@@ -66,12 +66,23 @@ See the details of each transaction method below for details on arguments and op
 
 In addition to the transaction methods, each created accountable model gets an associated `profile` which is the entry point for all Authorize.NET related data (transactions, subscriptions, payment methods, etc.) The profile will also hold the Authorize.NET profile id, encrypted via the use of the [attr_encrypted](https://github.com/attr-encrypted/attr_encrypted) gem. Note that many of the associations that exist on the profile itself exist as delegates on the accountable model, so `@accountable.profile.payments` is the same as `@accountable.payments`. The idea is to prevent ever needing to actually interact with the profile model directly, since it largely just serves as a middle man between the subject model and the actions to be taken.
 
+<<<<<<< HEAD
 ## Setup
 
 Once you've created either a sandbox or live Authorize.net account and logged in, take the following steps to configure the app and Authorize.net to work together:
 
-1. 
+1. ![](https://media.githubusercontent.com/media/ehainer/accounting/master/settings.png | width=50%)
 
+2. ![](https://media.githubusercontent.com/media/ehainer/accounting/master/credentials.png | width=50%)
+
+3. ![](https://media.githubusercontent.com/media/ehainer/accounting/master/details.png | width=50%)
+
+4. ![](https://media.githubusercontent.com/media/ehainer/accounting/master/test.png | width=50%)
+
+5. ![](https://media.githubusercontent.com/media/ehainer/accounting/master/hooks.png | width=50%)
+
+=======
+>>>>>>> 5755b3e3caf0cd70ce18b2d4ecb5a74203968961
 ## Payment Methods
 
 To create a stored payment method, simply create a new record of `@accountable.payments`, where `@accountable` is any model you've called the `accountable` method on:
@@ -86,7 +97,11 @@ To create a stored payment method, simply create a new record of `@accountable.p
   ccv: '123',
   month: 8,
   year: 2022,
+<<<<<<< HEAD
   address_attributes: { first_name: 'John', last_name: 'Doe', street_address: '123 Fake St', city: 'Gary', state: 'ID', zip: '11111', country: 'US' }
+=======
+  address: Accounting::Address.new(first_name: 'John', last_name: 'Doe', street_address: '123 Fake St', city: 'Gary', state: 'ID', zip: '11111', country: 'US')
+>>>>>>> 5755b3e3caf0cd70ce18b2d4ecb5a74203968961
 )
 
 # ACH/Check Payment Method
@@ -99,7 +114,11 @@ To create a stored payment method, simply create a new record of `@accountable.p
   account_type: 'checking', # Possible options are: [checking, savings, businessChecking]
   check_number: '1111', # Optional, the number that appears on the check itself, i.e. - 1014
   echeck_type: 'WEB', # Optional, possible options are here: https://github.com/AuthorizeNet/sdk-ruby/blob/master/lib/authorize_net/payment_methods/echeck.rb#L20-L27
+<<<<<<< HEAD
   address_attributes: { first_name: 'John', last_name: 'Doe', street_address: '123 Fake St', city: 'Gary', state: 'ID', zip: '11111', country: 'US' }
+=======
+  address: Accounting::Address.new(first_name: 'John', last_name: 'Doe', street_address: '123 Fake St', city: 'Gary', state: 'ID', zip: '11111', country: 'US')
+>>>>>>> 5755b3e3caf0cd70ce18b2d4ecb5a74203968961
 )
 ```
 
@@ -227,12 +246,15 @@ Subscriptions can be thought of as recurring transactions, and functionally are 
 | payment  | Any instance of `Accounting::Payment` associated with the accountable profile.                                                                                                                                                                                                                                                             |
 | options  | <ul><li>**description** A description of the subscription, if `name` needs to be more succinct.</li><li>**unit** The unit of time used in conjunction with `total_occurrences` to define when to charge the payment method. Can be one of: `days`, `months`. If omitted, defaults to `months`</li><li>**start_date** A `Time` object specifying the initial transaction date. If omitted, defaults to `Time.now`</li><li>**total_occurrences** The total number of occurrences in the subscription. If omitted, defaults to unlimited (subscription will have to be canceled to stop)</li><li>**trial_occurrences** The number of occurrences within the total occurrences that should be charged the `trial_amount`</li><li>**trial_amount** Decimal value, the trial amount to charge for each of the trial occurrences</li><li>**invoice_number** Optional invoice number for reference purposes</li></ul> |
 
+<<<<<<< HEAD
 ## WebHooks
 
 Provided you enter the Authorize.net signature key in the configuration and have enabled webhooks within the Authorize.net dashboard (see: Setup), Authorize.net will utilize it's own [WebHooks](https://developer.authorize.net/api/reference/features/webhooks.html) to notify the application of changes/updates to four resources: Customer Profiles, Payment Profiles, Transactions, and Subscriptions.
 
 Note that the use of WebHooks is all but required if utilizing subscription functionality due to the fact that webhooks are the only way subscription related transactions get created and the "next transaction date" gets moved forward. If webhooks are not enabled it is entirely up to the developer to calculate when a subscription transaction occurs and update the subscription instance's `next_transaction_at` column accordingly.
 
+=======
+>>>>>>> 5755b3e3caf0cd70ce18b2d4ecb5a74203968961
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
