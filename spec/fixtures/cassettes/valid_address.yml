@@ -1,0 +1,210 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://apitest.authorize.net/xml/v1/request.api
+    body:
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0" encoding="utf-8"?>
+        <createCustomerProfileRequest xmlns="AnetApi/xml/v1/schema/AnetApiSchema.xsd">
+          <merchantAuthentication>
+            <name>8U46Pew5dfF</name>
+            <transactionKey>3m26PD4kdzX4U358</transactionKey>
+          </merchantAuthentication>
+          <profile>
+            <merchantCustomerId>6e77cdf6-d855-4cb1-a</merchantCustomerId>
+            <description>Sequi sunt repudiandae.</description>
+            <email>debroah.rau@bayer.com</email>
+          </profile>
+          <validationMode>none</validationMode>
+        </createCustomerProfileRequest>
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Content-Type:
+      - text/xml
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - private
+      Content-Type:
+      - application/xml; charset=utf-8
+      Server:
+      - Microsoft-IIS/7.5
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - PUT,OPTIONS,POST,GET
+      Access-Control-Allow-Headers:
+      - x-requested-with,cache-control,content-type,origin,method,SOAPAction
+      Access-Control-Allow-Credentials:
+      - 'true'
+      X-Powered-By:
+      - ASP.NET
+      Content-Length:
+      - '507'
+      Date:
+      - Wed, 27 Sep 2017 16:18:47 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        77u/PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48Y3JlYXRlQ3VzdG9tZXJQcm9maWxlUmVzcG9uc2UgeG1sbnM6eHNpPSJodHRwOi8vd3d3LnczLm9yZy8yMDAxL1hNTFNjaGVtYS1pbnN0YW5jZSIgeG1sbnM6eHNkPSJodHRwOi8vd3d3LnczLm9yZy8yMDAxL1hNTFNjaGVtYSIgeG1sbnM9IkFuZXRBcGkveG1sL3YxL3NjaGVtYS9BbmV0QXBpU2NoZW1hLnhzZCI+PG1lc3NhZ2VzPjxyZXN1bHRDb2RlPk9rPC9yZXN1bHRDb2RlPjxtZXNzYWdlPjxjb2RlPkkwMDAwMTwvY29kZT48dGV4dD5TdWNjZXNzZnVsLjwvdGV4dD48L21lc3NhZ2U+PC9tZXNzYWdlcz48Y3VzdG9tZXJQcm9maWxlSWQ+MTUwMjUwMzIyMzwvY3VzdG9tZXJQcm9maWxlSWQ+PGN1c3RvbWVyUGF5bWVudFByb2ZpbGVJZExpc3QgLz48Y3VzdG9tZXJTaGlwcGluZ0FkZHJlc3NJZExpc3QgLz48dmFsaWRhdGlvbkRpcmVjdFJlc3BvbnNlTGlzdCAvPjwvY3JlYXRlQ3VzdG9tZXJQcm9maWxlUmVzcG9uc2U+
+    http_version: 
+  recorded_at: Wed, 27 Sep 2017 16:19:39 GMT
+- request:
+    method: post
+    uri: https://apitest.authorize.net/xml/v1/request.api
+    body:
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0" encoding="utf-8"?>
+        <createCustomerShippingAddressRequest xmlns="AnetApi/xml/v1/schema/AnetApiSchema.xsd">
+          <merchantAuthentication>
+            <name>8U46Pew5dfF</name>
+            <transactionKey>3m26PD4kdzX4U358</transactionKey>
+          </merchantAuthentication>
+          <customerProfileId>1502503223</customerProfileId>
+          <address>
+            <firstName>Danyelle</firstName>
+            <lastName>Sipes</lastName>
+            <company>Jacobi Bartoletti and Cummerata</company>
+            <address>26636 Queenie Hollow</address>
+            <city>North Faustinaburgh</city>
+            <state>Iowa</state>
+            <zip>54502</zip>
+            <country>LY</country>
+            <phoneNumber>(266)976-6710 x90367</phoneNumber>
+            <faxNumber>1-516-775-5181 x85893</faxNumber>
+          </address>
+        </createCustomerShippingAddressRequest>
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Content-Type:
+      - text/xml
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - private
+      Content-Type:
+      - application/xml; charset=utf-8
+      Server:
+      - Microsoft-IIS/7.5
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - PUT,OPTIONS,POST,GET
+      Access-Control-Allow-Headers:
+      - x-requested-with,cache-control,content-type,origin,method,SOAPAction
+      Access-Control-Allow-Credentials:
+      - 'true'
+      X-Powered-By:
+      - ASP.NET
+      Content-Length:
+      - '475'
+      Date:
+      - Wed, 27 Sep 2017 16:18:48 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        77u/PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48Y3JlYXRlQ3VzdG9tZXJTaGlwcGluZ0FkZHJlc3NSZXNwb25zZSB4bWxuczp4c2k9Imh0dHA6Ly93d3cudzMub3JnLzIwMDEvWE1MU2NoZW1hLWluc3RhbmNlIiB4bWxuczp4c2Q9Imh0dHA6Ly93d3cudzMub3JnLzIwMDEvWE1MU2NoZW1hIiB4bWxucz0iQW5ldEFwaS94bWwvdjEvc2NoZW1hL0FuZXRBcGlTY2hlbWEueHNkIj48bWVzc2FnZXM+PHJlc3VsdENvZGU+T2s8L3Jlc3VsdENvZGU+PG1lc3NhZ2U+PGNvZGU+STAwMDAxPC9jb2RlPjx0ZXh0PlN1Y2Nlc3NmdWwuPC90ZXh0PjwvbWVzc2FnZT48L21lc3NhZ2VzPjxjdXN0b21lclByb2ZpbGVJZD4xNTAyNTAzMjIzPC9jdXN0b21lclByb2ZpbGVJZD48Y3VzdG9tZXJBZGRyZXNzSWQ+MTUwMjA4MzE1MzwvY3VzdG9tZXJBZGRyZXNzSWQ+PC9jcmVhdGVDdXN0b21lclNoaXBwaW5nQWRkcmVzc1Jlc3BvbnNlPg==
+    http_version: 
+  recorded_at: Wed, 27 Sep 2017 16:19:40 GMT
+- request:
+    method: post
+    uri: https://apitest.authorize.net/xml/v1/request.api
+    body:
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0" encoding="utf-8"?>
+        <createCustomerPaymentProfileRequest xmlns="AnetApi/xml/v1/schema/AnetApiSchema.xsd">
+          <merchantAuthentication>
+            <name>8U46Pew5dfF</name>
+            <transactionKey>3m26PD4kdzX4U358</transactionKey>
+          </merchantAuthentication>
+          <customerProfileId>1502503223</customerProfileId>
+          <paymentProfile>
+            <billTo>
+              <firstName>Danyelle</firstName>
+              <lastName>Sipes</lastName>
+              <company>Jacobi Bartoletti and Cummerata</company>
+              <address>26636 Queenie Hollow</address>
+              <city>North Faustinaburgh</city>
+              <state>Iowa</state>
+              <zip>54502</zip>
+              <country>LY</country>
+              <phoneNumber>(266)976-6710 x90367</phoneNumber>
+              <faxNumber>1-516-775-5181 x85893</faxNumber>
+            </billTo>
+            <payment>
+              <creditCard>
+                <cardNumber>370000000000002</cardNumber>
+                <expirationDate>2022-09</expirationDate>
+                <cardCode>1234</cardCode>
+              </creditCard>
+            </payment>
+          </paymentProfile>
+          <validationMode>testMode</validationMode>
+        </createCustomerPaymentProfileRequest>
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Content-Type:
+      - text/xml
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - private
+      Content-Type:
+      - application/xml; charset=utf-8
+      Server:
+      - Microsoft-IIS/7.5
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - PUT,OPTIONS,POST,GET
+      Access-Control-Allow-Headers:
+      - x-requested-with,cache-control,content-type,origin,method,SOAPAction
+      Access-Control-Allow-Credentials:
+      - 'true'
+      X-Powered-By:
+      - ASP.NET
+      Content-Length:
+      - '969'
+      Date:
+      - Wed, 27 Sep 2017 16:18:48 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        77u/PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48Y3JlYXRlQ3VzdG9tZXJQYXltZW50UHJvZmlsZVJlc3BvbnNlIHhtbG5zOnhzaT0iaHR0cDovL3d3dy53My5vcmcvMjAwMS9YTUxTY2hlbWEtaW5zdGFuY2UiIHhtbG5zOnhzZD0iaHR0cDovL3d3dy53My5vcmcvMjAwMS9YTUxTY2hlbWEiIHhtbG5zPSJBbmV0QXBpL3htbC92MS9zY2hlbWEvQW5ldEFwaVNjaGVtYS54c2QiPjxtZXNzYWdlcz48cmVzdWx0Q29kZT5PazwvcmVzdWx0Q29kZT48bWVzc2FnZT48Y29kZT5JMDAwMDE8L2NvZGU+PHRleHQ+U3VjY2Vzc2Z1bC48L3RleHQ+PC9tZXNzYWdlPjwvbWVzc2FnZXM+PGN1c3RvbWVyUHJvZmlsZUlkPjE1MDI1MDMyMjM8L2N1c3RvbWVyUHJvZmlsZUlkPjxjdXN0b21lclBheW1lbnRQcm9maWxlSWQ+MTUwMjAzNDI2MzwvY3VzdG9tZXJQYXltZW50UHJvZmlsZUlkPjx2YWxpZGF0aW9uRGlyZWN0UmVzcG9uc2U+MSwxLDEsKFRFU1RNT0RFKSBUaGlzIHRyYW5zYWN0aW9uIGhhcyBiZWVuIGFwcHJvdmVkLiwwMDAwMDAsUCwwLG5vbmUsVGVzdCB0cmFuc2FjdGlvbiBmb3IgVmFsaWRhdGVDdXN0b21lclBheW1lbnRQcm9maWxlLiwxLjAwLENDLGF1dGhfb25seSxub25lLERhbnllbGxlLFNpcGVzLEphY29iaSBCYXJ0b2xldHRpIGFuZCBDdW1tZXJhdGEsMjY2MzYgUXVlZW5pZSBIb2xsb3csTm9ydGggRmF1c3RpbmFidXJnaCxJb3dhLDU0NTAyLExZLCgyNjYpOTc2LTY3MTAgeDkwMzY3LDEtNTE2LTc3NS01MTgxIHg4NTg5MyxlbWFpbEBleGFtcGxlLmNvbSwsLCwsLCwsLDAuMDAsMC4wMCwwLjAwLEZBTFNFLG5vbmUsQTNCNEEwMzUwNTIxM0JGNzdDNDBBQzYzMEIxODM4QjksLCwsLCwsLCwsLCwsWFhYWDAwMDIsQW1lcmljYW4gRXhwcmVzcywsLCwsLCwsLCwsLCwsLCwsPC92YWxpZGF0aW9uRGlyZWN0UmVzcG9uc2U+PC9jcmVhdGVDdXN0b21lclBheW1lbnRQcm9maWxlUmVzcG9uc2U+
+    http_version: 
+  recorded_at: Wed, 27 Sep 2017 16:19:41 GMT
+recorded_with: VCR 3.0.3

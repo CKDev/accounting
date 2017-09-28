@@ -1,0 +1,146 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://apitest.authorize.net/xml/v1/request.api
+    body:
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0" encoding="utf-8"?>
+        <createCustomerProfileRequest xmlns="AnetApi/xml/v1/schema/AnetApiSchema.xsd">
+          <merchantAuthentication>
+            <name>7b4Ju4Pu</name>
+            <transactionKey>23njV2895F7wHSy6</transactionKey>
+          </merchantAuthentication>
+          <profile>
+            <merchantCustomerId>f319b3ce-32bb-49c9-8</merchantCustomerId>
+            <description>Ab accusamus possimus similique est accusantium aliquam.</description>
+            <email>chuck@beier.us</email>
+          </profile>
+          <validationMode>none</validationMode>
+        </createCustomerProfileRequest>
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Content-Type:
+      - text/xml
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - private
+      Content-Type:
+      - application/xml; charset=utf-8
+      Server:
+      - Microsoft-IIS/7.5
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - PUT,OPTIONS,POST,GET
+      Access-Control-Allow-Headers:
+      - x-requested-with,cache-control,content-type,origin,method,SOAPAction
+      Access-Control-Allow-Credentials:
+      - 'true'
+      X-Cnection:
+      - close
+      X-Powered-By:
+      - ASP.NET
+      Content-Length:
+      - '507'
+      Date:
+      - Tue, 19 Sep 2017 15:53:32 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        77u/PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48Y3JlYXRlQ3VzdG9tZXJQcm9maWxlUmVzcG9uc2UgeG1sbnM6eHNpPSJodHRwOi8vd3d3LnczLm9yZy8yMDAxL1hNTFNjaGVtYS1pbnN0YW5jZSIgeG1sbnM6eHNkPSJodHRwOi8vd3d3LnczLm9yZy8yMDAxL1hNTFNjaGVtYSIgeG1sbnM9IkFuZXRBcGkveG1sL3YxL3NjaGVtYS9BbmV0QXBpU2NoZW1hLnhzZCI+PG1lc3NhZ2VzPjxyZXN1bHRDb2RlPk9rPC9yZXN1bHRDb2RlPjxtZXNzYWdlPjxjb2RlPkkwMDAwMTwvY29kZT48dGV4dD5TdWNjZXNzZnVsLjwvdGV4dD48L21lc3NhZ2U+PC9tZXNzYWdlcz48Y3VzdG9tZXJQcm9maWxlSWQ+MTgxMzA3MzQ1MDwvY3VzdG9tZXJQcm9maWxlSWQ+PGN1c3RvbWVyUGF5bWVudFByb2ZpbGVJZExpc3QgLz48Y3VzdG9tZXJTaGlwcGluZ0FkZHJlc3NJZExpc3QgLz48dmFsaWRhdGlvbkRpcmVjdFJlc3BvbnNlTGlzdCAvPjwvY3JlYXRlQ3VzdG9tZXJQcm9maWxlUmVzcG9uc2U+
+    http_version: 
+  recorded_at: Tue, 19 Sep 2017 15:54:10 GMT
+- request:
+    method: post
+    uri: https://apitest.authorize.net/xml/v1/request.api
+    body:
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0" encoding="utf-8"?>
+        <createCustomerPaymentProfileRequest xmlns="AnetApi/xml/v1/schema/AnetApiSchema.xsd">
+          <merchantAuthentication>
+            <name>7b4Ju4Pu</name>
+            <transactionKey>23njV2895F7wHSy6</transactionKey>
+          </merchantAuthentication>
+          <customerProfileId>1813073450</customerProfileId>
+          <paymentProfile>
+            <billTo>
+              <firstName>Carma</firstName>
+              <lastName>Shanahan</lastName>
+              <company>Jacobson Inc</company>
+              <address>2095 Prosacco Divide</address>
+              <city>West Bernadine</city>
+              <state>Arizona</state>
+              <zip>23421</zip>
+              <country>AS</country>
+              <phoneNumber>346-948-9856 x41495</phoneNumber>
+              <faxNumber>673-576-7388</faxNumber>
+            </billTo>
+            <payment>
+              <creditCard>
+                <cardNumber>370000000000002</cardNumber>
+                <expirationDate>2021-09</expirationDate>
+                <cardCode>1234567890</cardCode>
+              </creditCard>
+            </payment>
+          </paymentProfile>
+          <validationMode>testMode</validationMode>
+        </createCustomerPaymentProfileRequest>
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Content-Type:
+      - text/xml
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - private
+      Content-Type:
+      - application/xml; charset=utf-8
+      Server:
+      - Microsoft-IIS/7.5
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - PUT,OPTIONS,POST,GET
+      Access-Control-Allow-Headers:
+      - x-requested-with,cache-control,content-type,origin,method,SOAPAction
+      Access-Control-Allow-Credentials:
+      - 'true'
+      X-Cnection:
+      - close
+      X-Powered-By:
+      - ASP.NET
+      Content-Length:
+      - '564'
+      Date:
+      - Tue, 19 Sep 2017 15:53:32 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        77u/PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48RXJyb3JSZXNwb25zZSB4bWxuczp4c2k9Imh0dHA6Ly93d3cudzMub3JnLzIwMDEvWE1MU2NoZW1hLWluc3RhbmNlIiB4bWxuczp4c2Q9Imh0dHA6Ly93d3cudzMub3JnLzIwMDEvWE1MU2NoZW1hIiB4bWxucz0iQW5ldEFwaS94bWwvdjEvc2NoZW1hL0FuZXRBcGlTY2hlbWEueHNkIj48bWVzc2FnZXM+PHJlc3VsdENvZGU+RXJyb3I8L3Jlc3VsdENvZGU+PG1lc3NhZ2U+PGNvZGU+RTAwMDAzPC9jb2RlPjx0ZXh0PlRoZSAnQW5ldEFwaS94bWwvdjEvc2NoZW1hL0FuZXRBcGlTY2hlbWEueHNkOmNhcmRDb2RlJyBlbGVtZW50IGlzIGludmFsaWQgLSBUaGUgdmFsdWUgWFhYWFhYWFhYWFhYIGlzIGludmFsaWQgYWNjb3JkaW5nIHRvIGl0cyBkYXRhdHlwZSAnQW5ldEFwaS94bWwvdjEvc2NoZW1hL0FuZXRBcGlTY2hlbWEueHNkOmNhcmRDb2RlJyAtIFRoZSBhY3R1YWwgbGVuZ3RoIGlzIGdyZWF0ZXIgdGhhbiB0aGUgTWF4TGVuZ3RoIHZhbHVlLjwvdGV4dD48L21lc3NhZ2U+PC9tZXNzYWdlcz48L0Vycm9yUmVzcG9uc2U+
+    http_version: 
+  recorded_at: Tue, 19 Sep 2017 15:54:10 GMT
+recorded_with: VCR 3.0.3

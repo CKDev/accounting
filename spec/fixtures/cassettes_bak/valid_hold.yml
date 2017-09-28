@@ -1,0 +1,67 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://apitest.authorize.net/xml/v1/request.api
+    body:
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0" encoding="utf-8"?>
+        <createCustomerProfileTransactionRequest xmlns="AnetApi/xml/v1/schema/AnetApiSchema.xsd">
+          <merchantAuthentication>
+            <name>7b4Ju4Pu</name>
+            <transactionKey>23njV2895F7wHSy6</transactionKey>
+          </merchantAuthentication>
+          <transaction>
+            <profileTransAuthOnly>
+              <amount>1.0</amount>
+              <customerProfileId>1813073366</customerProfileId>
+              <customerPaymentProfileId>1807708915</customerPaymentProfileId>
+            </profileTransAuthOnly>
+          </transaction>
+        </createCustomerProfileTransactionRequest>
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Content-Type:
+      - text/xml
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - private
+      Content-Type:
+      - application/xml; charset=utf-8
+      Server:
+      - Microsoft-IIS/7.5
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - PUT,OPTIONS,POST,GET
+      Access-Control-Allow-Headers:
+      - x-requested-with,cache-control,content-type,origin,method,SOAPAction
+      Access-Control-Allow-Credentials:
+      - 'true'
+      X-Cnection:
+      - close
+      X-Powered-By:
+      - ASP.NET
+      Content-Length:
+      - '751'
+      Date:
+      - Tue, 19 Sep 2017 15:49:23 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        77u/PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48Y3JlYXRlQ3VzdG9tZXJQcm9maWxlVHJhbnNhY3Rpb25SZXNwb25zZSB4bWxuczp4c2k9Imh0dHA6Ly93d3cudzMub3JnLzIwMDEvWE1MU2NoZW1hLWluc3RhbmNlIiB4bWxuczp4c2Q9Imh0dHA6Ly93d3cudzMub3JnLzIwMDEvWE1MU2NoZW1hIiB4bWxucz0iQW5ldEFwaS94bWwvdjEvc2NoZW1hL0FuZXRBcGlTY2hlbWEueHNkIj48bWVzc2FnZXM+PHJlc3VsdENvZGU+T2s8L3Jlc3VsdENvZGU+PG1lc3NhZ2U+PGNvZGU+STAwMDAxPC9jb2RlPjx0ZXh0PlN1Y2Nlc3NmdWwuPC90ZXh0PjwvbWVzc2FnZT48L21lc3NhZ2VzPjxkaXJlY3RSZXNwb25zZT4xLDEsMSxUaGlzIHRyYW5zYWN0aW9uIGhhcyBiZWVuIGFwcHJvdmVkLixLQkJROTAsWSw2MDAzMDEwMDA1NCwsLDEuMDAsQ0MsYXV0aF9vbmx5LGQxZDkxODUyLTBmZjMtNDQ2Zi04LENhcm1hLFNoYW5haGFuLEphY29ic29uIEluYywyMDk1IFByb3NhY2NvIERpdmlkZSxXZXN0IEJlcm5hZGluZSxBcml6b25hLDIzNDIxLEFTLDM0Ni05NDgtOTg1NiB4NDE0OTUsNjczLTU3Ni03Mzg4LGNodWNrQGJlaWVyLnVzLCwsLCwsLCwsLCwsLCxBNkZERDY4QTc0QTFDNkZBRDg4NTcyMzgwMEEwOERBOSxQLDIsLCwsLCwsLCwsLFhYWFgwMDAyLEFtZXJpY2FuIEV4cHJlc3MsLCwsLCwsLCwsLCwsLCwsLDwvZGlyZWN0UmVzcG9uc2U+PC9jcmVhdGVDdXN0b21lclByb2ZpbGVUcmFuc2FjdGlvblJlc3BvbnNlPg==
+    http_version: 
+  recorded_at: Tue, 19 Sep 2017 15:50:01 GMT
+recorded_with: VCR 3.0.3
