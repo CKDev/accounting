@@ -72,15 +72,15 @@ Once you've created either a sandbox or live Authorize.net account and logged in
 
 *Note:* Where relevant, remember the default secret answer for the security question is "Simon" unless you have changed it already.
 
-1. From the account settings page, one must deal with 4 specific sections, highlighted here <img src="https://media.githubusercontent.com/media/ehainer/accounting/master/settings.png" width="50%" />
+1. From the account settings page, one must deal with 4 specific sections, highlighted here <img src="https://media.githubusercontent.com/media/ehainer/accounting/master/settings.png" width="100%" />
 
-2. First, grab the API login id, key, and signature from the credentials section. You'll plug all three into your app's configuration. <img src="https://media.githubusercontent.com/media/ehainer/accounting/master/credentials.png" width="50%" />
+2. First, grab the API login id, key, and signature from the credentials section. You'll plug all three into your app's configuration. <img src="https://media.githubusercontent.com/media/ehainer/accounting/master/credentials.png" width="100%" />
 
-3. Second, enable the transaction details api. <img src="https://media.githubusercontent.com/media/ehainer/accounting/master/details.png" width="50%" />
+3. Second, enable the transaction details api. <img src="https://media.githubusercontent.com/media/ehainer/accounting/master/details.png" width="100%" />
 
-4. Also, ensure the authorize.net account is in `Live` mode, otherwise transactions will not be processed. <img src="https://media.githubusercontent.com/media/ehainer/accounting/master/test.png" width="50%" />
+4. Also, ensure the authorize.net account is in `Live` mode, otherwise transactions will not be processed. <img src="https://media.githubusercontent.com/media/ehainer/accounting/master/test.png" width="100%" />
 
-5. Last, enable all WebHooks. The requested url should be your app's domain, followed by `/accounting/hooks`, which is the app endpoint that will handle requests from authorize.net. WebHooks are what essentially "sync" events in authorize.net with your application, such as ensuring a subscription related transaction is generated when the billing anniversary date is reached. <img src="https://media.githubusercontent.com/media/ehainer/accounting/master/hooks.png" width="50%" />
+5. Last, enable all WebHooks. The requested url should be your app's domain, followed by `/accounting/hooks`, which is the app endpoint that will handle requests from authorize.net. WebHooks are what essentially "sync" events in authorize.net with your application, such as ensuring a subscription related transaction is generated when the billing anniversary date is reached. <img src="https://media.githubusercontent.com/media/ehainer/accounting/master/hooks.png" width="100%" />
 
 ## Payment Methods
 
