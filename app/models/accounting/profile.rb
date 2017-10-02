@@ -1,6 +1,8 @@
 module Accounting
   class Profile < ::ActiveRecord::Base
 
+    include AccountingHelper
+
     belongs_to :accountable, polymorphic: true, optional: true, class_name: '::Accounting::Profile'
 
     has_many :payments, inverse_of: :profile, autosave: true, dependent: :destroy do
@@ -22,7 +24,7 @@ module Accounting
     before_destroy :delete_profile, if: proc { |p| p.profile_id.present? }
 
     def details
-      @details ||= Accounting.api(:cim).get_profile(profile_id)
+      @details ||= Accounting.api(:cim, api_options(accountable)).get_profile(profile_id)
       if @details && @details.success?
         @details.profile
       else
@@ -36,7 +38,7 @@ module Accounting
         return if errors.present?
 
         customer_profile = AuthorizeNet::CIM::CustomerProfile.new(profile_options)
-        response = Accounting.api(:cim).create_profile(customer_profile)
+        response = Accounting.api(:cim, api_options(accountable)).create_profile(customer_profile)
 
         if response.raw.is_a?(Net::HTTPSuccess)
           if response.success? && response.profile_id.present?
@@ -51,11 +53,12 @@ module Accounting
       end
 
       def delete_profile
-        Accounting.api(:cim).delete_profile(profile_id) unless Rails.env.test?
+        Accounting.api(:cim, api_options(accountable)).delete_profile(profile_id) unless Rails.env.test?
       end
 
       def profile_options
         { email: authnet_email, id: authnet_id, description: authnet_description }.reject { |_,v| v.blank? }
       end
+
   end
 end

@@ -53,7 +53,7 @@ module Accounting
     before_save :update_subscription!
 
     def details
-      @details ||= Accounting.api(:reporting).get_transaction_details(transaction_id)
+      @details ||= Accounting.api(:reporting, api_options(accountable)).get_transaction_details(transaction_id)
       if @details && @details.success?
         @details.transaction
       else
@@ -79,7 +79,7 @@ module Accounting
     end
 
     def process_now!
-      profile.accountable.try(:run_hook, :before_transaction_submit, self)
+      accountable.try(:run_hook, :before_transaction_submit, self)
 
       begin
         case transaction_type
@@ -98,7 +98,7 @@ module Accounting
       # This method is what is called within the Job 
       update_column(:job_id, '0') unless job_id.present?
 
-      profile.accountable.try(:run_hook, :after_transaction_submit, self)
+      accountable.try(:run_hook, :after_transaction_submit, self)
 
       self
     end
@@ -145,31 +145,31 @@ module Accounting
 
       def hold
         before_transaction!
-        response = Accounting.api(:cim).create_transaction_auth_only(amount, profile.profile_id, payment.payment_profile_id, nil, options)
+        response = Accounting.api(:cim, api_options(profile.accountable)).create_transaction_auth_only(amount, profile.profile_id, payment.payment_profile_id, nil, options)
         handle_transaction(response, status: :held)
       end
 
       def capture
         before_transaction!
-        response = Accounting.api(:cim).create_transaction_prior_auth_capture(original_transaction.try(:transaction_id), amount, nil, options)
+        response = Accounting.api(:cim, api_options(profile.accountable)).create_transaction_prior_auth_capture(original_transaction.try(:transaction_id), amount, nil, options)
         handle_transaction(response, status: :captured)
       end
 
       def void
         before_transaction!
-        response = Accounting.api(:cim).create_transaction_void(original_transaction.try(:transaction_id), options)
+        response = Accounting.api(:cim, api_options(profile.accountable)).create_transaction_void(original_transaction.try(:transaction_id), options)
         handle_transaction(response, status: :voided)
       end
 
       def charge
         before_transaction!
-        response = Accounting.api(:cim).create_transaction_auth_capture(amount, profile.profile_id, payment.payment_profile_id, nil, options)
+        response = Accounting.api(:cim, api_options(profile.accountable)).create_transaction_auth_capture(amount, profile.profile_id, payment.payment_profile_id, nil, options)
         handle_transaction(response, status: :captured)
       end
 
       def refund
         before_transaction!
-        response = Accounting.api(:cim).create_transaction_refund(original_transaction.try(:transaction_id), amount, profile.profile_id, payment.payment_profile_id, nil, options)
+        response = Accounting.api(:cim, api_options(profile.accountable)).create_transaction_refund(original_transaction.try(:transaction_id), amount, profile.profile_id, payment.payment_profile_id, nil, options)
         handle_transaction(response, status: :refunded)
       end
 
@@ -194,7 +194,11 @@ module Accounting
       end
 
       def queue
-        profile.accountable.instance_variable_get('@_accountable_options').try(:[], :queue) || 'default'
+        option(:queue, accountable) || :default
+      end
+
+      def accountable
+        profile.try(:accountable)
       end
 
       def update_subscription!

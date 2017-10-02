@@ -2,7 +2,7 @@ require 'spec_helper'
 
 RSpec.describe Accounting::HookService do
 
-  let(:hook) { Accounting::HookService.new(ActionController::Parameters.new({ 'payload' => { 'entityName' => 'transaction' }, 'eventType' => 'create' })) }
+  let(:hook) { Accounting::HookService.new({ 'payload' => { 'entityName' => 'transaction' }, 'eventType' => 'create' }) }
 
   it 'will have a titleized entity name' do
     hook.payload[:entity_name] = 'transaction'

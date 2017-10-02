@@ -10,8 +10,6 @@ module Accounting
       # Ensure the transaction has the associated profile and payment associated
       resource.profile_id ||= profile.id
 
-      raise Accounting::SyncError.new("Payment profile with id #{payload[:id]} not found in Authorize.NET", payload) if resource.details.nil?
-
       resource.title ||= title
       resource.address ||= address
 
@@ -39,9 +37,9 @@ module Accounting
     end
 
     def type
-      if resource.details.payment_method.is_a?(AuthorizeNet::ECheck)
+      if details.payment_method.is_a?(AuthorizeNet::ECheck)
         :ach
-      elsif resource.details.payment_method.is_a?(AuthorizeNet::CreditCard)
+      elsif details.payment_method.is_a?(AuthorizeNet::CreditCard)
         :card
       end
     end
@@ -57,29 +55,29 @@ module Accounting
     def title
       case type
         when :ach
-          resource.details.payment_method.bank_name
+          details.payment_method.bank_name
         when :card
-          resource.details.payment_method.card_type
+          details.payment_method.card_type
       end
     end
 
     def address
       Accounting::Address.new(
-        first_name: resource.details.billing_address.first_name,
-        last_name: resource.details.billing_address.last_name,
-        street_address: resource.details.billing_address.street_address,
-        city: resource.details.billing_address.city,
-        state: resource.details.billing_address.state,
-        zip: resource.details.billing_address.zip
+        first_name: details.billing_address.first_name,
+        last_name: details.billing_address.last_name,
+        street_address: details.billing_address.street_address,
+        city: details.billing_address.city,
+        state: details.billing_address.state,
+        zip: details.billing_address.zip
       )
     end
 
     def last_four
       case type
         when :ach
-          resource.details.payment_method.account_number[-4..-1]
+          details.payment_method.account_number[-4..-1]
         when :card
-          resource.details.payment_method.card_number[-4..-1]
+          details.payment_method.card_number[-4..-1]
       end
     end
 
@@ -88,6 +86,14 @@ module Accounting
         Accounting::Profile.find_by(profile_id: payload[:customer_profile_id])
       else
         raise Accounting::SyncWarning.new("Payment profile cannot be created, profile with profile id '#{payload[:customer_profile_id]}' could not be found.", payload)
+      end
+    end
+
+    def details
+      if resource.details.nil?
+        raise Accounting::SyncError.new("Payment profile cannot be created because the record could not be found.", payload)
+      else
+        resource.details
       end
     end
 

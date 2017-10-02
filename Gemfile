@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 source 'https://gem.minow.io' do
   # Stupid, but Authorize.NET fails to maintain their own gem
   # so we have to do it separately
-  gem 'authorizenet', path: '/web/Gems/sdk-ruby' #'~> 1.9.4'
+  gem 'authorizenet', '~> 1.9.5'
 end
 
 # Specify your gem's dependencies in accounting.gemspec

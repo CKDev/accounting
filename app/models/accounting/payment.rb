@@ -1,6 +1,8 @@
 module Accounting
   class Payment < ::ActiveRecord::Base
 
+    include AccountingHelper
+
     belongs_to :profile, inverse_of: :payments, required: true
 
     has_one :address, inverse_of: :payment, dependent: :destroy
@@ -45,7 +47,7 @@ module Accounting
     accepts_nested_attributes_for :address, reject_if: :all_blank
 
     def details
-      @details ||= Accounting.api(:cim).get_payment_profile(payment_profile_id, profile.profile_id)
+      @details ||= Accounting.api(:cim, api_options(profile.accountable)).get_payment_profile(payment_profile_id, profile.profile_id)
       if @details && @details.success?
         @details.payment_profile
       else
@@ -68,7 +70,7 @@ module Accounting
 
         payment_profile = AuthorizeNet::CIM::PaymentProfile.new(payment_method: type, billing_address: address.to_billing_address)
 
-        response = Accounting.api(:cim).create_payment_profile(payment_profile, profile.profile_id, validation_mode: Accounting.config.validation_mode)
+        response = Accounting.api(:cim, api_options(profile.accountable)).create_payment_profile(payment_profile, profile.profile_id, validation_mode: Accounting.config.validation_mode)
 
         if response.success?
           if response.validation_response.present?
@@ -90,7 +92,7 @@ module Accounting
 
       # Delete the associated payment profile on Authorize.net when this instance is destroyed
       def delete_payment
-        Accounting.api(:cim).delete_payment_profile(payment_profile_id, profile.profile_id) unless Rails.env.test?
+        Accounting.api(:cim, api_options(profile.accountable)).delete_payment_profile(payment_profile_id, profile.profile_id) unless Rails.env.test?
       end
 
       def reset_default
@@ -127,5 +129,6 @@ module Accounting
         self.errors.add(:base, 'Expiration date cannot be in the past') unless Time.new(year.to_i, month.to_i, Time.now.day, Time.now.hour, Time.now.min, 0) > Time.now
         self.errors.add(:base, 'Expiration date is invalid.') unless /^[0-9]{2}[0-9]{2}$/ =~ expiration
       end
+
   end
 end

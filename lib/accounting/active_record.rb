@@ -3,7 +3,7 @@ module Accounting
 
     extend ActiveSupport::Concern
 
-    ACCOUNTABLE_OPTIONS = { email: :email, id: nil, description: nil, queue: nil, sync_failure: nil }
+    ACCOUNTABLE_OPTIONS = { email: :email, id: nil, description: nil, queue: nil, api_login: nil, api_key: nil }
 
     included do
       # Hold
@@ -140,31 +140,6 @@ module Accounting
           self.build_profile(options) unless profile.present?
         end
       end
-
-#      def transaction_processed(callback=nil, **options, &block)
-#        @_processed_transactions ||= []
-#        @_processed_transactions << { callback: callback, options: options.symbolize_keys, block: block }
-#      end
-#
-#      def before_transaction(callback=nil, **options, &block)
-#        @_before_transactions ||= []
-#        @_before_transactions << { callback: callback, options: options.symbolize_keys, block: block }
-#      end
-#
-#      def after_transaction(callback=nil, **options, &block)
-#        @_after_transactions ||= []
-#        @_after_transactions << { callback: callback, options: options.symbolize_keys, block: block }
-#      end
-#
-#      def before_subscription(callback=nil, **options, &block)
-#        @_before_subscriptions ||= []
-#        @_before_subscriptions << { callback: callback, options: options.symbolize_keys, block: block }
-#      end
-#
-#      def after_subscription(callback=nil, **options, &block)
-#        @_after_subscriptions ||= []
-#        @_after_subscriptions << { callback: callback, options: options.symbolize_keys, block: block }
-#      end
 
     end
 

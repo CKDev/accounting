@@ -26,7 +26,7 @@ Then run the installer to create the initializer config, accounting.rb:
 
     $ rails g accounting:install
 
-Within the initializer, input your Authorize.NET api login and key as well as configure the gateway and any other options that seem applicable for your intended usage.
+Within the initializer, input your Authorize.NET api login id, key, and signature, as well as configure the gateway and any other options that seem applicable for your intended usage.
 
 ## Usage
 
@@ -70,7 +70,7 @@ In addition to the transaction methods, each created accountable model gets an a
 
 Once you've created either a sandbox or live Authorize.net account and logged in, take the following steps to configure the app and Authorize.net to work together:
 
-*Note:* Where relevant, remember the default secret answer for the security question is "Simon" unless you have changed it already.
+**Note:** Where relevant, remember the default secret answer for the security question is "Simon" unless you have changed it already.
 
 1. From the account settings page, one must deal with 4 specific sections, highlighted here
 <img src="https://media.githubusercontent.com/media/ehainer/accounting/master/settings.png" width="100%" />
@@ -273,6 +273,22 @@ Several callback methods exist to allow hooking into webhook related events, the
 | after_subscription_sync    | Subscription              | Fired just after syncing subscription data from Authorize.net                                                                                                                                                                                                                                                       |
 | before_subscription_cancel | Subscription              | Fired just prior to canceling the subscription in question. Note that if `Accounting.config.cancel_subscription_on_destroy` is set to `true` this callback will be fired when `destroy` is called on the subscription instance.                                                                                     |
 | after_subscription_cancel  | Subscription              | Fired just after canceling the subscription, if the cancellation was successful. Note that if `Accounting.config.cancel_subscription_on_destroy` is set to `true` it's possible to prevent subscription destruction by including a `raise` in the callback method, and should be used with caution for that reason. |
+
+Each callback should be defined as a class method within your accountable model, like so:
+
+```ruby
+class User < ApplicationRecord
+
+  accountable
+
+  after_subscription_tick :subscription_ticked
+
+  def subscription_ticked(subscription, transaction)
+    # Do something with the subscription or transaction objects, i.e. - send a notification
+  end
+
+end
+```
 
 ## Development
 

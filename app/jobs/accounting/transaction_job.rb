@@ -1,16 +1,14 @@
 module Accounting
   class TransactionJob < ::ActiveJob::Base
 
-    rescue_from ActiveJob::DeserializationError do |exception|
-      # Transaction model was destroyed, for now, fail gracefully
-      # TODO: Consider notifying someone when this happens
-    end
+    # Transaction model was destroyed. For now, fail gracefully
+    # TODO: Consider notifying someone when this happens
+    discard_on ActiveJob::DeserializationError
 
-    # No need to do anything, just rescue from the error
+    # No need to do anything
     # Duplicates are not seen as failures since according to
     # authorize.net, they have already been run
-    rescue_from ::Accounting::DuplicateError do |exception|
-    end
+    discard_on Accounting::DuplicateError
 
     def perform(transaction)
       transaction.process_now!

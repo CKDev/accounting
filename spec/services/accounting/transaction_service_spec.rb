@@ -2,10 +2,10 @@ require 'spec_helper'
 
 RSpec.describe Accounting::TransactionService do
 
-  let(:hook_card)             { ActionController::Parameters.new({ "notificationId" => "dcebdf14-6729-401a-8d5d-49706bb205ab", "eventType" => "net.authorize.payment.authcapture.created", "eventDate" => "2017-09-20T18:46:20.6332612Z", "webhookId" => "82ed4771-17bb-4fc6-8ea4-f0cad81d3414", "payload" => {"responseCode" => 0, "authCode" => "X0HP1G", "avsResponse" => "Y", "authAmount" => 0.0, "entityName" => "transaction", "id" => "40007214561" }}) }
-  let(:hook_ach)              { ActionController::Parameters.new({ "notificationId" => "7bcacf12-1330-4aac-81d2-cf0e67f05769", "eventType" => "net.authorize.payment.authcapture.created", "eventDate" => "2017-09-20T18:43:27.2160194Z", "webhookId" => "82ed4771-17bb-4fc6-8ea4-f0cad81d3414", "payload" => {"responseCode" => 0, "avsResponse" => "P", "authAmount" => 0.0, "entityName" => "transaction", "id" => "40007214462" }}) }
-  let(:hook_subscription)     { ActionController::Parameters.new({ "notificationId" => "13739aed-1ac2-4611-9c59-38ea8abd6ed0", "eventType" => "net.authorize.payment.authcapture.created", "eventDate" => "2017-09-20T17:22:06.6624919Z", "webhookId" => "82ed4771-17bb-4fc6-8ea4-f0cad81d3414", "payload" => {"responseCode" => 0,"authCode" => "YSV1DM", "avsResponse" => "Y", "authAmount" => 0.0, "entityName" => "transaction", "id" => "60030156528" }}) }
-  let(:hook_unknown)          { ActionController::Parameters.new({ "notificationId" => "13739aed-1ac2-4611-9c59-38ea8abd6ed0", "eventType" => "net.authorize.payment.authcapture.created", "eventDate" => "2017-09-20T17:22:06.6624919Z", "webhookId" => "82ed4771-17bb-4fc6-8ea4-f0cad81d3414", "payload" => {"responseCode" => 0,"authCode" => "YSV1DM", "avsResponse" => "Y", "authAmount" => 0.0, "entityName" => "transaction", "id" => "40007191118" }}) }
+  let(:hook_card)             { { "notificationId" => "dcebdf14-6729-401a-8d5d-49706bb205ab", "eventType" => "net.authorize.payment.authcapture.created", "eventDate" => "2017-09-20T18:46:20.6332612Z", "webhookId" => "82ed4771-17bb-4fc6-8ea4-f0cad81d3414", "payload" => {"responseCode" => 0, "authCode" => "X0HP1G", "avsResponse" => "Y", "authAmount" => 0.0, "entityName" => "transaction", "id" => "40007214561" }} }
+  let(:hook_ach)              { { "notificationId" => "7bcacf12-1330-4aac-81d2-cf0e67f05769", "eventType" => "net.authorize.payment.authcapture.created", "eventDate" => "2017-09-20T18:43:27.2160194Z", "webhookId" => "82ed4771-17bb-4fc6-8ea4-f0cad81d3414", "payload" => {"responseCode" => 0, "avsResponse" => "P", "authAmount" => 0.0, "entityName" => "transaction", "id" => "40007214462" }} }
+  let(:hook_subscription)     { { "notificationId" => "13739aed-1ac2-4611-9c59-38ea8abd6ed0", "eventType" => "net.authorize.payment.authcapture.created", "eventDate" => "2017-09-20T17:22:06.6624919Z", "webhookId" => "82ed4771-17bb-4fc6-8ea4-f0cad81d3414", "payload" => {"responseCode" => 0,"authCode" => "YSV1DM", "avsResponse" => "Y", "authAmount" => 0.0, "entityName" => "transaction", "id" => "60030156528" }} }
+  let(:hook_unknown)          { { "notificationId" => "13739aed-1ac2-4611-9c59-38ea8abd6ed0", "eventType" => "net.authorize.payment.authcapture.created", "eventDate" => "2017-09-20T17:22:06.6624919Z", "webhookId" => "82ed4771-17bb-4fc6-8ea4-f0cad81d3414", "payload" => {"responseCode" => 0,"authCode" => "YSV1DM", "avsResponse" => "Y", "authAmount" => 0.0, "entityName" => "transaction", "id" => "40007191118" }} }
 
   let(:service_card)          { Accounting::HookService.new(hook_card).service }
   let(:service_ach)           { Accounting::HookService.new(hook_ach).service }
@@ -48,7 +48,7 @@ RSpec.describe Accounting::TransactionService do
     service_card.resource.instance_variable_set('@details', nil)
     service_card.resource.transaction_id = 1
 
-    expect { service_card.sync! }.to raise_error(Accounting::SyncError, /not found in Authorize/)
+    expect { service_card.sync! }.to raise_error(Accounting::SyncError, /record could not be found/)
   end
 
   it 'should have a status' do

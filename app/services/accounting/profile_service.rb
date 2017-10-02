@@ -7,12 +7,10 @@ module Accounting
         return
       end
 
-      raise Accounting::SyncError.new("Customer profile with id #{payload[:id]} not found in Authorize.NET", payload) if resource.details.nil?
-
       resource.assign_attributes(
-        authnet_id: resource.details.id,
-        authnet_email: resource.details.email,
-        authnet_description: resource.details.description
+        authnet_id: details.id,
+        authnet_email: details.email,
+        authnet_description: details.description
       )
 
       resource.save!
@@ -26,6 +24,14 @@ module Accounting
 
     def resource
       @resource ||= Accounting::Profile.find_or_initialize_by(profile_id: payload[:id])
+    end
+
+    def details
+      if resource.details.nil?
+        raise Accounting::SyncError.new("Customer profile cannot be created because the record could not be found.", payload)
+      else
+        resource.details
+      end
     end
 
   end

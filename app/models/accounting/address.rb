@@ -1,6 +1,8 @@
 module Accounting
   class Address < ::ActiveRecord::Base
 
+    include AccountingHelper
+
     belongs_to :payment, inverse_of: :address, required: true
 
     validate :create_address, if: proc { |a| a.address_id.blank? }
@@ -23,7 +25,7 @@ module Accounting
         # If we already have errors, or our associated payment method has errors, don't bother creating the address
         return if errors.present? || payment.errors.present?
 
-        response = Accounting.api(:cim).create_address(to_billing_address, profile.profile_id)
+        response = Accounting.api(:cim, api_options(profile.accountable)).create_address(to_billing_address, profile.profile_id)
 
         if response.success?
           assign_attributes(address_id: response.address_id)
@@ -38,7 +40,7 @@ module Accounting
 
       # Delete the associated payment profile on Authorize.net when this instance is destroyed
       def delete_address
-        Accounting.api(:cim).delete_address(address_id, profile.profile_id) unless Rails.env.test?
+        Accounting.api(:cim, api_options(profile.accountable)).delete_address(address_id, profile.profile_id) unless Rails.env.test?
       end
 
       def address_fields

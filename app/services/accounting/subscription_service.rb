@@ -14,19 +14,17 @@ module Accounting
       # If a new transaction, pre-set the job id so it doesn't get put into the ActiveJob queue when saved
       resource.job_id ||= '0'
 
-      raise Accounting::SyncError.new("Subscription with id #{payload[:id]} not found in Authorize.NET", payload) if resource.details.nil?
-
       # Assign the attributes
       resource.assign_attributes(
         name: name,
         amount: amount,
         status: status,
-        description: resource.details.description,
-        total_occurrences: resource.details.total_occurrences,
-        length: resource.details.payment_schedule.length,
-        unit: resource.details.payment_schedule.unit,
-        trial_amount: resource.details.trial_amount,
-        start_date: resource.details.payment_schedule.start_date
+        description: details.description,
+        total_occurrences: details.total_occurrences,
+        length: details.payment_schedule.length,
+        unit: details.payment_schedule.unit,
+        trial_amount: details.trial_amount,
+        start_date: details.payment_schedule.start_date
       )
 
       resource.profile.accountable.try(:run_hook, :before_subscription_sync, resource)
@@ -65,6 +63,14 @@ module Accounting
         profile.payments.find_by(payment_profile_id: payload[:profile][:customer_payment_profile_id])
       else
         raise Accounting::SyncWarning.new("Subscription cannot be created because the defined payment method was not found on the accountable profile", payload)
+      end
+    end
+
+    def details
+      if resource.details.nil?
+        raise Accounting::SyncError.new("Subscription cannot be created because the record could not be found.", payload)
+      else
+        resource.details
       end
     end
 

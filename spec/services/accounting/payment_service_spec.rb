@@ -2,9 +2,9 @@ require 'spec_helper'
 
 RSpec.describe Accounting::PaymentService do
 
-  let(:hook_profile)          { ActionController::Parameters.new({ "notificationId" => "e2eaa2bd-4c5f-4bb8-a943-da264a0b1968", "eventType" => "net.authorize.customer.created", "eventDate" => "2017-09-20T17:18:54.9460311Z", "webhookId" => "82ed4771-17bb-4fc6-8ea4-f0cad81d3414", "payload" => {"paymentProfiles" => [], "merchantCustomerId" => "2b86c057-d7fe-4d57-a", "description" => "Ipsam quam voluptatem sunt et dolorum.", "entityName" => "customerProfile", "id" => "1502473210" }}) }
-  let(:hook_payment_card)     { ActionController::Parameters.new({ "notificationId" => "35f96318-03c4-419e-922f-2b0fb561b885", "eventType" => "net.authorize.customer.paymentProfile.created", "eventDate" => "2017-09-21T04:45:36.437607Z", "webhookId" => "82ed4771-17bb-4fc6-8ea4-f0cad81d3414", "payload" => {"customerProfileId" => 1502473210, "entityName" => "customerPaymentProfile", "id" => "1501996571" }}) }
-  let(:hook_payment_ach)      { ActionController::Parameters.new({ "notificationId" => "35f96318-03c4-419e-922f-2b0fb561b885", "eventType" => "net.authorize.customer.paymentProfile.created", "eventDate" => "2017-09-21T04:45:36.437607Z", "webhookId" => "82ed4771-17bb-4fc6-8ea4-f0cad81d3414", "payload" => {"customerProfileId" => 1502473210, "entityName" => "customerPaymentProfile", "id" => "1807755575" }}) }
+  let(:hook_profile)          { { "notificationId" => "e2eaa2bd-4c5f-4bb8-a943-da264a0b1968", "eventType" => "net.authorize.customer.created", "eventDate" => "2017-09-20T17:18:54.9460311Z", "webhookId" => "82ed4771-17bb-4fc6-8ea4-f0cad81d3414", "payload" => {"paymentProfiles" => [], "merchantCustomerId" => "2b86c057-d7fe-4d57-a", "description" => "Ipsam quam voluptatem sunt et dolorum.", "entityName" => "customerProfile", "id" => "1502473210" }} }
+  let(:hook_payment_card)     { { "notificationId" => "35f96318-03c4-419e-922f-2b0fb561b885", "eventType" => "net.authorize.customer.paymentProfile.created", "eventDate" => "2017-09-21T04:45:36.437607Z", "webhookId" => "82ed4771-17bb-4fc6-8ea4-f0cad81d3414", "payload" => {"customerProfileId" => 1502473210, "entityName" => "customerPaymentProfile", "id" => "1501996571" }} }
+  let(:hook_payment_ach)      { { "notificationId" => "35f96318-03c4-419e-922f-2b0fb561b885", "eventType" => "net.authorize.customer.paymentProfile.created", "eventDate" => "2017-09-21T04:45:36.437607Z", "webhookId" => "82ed4771-17bb-4fc6-8ea4-f0cad81d3414", "payload" => {"customerProfileId" => 1502473210, "entityName" => "customerPaymentProfile", "id" => "1807755575" }} }
 
   let(:service_profile)       { Accounting::HookService.new(hook_profile).service }
   let(:service_payment_card)  { Accounting::HookService.new(hook_payment_card).service }
@@ -48,5 +48,12 @@ RSpec.describe Accounting::PaymentService do
     service_payment_card.sync! # Create resource
     service_payment_card.event = 'deleted'
     expect { service_payment_card.sync! }.to change { Accounting::Payment.count }.by(-1) # Now destroy it
+  end
+
+  it 'should raise a sync error if the payment details could not be found' do
+    service_payment_card.sync!
+    service_payment_card.resource.update_column(:payment_profile_id, nil)
+    service_payment_card.resource.instance_variable_set('@details', nil)
+    expect { service_payment_card.details }.to raise_error(Accounting::SyncError, /Payment profile cannot be created because the record could not be found/)
   end
 end

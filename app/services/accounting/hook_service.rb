@@ -4,7 +4,7 @@ module Accounting
     attr_accessor :hook, :payload, :event
 
     def initialize(hook)
-      @hook = hook.to_unsafe_h.deep_transform_keys { |k| k.underscore.to_sym }
+      @hook = hook.deep_transform_keys { |k| k.underscore.to_sym }
       @payload = @hook[:payload]
       @event = @hook[:event_type].split('.').last
     end
