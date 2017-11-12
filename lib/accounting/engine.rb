@@ -5,6 +5,7 @@ module Accounting
 
     initializer 'accounting.initialize' do
       ::ActiveRecord::Base.send :include, ::Accounting::ActiveRecord
+      ::ActionDispatch::Routing::Mapper.send :include, ::Accounting::Routes
     end
 
   end
