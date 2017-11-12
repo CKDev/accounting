@@ -31,6 +31,9 @@ Accounting.setup do |config|
   # The default queue to add Transaction/Subscription/Hook background jobs to
   config.queue = :default
 
+  # The default logger that will be used when `Accounting.log` is called
+  config.logger = Logger.new(STDOUT)
+
 end
 CONTENT
       end
