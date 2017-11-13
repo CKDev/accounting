@@ -7,7 +7,6 @@
 /pkg/
 /spec/reports/
 /tmp/
-accounting.rb
 *.log
 /spec/railsapp/log/
 
