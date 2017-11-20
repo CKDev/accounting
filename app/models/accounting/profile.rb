@@ -19,7 +19,7 @@ module Accounting
 
     validates_length_of :authnet_id, maximum: 20, allow_nil: true, allow_blank: true
 
-    validate :create_profile, if: proc { |p| p.profile_id.blank? }
+    validate :create_profile
 
     before_destroy :delete_profile, if: proc { |p| p.profile_id.present? }
 
@@ -35,7 +35,7 @@ module Accounting
     private
 
       def create_profile
-        return if errors.present?
+        return if errors.present? || profile_id.blank?
 
         customer_profile = AuthorizeNet::CIM::CustomerProfile.new(profile_options)
         response = Accounting.api(:cim, api_options(accountable)).create_profile(customer_profile)

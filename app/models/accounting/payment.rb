@@ -21,6 +21,8 @@ module Accounting
 
     enum profile_type: [:card, :ach]
 
+    before_validation :format_data
+
     validates :address, presence: true
 
     validates :account_type, inclusion: { in: Accounting::Payment.account_types.keys }, if: :ach?
@@ -128,6 +130,10 @@ module Accounting
 
         self.errors.add(:base, 'Expiration date cannot be in the past') unless Time.new(year.to_i, month.to_i, Time.now.day, Time.now.hour, Time.now.min, 0) > Time.now
         self.errors.add(:base, 'Expiration date is invalid.') unless /^[0-9]{2}[0-9]{2}$/ =~ expiration
+      end
+
+      def format_data
+        self.number = number.to_s.gsub(/[^0-9]+/, '')
       end
 
   end
