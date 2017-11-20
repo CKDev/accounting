@@ -35,7 +35,7 @@ module Accounting
     private
 
       def create_profile
-        return if errors.present? || profile_id.blank?
+        return if errors.present? || profile_id.present?
 
         customer_profile = AuthorizeNet::CIM::CustomerProfile.new(profile_options)
         response = Accounting.api(:cim, api_options(accountable)).create_profile(customer_profile)
