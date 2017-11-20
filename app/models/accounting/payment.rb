@@ -129,7 +129,7 @@ module Accounting
         return if year == -1 && month == -1
 
         # Ensure the year is 4 digit representation
-        year = '20' + year.to_s[-2..-1]
+        year = '20' + year.to_s[-2..-1].to_s
 
         self.errors.add(:base, 'Expiration date cannot be in the past') unless Time.new(year.to_i, month.to_i, Time.now.day, Time.now.hour, Time.now.min, 0) > Time.now
         self.errors.add(:base, 'Expiration date is invalid.') unless /^[0-9]{2}[0-9]{2}$/ =~ expiration
