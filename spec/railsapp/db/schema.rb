@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170731015228) do
+ActiveRecord::Schema.define(version: 20171218235154) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -98,6 +98,7 @@ ActiveRecord::Schema.define(version: 20170731015228) do
     t.integer "subscription_id"
     t.integer "subscription_payment"
     t.boolean "settled", default: false
+    t.text "message"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -3,7 +3,7 @@ module Accounting
 
     extend ActiveSupport::Concern
 
-    ACCOUNTABLE_OPTIONS = { email: :email, id: nil, description: nil, queue: nil, api_login: nil, api_key: nil }
+    ACCOUNTABLE_OPTIONS = { email: nil, id: nil, description: nil, queue: nil, api_login: nil, api_key: nil }
 
     included do
       # Hold
@@ -111,7 +111,7 @@ module Accounting
 
         accountable_options = ACCOUNTABLE_OPTIONS.merge(options.symbolize_keys).symbolize_keys
 
-        has_one :profile, as: :accountable, dependent: :destroy, required: true, class_name: '::Accounting::Profile'
+        has_one :profile, as: :accountable, dependent: :destroy, required: false, class_name: '::Accounting::Profile'
 
         delegate :payments, to: :profile
 
@@ -126,18 +126,26 @@ module Accounting
           @_accountable_options = accountable_options
         end
 
-        before_validation do
-          options = accountable_options.slice(:email, :id, :description).map do |k,v|
-            if v.is_a?(String)
-              { "authnet_#{k}" => v }
-            elsif v.is_a?(Symbol)
-              { "authnet_#{k}" => self.send(v) }
-            elsif v.respond_to?(:call)
-              { "authnet_#{k}" => v.call(self) }
-            end
-          end.compact.reduce(:merge)
+        after_commit do
+          options = {
+            authnet_id: "#{self.class.name} #{self.id}",
+            authnet_email: "#{self.class.name.gsub('::', '_').underscore}_#{self.id}@#{Accounting.config.domain}",
+            authnet_description: "#{self.class.name} #{self.id}"
+          }
 
-          self.build_profile(options) unless profile.present?
+          # Does not work if the proc references models not yet saved
+          #
+          # options = accountable_options.slice(:id, :email, :description).map do |k,v|
+          #   if v.is_a?(String)
+          #     { "authnet_#{k}" => v }
+          #   elsif v.is_a?(Symbol)
+          #     { "authnet_#{k}" => self.send(v) }
+          #   elsif v.respond_to?(:call)
+          #     { "authnet_#{k}" => v.call(self) }
+          #   end
+          # end.compact.reduce(:merge)
+
+          self.create_profile(options) unless profile.present?
         end
       end
 

@@ -17,6 +17,7 @@ class CreateAccountingTransactions < ActiveRecord::Migration[5.1]
       t.integer :subscription_id
       t.integer :subscription_payment
       t.boolean :settled, default: false
+      t.text :message
 
       t.timestamps
     end

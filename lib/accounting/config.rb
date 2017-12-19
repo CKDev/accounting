@@ -1,7 +1,7 @@
 module Accounting
   class Config
 
-    attr_accessor :login, :key, :signature, :validation_mode, :gateway, :cancel_subscription_on_destroy, :queue, :logger
+    attr_accessor :login, :key, :signature, :validation_mode, :gateway, :cancel_subscription_on_destroy, :queue, :logger, :domain
 
     def initialize
       @gateway ||= :sandbox
@@ -9,6 +9,7 @@ module Accounting
       @cancel_subscription_on_destroy ||= false
       @queue ||= :default
       @logger ||= ActiveSupport::TaggedLogging.new(Logger.new(Rails.root.join('log', 'accounting.log'), 'weekly'))
+      @domain ||= 'example.org'
     end
 
   end

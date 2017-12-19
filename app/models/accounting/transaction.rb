@@ -40,8 +40,6 @@ module Accounting
 
     validates :payment, presence: true, if: proc { |t| !['void', 'prior_auth_capture'].include?(t.transaction_type) }
 
-    validates :transaction_id, presence: true, on: :update
-
     validate :can_capture, if: proc { |t| t.transaction_type == 'prior_auth_capture' }
 
     validate :can_refund, if: proc { |t| t.transaction_type == 'refund' }
@@ -70,16 +68,19 @@ module Accounting
         process_now!
       rescue Accounting::DuplicateError => e
         Accounting.log('Transaction', 'Process', e.message)
-        update(status: :duplicate, submitted_at: Time.now)
+        update(status: :duplicate, submitted_at: Time.now, message: e.message)
         self
       rescue => e
         self.errors.add(:base, e.message)
+        update(message: e.message)
         false
       end
     end
 
     def process_now!
       accountable.try(:run_hook, :before_transaction_submit, self)
+
+      return self if processed?
 
       begin
         case transaction_type
@@ -90,7 +91,10 @@ module Accounting
           when 'refund';             refund
         end
       rescue Accounting::DuplicateError => e
-        update(status: :duplicate, submitted_at: Time.now)
+        update(status: :duplicate, submitted_at: Time.now, message: e.message)
+        raise e
+      rescue StandardError => e
+        update(status: :error, submitted_at: Time.now, message: e.message)
         raise e
       end
 
@@ -112,7 +116,7 @@ module Accounting
     end
 
     def processed?
-      submitted_at.present? && transaction_id.present?
+      submitted_at.present?
     end
 
     private
@@ -122,6 +126,9 @@ module Accounting
           if response.direct_response.present?
             # Extract just the fields that we're going to save
             fields = response.direct_response.fields.slice(:authorization_code, :method, :transaction_id, :avs_response)
+
+            # Set the submitted at timestamp
+            fields[:submitted_at] = Time.now.utc
 
             # Can't use the key/column name "method" in a database, change it to "transaction_method"
             fields[:transaction_method] = fields.delete(:method)

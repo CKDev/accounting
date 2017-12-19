@@ -34,6 +34,11 @@ Accounting.setup do |config|
   # The default logger that will be used when `Accounting.log` is called
   config.logger = Logger.new(STDOUT)
 
+  # The domain used for email adddresses associated with customer profiles
+  # The format of emails will always be <accountable_class>_<accountable_id>@<domain>, and will not actually
+  # refer to specific customer email addresses
+  config.domain = 'example.org'
+
 end
 CONTENT
       end

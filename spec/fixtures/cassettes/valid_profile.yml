@@ -10,12 +10,12 @@ http_interactions:
         <createCustomerProfileRequest xmlns="AnetApi/xml/v1/schema/AnetApiSchema.xsd">
           <merchantAuthentication>
             <name>8U46Pew5dfF</name>
-            <transactionKey>3m26PD4kdzX4U358</transactionKey>
+            <transactionKey>7q7L43ED4x5Gr4j5</transactionKey>
           </merchantAuthentication>
           <profile>
-            <merchantCustomerId>2000dc9a-7b01-4e1d-a</merchantCustomerId>
-            <description>Ut perspiciatis nam accusantium autem.</description>
-            <email>danyelle@jacobi.name</email>
+            <merchantCustomerId>248e3c72-a162-4f69-b</merchantCustomerId>
+            <description>Voluptate debitis error ipsam hic.</description>
+            <email>reatha_gerhold@schillerpfannerstill.name</email>
           </profile>
           <validationMode>none</validationMode>
         </createCustomerProfileRequest>
@@ -37,8 +37,8 @@ http_interactions:
       - private
       Content-Type:
       - application/xml; charset=utf-8
-      Server:
-      - Microsoft-IIS/7.5
+      X-Opnet-Transaction-Trace:
+      - a2_dcf889a9-594e-4466-ba42-7cd4dfc8e900-5416-5830561
       Access-Control-Allow-Origin:
       - "*"
       Access-Control-Allow-Methods:
@@ -47,20 +47,18 @@ http_interactions:
       - x-requested-with,cache-control,content-type,origin,method,SOAPAction
       Access-Control-Allow-Credentials:
       - 'true'
-      X-Powered-By:
-      - ASP.NET
       Content-Length:
       - '507'
       Date:
-      - Wed, 27 Sep 2017 16:18:42 GMT
+      - Tue, 19 Dec 2017 06:53:46 GMT
       Connection:
       - keep-alive
     body:
       encoding: ASCII-8BIT
       string: !binary |-
-        77u/PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48Y3JlYXRlQ3VzdG9tZXJQcm9maWxlUmVzcG9uc2UgeG1sbnM6eHNpPSJodHRwOi8vd3d3LnczLm9yZy8yMDAxL1hNTFNjaGVtYS1pbnN0YW5jZSIgeG1sbnM6eHNkPSJodHRwOi8vd3d3LnczLm9yZy8yMDAxL1hNTFNjaGVtYSIgeG1sbnM9IkFuZXRBcGkveG1sL3YxL3NjaGVtYS9BbmV0QXBpU2NoZW1hLnhzZCI+PG1lc3NhZ2VzPjxyZXN1bHRDb2RlPk9rPC9yZXN1bHRDb2RlPjxtZXNzYWdlPjxjb2RlPkkwMDAwMTwvY29kZT48dGV4dD5TdWNjZXNzZnVsLjwvdGV4dD48L21lc3NhZ2U+PC9tZXNzYWdlcz48Y3VzdG9tZXJQcm9maWxlSWQ+MTUwMjUwMzIyMTwvY3VzdG9tZXJQcm9maWxlSWQ+PGN1c3RvbWVyUGF5bWVudFByb2ZpbGVJZExpc3QgLz48Y3VzdG9tZXJTaGlwcGluZ0FkZHJlc3NJZExpc3QgLz48dmFsaWRhdGlvbkRpcmVjdFJlc3BvbnNlTGlzdCAvPjwvY3JlYXRlQ3VzdG9tZXJQcm9maWxlUmVzcG9uc2U+
+        77u/PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48Y3JlYXRlQ3VzdG9tZXJQcm9maWxlUmVzcG9uc2UgeG1sbnM6eHNpPSJodHRwOi8vd3d3LnczLm9yZy8yMDAxL1hNTFNjaGVtYS1pbnN0YW5jZSIgeG1sbnM6eHNkPSJodHRwOi8vd3d3LnczLm9yZy8yMDAxL1hNTFNjaGVtYSIgeG1sbnM9IkFuZXRBcGkveG1sL3YxL3NjaGVtYS9BbmV0QXBpU2NoZW1hLnhzZCI+PG1lc3NhZ2VzPjxyZXN1bHRDb2RlPk9rPC9yZXN1bHRDb2RlPjxtZXNzYWdlPjxjb2RlPkkwMDAwMTwvY29kZT48dGV4dD5TdWNjZXNzZnVsLjwvdGV4dD48L21lc3NhZ2U+PC9tZXNzYWdlcz48Y3VzdG9tZXJQcm9maWxlSWQ+MTUwMzA4MzA2NTwvY3VzdG9tZXJQcm9maWxlSWQ+PGN1c3RvbWVyUGF5bWVudFByb2ZpbGVJZExpc3QgLz48Y3VzdG9tZXJTaGlwcGluZ0FkZHJlc3NJZExpc3QgLz48dmFsaWRhdGlvbkRpcmVjdFJlc3BvbnNlTGlzdCAvPjwvY3JlYXRlQ3VzdG9tZXJQcm9maWxlUmVzcG9uc2U+
     http_version: 
-  recorded_at: Wed, 27 Sep 2017 16:19:34 GMT
+  recorded_at: Tue, 19 Dec 2017 06:53:46 GMT
 - request:
     method: post
     uri: https://apitest.authorize.net/xml/v1/request.api
@@ -71,26 +69,26 @@ http_interactions:
         <createCustomerPaymentProfileRequest xmlns="AnetApi/xml/v1/schema/AnetApiSchema.xsd">
           <merchantAuthentication>
             <name>8U46Pew5dfF</name>
-            <transactionKey>3m26PD4kdzX4U358</transactionKey>
+            <transactionKey>7q7L43ED4x5Gr4j5</transactionKey>
           </merchantAuthentication>
-          <customerProfileId>1502503221</customerProfileId>
+          <customerProfileId>1503083065</customerProfileId>
           <paymentProfile>
             <billTo>
-              <firstName>Queenie</firstName>
-              <lastName>Leffler</lastName>
-              <company>VonRueden Inc</company>
-              <address>584 Love Light</address>
-              <city>Lake Veliachester</city>
-              <state>Ohio</state>
-              <zip>18767</zip>
-              <country>NG</country>
-              <phoneNumber>(441)434-0367</phoneNumber>
-              <faxNumber>1-516-775-5181 x85893</faxNumber>
+              <firstName>Leann</firstName>
+              <lastName>Herzog</lastName>
+              <company>Lynch LLC</company>
+              <address>143 Wendolyn Forks</address>
+              <city>New Debbi</city>
+              <state>South Dakota</state>
+              <zip>85825-8705</zip>
+              <country>SZ</country>
+              <phoneNumber>(657)947-5240</phoneNumber>
+              <faxNumber>225-740-5429 x4932</faxNumber>
             </billTo>
             <payment>
               <creditCard>
-                <cardNumber>4007000000027</cardNumber>
-                <expirationDate>2021-09</expirationDate>
+                <cardNumber>6011000000000012</cardNumber>
+                <expirationDate>2020-12</expirationDate>
                 <cardCode>123</cardCode>
               </creditCard>
             </payment>
@@ -115,8 +113,8 @@ http_interactions:
       - private
       Content-Type:
       - application/xml; charset=utf-8
-      Server:
-      - Microsoft-IIS/7.5
+      X-Opnet-Transaction-Trace:
+      - a2_a02dc2a0-18bd-4b58-b281-8df14e79e8a4-3972-5827211
       Access-Control-Allow-Origin:
       - "*"
       Access-Control-Allow-Methods:
@@ -125,20 +123,18 @@ http_interactions:
       - x-requested-with,cache-control,content-type,origin,method,SOAPAction
       Access-Control-Allow-Credentials:
       - 'true'
-      X-Powered-By:
-      - ASP.NET
       Content-Length:
-      - '925'
+      - '928'
       Date:
-      - Wed, 27 Sep 2017 16:18:42 GMT
+      - Tue, 19 Dec 2017 06:53:47 GMT
       Connection:
       - keep-alive
     body:
       encoding: ASCII-8BIT
       string: !binary |-
-        77u/PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48Y3JlYXRlQ3VzdG9tZXJQYXltZW50UHJvZmlsZVJlc3BvbnNlIHhtbG5zOnhzaT0iaHR0cDovL3d3dy53My5vcmcvMjAwMS9YTUxTY2hlbWEtaW5zdGFuY2UiIHhtbG5zOnhzZD0iaHR0cDovL3d3dy53My5vcmcvMjAwMS9YTUxTY2hlbWEiIHhtbG5zPSJBbmV0QXBpL3htbC92MS9zY2hlbWEvQW5ldEFwaVNjaGVtYS54c2QiPjxtZXNzYWdlcz48cmVzdWx0Q29kZT5PazwvcmVzdWx0Q29kZT48bWVzc2FnZT48Y29kZT5JMDAwMDE8L2NvZGU+PHRleHQ+U3VjY2Vzc2Z1bC48L3RleHQ+PC9tZXNzYWdlPjwvbWVzc2FnZXM+PGN1c3RvbWVyUHJvZmlsZUlkPjE1MDI1MDMyMjE8L2N1c3RvbWVyUHJvZmlsZUlkPjxjdXN0b21lclBheW1lbnRQcm9maWxlSWQ+MTUwMjAzNDI2MDwvY3VzdG9tZXJQYXltZW50UHJvZmlsZUlkPjx2YWxpZGF0aW9uRGlyZWN0UmVzcG9uc2U+MSwxLDEsKFRFU1RNT0RFKSBUaGlzIHRyYW5zYWN0aW9uIGhhcyBiZWVuIGFwcHJvdmVkLiwwMDAwMDAsUCwwLG5vbmUsVGVzdCB0cmFuc2FjdGlvbiBmb3IgVmFsaWRhdGVDdXN0b21lclBheW1lbnRQcm9maWxlLiwxLjAwLENDLGF1dGhfb25seSxub25lLFF1ZWVuaWUsTGVmZmxlcixWb25SdWVkZW4gSW5jLDU4NCBMb3ZlIExpZ2h0LExha2UgVmVsaWFjaGVzdGVyLE9oaW8sMTg3NjcsTkcsKDQ0MSk0MzQtMDM2NywxLTUxNi03NzUtNTE4MSB4ODU4OTMsZW1haWxAZXhhbXBsZS5jb20sLCwsLCwsLCwwLjAwLDAuMDAsMC4wMCxGQUxTRSxub25lLEEzQjRBMDM1MDUyMTNCRjc3QzQwQUM2MzBCMTgzOEI5LCwsLCwsLCwsLCwsLFhYWFgwMDI3LFZpc2EsLCwsLCwsLCwsLCwsLCwsLDwvdmFsaWRhdGlvbkRpcmVjdFJlc3BvbnNlPjwvY3JlYXRlQ3VzdG9tZXJQYXltZW50UHJvZmlsZVJlc3BvbnNlPg==
+        77u/PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48Y3JlYXRlQ3VzdG9tZXJQYXltZW50UHJvZmlsZVJlc3BvbnNlIHhtbG5zOnhzaT0iaHR0cDovL3d3dy53My5vcmcvMjAwMS9YTUxTY2hlbWEtaW5zdGFuY2UiIHhtbG5zOnhzZD0iaHR0cDovL3d3dy53My5vcmcvMjAwMS9YTUxTY2hlbWEiIHhtbG5zPSJBbmV0QXBpL3htbC92MS9zY2hlbWEvQW5ldEFwaVNjaGVtYS54c2QiPjxtZXNzYWdlcz48cmVzdWx0Q29kZT5PazwvcmVzdWx0Q29kZT48bWVzc2FnZT48Y29kZT5JMDAwMDE8L2NvZGU+PHRleHQ+U3VjY2Vzc2Z1bC48L3RleHQ+PC9tZXNzYWdlPjwvbWVzc2FnZXM+PGN1c3RvbWVyUHJvZmlsZUlkPjE1MDMwODMwNjU8L2N1c3RvbWVyUHJvZmlsZUlkPjxjdXN0b21lclBheW1lbnRQcm9maWxlSWQ+MTUwMjQ0NDM3MTwvY3VzdG9tZXJQYXltZW50UHJvZmlsZUlkPjx2YWxpZGF0aW9uRGlyZWN0UmVzcG9uc2U+MSwxLDEsKFRFU1RNT0RFKSBUaGlzIHRyYW5zYWN0aW9uIGhhcyBiZWVuIGFwcHJvdmVkLiwwMDAwMDAsUCwwLG5vbmUsVGVzdCB0cmFuc2FjdGlvbiBmb3IgVmFsaWRhdGVDdXN0b21lclBheW1lbnRQcm9maWxlLiwxLjAwLENDLGF1dGhfb25seSxub25lLExlYW5uLEhlcnpvZyxMeW5jaCBMTEMsMTQzIFdlbmRvbHluIEZvcmtzLE5ldyBEZWJiaSxTb3V0aCBEYWtvdGEsODU4MjUtODcwNSxTWiwoNjU3KTk0Ny01MjQwLDIyNS03NDAtNTQyOSB4NDkzMixlbWFpbEBleGFtcGxlLmNvbSwsLCwsLCwsLDAuMDAsMC4wMCwwLjAwLEZBTFNFLG5vbmUsNkY0REJFQUUyMUQ0OEZFMjRFMUNENkQ1RDU1NkNBQTQsLCwsLCwsLCwsLCwsWFhYWDAwMTIsRGlzY292ZXIsLCwsLCwsLCwsLCwsLCwsLDwvdmFsaWRhdGlvbkRpcmVjdFJlc3BvbnNlPjwvY3JlYXRlQ3VzdG9tZXJQYXltZW50UHJvZmlsZVJlc3BvbnNlPg==
     http_version: 
-  recorded_at: Wed, 27 Sep 2017 16:19:35 GMT
+  recorded_at: Tue, 19 Dec 2017 06:53:47 GMT
 - request:
     method: post
     uri: https://apitest.authorize.net/xml/v1/request.api
@@ -149,20 +145,20 @@ http_interactions:
         <createCustomerShippingAddressRequest xmlns="AnetApi/xml/v1/schema/AnetApiSchema.xsd">
           <merchantAuthentication>
             <name>8U46Pew5dfF</name>
-            <transactionKey>3m26PD4kdzX4U358</transactionKey>
+            <transactionKey>7q7L43ED4x5Gr4j5</transactionKey>
           </merchantAuthentication>
-          <customerProfileId>1502503221</customerProfileId>
+          <customerProfileId>1503083065</customerProfileId>
           <address>
-            <firstName>Queenie</firstName>
-            <lastName>Leffler</lastName>
-            <company>VonRueden Inc</company>
-            <address>584 Love Light</address>
-            <city>Lake Veliachester</city>
-            <state>Ohio</state>
-            <zip>18767</zip>
-            <country>NG</country>
-            <phoneNumber>(441)434-0367</phoneNumber>
-            <faxNumber>1-516-775-5181 x85893</faxNumber>
+            <firstName>Leann</firstName>
+            <lastName>Herzog</lastName>
+            <company>Lynch LLC</company>
+            <address>143 Wendolyn Forks</address>
+            <city>New Debbi</city>
+            <state>South Dakota</state>
+            <zip>85825-8705</zip>
+            <country>SZ</country>
+            <phoneNumber>(657)947-5240</phoneNumber>
+            <faxNumber>225-740-5429 x4932</faxNumber>
           </address>
         </createCustomerShippingAddressRequest>
     headers:
@@ -183,8 +179,8 @@ http_interactions:
       - private
       Content-Type:
       - application/xml; charset=utf-8
-      Server:
-      - Microsoft-IIS/7.5
+      X-Opnet-Transaction-Trace:
+      - a2_a02dc2a0-18bd-4b58-b281-8df14e79e8a4-3972-5827225
       Access-Control-Allow-Origin:
       - "*"
       Access-Control-Allow-Methods:
@@ -193,20 +189,18 @@ http_interactions:
       - x-requested-with,cache-control,content-type,origin,method,SOAPAction
       Access-Control-Allow-Credentials:
       - 'true'
-      X-Powered-By:
-      - ASP.NET
       Content-Length:
       - '475'
       Date:
-      - Wed, 27 Sep 2017 16:18:43 GMT
+      - Tue, 19 Dec 2017 06:53:47 GMT
       Connection:
       - keep-alive
     body:
       encoding: ASCII-8BIT
       string: !binary |-
-        77u/PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48Y3JlYXRlQ3VzdG9tZXJTaGlwcGluZ0FkZHJlc3NSZXNwb25zZSB4bWxuczp4c2k9Imh0dHA6Ly93d3cudzMub3JnLzIwMDEvWE1MU2NoZW1hLWluc3RhbmNlIiB4bWxuczp4c2Q9Imh0dHA6Ly93d3cudzMub3JnLzIwMDEvWE1MU2NoZW1hIiB4bWxucz0iQW5ldEFwaS94bWwvdjEvc2NoZW1hL0FuZXRBcGlTY2hlbWEueHNkIj48bWVzc2FnZXM+PHJlc3VsdENvZGU+T2s8L3Jlc3VsdENvZGU+PG1lc3NhZ2U+PGNvZGU+STAwMDAxPC9jb2RlPjx0ZXh0PlN1Y2Nlc3NmdWwuPC90ZXh0PjwvbWVzc2FnZT48L21lc3NhZ2VzPjxjdXN0b21lclByb2ZpbGVJZD4xNTAyNTAzMjIxPC9jdXN0b21lclByb2ZpbGVJZD48Y3VzdG9tZXJBZGRyZXNzSWQ+MTUwMjA4MzE0ODwvY3VzdG9tZXJBZGRyZXNzSWQ+PC9jcmVhdGVDdXN0b21lclNoaXBwaW5nQWRkcmVzc1Jlc3BvbnNlPg==
+        77u/PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48Y3JlYXRlQ3VzdG9tZXJTaGlwcGluZ0FkZHJlc3NSZXNwb25zZSB4bWxuczp4c2k9Imh0dHA6Ly93d3cudzMub3JnLzIwMDEvWE1MU2NoZW1hLWluc3RhbmNlIiB4bWxuczp4c2Q9Imh0dHA6Ly93d3cudzMub3JnLzIwMDEvWE1MU2NoZW1hIiB4bWxucz0iQW5ldEFwaS94bWwvdjEvc2NoZW1hL0FuZXRBcGlTY2hlbWEueHNkIj48bWVzc2FnZXM+PHJlc3VsdENvZGU+T2s8L3Jlc3VsdENvZGU+PG1lc3NhZ2U+PGNvZGU+STAwMDAxPC9jb2RlPjx0ZXh0PlN1Y2Nlc3NmdWwuPC90ZXh0PjwvbWVzc2FnZT48L21lc3NhZ2VzPjxjdXN0b21lclByb2ZpbGVJZD4xNTAzMDgzMDY1PC9jdXN0b21lclByb2ZpbGVJZD48Y3VzdG9tZXJBZGRyZXNzSWQ+MTUwMjQ5NDY2NTwvY3VzdG9tZXJBZGRyZXNzSWQ+PC9jcmVhdGVDdXN0b21lclNoaXBwaW5nQWRkcmVzc1Jlc3BvbnNlPg==
     http_version: 
-  recorded_at: Wed, 27 Sep 2017 16:19:35 GMT
+  recorded_at: Tue, 19 Dec 2017 06:53:47 GMT
 - request:
     method: post
     uri: https://apitest.authorize.net/xml/v1/request.api
@@ -217,26 +211,168 @@ http_interactions:
         <createCustomerPaymentProfileRequest xmlns="AnetApi/xml/v1/schema/AnetApiSchema.xsd">
           <merchantAuthentication>
             <name>8U46Pew5dfF</name>
-            <transactionKey>3m26PD4kdzX4U358</transactionKey>
+            <transactionKey>7q7L43ED4x5Gr4j5</transactionKey>
           </merchantAuthentication>
-          <customerProfileId>1502503221</customerProfileId>
+          <customerProfileId>1503083065</customerProfileId>
           <paymentProfile>
             <billTo>
-              <firstName>Jim</firstName>
-              <lastName>Torp</lastName>
-              <company>Lesch LLC</company>
-              <address>3616 Miki Drives</address>
-              <city>Luciashire</city>
-              <state>New Hampshire</state>
-              <zip>91667</zip>
-              <country>FM</country>
-              <phoneNumber>641-364-6925</phoneNumber>
-              <faxNumber>799.700.8686 x198</faxNumber>
+              <firstName>Tera</firstName>
+              <lastName>Batz</lastName>
+              <company>Gottlieb and Sons</company>
+              <address>3918 Kindra Streets</address>
+              <city>Merylside</city>
+              <state>Kentucky</state>
+              <zip>93144-3772</zip>
+              <country>SC</country>
+              <phoneNumber>455-427-4733</phoneNumber>
+              <faxNumber>343-981-4970</faxNumber>
+            </billTo>
+            <payment>
+              <creditCard>
+                <cardNumber>6011000000000012</cardNumber>
+                <expirationDate>2018-12</expirationDate>
+                <cardCode>123</cardCode>
+              </creditCard>
+            </payment>
+          </paymentProfile>
+          <validationMode>testMode</validationMode>
+        </createCustomerPaymentProfileRequest>
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Content-Type:
+      - text/xml
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - private
+      Content-Type:
+      - application/xml; charset=utf-8
+      X-Opnet-Transaction-Trace:
+      - a2_dcf889a9-594e-4466-ba42-7cd4dfc8e900-5416-5830581
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - PUT,OPTIONS,POST,GET
+      Access-Control-Allow-Headers:
+      - x-requested-with,cache-control,content-type,origin,method,SOAPAction
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Content-Length:
+      - '923'
+      Date:
+      - Tue, 19 Dec 2017 06:53:48 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        77u/PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48Y3JlYXRlQ3VzdG9tZXJQYXltZW50UHJvZmlsZVJlc3BvbnNlIHhtbG5zOnhzaT0iaHR0cDovL3d3dy53My5vcmcvMjAwMS9YTUxTY2hlbWEtaW5zdGFuY2UiIHhtbG5zOnhzZD0iaHR0cDovL3d3dy53My5vcmcvMjAwMS9YTUxTY2hlbWEiIHhtbG5zPSJBbmV0QXBpL3htbC92MS9zY2hlbWEvQW5ldEFwaVNjaGVtYS54c2QiPjxtZXNzYWdlcz48cmVzdWx0Q29kZT5PazwvcmVzdWx0Q29kZT48bWVzc2FnZT48Y29kZT5JMDAwMDE8L2NvZGU+PHRleHQ+U3VjY2Vzc2Z1bC48L3RleHQ+PC9tZXNzYWdlPjwvbWVzc2FnZXM+PGN1c3RvbWVyUHJvZmlsZUlkPjE1MDMwODMwNjU8L2N1c3RvbWVyUHJvZmlsZUlkPjxjdXN0b21lclBheW1lbnRQcm9maWxlSWQ+MTUwMjQ0NDM3MjwvY3VzdG9tZXJQYXltZW50UHJvZmlsZUlkPjx2YWxpZGF0aW9uRGlyZWN0UmVzcG9uc2U+MSwxLDEsKFRFU1RNT0RFKSBUaGlzIHRyYW5zYWN0aW9uIGhhcyBiZWVuIGFwcHJvdmVkLiwwMDAwMDAsUCwwLG5vbmUsVGVzdCB0cmFuc2FjdGlvbiBmb3IgVmFsaWRhdGVDdXN0b21lclBheW1lbnRQcm9maWxlLiwxLjAwLENDLGF1dGhfb25seSxub25lLFRlcmEsQmF0eixHb3R0bGllYiBhbmQgU29ucywzOTE4IEtpbmRyYSBTdHJlZXRzLE1lcnlsc2lkZSxLZW50dWNreSw5MzE0NC0zNzcyLFNDLDQ1NS00MjctNDczMywzNDMtOTgxLTQ5NzAsZW1haWxAZXhhbXBsZS5jb20sLCwsLCwsLCwwLjAwLDAuMDAsMC4wMCxGQUxTRSxub25lLDZGNERCRUFFMjFENDhGRTI0RTFDRDZENUQ1NTZDQUE0LCwsLCwsLCwsLCwsLFhYWFgwMDEyLERpc2NvdmVyLCwsLCwsLCwsLCwsLCwsLCw8L3ZhbGlkYXRpb25EaXJlY3RSZXNwb25zZT48L2NyZWF0ZUN1c3RvbWVyUGF5bWVudFByb2ZpbGVSZXNwb25zZT4=
+    http_version: 
+  recorded_at: Tue, 19 Dec 2017 06:53:48 GMT
+- request:
+    method: post
+    uri: https://apitest.authorize.net/xml/v1/request.api
+    body:
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0" encoding="utf-8"?>
+        <createCustomerShippingAddressRequest xmlns="AnetApi/xml/v1/schema/AnetApiSchema.xsd">
+          <merchantAuthentication>
+            <name>8U46Pew5dfF</name>
+            <transactionKey>7q7L43ED4x5Gr4j5</transactionKey>
+          </merchantAuthentication>
+          <customerProfileId>1503083065</customerProfileId>
+          <address>
+            <firstName>Tera</firstName>
+            <lastName>Batz</lastName>
+            <company>Gottlieb and Sons</company>
+            <address>3918 Kindra Streets</address>
+            <city>Merylside</city>
+            <state>Kentucky</state>
+            <zip>93144-3772</zip>
+            <country>SC</country>
+            <phoneNumber>455-427-4733</phoneNumber>
+            <faxNumber>343-981-4970</faxNumber>
+          </address>
+        </createCustomerShippingAddressRequest>
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Content-Type:
+      - text/xml
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - private
+      Content-Type:
+      - application/xml; charset=utf-8
+      X-Opnet-Transaction-Trace:
+      - a2_dcf889a9-594e-4466-ba42-7cd4dfc8e900-5416-5830589
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - PUT,OPTIONS,POST,GET
+      Access-Control-Allow-Headers:
+      - x-requested-with,cache-control,content-type,origin,method,SOAPAction
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Content-Length:
+      - '475'
+      Date:
+      - Tue, 19 Dec 2017 06:53:48 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        77u/PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48Y3JlYXRlQ3VzdG9tZXJTaGlwcGluZ0FkZHJlc3NSZXNwb25zZSB4bWxuczp4c2k9Imh0dHA6Ly93d3cudzMub3JnLzIwMDEvWE1MU2NoZW1hLWluc3RhbmNlIiB4bWxuczp4c2Q9Imh0dHA6Ly93d3cudzMub3JnLzIwMDEvWE1MU2NoZW1hIiB4bWxucz0iQW5ldEFwaS94bWwvdjEvc2NoZW1hL0FuZXRBcGlTY2hlbWEueHNkIj48bWVzc2FnZXM+PHJlc3VsdENvZGU+T2s8L3Jlc3VsdENvZGU+PG1lc3NhZ2U+PGNvZGU+STAwMDAxPC9jb2RlPjx0ZXh0PlN1Y2Nlc3NmdWwuPC90ZXh0PjwvbWVzc2FnZT48L21lc3NhZ2VzPjxjdXN0b21lclByb2ZpbGVJZD4xNTAzMDgzMDY1PC9jdXN0b21lclByb2ZpbGVJZD48Y3VzdG9tZXJBZGRyZXNzSWQ+MTUwMjQ5NDY2NzwvY3VzdG9tZXJBZGRyZXNzSWQ+PC9jcmVhdGVDdXN0b21lclNoaXBwaW5nQWRkcmVzc1Jlc3BvbnNlPg==
+    http_version: 
+  recorded_at: Tue, 19 Dec 2017 06:53:48 GMT
+- request:
+    method: post
+    uri: https://apitest.authorize.net/xml/v1/request.api
+    body:
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0" encoding="utf-8"?>
+        <createCustomerPaymentProfileRequest xmlns="AnetApi/xml/v1/schema/AnetApiSchema.xsd">
+          <merchantAuthentication>
+            <name>8U46Pew5dfF</name>
+            <transactionKey>7q7L43ED4x5Gr4j5</transactionKey>
+          </merchantAuthentication>
+          <customerProfileId>1503083065</customerProfileId>
+          <paymentProfile>
+            <billTo>
+              <firstName>Yun</firstName>
+              <lastName>Bogan</lastName>
+              <company>D'Amore Deckow and Buckridge</company>
+              <address>2890 Susannah Mall</address>
+              <city>Archiechester</city>
+              <state>New Mexico</state>
+              <zip>45123-9427</zip>
+              <country>TG</country>
+              <phoneNumber>1-425-806-3230</phoneNumber>
+              <faxNumber>456.643.4703 x07661</faxNumber>
             </billTo>
             <payment>
               <creditCard>
                 <cardNumber>3088000000000017</cardNumber>
-                <expirationDate>2021-09</expirationDate>
+                <expirationDate>2019-12</expirationDate>
                 <cardCode>123</cardCode>
               </creditCard>
             </payment>
@@ -261,8 +397,8 @@ http_interactions:
       - private
       Content-Type:
       - application/xml; charset=utf-8
-      Server:
-      - Microsoft-IIS/7.5
+      X-Opnet-Transaction-Trace:
+      - a2_a02dc2a0-18bd-4b58-b281-8df14e79e8a4-3972-5827247
       Access-Control-Allow-Origin:
       - "*"
       Access-Control-Allow-Methods:
@@ -271,20 +407,18 @@ http_interactions:
       - x-requested-with,cache-control,content-type,origin,method,SOAPAction
       Access-Control-Allow-Credentials:
       - 'true'
-      X-Powered-By:
-      - ASP.NET
       Content-Length:
-      - '912'
+      - '951'
       Date:
-      - Wed, 27 Sep 2017 16:18:44 GMT
+      - Tue, 19 Dec 2017 06:53:49 GMT
       Connection:
       - keep-alive
     body:
       encoding: ASCII-8BIT
       string: !binary |-
-        77u/PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48Y3JlYXRlQ3VzdG9tZXJQYXltZW50UHJvZmlsZVJlc3BvbnNlIHhtbG5zOnhzaT0iaHR0cDovL3d3dy53My5vcmcvMjAwMS9YTUxTY2hlbWEtaW5zdGFuY2UiIHhtbG5zOnhzZD0iaHR0cDovL3d3dy53My5vcmcvMjAwMS9YTUxTY2hlbWEiIHhtbG5zPSJBbmV0QXBpL3htbC92MS9zY2hlbWEvQW5ldEFwaVNjaGVtYS54c2QiPjxtZXNzYWdlcz48cmVzdWx0Q29kZT5PazwvcmVzdWx0Q29kZT48bWVzc2FnZT48Y29kZT5JMDAwMDE8L2NvZGU+PHRleHQ+U3VjY2Vzc2Z1bC48L3RleHQ+PC9tZXNzYWdlPjwvbWVzc2FnZXM+PGN1c3RvbWVyUHJvZmlsZUlkPjE1MDI1MDMyMjE8L2N1c3RvbWVyUHJvZmlsZUlkPjxjdXN0b21lclBheW1lbnRQcm9maWxlSWQ+MTUwMjAzNDI2MTwvY3VzdG9tZXJQYXltZW50UHJvZmlsZUlkPjx2YWxpZGF0aW9uRGlyZWN0UmVzcG9uc2U+MSwxLDEsKFRFU1RNT0RFKSBUaGlzIHRyYW5zYWN0aW9uIGhhcyBiZWVuIGFwcHJvdmVkLiwwMDAwMDAsUCwwLG5vbmUsVGVzdCB0cmFuc2FjdGlvbiBmb3IgVmFsaWRhdGVDdXN0b21lclBheW1lbnRQcm9maWxlLiwxLjAwLENDLGF1dGhfb25seSxub25lLEppbSxUb3JwLExlc2NoIExMQywzNjE2IE1pa2kgRHJpdmVzLEx1Y2lhc2hpcmUsTmV3IEhhbXBzaGlyZSw5MTY2NyxGTSw2NDEtMzY0LTY5MjUsNzk5LjcwMC44Njg2IHgxOTgsZW1haWxAZXhhbXBsZS5jb20sLCwsLCwsLCwwLjAwLDAuMDAsMC4wMCxGQUxTRSxub25lLEEzQjRBMDM1MDUyMTNCRjc3QzQwQUM2MzBCMTgzOEI5LCwsLCwsLCwsLCwsLFhYWFgwMDE3LEpDQiwsLCwsLCwsLCwsLCwsLCwsPC92YWxpZGF0aW9uRGlyZWN0UmVzcG9uc2U+PC9jcmVhdGVDdXN0b21lclBheW1lbnRQcm9maWxlUmVzcG9uc2U+
+        77u/PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48Y3JlYXRlQ3VzdG9tZXJQYXltZW50UHJvZmlsZVJlc3BvbnNlIHhtbG5zOnhzaT0iaHR0cDovL3d3dy53My5vcmcvMjAwMS9YTUxTY2hlbWEtaW5zdGFuY2UiIHhtbG5zOnhzZD0iaHR0cDovL3d3dy53My5vcmcvMjAwMS9YTUxTY2hlbWEiIHhtbG5zPSJBbmV0QXBpL3htbC92MS9zY2hlbWEvQW5ldEFwaVNjaGVtYS54c2QiPjxtZXNzYWdlcz48cmVzdWx0Q29kZT5PazwvcmVzdWx0Q29kZT48bWVzc2FnZT48Y29kZT5JMDAwMDE8L2NvZGU+PHRleHQ+U3VjY2Vzc2Z1bC48L3RleHQ+PC9tZXNzYWdlPjwvbWVzc2FnZXM+PGN1c3RvbWVyUHJvZmlsZUlkPjE1MDMwODMwNjU8L2N1c3RvbWVyUHJvZmlsZUlkPjxjdXN0b21lclBheW1lbnRQcm9maWxlSWQ+MTUwMjQ0NDM3MzwvY3VzdG9tZXJQYXltZW50UHJvZmlsZUlkPjx2YWxpZGF0aW9uRGlyZWN0UmVzcG9uc2U+MSwxLDEsKFRFU1RNT0RFKSBUaGlzIHRyYW5zYWN0aW9uIGhhcyBiZWVuIGFwcHJvdmVkLiwwMDAwMDAsUCwwLG5vbmUsVGVzdCB0cmFuc2FjdGlvbiBmb3IgVmFsaWRhdGVDdXN0b21lclBheW1lbnRQcm9maWxlLiwxLjAwLENDLGF1dGhfb25seSxub25lLFl1bixCb2dhbixEJmFtcDsjMzk7QW1vcmUgRGVja293IGFuZCBCdWNrcmlkZ2UsMjg5MCBTdXNhbm5haCBNYWxsLEFyY2hpZWNoZXN0ZXIsTmV3IE1leGljbyw0NTEyMy05NDI3LFRHLDEtNDI1LTgwNi0zMjMwLDQ1Ni42NDMuNDcwMyB4MDc2NjEsZW1haWxAZXhhbXBsZS5jb20sLCwsLCwsLCwwLjAwLDAuMDAsMC4wMCxGQUxTRSxub25lLDZGNERCRUFFMjFENDhGRTI0RTFDRDZENUQ1NTZDQUE0LCwsLCwsLCwsLCwsLFhYWFgwMDE3LEpDQiwsLCwsLCwsLCwsLCwsLCwsPC92YWxpZGF0aW9uRGlyZWN0UmVzcG9uc2U+PC9jcmVhdGVDdXN0b21lclBheW1lbnRQcm9maWxlUmVzcG9uc2U+
     http_version: 
-  recorded_at: Wed, 27 Sep 2017 16:19:36 GMT
+  recorded_at: Tue, 19 Dec 2017 06:53:49 GMT
 - request:
     method: post
     uri: https://apitest.authorize.net/xml/v1/request.api
@@ -295,20 +429,20 @@ http_interactions:
         <createCustomerShippingAddressRequest xmlns="AnetApi/xml/v1/schema/AnetApiSchema.xsd">
           <merchantAuthentication>
             <name>8U46Pew5dfF</name>
-            <transactionKey>3m26PD4kdzX4U358</transactionKey>
+            <transactionKey>7q7L43ED4x5Gr4j5</transactionKey>
           </merchantAuthentication>
-          <customerProfileId>1502503221</customerProfileId>
+          <customerProfileId>1503083065</customerProfileId>
           <address>
-            <firstName>Jim</firstName>
-            <lastName>Torp</lastName>
-            <company>Lesch LLC</company>
-            <address>3616 Miki Drives</address>
-            <city>Luciashire</city>
-            <state>New Hampshire</state>
-            <zip>91667</zip>
-            <country>FM</country>
-            <phoneNumber>641-364-6925</phoneNumber>
-            <faxNumber>799.700.8686 x198</faxNumber>
+            <firstName>Yun</firstName>
+            <lastName>Bogan</lastName>
+            <company>D'Amore Deckow and Buckridge</company>
+            <address>2890 Susannah Mall</address>
+            <city>Archiechester</city>
+            <state>New Mexico</state>
+            <zip>45123-9427</zip>
+            <country>TG</country>
+            <phoneNumber>1-425-806-3230</phoneNumber>
+            <faxNumber>456.643.4703 x07661</faxNumber>
           </address>
         </createCustomerShippingAddressRequest>
     headers:
@@ -329,8 +463,8 @@ http_interactions:
       - private
       Content-Type:
       - application/xml; charset=utf-8
-      Server:
-      - Microsoft-IIS/7.5
+      X-Opnet-Transaction-Trace:
+      - a2_dcf889a9-594e-4466-ba42-7cd4dfc8e900-5416-5830605
       Access-Control-Allow-Origin:
       - "*"
       Access-Control-Allow-Methods:
@@ -339,164 +473,16 @@ http_interactions:
       - x-requested-with,cache-control,content-type,origin,method,SOAPAction
       Access-Control-Allow-Credentials:
       - 'true'
-      X-Powered-By:
-      - ASP.NET
       Content-Length:
       - '475'
       Date:
-      - Wed, 27 Sep 2017 16:18:44 GMT
+      - Tue, 19 Dec 2017 06:53:50 GMT
       Connection:
       - keep-alive
     body:
       encoding: ASCII-8BIT
       string: !binary |-
-        77u/PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48Y3JlYXRlQ3VzdG9tZXJTaGlwcGluZ0FkZHJlc3NSZXNwb25zZSB4bWxuczp4c2k9Imh0dHA6Ly93d3cudzMub3JnLzIwMDEvWE1MU2NoZW1hLWluc3RhbmNlIiB4bWxuczp4c2Q9Imh0dHA6Ly93d3cudzMub3JnLzIwMDEvWE1MU2NoZW1hIiB4bWxucz0iQW5ldEFwaS94bWwvdjEvc2NoZW1hL0FuZXRBcGlTY2hlbWEueHNkIj48bWVzc2FnZXM+PHJlc3VsdENvZGU+T2s8L3Jlc3VsdENvZGU+PG1lc3NhZ2U+PGNvZGU+STAwMDAxPC9jb2RlPjx0ZXh0PlN1Y2Nlc3NmdWwuPC90ZXh0PjwvbWVzc2FnZT48L21lc3NhZ2VzPjxjdXN0b21lclByb2ZpbGVJZD4xNTAyNTAzMjIxPC9jdXN0b21lclByb2ZpbGVJZD48Y3VzdG9tZXJBZGRyZXNzSWQ+MTUwMjA4MzE1MDwvY3VzdG9tZXJBZGRyZXNzSWQ+PC9jcmVhdGVDdXN0b21lclNoaXBwaW5nQWRkcmVzc1Jlc3BvbnNlPg==
+        77u/PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48Y3JlYXRlQ3VzdG9tZXJTaGlwcGluZ0FkZHJlc3NSZXNwb25zZSB4bWxuczp4c2k9Imh0dHA6Ly93d3cudzMub3JnLzIwMDEvWE1MU2NoZW1hLWluc3RhbmNlIiB4bWxuczp4c2Q9Imh0dHA6Ly93d3cudzMub3JnLzIwMDEvWE1MU2NoZW1hIiB4bWxucz0iQW5ldEFwaS94bWwvdjEvc2NoZW1hL0FuZXRBcGlTY2hlbWEueHNkIj48bWVzc2FnZXM+PHJlc3VsdENvZGU+T2s8L3Jlc3VsdENvZGU+PG1lc3NhZ2U+PGNvZGU+STAwMDAxPC9jb2RlPjx0ZXh0PlN1Y2Nlc3NmdWwuPC90ZXh0PjwvbWVzc2FnZT48L21lc3NhZ2VzPjxjdXN0b21lclByb2ZpbGVJZD4xNTAzMDgzMDY1PC9jdXN0b21lclByb2ZpbGVJZD48Y3VzdG9tZXJBZGRyZXNzSWQ+MTUwMjQ5NDY2OTwvY3VzdG9tZXJBZGRyZXNzSWQ+PC9jcmVhdGVDdXN0b21lclNoaXBwaW5nQWRkcmVzc1Jlc3BvbnNlPg==
     http_version: 
-  recorded_at: Wed, 27 Sep 2017 16:19:37 GMT
-- request:
-    method: post
-    uri: https://apitest.authorize.net/xml/v1/request.api
-    body:
-      encoding: UTF-8
-      string: |
-        <?xml version="1.0" encoding="utf-8"?>
-        <createCustomerPaymentProfileRequest xmlns="AnetApi/xml/v1/schema/AnetApiSchema.xsd">
-          <merchantAuthentication>
-            <name>8U46Pew5dfF</name>
-            <transactionKey>3m26PD4kdzX4U358</transactionKey>
-          </merchantAuthentication>
-          <customerProfileId>1502503221</customerProfileId>
-          <paymentProfile>
-            <billTo>
-              <firstName>Nicolasa</firstName>
-              <lastName>Hettinger</lastName>
-              <company>Hegmann-Rath</company>
-              <address>932 Nienow Knoll</address>
-              <city>East Maeganland</city>
-              <state>Florida</state>
-              <zip>18786-6912</zip>
-              <country>JE</country>
-              <phoneNumber>838.889.3584 x8153</phoneNumber>
-              <faxNumber>253.981.0036</faxNumber>
-            </billTo>
-            <payment>
-              <creditCard>
-                <cardNumber>370000000000002</cardNumber>
-                <expirationDate>2020-09</expirationDate>
-                <cardCode>1234</cardCode>
-              </creditCard>
-            </payment>
-          </paymentProfile>
-          <validationMode>testMode</validationMode>
-        </createCustomerPaymentProfileRequest>
-    headers:
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
-      User-Agent:
-      - Ruby
-      Content-Type:
-      - text/xml
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Cache-Control:
-      - private
-      Content-Type:
-      - application/xml; charset=utf-8
-      Server:
-      - Microsoft-IIS/7.5
-      Access-Control-Allow-Origin:
-      - "*"
-      Access-Control-Allow-Methods:
-      - PUT,OPTIONS,POST,GET
-      Access-Control-Allow-Headers:
-      - x-requested-with,cache-control,content-type,origin,method,SOAPAction
-      Access-Control-Allow-Credentials:
-      - 'true'
-      X-Powered-By:
-      - ASP.NET
-      Content-Length:
-      - '943'
-      Date:
-      - Wed, 27 Sep 2017 16:18:45 GMT
-      Connection:
-      - keep-alive
-    body:
-      encoding: ASCII-8BIT
-      string: !binary |-
-        77u/PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48Y3JlYXRlQ3VzdG9tZXJQYXltZW50UHJvZmlsZVJlc3BvbnNlIHhtbG5zOnhzaT0iaHR0cDovL3d3dy53My5vcmcvMjAwMS9YTUxTY2hlbWEtaW5zdGFuY2UiIHhtbG5zOnhzZD0iaHR0cDovL3d3dy53My5vcmcvMjAwMS9YTUxTY2hlbWEiIHhtbG5zPSJBbmV0QXBpL3htbC92MS9zY2hlbWEvQW5ldEFwaVNjaGVtYS54c2QiPjxtZXNzYWdlcz48cmVzdWx0Q29kZT5PazwvcmVzdWx0Q29kZT48bWVzc2FnZT48Y29kZT5JMDAwMDE8L2NvZGU+PHRleHQ+U3VjY2Vzc2Z1bC48L3RleHQ+PC9tZXNzYWdlPjwvbWVzc2FnZXM+PGN1c3RvbWVyUHJvZmlsZUlkPjE1MDI1MDMyMjE8L2N1c3RvbWVyUHJvZmlsZUlkPjxjdXN0b21lclBheW1lbnRQcm9maWxlSWQ+MTUwMjAzNDI2MjwvY3VzdG9tZXJQYXltZW50UHJvZmlsZUlkPjx2YWxpZGF0aW9uRGlyZWN0UmVzcG9uc2U+MSwxLDEsKFRFU1RNT0RFKSBUaGlzIHRyYW5zYWN0aW9uIGhhcyBiZWVuIGFwcHJvdmVkLiwwMDAwMDAsUCwwLG5vbmUsVGVzdCB0cmFuc2FjdGlvbiBmb3IgVmFsaWRhdGVDdXN0b21lclBheW1lbnRQcm9maWxlLiwxLjAwLENDLGF1dGhfb25seSxub25lLE5pY29sYXNhLEhldHRpbmdlcixIZWdtYW5uLVJhdGgsOTMyIE5pZW5vdyBLbm9sbCxFYXN0IE1hZWdhbmxhbmQsRmxvcmlkYSwxODc4Ni02OTEyLEpFLDgzOC44ODkuMzU4NCB4ODE1MywyNTMuOTgxLjAwMzYsZW1haWxAZXhhbXBsZS5jb20sLCwsLCwsLCwwLjAwLDAuMDAsMC4wMCxGQUxTRSxub25lLEEzQjRBMDM1MDUyMTNCRjc3QzQwQUM2MzBCMTgzOEI5LCwsLCwsLCwsLCwsLFhYWFgwMDAyLEFtZXJpY2FuIEV4cHJlc3MsLCwsLCwsLCwsLCwsLCwsLDwvdmFsaWRhdGlvbkRpcmVjdFJlc3BvbnNlPjwvY3JlYXRlQ3VzdG9tZXJQYXltZW50UHJvZmlsZVJlc3BvbnNlPg==
-    http_version: 
-  recorded_at: Wed, 27 Sep 2017 16:19:37 GMT
-- request:
-    method: post
-    uri: https://apitest.authorize.net/xml/v1/request.api
-    body:
-      encoding: UTF-8
-      string: |
-        <?xml version="1.0" encoding="utf-8"?>
-        <createCustomerShippingAddressRequest xmlns="AnetApi/xml/v1/schema/AnetApiSchema.xsd">
-          <merchantAuthentication>
-            <name>8U46Pew5dfF</name>
-            <transactionKey>3m26PD4kdzX4U358</transactionKey>
-          </merchantAuthentication>
-          <customerProfileId>1502503221</customerProfileId>
-          <address>
-            <firstName>Nicolasa</firstName>
-            <lastName>Hettinger</lastName>
-            <company>Hegmann-Rath</company>
-            <address>932 Nienow Knoll</address>
-            <city>East Maeganland</city>
-            <state>Florida</state>
-            <zip>18786-6912</zip>
-            <country>JE</country>
-            <phoneNumber>838.889.3584 x8153</phoneNumber>
-            <faxNumber>253.981.0036</faxNumber>
-          </address>
-        </createCustomerShippingAddressRequest>
-    headers:
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
-      User-Agent:
-      - Ruby
-      Content-Type:
-      - text/xml
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Cache-Control:
-      - private
-      Content-Type:
-      - application/xml; charset=utf-8
-      Server:
-      - Microsoft-IIS/7.5
-      Access-Control-Allow-Origin:
-      - "*"
-      Access-Control-Allow-Methods:
-      - PUT,OPTIONS,POST,GET
-      Access-Control-Allow-Headers:
-      - x-requested-with,cache-control,content-type,origin,method,SOAPAction
-      Access-Control-Allow-Credentials:
-      - 'true'
-      X-Powered-By:
-      - ASP.NET
-      Content-Length:
-      - '475'
-      Date:
-      - Wed, 27 Sep 2017 16:18:46 GMT
-      Connection:
-      - keep-alive
-    body:
-      encoding: ASCII-8BIT
-      string: !binary |-
-        77u/PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48Y3JlYXRlQ3VzdG9tZXJTaGlwcGluZ0FkZHJlc3NSZXNwb25zZSB4bWxuczp4c2k9Imh0dHA6Ly93d3cudzMub3JnLzIwMDEvWE1MU2NoZW1hLWluc3RhbmNlIiB4bWxuczp4c2Q9Imh0dHA6Ly93d3cudzMub3JnLzIwMDEvWE1MU2NoZW1hIiB4bWxucz0iQW5ldEFwaS94bWwvdjEvc2NoZW1hL0FuZXRBcGlTY2hlbWEueHNkIj48bWVzc2FnZXM+PHJlc3VsdENvZGU+T2s8L3Jlc3VsdENvZGU+PG1lc3NhZ2U+PGNvZGU+STAwMDAxPC9jb2RlPjx0ZXh0PlN1Y2Nlc3NmdWwuPC90ZXh0PjwvbWVzc2FnZT48L21lc3NhZ2VzPjxjdXN0b21lclByb2ZpbGVJZD4xNTAyNTAzMjIxPC9jdXN0b21lclByb2ZpbGVJZD48Y3VzdG9tZXJBZGRyZXNzSWQ+MTUwMjA4MzE1MjwvY3VzdG9tZXJBZGRyZXNzSWQ+PC9jcmVhdGVDdXN0b21lclNoaXBwaW5nQWRkcmVzc1Jlc3BvbnNlPg==
-    http_version: 
-  recorded_at: Wed, 27 Sep 2017 16:19:38 GMT
+  recorded_at: Tue, 19 Dec 2017 06:53:50 GMT
 recorded_with: VCR 3.0.3
