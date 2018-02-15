@@ -60,6 +60,20 @@ module Accounting
         subscribe(name, amount, interval, payment, options).save!
       end
 
+      def accountable_options
+        options = instance_variable_get('@_accountable_options') || {}
+
+        options.slice(:id, :email, :description).map do |k,v|
+          if v.is_a?(String)
+            { "authnet_#{k}" => v }
+          elsif v.is_a?(Symbol)
+            { "authnet_#{k}" => self.send(v) }
+          elsif v.respond_to?(:call)
+            { "authnet_#{k}" => v.call(self) }
+          end
+        end.compact.reduce(:merge)
+      end
+
       private
 
         def hold_transaction(amount, payment, options)
@@ -109,9 +123,9 @@ module Accounting
 
         include Hooks
 
-        accountable_options = ACCOUNTABLE_OPTIONS.merge(options.symbolize_keys).symbolize_keys
+        accountable_opts = ACCOUNTABLE_OPTIONS.merge(options.symbolize_keys).symbolize_keys
 
-        has_one :profile, as: :accountable, dependent: :destroy, required: false, class_name: '::Accounting::Profile'
+        has_one :profile, as: :accountable, dependent: :destroy, required: true, autosave: true, validate: true, class_name: '::Accounting::Profile'
 
         delegate :payments, to: :profile
 
@@ -121,31 +135,16 @@ module Accounting
 
         define_hooks :before_subscription_tick, :after_subscription_tick, :before_transaction_submit, :after_transaction_submit, :before_transaction_sync, :after_transaction_sync, :before_subscription_submit, :after_subscription_submit, :before_subscription_sync, :after_subscription_sync, :before_subscription_cancel, :after_subscription_cancel
 
+        validates_presence_of :profile
+
         # Expose the options so they can be retrieved later
         after_initialize do
-          @_accountable_options = accountable_options
+          @_accountable_options = accountable_opts
         end
 
-        after_commit do
-          options = {
-            authnet_id: "#{self.class.name} #{self.id}",
-            authnet_email: "#{self.class.name.gsub('::', '_').underscore}_#{self.id}@#{Accounting.config.domain}",
-            authnet_description: "#{self.class.name} #{self.id}"
-          }
-
+        before_validation unless: Proc.new { |a| a.profile.present? } do
           # Does not work if the proc references models not yet saved
-          #
-          # options = accountable_options.slice(:id, :email, :description).map do |k,v|
-          #   if v.is_a?(String)
-          #     { "authnet_#{k}" => v }
-          #   elsif v.is_a?(Symbol)
-          #     { "authnet_#{k}" => self.send(v) }
-          #   elsif v.respond_to?(:call)
-          #     { "authnet_#{k}" => v.call(self) }
-          #   end
-          # end.compact.reduce(:merge)
-
-          self.create_profile(options) unless profile.present?
+          self.build_profile(accountable_options)
         end
       end
 

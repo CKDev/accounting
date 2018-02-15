@@ -11,7 +11,7 @@ Integration with the Authorize.NET api, providing ActiveJob backed support for c
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'accounting', '~> 0.1.0'
+gem 'accounting', '~> 0.1.5.4'
 ```
 
 And then execute:
