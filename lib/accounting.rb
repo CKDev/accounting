@@ -38,7 +38,7 @@ module Accounting
       @payload
     end
   end
-  
+
   def self.setup
     yield config
   end
@@ -57,6 +57,8 @@ module Accounting
         AuthorizeNet::CIM::Transaction.new(options[:api_login], options[:api_key], { gateway: config.gateway })
       when :reporting
         AuthorizeNet::Reporting::Transaction.new(options[:api_login], options[:api_key], { gateway: config.gateway })
+      when :api
+        AuthorizeNet::API::Transaction.new(options[:api_login], options[:api_key], { gateway: config.gateway })
     end
   end
 

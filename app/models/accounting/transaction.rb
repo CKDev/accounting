@@ -99,7 +99,7 @@ module Accounting
       end
 
       # Flag a job id so that process_later does not unintentionally create a job, but only if it's not already set
-      # This method is what is called within the Job 
+      # This method is what is called within the Job
       update_column(:job_id, '0') unless job_id.present?
 
       accountable.try(:run_hook, :after_transaction_submit, self)

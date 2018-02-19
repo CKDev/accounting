@@ -33,6 +33,18 @@ module Accounting
       end
     end
 
+    def transaction_details
+      return [] if self.profile_id.blank?
+      request = configure_transactions_request
+      @response ||= Accounting.api(:api, api_options(accountable)).get_transaction_list_for_customer(request)
+      if @response.messages.resultCode == AuthorizeNet::API::MessageTypeEnum::Ok
+        @response.transactions.transaction
+      else
+        # TODO: log error message.
+        []
+      end
+    end
+
     private
 
       def create_profile
@@ -79,6 +91,21 @@ module Accounting
 
       def profile_options
         { email: authnet_email, id: authnet_id, description: authnet_description }.reject { |_,v| v.blank? }
+      end
+
+      def configure_transactions_request
+        request = AuthorizeNet::API::GetTransactionListForCustomerRequest.new
+        request.customerProfileId = self.profile_id
+
+        request.paging = AuthorizeNet::API::Paging.new;
+        request.paging.limit = 100;
+        request.paging.offset = 1;
+
+        request.sorting = AuthorizeNet::API::TransactionListSorting.new;
+        request.sorting.orderBy = "id";
+        request.sorting.orderDescending = true;
+
+        request
       end
 
   end
