@@ -38,6 +38,7 @@ module Accounting
       request = configure_transactions_request
       @response ||= Accounting.api(:api, api_options(accountable)).get_transaction_list_for_customer(request)
       if @response.messages.resultCode == AuthorizeNet::API::MessageTypeEnum::Ok
+        return [] if @response.transactions&.transaction.blank?
         @response.transactions.transaction
       else
         # TODO: log error message.
