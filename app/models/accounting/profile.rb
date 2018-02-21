@@ -103,7 +103,7 @@ module Accounting
         request.paging.offset = 1;
 
         request.sorting = AuthorizeNet::API::TransactionListSorting.new;
-        request.sorting.orderBy = "id";
+        request.sorting.orderBy = AuthorizeNet::API::TransactionListOrderFieldEnum::SubmitTimeUTC
         request.sorting.orderDescending = true;
 
         request
