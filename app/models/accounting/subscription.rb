@@ -41,7 +41,7 @@ module Accounting
     # since it won't initially have a subscription id
     validates_presence_of :subscription_id, on: :update
 
-    after_create :process_later
+    after_commit :process_later
 
     def details
       @details ||= Accounting.api(:arb, api_options(profile.accountable)).get_subscription_details(subscription_id)

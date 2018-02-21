@@ -46,7 +46,7 @@ module Accounting
 
     validate :can_void, if: proc { |t| t.transaction_type == 'void' }
 
-    after_create :process_later
+    after_commit :process_later
 
     before_save :update_subscription!
 
