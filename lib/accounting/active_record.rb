@@ -94,7 +94,7 @@ module Accounting
         end
 
         def charge_transaction(amount, payment, options)
-          options.slice!(:address_id, :split_tender_id, :custom_fields)
+          options.slice!(:address_id, :split_tender_id, :custom_fields, :message)
           options[:address_id] = options[:address_id].address_id if options[:address_id].present? && options[:address_id].is_a?(Accounting::Address)
           self.transactions.build(transaction_type: :auth_capture, amount: amount, payment: payment, options: options)
         end
@@ -118,7 +118,7 @@ module Accounting
     end
 
     class_methods do
-      
+
       def accountable(**options)
 
         include Hooks

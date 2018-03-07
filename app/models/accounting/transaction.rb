@@ -171,7 +171,7 @@ module Accounting
       def charge
         before_transaction!
         response = Accounting.api(:cim, api_options(profile.accountable)).create_transaction_auth_capture(amount, profile.profile_id, payment.payment_profile_id, nil, options)
-        handle_transaction(response, status: :captured)
+        handle_transaction(response, status: :captured, message: options['message'])
       end
 
       def refund
