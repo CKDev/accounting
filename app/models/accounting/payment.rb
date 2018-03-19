@@ -112,14 +112,14 @@ module Accounting
       end
 
       def card
-        AuthorizeNet::CreditCard.new(number, expiration, card_code: ccv)
+        AuthorizeNet::CreditCard.new(number, expiration_str, card_code: ccv)
       end
 
       def ach
         AuthorizeNet::ECheck.new(routing, account, bank_name, account_holder, { account_type: account_type, check_number: check_number, echeck_type: echeck_type || AuthorizeNet::ECheck::CheckType::INTERNET_INITIATED })
       end
 
-      def expiration
+      def expiration_str
         "#{month.to_s.rjust(2, '0')}#{year.to_s[-2..-1]}"
       end
 
@@ -129,7 +129,7 @@ module Accounting
         return if year == -1 && month == -1
 
         self.errors.add(:base, 'Expiration date cannot be in the past') unless Time.new(year.to_i, month.to_i, Time.now.day, Time.now.hour, Time.now.min, 0) > Time.now
-        self.errors.add(:base, 'Expiration date is invalid.') unless /^[0-9]{2}[0-9]{2}$/ =~ expiration
+        self.errors.add(:base, 'Expiration date is invalid.') unless /^[0-9]{2}[0-9]{2}$/ =~ expiration_str
       end
 
       def format_data
