@@ -19,12 +19,25 @@ RSpec.describe Accounting::Payment, type: :model do
     end
   end
 
-  it 'should be the default payment if first payment method' do
-    VCR.use_cassette :valid_payment, record: :new_episodes, re_record_interval: 7.days do
-      expect(payment.profile.payments.count).to eq(0)
-      payment.save!
-      expect(payment.profile.payments.count).to eq(1)
-      expect(payment.default?).to be_truthy
+  describe 'default payment' do
+    it 'should be the default payment if first payment method' do
+      VCR.use_cassette :valid_payment, record: :new_episodes, re_record_interval: 7.days do
+        expect(payment.profile.payments.count).to eq(0)
+        payment.save!
+        expect(payment.profile.payments.count).to eq(1)
+        expect(payment.default?).to be_truthy
+      end
+    end
+
+    it 'should make default payment when default! called' do
+      VCR.use_cassette :valid_payment, record: :new_episodes, re_record_interval: 7.days do
+        payment.save!
+        expect(payment.default?).to be_truthy
+        payment2 = FactoryGirl.create(:accounting_payment, :with_card, profile: payment.profile)
+        payment2.default!
+        expect(payment.reload.default?).to be_falsey
+        expect(payment2.reload.default?).to be_truthy
+      end
     end
   end
 
