@@ -119,6 +119,17 @@ module Accounting
       submitted_at.present?
     end
 
+    def refundable?
+      return false unless (captured? && settled?)
+      return false if submitted_at < Time.zone.now - 120.days
+      true
+    end
+
+    def voidable?
+      return false unless (captured? && !settled?)
+      true
+    end
+
     private
 
       def handle_transaction(response, **params)
