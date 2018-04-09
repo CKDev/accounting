@@ -77,19 +77,19 @@ module Accounting
       private
 
         def hold_transaction(amount, payment, options)
-          options.slice!(:address_id, :split_tender_id, :custom_fields)
+          options.slice!(:address_id, :split_tender_id, :custom_fields, :message)
           options[:address_id] = options[:address_id].address_id if options[:address_id].present? && options[:address_id].is_a?(Accounting::Address)
           self.transactions.build(transaction_type: :auth_only, amount: amount, payment: payment, options: options)
         end
 
         def capture_transaction(transaction, amount, options)
-          options.slice!(:custom_fields)
+          options.slice!(:custom_fields, :message)
           amount ||= transaction.amount
           self.transactions.build(transaction_type: :prior_auth_capture, original_transaction: transaction, amount: amount, options: options)
         end
 
         def void_transaction(transaction, options)
-          options.slice!(:custom_fields)
+          options.slice!(:custom_fields, :message)
           self.transactions.build(transaction_type: :void, original_transaction: transaction, options: options)
         end
 
@@ -100,7 +100,7 @@ module Accounting
         end
 
         def refund_transaction(amount, transaction, payment, options)
-          options.slice!(:custom_fields)
+          options.slice!(:custom_fields, :message)
           payment = transaction.payment if payment.nil?
           amount ||= transaction.try(:amount).to_d
           self.transactions.build(transaction_type: :refund, original_transaction: transaction, amount: amount, payment: payment, options: options)

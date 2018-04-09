@@ -164,19 +164,19 @@ module Accounting
       def hold
         before_transaction!
         response = Accounting.api(:cim, api_options(profile.accountable)).create_transaction_auth_only(amount, profile.profile_id, payment.payment_profile_id, nil, options)
-        handle_transaction(response, status: :held)
+        handle_transaction(response, status: :held, message: options['message'])
       end
 
       def capture
         before_transaction!
         response = Accounting.api(:cim, api_options(profile.accountable)).create_transaction_prior_auth_capture(original_transaction.try(:transaction_id), amount, nil, options)
-        handle_transaction(response, status: :captured)
+        handle_transaction(response, status: :captured, message: options['message'])
       end
 
       def void
         before_transaction!
         response = Accounting.api(:cim, api_options(profile.accountable)).create_transaction_void(original_transaction.try(:transaction_id), options)
-        handle_transaction(response, status: :voided)
+        handle_transaction(response, status: :voided, message: options['message'])
       end
 
       def charge
@@ -188,7 +188,7 @@ module Accounting
       def refund
         before_transaction!
         response = Accounting.api(:cim, api_options(profile.accountable)).create_transaction_refund(original_transaction.try(:transaction_id), amount, profile.profile_id, payment.payment_profile_id, nil, options)
-        handle_transaction(response, status: :refunded)
+        handle_transaction(response, status: :refunded, message: options['message'])
       end
 
       def before_transaction!
