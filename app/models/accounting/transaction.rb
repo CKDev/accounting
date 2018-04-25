@@ -134,7 +134,7 @@ module Accounting
       # TODO: I think this should update our db with any differing info from Authorize, but
       # I'm not sure that's the best thing to do at this point.  For now, just update settled
       # status.
-      update_column(:settled, true) if details.status == 'settledSuccessfully'
+      update_column(:settled, true) if details&.status == 'settledSuccessfully'
     end
 
     private
