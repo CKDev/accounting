@@ -33,7 +33,7 @@ module Accounting
     end
 
     def errors
-      @errors || @payment.errors
+      @payment.errors
     end
 
     private
@@ -62,13 +62,13 @@ module Accounting
             )
             return @payment.save
           else
-            error_msg = "#{@response.messages.messages[0].code} #{@response.messages.messages[0].text}"
+            error_msg = [@response.messages.messages[0].code, @response.messages.messages[0].text].join(' ')
             Accounting.log 'Payment', 'Accept', warn: "Failed to create a new customer payment profile - #{error_msg}"
-            @errors = [error_msg]
+            @payment.errors.add(:base, error_msg)
           end
         else
           Accounting.log 'Payment', 'Accept', warn: 'Response is null'
-          @errors = ["Failed to create a new customer payment profile."]
+          @payment.errors.add(:base, 'Failed to create a new customer payment profile.')
         end
 
         false
