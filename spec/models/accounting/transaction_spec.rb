@@ -56,7 +56,7 @@ RSpec.describe Accounting::Transaction, type: :model do
     charge = user.charge(1.00, user.payments.default)
     charge.save
 
-    VCR.use_cassette :invalid_charge { charge.process_now }
+    VCR.use_cassette(:invalid_charge) { charge.process_now }
     expect(charge.errors.full_messages).to eq(['E00003 Broken'])
   end
   
