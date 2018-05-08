@@ -17,23 +17,17 @@ module Accounting
     #
     # @author Ming <ming@commercekitchen.com>
     #
-    # @return {Bool} True if payment and address created successfully
-    def create_payment
+    # @return {Accounting::Payment}
+    def build_payment
       @payment = @profile.payments.build(accept: true, profile_type: @params[:profile_type])
       if @payment.card?
         @payment.assign_attributes(@params[:card])
-        if @payment.address && @payment.address.invalid?
-          # Don't want to run payment validation when addres is invalid
-          @errors = @payment.address.errors
-          return false
-        end  
+        return false if @payment.address && @payment.address.invalid?
       end
 
       create_customer_payment_profile
-    end
 
-    def errors
-      @payment.errors
+      @payment
     end
 
     private
@@ -45,8 +39,6 @@ module Accounting
       # @author Ming <ming@commercekitchen.com>
       #
       # @reference https://github.com/AuthorizeNet/sample-code-ruby/blob/master/CustomerProfiles/create-customer-payment-profile.rb
-      #
-      # @return {Bool} True or False on whether payment profile has been created
       def create_customer_payment_profile
         transaction = Accounting.api(:api, api_options(@profile.accountable))
         @response = transaction.create_customer_payment_profile(build_request)
@@ -60,7 +52,6 @@ module Accounting
               default: @profile.payments.count == 0,
               last_four: parsed_response[:account_number].to_s[-4..-1]
             )
-            return @payment.save
           else
             error_msg = [@response.messages.messages[0].code, @response.messages.messages[0].text].join(' ')
             Accounting.log 'Payment', 'Accept', warn: "Failed to create a new customer payment profile - #{error_msg}"
@@ -70,8 +61,6 @@ module Accounting
           Accounting.log 'Payment', 'Accept', warn: 'Response is null'
           @payment.errors.add(:base, 'Failed to create a new customer payment profile.')
         end
-
-        false
       end
 
       def build_request

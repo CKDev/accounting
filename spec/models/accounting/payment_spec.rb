@@ -107,6 +107,10 @@ RSpec.describe Accounting::Payment, type: :model do
       expect(payment_ach.errors.messages.keys).not_to include(:routing, :account, :bank_name, :account_holder, :account_type)
     end
 
+    it 'should not run create_payment when create from accept' do
+      expect(payment_card).not_to receive(:create_payment)
+      payment_card.save
+    end
   end
 
 end

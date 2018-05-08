@@ -32,7 +32,8 @@ RSpec.describe Accounting::AcceptService do
     expect(service).to receive(:parsed_response).twice.and_return({ card_type: 'Visa', account_number: 'xxxx1234' })
     expect_any_instance_of(AuthorizeNet::API::Transaction).to receive(:create_customer_payment_profile).and_return(api_response)
     VCR.use_cassette :valid_address, record: :new_episodes, re_record_interval: 7.days do
-      expect(service.create_payment).to be_truthy
+      payment = service.build_payment
+      expect(payment.save).to be_truthy
     end
   end
 end

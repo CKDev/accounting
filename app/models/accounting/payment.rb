@@ -5,7 +5,7 @@ module Accounting
 
     belongs_to :profile, inverse_of: :payments, required: true
 
-    has_one :address, inverse_of: :payment, dependent: :destroy
+    has_one :address, inverse_of: :payment, autosave: true, dependent: :destroy
 
     before_destroy :delete_payment
 
@@ -25,7 +25,7 @@ module Accounting
 
     before_validation :format_data
 
-    validates :address, presence: true
+    validates :address, presence: true, if: :card?
 
     validates :account_type, inclusion: { in: Accounting::Payment.account_types.keys }, if: :ach?
 
@@ -78,7 +78,7 @@ module Accounting
         # Don't bother creating the payment if errors exist on self or the address at this point, it will fail to validate anyways
         return if errors.present? || (address.present? && address.errors.present?)
 
-        payment_profile = AuthorizeNet::CIM::PaymentProfile.new(payment_method: type, billing_address: address.to_billing_address)
+        payment_profile = AuthorizeNet::CIM::PaymentProfile.new(payment_method: type, billing_address: address&.to_billing_address)
 
         response = Accounting.api(:cim, api_options(profile.accountable)).create_payment_profile(payment_profile, profile.profile_id, validation_mode: Accounting.config.validation_mode)
 
