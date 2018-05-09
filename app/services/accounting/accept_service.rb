@@ -16,8 +16,6 @@ module Accounting
     # 2. Create Authorize.net request to create payment profile
     #
     # @author Ming <ming@commercekitchen.com>
-    #
-    # @return {Accounting::Payment}
     def build_payment
       @payment = @profile.payments.build(accept: true, profile_type: @params[:profile_type])
       if @payment.card?
@@ -26,8 +24,15 @@ module Accounting
       end
 
       create_customer_payment_profile
+    end
 
-      @payment
+    def save
+      build_payment
+      @payment.errors.blank? && @payment.save
+    end
+
+    def errors
+      @payment.errors
     end
 
     private
