@@ -97,4 +97,20 @@ RSpec.describe Accounting::Payment, type: :model do
 
   end
 
+  context 'Opaque Data(Accept.js)' do
+
+    let(:payment_card) { FactoryGirl.build(:accounting_payment, :with_card_opaque_data) }
+    let(:payment_ach) { FactoryGirl.build(:accounting_payment, :with_ach_opaque_data) }
+
+    it 'should skip customer payment details validation' do
+      expect(payment_card.errors.messages.keys).not_to include(:number, :ccv)
+      expect(payment_ach.errors.messages.keys).not_to include(:routing, :account, :bank_name, :account_holder, :account_type)
+    end
+
+    it 'should not run create_payment when create from accept' do
+      expect(payment_card).not_to receive(:create_payment)
+      payment_card.save
+    end
+  end
+
 end

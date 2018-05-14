@@ -5,13 +5,15 @@ module Accounting
 
     belongs_to :profile, inverse_of: :payments, required: true
 
-    has_one :address, inverse_of: :payment, dependent: :destroy
+    has_one :address, inverse_of: :payment, autosave: true, dependent: :destroy
 
     before_destroy :delete_payment
 
     after_create :reset_default
 
     after_destroy :reset_default
+
+    attr_writer :accept
 
     attr_accessor :number, :ccv, :month, :year
 
@@ -23,25 +25,27 @@ module Accounting
 
     before_validation :format_data
 
-    validates :address, presence: true
+    validates :address, presence: true, if: :card?
 
     validates :account_type, inclusion: { in: Accounting::Payment.account_types.keys }, if: :ach?
 
-    validates :number, length: { in: 13..16 }, if: :card?
+    validates :number, length: { in: 13..16 }, if: :card?, unless: :accept?
 
-    validates :number, :ccv, :month, :year, presence: true, if: :card?
+    validates :number, :ccv, presence: true, if: :card?, unless: :accept?
 
-    validates :number, :ccv, :month, :year, numericality: { only_integer: true }, if: :card?
+    validates :number, :ccv, numericality: { only_integer: true }, if: :card?, unless: :accept?
 
-    validates :routing, :account, :bank_name, :account_holder, :account_type, presence: true, if: :ach?
+    validates :month, :year, presence: true, if: :card?
 
-    validates :routing, :account, presence: true, if: :ach?
+    validates :month, :year, numericality: { only_integer: true }, if: :card?
+
+    validates :routing, :account, :bank_name, :account_holder, :account_type, presence: true, if: :ach?, unless: :accept?
 
     validates :profile_type, presence: true, inclusion: { in: Accounting::Payment.profile_types.keys }
 
     validate :expiration_date, on: :create, if: :card?
 
-    validate :create_payment, if: proc { |p| p.payment_profile_id.blank? }
+    validate :create_payment, if: proc { |p| p.payment_profile_id.blank? && !p.accept? }
 
     # The below validation should not be run if errors exist, since the above :create_payment validation sets these values
     validates_presence_of :payment_profile_id, if: proc { |p| p.errors.blank? }
@@ -64,13 +68,17 @@ module Accounting
       end
     end
 
+    def accept?
+      @accept || false
+    end
+
     private
 
       def create_payment
         # Don't bother creating the payment if errors exist on self or the address at this point, it will fail to validate anyways
         return if errors.present? || (address.present? && address.errors.present?)
 
-        payment_profile = AuthorizeNet::CIM::PaymentProfile.new(payment_method: type, billing_address: address.to_billing_address)
+        payment_profile = AuthorizeNet::CIM::PaymentProfile.new(payment_method: type, billing_address: address&.to_billing_address)
 
         response = Accounting.api(:cim, api_options(profile.accountable)).create_payment_profile(payment_profile, profile.profile_id, validation_mode: Accounting.config.validation_mode)
 

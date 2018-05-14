@@ -34,6 +34,18 @@ FactoryGirl.define do
       check_number { [*1000..9999].sample }
     end
 
+    trait :with_card_opaque_data do
+      accept true
+      profile_type 'card'
+      month { Time.now.month }
+      year { Time.now.year + [*1..5].sample }
+    end
+
+    trait :with_ach_opaque_data do
+      accept true
+      profile_type 'ach'
+    end
+
     trait :default do
       default true
     end
