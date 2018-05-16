@@ -35,4 +35,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'sidekiq', '~> 4.2.10'
   spec.add_development_dependency 'colorize', '~> 0.8.1'
   spec.add_development_dependency 'pg', '~> 0.18'
+  spec.add_development_dependency 'pry'
 end

@@ -4,7 +4,9 @@ RSpec.describe Accounting::Transaction, type: :model do
 
   before(:all) { ActiveJob::Base.queue_adapter = :test }
 
-  let(:user) { FactoryGirl.create(:user, :with_transactions) }
+  let(:user) do
+    FactoryGirl.create(:user, :with_transactions)
+  end
 
   before(:each) { user.transactions }
 
@@ -12,12 +14,12 @@ RSpec.describe Accounting::Transaction, type: :model do
     expect(Accounting::Transaction.new).to be_instance_of(Accounting::Transaction)
   end
 
-  it 'should raise a duplicate transaction error if already processed' do
+  it 'should return self if already processed' do
     charge = user.charge(1.00, user.payments.default)
     charge.save
 
     expect { charge.process_now! }.to_not raise_error # First call should be fine
-    expect { charge.process_now! }.to raise_error(::Accounting::DuplicateError)
+    expect(charge.process_now!).to eq(charge)
   end
 
   it 'should raise a duplicate transaction error if previously submitted' do

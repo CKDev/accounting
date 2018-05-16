@@ -1,7 +1,7 @@
 module Accounting
   class Config
 
-    attr_accessor :login, :key, :signature, :validation_mode, :gateway, :cancel_subscription_on_destroy, :queue, :logger, :domain
+    attr_accessor :login, :key, :signature, :client_key, :validation_mode, :gateway, :cancel_subscription_on_destroy, :queue, :logger, :domain
 
     def initialize
       @gateway ||= :sandbox

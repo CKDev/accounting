@@ -49,13 +49,11 @@ module Accounting
     private
 
       def create_profile
-        return if errors.present? || details.present?
+        return if errors.present? || @details.present?
 
         customer_profile = AuthorizeNet::CIM::CustomerProfile.new(profile_options)
         response = Accounting.api(:cim, api_options(accountable)).create_profile(customer_profile)
-
         if response.raw.is_a?(Net::HTTPSuccess)
-
           if response.message_code == 'E00039' # Profile exists
             profile_id = response.message_text.match(/[0-9]+/).to_s
             info = details(profile_id)

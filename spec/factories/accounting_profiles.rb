@@ -1,3 +1,5 @@
+require_relative '../support/create_card'
+
 FactoryGirl.define do
   factory :accounting_profile, class: 'Accounting::Profile' do
     authnet_id { SecureRandom.uuid[0..19] }
@@ -11,7 +13,14 @@ FactoryGirl.define do
 
       after :create do |profile, evaluator|
         evaluator.card_numbers.each do |number|
-          payment = FactoryGirl.build(:accounting_payment, :with_card, profile: profile, number: number, profile_type: 'card')
+          payment = AccountingTest::CreateCard.new(
+            profile,
+            number,
+            number == '370000000000002' ? 1234 : 123,
+            nil,
+            nil,
+            FactoryGirl.build(:accounting_address)
+          ).create_payment
           payment.save
           profile.payments << payment
         end
@@ -20,12 +29,20 @@ FactoryGirl.define do
 
     trait :with_payment do
       transient do
+        card_numbers ['370000000000002', '6011000000000012', '3088000000000017', '4007000000027', '5424000000000015']
         payment_count 1
       end
 
       after :create do |profile, evaluator|
-        evaluator.payment_count.times do
-          payment = FactoryGirl.build(:accounting_payment, :with_card, profile: profile, profile_type: 'card')
+        evaluator.payment_count.times do |i|
+          payment = AccountingTest::CreateCard.new(
+            profile,
+            evaluator.card_numbers[i],
+            [*1000..9999].sample,
+            nil,
+            nil,
+            FactoryGirl.build(:accounting_address)
+          ).create_payment
           payment.save
           profile.payments << payment
         end
