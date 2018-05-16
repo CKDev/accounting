@@ -15,8 +15,8 @@ FactoryGirl.define do
     end
 
     after :build do |payment|
-      unless payment.address.present?
-        payment.address = FactoryGirl.build(:accounting_address, payment: payment)
+      if payment.address.blank?
+        payment.address = FactoryBot.build(:accounting_address, payment: payment)
       end
     end
 
@@ -36,7 +36,7 @@ FactoryGirl.define do
     trait :with_ach do
       profile_type 'ach'
       routing { routing_numbers.sample }
-      account { [*1000000..9999999].sample }
+      account { [*1_000_000..9_999_999].sample }
       bank_name { FFaker::Company.name }
       account_holder { FFaker::Name.name }
       account_type { ['checking', 'savings'].sample }
