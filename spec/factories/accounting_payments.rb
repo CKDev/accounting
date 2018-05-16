@@ -1,3 +1,5 @@
+require_relative '../../lib/accounting/test/create_card'
+
 FactoryGirl.define do
   factory :accounting_payment, class: 'Accounting::Payment' do
     title ['American Express', 'Discover', 'JCB', 'Visa', 'MasterCard'].sample
@@ -6,7 +8,10 @@ FactoryGirl.define do
     profile_type 'card'
 
     transient do
+      card_numbers ['370000000000002', '6011000000000012', '3088000000000017', '4007000000027', '5424000000000015']
       routing_numbers ['102003154', '272477694', '231386137', '102006025', '102102864', '102105353', '102189324']
+      number { card_numbers.sample }
+      address { FactoryGirl.build(:accounting_address) }
     end
 
     after :build do |payment|
@@ -16,10 +21,16 @@ FactoryGirl.define do
     end
 
     trait :with_card do
-      profile_type 'card'
-      month { Time.now.month }
-      year { Time.now.year + [*1..5].sample }
-      payment_profile_id { [*1825701..1825800].sample }
+      initialize_with do
+        Accounting::Test::CreateCard.new(
+          profile,
+          number,
+          number == '370000000000002' ? 1234 : 123,
+          nil,
+          nil,
+          address
+        ).create_payment
+      end
     end
 
     trait :with_ach do

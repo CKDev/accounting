@@ -111,7 +111,7 @@ module Accounting
 
       def format_data
         # Ensure the year is 4 digit representation
-        self.year = '20' + year.to_s[-2..-1].to_s
+        self.year = '20' + year.to_s[-2..-1].to_s unless year == -1
         self.expiration = Date.new(year.to_i, month.to_i, -1) rescue nil
       end
 

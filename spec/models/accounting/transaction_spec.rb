@@ -32,18 +32,8 @@ RSpec.describe Accounting::Transaction, type: :model do
     expect { charge2.process_now! }.to raise_error(::Accounting::DuplicateError)
   end
 
-  it 'should flag the transaction as a duplicate' do
-    charge = user.charge(1.00, user.payments.default)
-    charge.submitted_at = Time.now
-    charge.transaction_id = '1234567890'
-    charge.save
-    expect(charge.status).to eq('pending')
-    charge.process_now
-    expect(charge.status).to eq('duplicate')
-  end
-
   it 'will fetch the address if an address instance is provided' do
-    address = FactoryGirl.create(:accounting_address, :with_address_id)
+    address = FactoryGirl.create(:accounting_address, :with_payment, :with_address_id)
     charge = user.charge(1.00, user.payments.default, address_id: '0')
     expect(charge).to be_valid
     expect(charge.options['address_id']).to eq('0')

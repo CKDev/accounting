@@ -11,8 +11,9 @@ RSpec.describe Accounting::Subscription, type: :model do
   end
 
   it 'should enqueue a subscription' do
+    subscription = user.subscribe('Test', 1.00, 6, user.payments.default)
     VCR.use_cassette :valid_subscription do
-      expect { user.subscribe('Test', 1.00, 6, user.payments.default).save }.to have_enqueued_job
+      expect { subscription.save }.to have_enqueued_job
     end
   end
 

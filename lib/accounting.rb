@@ -72,6 +72,11 @@ module Accounting
       messages.each { |type, message| config.logger.send(type, "[#{Time.now.to_s}] #{message}") }
     end
   end
+
+  module Test
+    autoload :CreateCard, 'accounting/test/create_card'
+  end
+  
 end
 
 require 'accounting/engine' if defined?(Rails)

@@ -1,5 +1,3 @@
-require_relative '../support/create_card'
-
 FactoryGirl.define do
   factory :user, class: 'User' do
 
@@ -15,15 +13,8 @@ FactoryGirl.define do
 
       before :create do |user, evaluator|
         evaluator.payments.times do
-          number = evaluator.numbers.delete(evaluator.numbers.sample)
-          payment = AccountingTest::CreateCard.new(
-            user.profile,
-            number,
-            number == '370000000000002' ? 1234 : 123,
-            nil,
-            nil,
-            FactoryGirl.build(:accounting_address)
-          ).create_payment
+          payment = FactoryGirl.build(:accounting_payment, :with_card, profile: user.profile)
+          payment.save
           user.payments << payment
         end
       end
