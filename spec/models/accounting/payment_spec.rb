@@ -21,9 +21,7 @@ RSpec.describe Accounting::Payment, type: :model do
     it 'should make default payment when default! called' do
       VCR.use_cassette :valid_payment, record: :new_episodes, re_record_interval: 7.days do
         payment.save!
-        # I need to add reload here because migration is wrong. ActiveRecord enum datatype should be integer in database
-        # but it's defined as string in migration which causes profile_type value does not persist in test env
-        expect(payment.reload.default?).to be_truthy
+        expect(payment.default?).to be_truthy
         payment2 = FactoryGirl.create(:accounting_payment, :with_card, profile: payment.profile)
         payment2.default!
         expect(payment.reload.default?).to be_falsey

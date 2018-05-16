@@ -103,7 +103,7 @@ module Accounting
         # Allow an out for the edge case where Authorize.NET sends the hook to create a payment profile
         # It does not send expiration dates, so we need to allow nil in this case and treat it as "Unknown"
         return if year == -1 && month == -1
-        
+
         self.errors.add(:base, 'Expiration date cannot be in the past') unless Time.new(year.to_i, month.to_i, Time.now.day, Time.now.hour, Time.now.min, 0) > Time.now
       rescue ArgumentError
         self.errors.add(:base, 'Expiration date is invalid')

@@ -1,6 +1,6 @@
 module AccountingTest
   ##
-  # Since we will use Accept.js for payment creation, we need a way to create in original way(with card data)
+  # Since we will use Accept.js for payment creation, we need a way to create Payment Profile in original way(with card data)
   # for tests. <tt>AccountingTest::CreateCard<tt> provides the way.
   class CreateCard
     attr_accessor :address, :profile, :payment
