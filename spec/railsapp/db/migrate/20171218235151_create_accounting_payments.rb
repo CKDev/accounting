@@ -6,7 +6,7 @@ class CreateAccountingPayments < ActiveRecord::Migration[5.1]
       t.string :title
       t.string :last_four
       t.date :expiration
-      t.string :profile_type
+      t.integer :profile_type
       t.boolean :default, null: false, default: false
 
       t.timestamps null: false

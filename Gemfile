@@ -17,4 +17,5 @@ group :test do
   gem 'coveralls', require: false
   gem 'webmock', '~> 3'
   gem 'vcr'
+  gem 'pry'
 end

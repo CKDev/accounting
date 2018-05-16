@@ -2,7 +2,7 @@ require 'spec_helper'
 
 RSpec.describe Accounting::Address, type: :model do
 
-  let(:address) { FactoryGirl.build(:accounting_address) }
+  let(:address) { FactoryGirl.build(:accounting_address, :with_payment) }
 
   it 'can be fetched as a billing address' do
     expect(address.to_billing_address).to be_instance_of(AuthorizeNet::Address)

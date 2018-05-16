@@ -1,3 +1,5 @@
+require_relative '../../lib/accounting/test/create_card'
+
 FactoryGirl.define do
   factory :accounting_profile, class: 'Accounting::Profile' do
     authnet_id { SecureRandom.uuid[0..19] }
@@ -11,7 +13,7 @@ FactoryGirl.define do
 
       after :create do |profile, evaluator|
         evaluator.card_numbers.each do |number|
-          payment = FactoryGirl.build(:accounting_payment, :with_card, profile: profile, number: number, profile_type: 'card')
+          payment = FactoryGirl.build(:accounting_payment, :with_card, profile: profile, number: number)
           payment.save
           profile.payments << payment
         end
@@ -25,7 +27,7 @@ FactoryGirl.define do
 
       after :create do |profile, evaluator|
         evaluator.payment_count.times do
-          payment = FactoryGirl.build(:accounting_payment, :with_card, profile: profile, profile_type: 'card')
+          payment = FactoryGirl.build(:accounting_payment, :with_card, profile: profile)
           payment.save
           profile.payments << payment
         end

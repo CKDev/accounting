@@ -11,10 +11,8 @@ FactoryGirl.define do
     phone { FFaker::PhoneNumber.phone_number }
     fax { FFaker::PhoneNumber.phone_number }
 
-    after :build do |address|
-      unless address.payment.present?
-        address.payment = FactoryGirl.build(:accounting_payment, :with_card, address: address)
-      end
+    trait :with_payment do
+      payment { FactoryGirl.build(:accounting_payment, :with_card, address: address) }
     end
 
     trait :with_address_id do

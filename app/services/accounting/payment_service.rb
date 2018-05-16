@@ -25,8 +25,6 @@ module Accounting
       # In the case of card we set dummy data to ensure rails specific validations pass, the data itself is never saved
       if ach?
         resource.assign_attributes(routing: '0000000', account: '0000000', account_holder: 'Dummy', bank_name: 'Dummy', account_type: 'checking')
-      elsif card?
-        resource.assign_attributes(number: '0000000000000000', ccv: '000')
       end
 
       resource.save!

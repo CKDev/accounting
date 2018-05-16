@@ -17,7 +17,7 @@ module Accounting
     #
     # @author Ming <ming@commercekitchen.com>
     def build_payment
-      @payment = @profile.payments.build(accept: true, profile_type: @params[:profile_type])
+      @payment = @profile.payments.build(profile_type: @params[:profile_type])
       if @payment.card?
         @payment.assign_attributes(@params[:card])
         return false if @payment.address && @payment.address.invalid?

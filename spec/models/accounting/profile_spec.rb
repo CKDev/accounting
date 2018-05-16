@@ -19,7 +19,7 @@ RSpec.describe Accounting::Profile, type: :model do
     end
   end
 
-  it 'should have a unique email address' do
+  it 'should allow multiple profiles with same email address' do
     VCR.use_cassette :valid_profile, record: :new_episodes, re_record_interval: 7.days do
       expect(profile).to be_valid
       profile.save!
@@ -27,8 +27,7 @@ RSpec.describe Accounting::Profile, type: :model do
     email = profile.authnet_email
 
     new_profile = FactoryGirl.build(:accounting_profile, authnet_email: email)
-    expect(new_profile).to_not be_valid
-    expect(new_profile.errors.full_messages).to eq(['Authnet email has already been taken'])
+    expect(new_profile).to be_valid
   end
 
   it 'should fail to validate if an authorize.net error was returned' do
@@ -41,7 +40,7 @@ RSpec.describe Accounting::Profile, type: :model do
   it 'should fail to validate with the request errors if not a 200 response' do
     stub_request(:any, 'https://apitest.authorize.net/xml/v1/request.api').to_raise('Blocked')
     expect(profile).to_not be_valid
-    expect(profile.errors.full_messages).to eq(['Blocked'])
+    expect(profile.errors.full_messages).to eq(['Blocked', 'Profile can\'t be blank'])
   end
 
   it 'should delete the customer profile when destroyed' do
@@ -59,7 +58,7 @@ RSpec.describe Accounting::Profile, type: :model do
   context 'Payments' do
 
     let(:profile) do
-      VCR.use_cassette :valid_profile, record: :new_episodes, re_record_interval: 7.days do
+      VCR.use_cassette :valid_profiles, record: :new_episodes, re_record_interval: 7.days do
         FactoryGirl.create(:accounting_profile, :with_payment, payment_count: 3)
       end
     end

@@ -13,8 +13,9 @@ FactoryGirl.define do
 
       before :create do |user, evaluator|
         evaluator.payments.times do
-          number = evaluator.numbers.delete(evaluator.numbers.sample)
-          user.payments.create!(profile_type: :card, number: number, ccv: number == '370000000000002' ? 1234 : 123, month: rand(1..12).to_i, year: Time.now.year.to_i + 5, address: FactoryGirl.build(:accounting_address))
+          payment = FactoryGirl.build(:accounting_payment, :with_card, profile: user.profile)
+          payment.save
+          user.payments << payment
         end
       end
     end

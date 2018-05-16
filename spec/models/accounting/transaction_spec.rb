@@ -4,7 +4,9 @@ RSpec.describe Accounting::Transaction, type: :model do
 
   before(:all) { ActiveJob::Base.queue_adapter = :test }
 
-  let(:user) { FactoryGirl.create(:user, :with_transactions) }
+  let(:user) do
+    FactoryGirl.create(:user, :with_transactions)
+  end
 
   before(:each) { user.transactions }
 
@@ -12,12 +14,12 @@ RSpec.describe Accounting::Transaction, type: :model do
     expect(Accounting::Transaction.new).to be_instance_of(Accounting::Transaction)
   end
 
-  it 'should raise a duplicate transaction error if already processed' do
+  it 'should return self if already processed' do
     charge = user.charge(1.00, user.payments.default)
     charge.save
 
     expect { charge.process_now! }.to_not raise_error # First call should be fine
-    expect { charge.process_now! }.to raise_error(::Accounting::DuplicateError)
+    expect(charge.process_now!).to eq(charge)
   end
 
   it 'should raise a duplicate transaction error if previously submitted' do
@@ -30,18 +32,8 @@ RSpec.describe Accounting::Transaction, type: :model do
     expect { charge2.process_now! }.to raise_error(::Accounting::DuplicateError)
   end
 
-  it 'should flag the transaction as a duplicate' do
-    charge = user.charge(1.00, user.payments.default)
-    charge.submitted_at = Time.now
-    charge.transaction_id = '1234567890'
-    charge.save
-    expect(charge.status).to eq('pending')
-    charge.process_now
-    expect(charge.status).to eq('duplicate')
-  end
-
   it 'will fetch the address if an address instance is provided' do
-    address = FactoryGirl.create(:accounting_address, :with_address_id)
+    address = FactoryGirl.create(:accounting_address, :with_payment, :with_address_id)
     charge = user.charge(1.00, user.payments.default, address_id: '0')
     expect(charge).to be_valid
     expect(charge.options['address_id']).to eq('0')

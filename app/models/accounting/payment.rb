@@ -13,9 +13,7 @@ module Accounting
 
     after_destroy :reset_default
 
-    attr_writer :accept
-
-    attr_accessor :number, :ccv, :month, :year
+    attr_accessor :month, :year
 
     attr_accessor :routing, :account, :bank_name, :account_holder, :account_type, :check_number, :echeck_type
 
@@ -29,23 +27,17 @@ module Accounting
 
     validates :account_type, inclusion: { in: Accounting::Payment.account_types.keys }, if: :ach?
 
-    validates :number, length: { in: 13..16 }, if: :card?, unless: :accept?
-
-    validates :number, :ccv, presence: true, if: :card?, unless: :accept?
-
-    validates :number, :ccv, numericality: { only_integer: true }, if: :card?, unless: :accept?
-
     validates :month, :year, presence: true, if: :card?
 
     validates :month, :year, numericality: { only_integer: true }, if: :card?
 
-    validates :routing, :account, :bank_name, :account_holder, :account_type, presence: true, if: :ach?, unless: :accept?
+    validates :routing, :account, :bank_name, :account_holder, :account_type, presence: true, if: :ach?
 
     validates :profile_type, presence: true, inclusion: { in: Accounting::Payment.profile_types.keys }
 
     validate :expiration_date, on: :create, if: :card?
 
-    validate :create_payment, if: proc { |p| p.payment_profile_id.blank? && !p.accept? }
+    validate :create_payment, if: proc { |p| p.payment_profile_id.blank? }, unless: :card?
 
     # The below validation should not be run if errors exist, since the above :create_payment validation sets these values
     validates_presence_of :payment_profile_id, if: proc { |p| p.errors.blank? }
@@ -68,17 +60,14 @@ module Accounting
       end
     end
 
-    def accept?
-      @accept || false
-    end
-
     private
 
       def create_payment
         # Don't bother creating the payment if errors exist on self or the address at this point, it will fail to validate anyways
         return if errors.present? || (address.present? && address.errors.present?)
 
-        payment_profile = AuthorizeNet::CIM::PaymentProfile.new(payment_method: type, billing_address: address&.to_billing_address)
+        ach = AuthorizeNet::ECheck.new(routing, account, bank_name, account_holder, { account_type: account_type, check_number: check_number, echeck_type: echeck_type || AuthorizeNet::ECheck::CheckType::INTERNET_INITIATED })
+        payment_profile = AuthorizeNet::CIM::PaymentProfile.new(payment_method: ach, billing_address: address&.to_billing_address)
 
         response = Accounting.api(:cim, api_options(profile.accountable)).create_payment_profile(payment_profile, profile.profile_id, validation_mode: Accounting.config.validation_mode)
 
@@ -90,7 +79,6 @@ module Accounting
               title: response.validation_response.fields[:card_type],
               payment_profile_id: response.payment_profile_id,
               default: profile.payments.count == 0,
-              expiration: (Date.new(year.to_i, month.to_i, -1) rescue nil),
               last_four: response.validation_response.fields[:account_number].to_s[-4..-1]
             )
           end
@@ -111,41 +99,20 @@ module Accounting
         end
       end
 
-      def type
-        if card?
-          card
-        elsif ach?
-          ach
-        end
-      end
-
-      def card
-        AuthorizeNet::CreditCard.new(number, expiration_str, card_code: ccv)
-      end
-
-      def ach
-        AuthorizeNet::ECheck.new(routing, account, bank_name, account_holder, { account_type: account_type, check_number: check_number, echeck_type: echeck_type || AuthorizeNet::ECheck::CheckType::INTERNET_INITIATED })
-      end
-
-      def expiration_str
-        "#{month.to_s.rjust(2, '0')}#{year.to_s[-2..-1]}"
-      end
-
       def expiration_date
         # Allow an out for the edge case where Authorize.NET sends the hook to create a payment profile
         # It does not send expiration dates, so we need to allow nil in this case and treat it as "Unknown"
         return if year == -1 && month == -1
 
         self.errors.add(:base, 'Expiration date cannot be in the past') unless Time.new(year.to_i, month.to_i, Time.now.day, Time.now.hour, Time.now.min, 0) > Time.now
-        self.errors.add(:base, 'Expiration date is invalid.') unless /^[0-9]{2}[0-9]{2}$/ =~ expiration_str
+      rescue ArgumentError
+        self.errors.add(:base, 'Expiration date is invalid')
       end
 
       def format_data
         # Ensure the year is 4 digit representation
-        self.year = '20' + year.to_s[-2..-1].to_s
-
-        # Ensure the credit card number is only numbers (no spaces, dashes, etc)
-        self.number = number.to_s.gsub(/[^0-9]+/, '')
+        self.year = '20' + year.to_s[-2..-1].to_s unless year == -1
+        self.expiration = Date.new(year.to_i, month.to_i, -1) rescue nil
       end
 
   end

@@ -71,8 +71,8 @@ module Accounting
         update(status: :duplicate, submitted_at: Time.now, message: e.message)
         self
       rescue => e
-        self.errors.add(:base, e.message)
         update(message: e.message)
+        self.errors.add(:base, e.message)
         false
       end
     end
