@@ -60,6 +60,8 @@ module Accounting
     end
 
     def address
+      return unless details.billing_address.present?
+
       Accounting::Address.new(
         first_name: details.billing_address.first_name,
         last_name: details.billing_address.last_name,

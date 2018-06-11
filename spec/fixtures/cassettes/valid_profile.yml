@@ -7,138 +7,6 @@ http_interactions:
       encoding: UTF-8
       string: |
         <?xml version="1.0" encoding="utf-8"?>
-        <createCustomerShippingAddressRequest xmlns="AnetApi/xml/v1/schema/AnetApiSchema.xsd">
-          <merchantAuthentication>
-            <name>8U46Pew5dfF</name>
-            <transactionKey>7q7L43ED4x5Gr4j5</transactionKey>
-          </merchantAuthentication>
-          <customerProfileId>1504503640</customerProfileId>
-          <address>
-            <firstName>France</firstName>
-            <lastName>Ankunding</lastName>
-            <company>Bosco-Nolan</company>
-            <address>393 Harriette Branch</address>
-            <city>Jenniferton</city>
-            <state>Colorado</state>
-            <zip>14571</zip>
-            <country>KP</country>
-            <phoneNumber>(897)401-4215</phoneNumber>
-            <faxNumber>762.385.0750 x0434</faxNumber>
-          </address>
-        </createCustomerShippingAddressRequest>
-    headers:
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
-      User-Agent:
-      - Ruby
-      Content-Type:
-      - text/xml
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Cache-Control:
-      - private
-      Content-Type:
-      - application/xml; charset=utf-8
-      Access-Control-Allow-Origin:
-      - "*"
-      Access-Control-Allow-Headers:
-      - x-requested-with,cache-control,content-type,origin,method,SOAPAction
-      Access-Control-Allow-Credentials:
-      - 'true'
-      Access-Control-Allow-Methods:
-      - PUT,OPTIONS,POST,GET
-      X-Cnection:
-      - close
-      Content-Length:
-      - '475'
-      Date:
-      - Wed, 16 May 2018 03:06:31 GMT
-      Connection:
-      - keep-alive
-    body:
-      encoding: ASCII-8BIT
-      string: !binary |-
-        77u/PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48Y3JlYXRlQ3VzdG9tZXJTaGlwcGluZ0FkZHJlc3NSZXNwb25zZSB4bWxuczp4c2k9Imh0dHA6Ly93d3cudzMub3JnLzIwMDEvWE1MU2NoZW1hLWluc3RhbmNlIiB4bWxuczp4c2Q9Imh0dHA6Ly93d3cudzMub3JnLzIwMDEvWE1MU2NoZW1hIiB4bWxucz0iQW5ldEFwaS94bWwvdjEvc2NoZW1hL0FuZXRBcGlTY2hlbWEueHNkIj48bWVzc2FnZXM+PHJlc3VsdENvZGU+T2s8L3Jlc3VsdENvZGU+PG1lc3NhZ2U+PGNvZGU+STAwMDAxPC9jb2RlPjx0ZXh0PlN1Y2Nlc3NmdWwuPC90ZXh0PjwvbWVzc2FnZT48L21lc3NhZ2VzPjxjdXN0b21lclByb2ZpbGVJZD4xNTA0NTAzNjQwPC9jdXN0b21lclByb2ZpbGVJZD48Y3VzdG9tZXJBZGRyZXNzSWQ+MTUwMzk0NTE0NzwvY3VzdG9tZXJBZGRyZXNzSWQ+PC9jcmVhdGVDdXN0b21lclNoaXBwaW5nQWRkcmVzc1Jlc3BvbnNlPg==
-    http_version: 
-  recorded_at: Wed, 16 May 2018 03:06:31 GMT
-- request:
-    method: post
-    uri: https://apitest.authorize.net/xml/v1/request.api
-    body:
-      encoding: UTF-8
-      string: |
-        <?xml version="1.0" encoding="utf-8"?>
-        <createCustomerShippingAddressRequest xmlns="AnetApi/xml/v1/schema/AnetApiSchema.xsd">
-          <merchantAuthentication>
-            <name>8U46Pew5dfF</name>
-            <transactionKey>7q7L43ED4x5Gr4j5</transactionKey>
-          </merchantAuthentication>
-          <customerProfileId>1504503640</customerProfileId>
-          <address>
-            <firstName>Jovita</firstName>
-            <lastName>Bogisich</lastName>
-            <company>Schoen-Fritsch</company>
-            <address>5566 Williamson Valley</address>
-            <city>South Tonia</city>
-            <state>Iowa</state>
-            <zip>35774-1356</zip>
-            <country>LU</country>
-            <phoneNumber>626-239-3364</phoneNumber>
-            <faxNumber>903-785-8383 x4316</faxNumber>
-          </address>
-        </createCustomerShippingAddressRequest>
-    headers:
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
-      User-Agent:
-      - Ruby
-      Content-Type:
-      - text/xml
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Cache-Control:
-      - private
-      Content-Type:
-      - application/xml; charset=utf-8
-      Access-Control-Allow-Origin:
-      - "*"
-      Access-Control-Allow-Headers:
-      - x-requested-with,cache-control,content-type,origin,method,SOAPAction
-      Access-Control-Allow-Credentials:
-      - 'true'
-      Access-Control-Allow-Methods:
-      - PUT,OPTIONS,POST,GET
-      X-Cnection:
-      - close
-      Content-Length:
-      - '475'
-      Date:
-      - Wed, 16 May 2018 03:06:32 GMT
-      Connection:
-      - keep-alive
-    body:
-      encoding: ASCII-8BIT
-      string: !binary |-
-        77u/PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48Y3JlYXRlQ3VzdG9tZXJTaGlwcGluZ0FkZHJlc3NSZXNwb25zZSB4bWxuczp4c2k9Imh0dHA6Ly93d3cudzMub3JnLzIwMDEvWE1MU2NoZW1hLWluc3RhbmNlIiB4bWxuczp4c2Q9Imh0dHA6Ly93d3cudzMub3JnLzIwMDEvWE1MU2NoZW1hIiB4bWxucz0iQW5ldEFwaS94bWwvdjEvc2NoZW1hL0FuZXRBcGlTY2hlbWEueHNkIj48bWVzc2FnZXM+PHJlc3VsdENvZGU+T2s8L3Jlc3VsdENvZGU+PG1lc3NhZ2U+PGNvZGU+STAwMDAxPC9jb2RlPjx0ZXh0PlN1Y2Nlc3NmdWwuPC90ZXh0PjwvbWVzc2FnZT48L21lc3NhZ2VzPjxjdXN0b21lclByb2ZpbGVJZD4xNTA0NTAzNjQwPC9jdXN0b21lclByb2ZpbGVJZD48Y3VzdG9tZXJBZGRyZXNzSWQ+MTUwMzk0NTE0ODwvY3VzdG9tZXJBZGRyZXNzSWQ+PC9jcmVhdGVDdXN0b21lclNoaXBwaW5nQWRkcmVzc1Jlc3BvbnNlPg==
-    http_version: 
-  recorded_at: Wed, 16 May 2018 03:06:32 GMT
-- request:
-    method: post
-    uri: https://apitest.authorize.net/xml/v1/request.api
-    body:
-      encoding: UTF-8
-      string: |
-        <?xml version="1.0" encoding="utf-8"?>
         <createCustomerProfileRequest xmlns="AnetApi/xml/v1/schema/AnetApiSchema.xsd">
           <merchantAuthentication>
             <name>8U46Pew5dfF</name>
@@ -422,4 +290,122 @@ http_interactions:
         77u/PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48Y3JlYXRlQ3VzdG9tZXJQcm9maWxlUmVzcG9uc2UgeG1sbnM6eHNpPSJodHRwOi8vd3d3LnczLm9yZy8yMDAxL1hNTFNjaGVtYS1pbnN0YW5jZSIgeG1sbnM6eHNkPSJodHRwOi8vd3d3LnczLm9yZy8yMDAxL1hNTFNjaGVtYSIgeG1sbnM9IkFuZXRBcGkveG1sL3YxL3NjaGVtYS9BbmV0QXBpU2NoZW1hLnhzZCI+PG1lc3NhZ2VzPjxyZXN1bHRDb2RlPk9rPC9yZXN1bHRDb2RlPjxtZXNzYWdlPjxjb2RlPkkwMDAwMTwvY29kZT48dGV4dD5TdWNjZXNzZnVsLjwvdGV4dD48L21lc3NhZ2U+PC9tZXNzYWdlcz48Y3VzdG9tZXJQcm9maWxlSWQ+MTUwNDY3MzAzODwvY3VzdG9tZXJQcm9maWxlSWQ+PGN1c3RvbWVyUGF5bWVudFByb2ZpbGVJZExpc3QgLz48Y3VzdG9tZXJTaGlwcGluZ0FkZHJlc3NJZExpc3QgLz48dmFsaWRhdGlvbkRpcmVjdFJlc3BvbnNlTGlzdCAvPjwvY3JlYXRlQ3VzdG9tZXJQcm9maWxlUmVzcG9uc2U+
     http_version: 
   recorded_at: Mon, 11 Jun 2018 17:56:28 GMT
+- request:
+    method: post
+    uri: https://apitest.authorize.net/xml/v1/request.api
+    body:
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0" encoding="utf-8"?>
+        <createCustomerProfileRequest xmlns="AnetApi/xml/v1/schema/AnetApiSchema.xsd">
+          <merchantAuthentication>
+            <name>7b4Ju4Pu</name>
+            <transactionKey>898zCaw9DX83m932</transactionKey>
+          </merchantAuthentication>
+          <profile>
+            <merchantCustomerId>d45905bc-f603-41e0-9</merchantCustomerId>
+            <description>Molestias dicta incidunt cupiditate.</description>
+            <email>rose@rippin.us</email>
+          </profile>
+          <validationMode>none</validationMode>
+        </createCustomerProfileRequest>
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Content-Type:
+      - text/xml
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - private
+      Content-Type:
+      - application/xml; charset=utf-8
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - x-requested-with,cache-control,content-type,origin,method,SOAPAction
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - PUT,OPTIONS,POST,GET
+      X-Cnection:
+      - close
+      Content-Length:
+      - '507'
+      Date:
+      - Mon, 11 Jun 2018 21:36:50 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        77u/PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48Y3JlYXRlQ3VzdG9tZXJQcm9maWxlUmVzcG9uc2UgeG1sbnM6eHNpPSJodHRwOi8vd3d3LnczLm9yZy8yMDAxL1hNTFNjaGVtYS1pbnN0YW5jZSIgeG1sbnM6eHNkPSJodHRwOi8vd3d3LnczLm9yZy8yMDAxL1hNTFNjaGVtYSIgeG1sbnM9IkFuZXRBcGkveG1sL3YxL3NjaGVtYS9BbmV0QXBpU2NoZW1hLnhzZCI+PG1lc3NhZ2VzPjxyZXN1bHRDb2RlPk9rPC9yZXN1bHRDb2RlPjxtZXNzYWdlPjxjb2RlPkkwMDAwMTwvY29kZT48dGV4dD5TdWNjZXNzZnVsLjwvdGV4dD48L21lc3NhZ2U+PC9tZXNzYWdlcz48Y3VzdG9tZXJQcm9maWxlSWQ+MTkxNDExNDI3OTwvY3VzdG9tZXJQcm9maWxlSWQ+PGN1c3RvbWVyUGF5bWVudFByb2ZpbGVJZExpc3QgLz48Y3VzdG9tZXJTaGlwcGluZ0FkZHJlc3NJZExpc3QgLz48dmFsaWRhdGlvbkRpcmVjdFJlc3BvbnNlTGlzdCAvPjwvY3JlYXRlQ3VzdG9tZXJQcm9maWxlUmVzcG9uc2U+
+    http_version: 
+  recorded_at: Mon, 11 Jun 2018 21:36:50 GMT
+- request:
+    method: post
+    uri: https://apitest.authorize.net/xml/v1/request.api
+    body:
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0" encoding="utf-8"?>
+        <createCustomerProfileRequest xmlns="AnetApi/xml/v1/schema/AnetApiSchema.xsd">
+          <merchantAuthentication>
+            <name>7b4Ju4Pu</name>
+            <transactionKey>898zCaw9DX83m932</transactionKey>
+          </merchantAuthentication>
+          <profile>
+            <merchantCustomerId>93bfba03-1480-4acd-9</merchantCustomerId>
+            <description>Eaque esse necessitatibus.</description>
+            <email>janae.hand@heidenreichherzog.info</email>
+          </profile>
+          <validationMode>none</validationMode>
+        </createCustomerProfileRequest>
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Content-Type:
+      - text/xml
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - private
+      Content-Type:
+      - application/xml; charset=utf-8
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - x-requested-with,cache-control,content-type,origin,method,SOAPAction
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - PUT,OPTIONS,POST,GET
+      X-Cnection:
+      - close
+      Content-Length:
+      - '507'
+      Date:
+      - Mon, 11 Jun 2018 21:43:30 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        77u/PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48Y3JlYXRlQ3VzdG9tZXJQcm9maWxlUmVzcG9uc2UgeG1sbnM6eHNpPSJodHRwOi8vd3d3LnczLm9yZy8yMDAxL1hNTFNjaGVtYS1pbnN0YW5jZSIgeG1sbnM6eHNkPSJodHRwOi8vd3d3LnczLm9yZy8yMDAxL1hNTFNjaGVtYSIgeG1sbnM9IkFuZXRBcGkveG1sL3YxL3NjaGVtYS9BbmV0QXBpU2NoZW1hLnhzZCI+PG1lc3NhZ2VzPjxyZXN1bHRDb2RlPk9rPC9yZXN1bHRDb2RlPjxtZXNzYWdlPjxjb2RlPkkwMDAwMTwvY29kZT48dGV4dD5TdWNjZXNzZnVsLjwvdGV4dD48L21lc3NhZ2U+PC9tZXNzYWdlcz48Y3VzdG9tZXJQcm9maWxlSWQ+MTkxNDExNDMyOTwvY3VzdG9tZXJQcm9maWxlSWQ+PGN1c3RvbWVyUGF5bWVudFByb2ZpbGVJZExpc3QgLz48Y3VzdG9tZXJTaGlwcGluZ0FkZHJlc3NJZExpc3QgLz48dmFsaWRhdGlvbkRpcmVjdFJlc3BvbnNlTGlzdCAvPjwvY3JlYXRlQ3VzdG9tZXJQcm9maWxlUmVzcG9uc2U+
+    http_version: 
+  recorded_at: Mon, 11 Jun 2018 21:43:30 GMT
 recorded_with: VCR 4.0.0
