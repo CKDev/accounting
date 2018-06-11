@@ -12,7 +12,7 @@ FactoryGirl.define do
     fax { FFaker::PhoneNumber.phone_number }
 
     trait :with_payment do
-      payment { FactoryGirl.build(:accounting_payment, :with_card, address: address) }
+      payment { FactoryGirl.build(:accounting_payment, :with_card) }
     end
 
     trait :with_address_id do

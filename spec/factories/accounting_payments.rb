@@ -16,7 +16,7 @@ FactoryGirl.define do
 
     after :build do |payment|
       if payment.address.blank?
-        payment.address = FactoryBot.build(:accounting_address, payment: payment)
+        payment.address = FactoryGirl.build(:accounting_address, payment: payment)
       end
     end
 
