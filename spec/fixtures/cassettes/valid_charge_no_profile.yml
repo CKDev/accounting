@@ -1,0 +1,68 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://apitest.authorize.net/xml/v1/request.api
+    body:
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0" encoding="utf-8"?>
+        <createTransactionRequest xmlns="AnetApi/xml/v1/schema/AnetApiSchema.xsd">
+          <merchantAuthentication>
+            <name>7b4Ju4Pu</name>
+            <transactionKey>898zCaw9DX83m932</transactionKey>
+          </merchantAuthentication>
+          <clientId>sdk-ruby-1.9.3</clientId>
+          <transactionRequest>
+            <transactionType>authCaptureTransaction</transactionType>
+            <amount>19.38</amount>
+            <payment>
+              <creditCard>
+                <cardNumber>4111111111111111</cardNumber>
+                <expirationDate>0119</expirationDate>
+                <cardCode>123</cardCode>
+              </creditCard>
+            </payment>
+          </transactionRequest>
+        </createTransactionRequest>
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Content-Type:
+      - text/xml
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - private
+      Content-Type:
+      - application/xml; charset=utf-8
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - x-requested-with,cache-control,content-type,origin,method,SOAPAction
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - PUT,OPTIONS,POST,GET
+      X-Cnection:
+      - close
+      Content-Length:
+      - '1023'
+      Date:
+      - Mon, 11 Jun 2018 21:05:04 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        77u/PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48Y3JlYXRlVHJhbnNhY3Rpb25SZXNwb25zZSB4bWxuczp4c2k9Imh0dHA6Ly93d3cudzMub3JnLzIwMDEvWE1MU2NoZW1hLWluc3RhbmNlIiB4bWxuczp4c2Q9Imh0dHA6Ly93d3cudzMub3JnLzIwMDEvWE1MU2NoZW1hIiB4bWxucz0iQW5ldEFwaS94bWwvdjEvc2NoZW1hL0FuZXRBcGlTY2hlbWEueHNkIj48bWVzc2FnZXM+PHJlc3VsdENvZGU+T2s8L3Jlc3VsdENvZGU+PG1lc3NhZ2U+PGNvZGU+STAwMDAxPC9jb2RlPjx0ZXh0PlN1Y2Nlc3NmdWwuPC90ZXh0PjwvbWVzc2FnZT48L21lc3NhZ2VzPjx0cmFuc2FjdGlvblJlc3BvbnNlPjxyZXNwb25zZUNvZGU+MTwvcmVzcG9uc2VDb2RlPjxhdXRoQ29kZT41UjRHVU48L2F1dGhDb2RlPjxhdnNSZXN1bHRDb2RlPlk8L2F2c1Jlc3VsdENvZGU+PGN2dlJlc3VsdENvZGU+UDwvY3Z2UmVzdWx0Q29kZT48Y2F2dlJlc3VsdENvZGU+MjwvY2F2dlJlc3VsdENvZGU+PHRyYW5zSWQ+NjAxMDQ0MzU5NTA8L3RyYW5zSWQ+PHJlZlRyYW5zSUQgLz48dHJhbnNIYXNoPjJERjA5Q0IwMUVGRTQ0MDc2RDgzOTRDNDIyQkU3MEI5PC90cmFuc0hhc2g+PHRlc3RSZXF1ZXN0PjA8L3Rlc3RSZXF1ZXN0PjxhY2NvdW50TnVtYmVyPlhYWFgxMTExPC9hY2NvdW50TnVtYmVyPjxhY2NvdW50VHlwZT5WaXNhPC9hY2NvdW50VHlwZT48bWVzc2FnZXM+PG1lc3NhZ2U+PGNvZGU+MTwvY29kZT48ZGVzY3JpcHRpb24+VGhpcyB0cmFuc2FjdGlvbiBoYXMgYmVlbiBhcHByb3ZlZC48L2Rlc2NyaXB0aW9uPjwvbWVzc2FnZT48L21lc3NhZ2VzPjx0cmFuc0hhc2hTaGEyPjAzODE1RDYyRjczMjNENDE2RjU5RkY5OUQ4NEYwNEQ0NzdBRTQwMzhEQjA0RTFDNjcwNjM1RjgyNEZENzhFMUE5QTE0ODcyRUI1NEVDRDkwMjVFNEQ3ODNFMUVGMkIzNzgyNzgzNkVGMzAxOTgxQjc2MzdFNTU2QUZBRkQwQTE4PC90cmFuc0hhc2hTaGEyPjwvdHJhbnNhY3Rpb25SZXNwb25zZT48L2NyZWF0ZVRyYW5zYWN0aW9uUmVzcG9uc2U+
+    http_version: 
+  recorded_at: Mon, 11 Jun 2018 21:05:04 GMT
+recorded_with: VCR 4.0.0

@@ -23,7 +23,7 @@ module Accounting
 
     before_validation :format_data
 
-    validates :address, presence: true, if: :card?
+    validates :address, presence: true, if: :card?, on: :create
 
     validates :account_type, inclusion: { in: Accounting::Payment.account_types.keys }, if: :ach?
 
@@ -46,6 +46,7 @@ module Accounting
 
     def details
       @details ||= Accounting.api(:cim, api_options(profile.accountable)).get_payment_profile(payment_profile_id, profile.profile_id)
+
       if @details && @details.success?
         @details.payment_profile
       else
