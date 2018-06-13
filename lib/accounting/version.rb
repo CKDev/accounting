@@ -1,3 +1,3 @@
 module Accounting
-  VERSION = '0.1.5.4'.freeze
+  VERSION = '0.1.5.5'.freeze
 end
