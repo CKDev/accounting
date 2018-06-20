@@ -6,29 +6,34 @@ RSpec.describe Accounting::HooksController, type: :controller do
   let(:invalid_header)  { { 'X-ANET-Signature' => 'sha512=2883C17E8BF62AD36C1F34C9C11FFAC38DCB7DB5661AE900F4C7549436F1797F90FDA81EF92DD0C5D967ECE2D60ACA9C55454D561F486B5E33EB7EF5766BEEA6' } }
   let(:error_header)    { { 'X-ANET-Signature' => 'sha512=5F81D8B8B6250EA6D6E3FBF4E30902708C2F5BE38FF9FB511F0350DC4F49F201BDA414B3FB718FF2372C9DF8A32C998A8E131148599237C1DECD370F1231B0F4' } }
 
-  let(:valid_payload)   { '{"notificationId":"d9819ad2-f656-49ce-b890-1213233648b4","eventType":"net.authorize.customer.paymentProfile.created","eventDate":"2017-09-21T20:45:10.8088504Z","webhookId":"82ed4771-17bb-4fc6-8ea4-f0cad81d3414","payload":{"customerProfileId":1502475189,"entityName":"customerPaymentProfile","id":"1501999515"}}' }
-  let(:invalid_payload) { '{"notificationId":"d9819ad2-f656-49ce-b890-1213233648b4","eventType":"net.authorize.customer.paymentProfile.created","eventDate":"2017-09-21T20:45:10.8088504Z","webhookId":"82ed4771-17bb-4fc6-8ea4-f0cad81d3414","payload":{"customerProfileId":1111111111,"entityName":"customerPaymentProfile","id":"AAAAAAAAAA"}}' }
-
   before(:all) { ActiveJob::Base.queue_adapter = :test }
 
   before(:each) do
     request.headers.merge! valid_header
-    Accounting::Profile.create!(authnet_email: 'test1@test.org', profile_id: 1502475189)
-    Accounting::Profile.create!(authnet_email: 'test2@test.org', profile_id: 1111111111)
+    @profile = FactoryGirl.create(:accounting_profile)
+    @paymentProfile = FactoryGirl.create(:accounting_payment, :with_ach, profile: @profile)
+
+    @valid_payload = "{\"notificationId\":\"d9819ad2-f656-49ce-b890-1213233648b4\",
+                       \"eventType\":\"net.authorize.customer.paymentProfile.created\",
+                       \"eventDate\":\"2017-09-21T20:45:10.8088504Z\",
+                       \"webhookId\":\"82ed4771-17bb-4fc6-8ea4-f0cad81d3414\",
+                       \"payload\":{\"customerProfileId\":#{@profile.profile_id},
+                       \"entityName\":\"customerPaymentProfile\",
+                       \"id\":#{@paymentProfile.id}}}"
   end
 
   it 'should enqueue a hook job on create' do
-    expect { post :create, params: JSON.parse(valid_payload) }.to have_enqueued_job(Accounting::HookJob)
+    expect { post :create, params: JSON.parse(@valid_payload) }.to have_enqueued_job(Accounting::HookJob)
     expect(response).to have_http_status(:ok)
   end
 
   it 'should enqueue a hook job on update' do
-    expect { post :update, params: JSON.parse(valid_payload) }.to have_enqueued_job(Accounting::HookJob)
+    expect { post :update, params: JSON.parse(@valid_payload) }.to have_enqueued_job(Accounting::HookJob)
     expect(response).to have_http_status(:ok)
   end
 
   it 'should enqueue a hook job on destroy' do
-    expect { post :destroy, params: JSON.parse(valid_payload) }.to have_enqueued_job(Accounting::HookJob)
+    expect { post :destroy, params: JSON.parse(@valid_payload) }.to have_enqueued_job(Accounting::HookJob)
     expect(response).to have_http_status(:ok)
   end
 

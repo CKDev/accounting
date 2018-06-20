@@ -9,13 +9,13 @@ http_interactions:
         <?xml version="1.0" encoding="utf-8"?>
         <createCustomerProfileRequest xmlns="AnetApi/xml/v1/schema/AnetApiSchema.xsd">
           <merchantAuthentication>
-            <name>8U46Pew5dfF</name>
-            <transactionKey>7q7L43ED4x5Gr4j5</transactionKey>
+            <name>7b4Ju4Pu</name>
+            <transactionKey>898zCaw9DX83m932</transactionKey>
           </merchantAuthentication>
           <profile>
-            <merchantCustomerId>44c4d7c4-c4eb-443e-a</merchantCustomerId>
-            <description>Nesciunt culpa et dolorum harum porro.</description>
-            <email>galen_okuneva@abernathy.co.uk</email>
+            <merchantCustomerId>9fe018eb-8303-4edc-8</merchantCustomerId>
+            <description>Reprehenderit quia aut eos asperiores.</description>
+            <email>bethel_hermann@bernhard.name</email>
           </profile>
           <validationMode>none</validationMode>
         </createCustomerProfileRequest>
@@ -50,15 +50,15 @@ http_interactions:
       Content-Length:
       - '507'
       Date:
-      - Mon, 11 Jun 2018 17:56:27 GMT
+      - Wed, 20 Jun 2018 19:03:49 GMT
       Connection:
       - keep-alive
     body:
       encoding: ASCII-8BIT
       string: !binary |-
-        77u/PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48Y3JlYXRlQ3VzdG9tZXJQcm9maWxlUmVzcG9uc2UgeG1sbnM6eHNpPSJodHRwOi8vd3d3LnczLm9yZy8yMDAxL1hNTFNjaGVtYS1pbnN0YW5jZSIgeG1sbnM6eHNkPSJodHRwOi8vd3d3LnczLm9yZy8yMDAxL1hNTFNjaGVtYSIgeG1sbnM9IkFuZXRBcGkveG1sL3YxL3NjaGVtYS9BbmV0QXBpU2NoZW1hLnhzZCI+PG1lc3NhZ2VzPjxyZXN1bHRDb2RlPk9rPC9yZXN1bHRDb2RlPjxtZXNzYWdlPjxjb2RlPkkwMDAwMTwvY29kZT48dGV4dD5TdWNjZXNzZnVsLjwvdGV4dD48L21lc3NhZ2U+PC9tZXNzYWdlcz48Y3VzdG9tZXJQcm9maWxlSWQ+MTUwNDY3MzAzNTwvY3VzdG9tZXJQcm9maWxlSWQ+PGN1c3RvbWVyUGF5bWVudFByb2ZpbGVJZExpc3QgLz48Y3VzdG9tZXJTaGlwcGluZ0FkZHJlc3NJZExpc3QgLz48dmFsaWRhdGlvbkRpcmVjdFJlc3BvbnNlTGlzdCAvPjwvY3JlYXRlQ3VzdG9tZXJQcm9maWxlUmVzcG9uc2U+
+        77u/PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48Y3JlYXRlQ3VzdG9tZXJQcm9maWxlUmVzcG9uc2UgeG1sbnM6eHNpPSJodHRwOi8vd3d3LnczLm9yZy8yMDAxL1hNTFNjaGVtYS1pbnN0YW5jZSIgeG1sbnM6eHNkPSJodHRwOi8vd3d3LnczLm9yZy8yMDAxL1hNTFNjaGVtYSIgeG1sbnM9IkFuZXRBcGkveG1sL3YxL3NjaGVtYS9BbmV0QXBpU2NoZW1hLnhzZCI+PG1lc3NhZ2VzPjxyZXN1bHRDb2RlPk9rPC9yZXN1bHRDb2RlPjxtZXNzYWdlPjxjb2RlPkkwMDAwMTwvY29kZT48dGV4dD5TdWNjZXNzZnVsLjwvdGV4dD48L21lc3NhZ2U+PC9tZXNzYWdlcz48Y3VzdG9tZXJQcm9maWxlSWQ+MTkxNDM0NTIxNTwvY3VzdG9tZXJQcm9maWxlSWQ+PGN1c3RvbWVyUGF5bWVudFByb2ZpbGVJZExpc3QgLz48Y3VzdG9tZXJTaGlwcGluZ0FkZHJlc3NJZExpc3QgLz48dmFsaWRhdGlvbkRpcmVjdFJlc3BvbnNlTGlzdCAvPjwvY3JlYXRlQ3VzdG9tZXJQcm9maWxlUmVzcG9uc2U+
     http_version: 
-  recorded_at: Mon, 11 Jun 2018 17:56:27 GMT
+  recorded_at: Wed, 20 Jun 2018 19:03:49 GMT
 - request:
     method: post
     uri: https://apitest.authorize.net/xml/v1/request.api
@@ -68,13 +68,244 @@ http_interactions:
         <?xml version="1.0" encoding="utf-8"?>
         <createCustomerProfileRequest xmlns="AnetApi/xml/v1/schema/AnetApiSchema.xsd">
           <merchantAuthentication>
-            <name>8U46Pew5dfF</name>
-            <transactionKey>7q7L43ED4x5Gr4j5</transactionKey>
+            <name>7b4Ju4Pu</name>
+            <transactionKey>898zCaw9DX83m932</transactionKey>
           </merchantAuthentication>
           <profile>
-            <merchantCustomerId>44c4d7c4-c4eb-443e-a</merchantCustomerId>
-            <description>Nesciunt culpa et dolorum harum porro.</description>
-            <email>galen_okuneva@abernathy.co.uk</email>
+            <merchantCustomerId>3b89693a-f9cd-4a3e-8</merchantCustomerId>
+            <description>Reprehenderit quia aut eos asperiores.</description>
+            <email>bethel_hermann@bernhard.name</email>
+          </profile>
+          <validationMode>none</validationMode>
+        </createCustomerProfileRequest>
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Content-Type:
+      - text/xml
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - private
+      Content-Type:
+      - application/xml; charset=utf-8
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - x-requested-with,cache-control,content-type,origin,method,SOAPAction
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - PUT,OPTIONS,POST,GET
+      X-Cnection:
+      - close
+      Content-Length:
+      - '507'
+      Date:
+      - Wed, 20 Jun 2018 19:03:50 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        77u/PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48Y3JlYXRlQ3VzdG9tZXJQcm9maWxlUmVzcG9uc2UgeG1sbnM6eHNpPSJodHRwOi8vd3d3LnczLm9yZy8yMDAxL1hNTFNjaGVtYS1pbnN0YW5jZSIgeG1sbnM6eHNkPSJodHRwOi8vd3d3LnczLm9yZy8yMDAxL1hNTFNjaGVtYSIgeG1sbnM9IkFuZXRBcGkveG1sL3YxL3NjaGVtYS9BbmV0QXBpU2NoZW1hLnhzZCI+PG1lc3NhZ2VzPjxyZXN1bHRDb2RlPk9rPC9yZXN1bHRDb2RlPjxtZXNzYWdlPjxjb2RlPkkwMDAwMTwvY29kZT48dGV4dD5TdWNjZXNzZnVsLjwvdGV4dD48L21lc3NhZ2U+PC9tZXNzYWdlcz48Y3VzdG9tZXJQcm9maWxlSWQ+MTkxNDM0NTIxNzwvY3VzdG9tZXJQcm9maWxlSWQ+PGN1c3RvbWVyUGF5bWVudFByb2ZpbGVJZExpc3QgLz48Y3VzdG9tZXJTaGlwcGluZ0FkZHJlc3NJZExpc3QgLz48dmFsaWRhdGlvbkRpcmVjdFJlc3BvbnNlTGlzdCAvPjwvY3JlYXRlQ3VzdG9tZXJQcm9maWxlUmVzcG9uc2U+
+    http_version: 
+  recorded_at: Wed, 20 Jun 2018 19:03:50 GMT
+- request:
+    method: post
+    uri: https://apitest.authorize.net/xml/v1/request.api
+    body:
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0" encoding="utf-8"?>
+        <getCustomerProfileRequest xmlns="AnetApi/xml/v1/schema/AnetApiSchema.xsd">
+          <merchantAuthentication>
+            <name>7b4Ju4Pu</name>
+            <transactionKey>898zCaw9DX83m932</transactionKey>
+          </merchantAuthentication>
+          <customerProfileId>1914345217</customerProfileId>
+        </getCustomerProfileRequest>
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Content-Type:
+      - text/xml
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - private
+      Content-Type:
+      - application/xml; charset=utf-8
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - x-requested-with,cache-control,content-type,origin,method,SOAPAction
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - PUT,OPTIONS,POST,GET
+      X-Cnection:
+      - close
+      Content-Length:
+      - '626'
+      Date:
+      - Wed, 20 Jun 2018 19:03:50 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        77u/PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48Z2V0Q3VzdG9tZXJQcm9maWxlUmVzcG9uc2UgeG1sbnM6eHNpPSJodHRwOi8vd3d3LnczLm9yZy8yMDAxL1hNTFNjaGVtYS1pbnN0YW5jZSIgeG1sbnM6eHNkPSJodHRwOi8vd3d3LnczLm9yZy8yMDAxL1hNTFNjaGVtYSIgeG1sbnM9IkFuZXRBcGkveG1sL3YxL3NjaGVtYS9BbmV0QXBpU2NoZW1hLnhzZCI+PG1lc3NhZ2VzPjxyZXN1bHRDb2RlPk9rPC9yZXN1bHRDb2RlPjxtZXNzYWdlPjxjb2RlPkkwMDAwMTwvY29kZT48dGV4dD5TdWNjZXNzZnVsLjwvdGV4dD48L21lc3NhZ2U+PC9tZXNzYWdlcz48cHJvZmlsZT48bWVyY2hhbnRDdXN0b21lcklkPjNiODk2OTNhLWY5Y2QtNGEzZS04PC9tZXJjaGFudEN1c3RvbWVySWQ+PGRlc2NyaXB0aW9uPlJlcHJlaGVuZGVyaXQgcXVpYSBhdXQgZW9zIGFzcGVyaW9yZXMuPC9kZXNjcmlwdGlvbj48ZW1haWw+YmV0aGVsX2hlcm1hbm5AYmVybmhhcmQubmFtZTwvZW1haWw+PGN1c3RvbWVyUHJvZmlsZUlkPjE5MTQzNDUyMTc8L2N1c3RvbWVyUHJvZmlsZUlkPjxwcm9maWxlVHlwZT5yZWd1bGFyPC9wcm9maWxlVHlwZT48L3Byb2ZpbGU+PC9nZXRDdXN0b21lclByb2ZpbGVSZXNwb25zZT4=
+    http_version: 
+  recorded_at: Wed, 20 Jun 2018 19:03:51 GMT
+- request:
+    method: post
+    uri: https://apitest.authorize.net/xml/v1/request.api
+    body:
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0" encoding="utf-8"?>
+        <createCustomerProfileRequest xmlns="AnetApi/xml/v1/schema/AnetApiSchema.xsd">
+          <merchantAuthentication>
+            <name>7b4Ju4Pu</name>
+            <transactionKey>898zCaw9DX83m932</transactionKey>
+          </merchantAuthentication>
+          <profile>
+            <merchantCustomerId>f42dd2f2-8dff-49df-9</merchantCustomerId>
+            <description>Reprehenderit quia aut eos asperiores.</description>
+            <email>bethel_hermann@bernhard.name</email>
+          </profile>
+          <validationMode>none</validationMode>
+        </createCustomerProfileRequest>
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Content-Type:
+      - text/xml
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - private
+      Content-Type:
+      - application/xml; charset=utf-8
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - x-requested-with,cache-control,content-type,origin,method,SOAPAction
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - PUT,OPTIONS,POST,GET
+      X-Cnection:
+      - close
+      Content-Length:
+      - '507'
+      Date:
+      - Wed, 20 Jun 2018 19:03:51 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        77u/PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48Y3JlYXRlQ3VzdG9tZXJQcm9maWxlUmVzcG9uc2UgeG1sbnM6eHNpPSJodHRwOi8vd3d3LnczLm9yZy8yMDAxL1hNTFNjaGVtYS1pbnN0YW5jZSIgeG1sbnM6eHNkPSJodHRwOi8vd3d3LnczLm9yZy8yMDAxL1hNTFNjaGVtYSIgeG1sbnM9IkFuZXRBcGkveG1sL3YxL3NjaGVtYS9BbmV0QXBpU2NoZW1hLnhzZCI+PG1lc3NhZ2VzPjxyZXN1bHRDb2RlPk9rPC9yZXN1bHRDb2RlPjxtZXNzYWdlPjxjb2RlPkkwMDAwMTwvY29kZT48dGV4dD5TdWNjZXNzZnVsLjwvdGV4dD48L21lc3NhZ2U+PC9tZXNzYWdlcz48Y3VzdG9tZXJQcm9maWxlSWQ+MTkxNDM0NTIyMDwvY3VzdG9tZXJQcm9maWxlSWQ+PGN1c3RvbWVyUGF5bWVudFByb2ZpbGVJZExpc3QgLz48Y3VzdG9tZXJTaGlwcGluZ0FkZHJlc3NJZExpc3QgLz48dmFsaWRhdGlvbkRpcmVjdFJlc3BvbnNlTGlzdCAvPjwvY3JlYXRlQ3VzdG9tZXJQcm9maWxlUmVzcG9uc2U+
+    http_version: 
+  recorded_at: Wed, 20 Jun 2018 19:03:51 GMT
+- request:
+    method: post
+    uri: https://apitest.authorize.net/xml/v1/request.api
+    body:
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0" encoding="utf-8"?>
+        <createCustomerProfileRequest xmlns="AnetApi/xml/v1/schema/AnetApiSchema.xsd">
+          <merchantAuthentication>
+            <name>7b4Ju4Pu</name>
+            <transactionKey>898zCaw9DX83m932</transactionKey>
+          </merchantAuthentication>
+          <profile>
+            <merchantCustomerId>3ec8733f-2f2b-42cf-b</merchantCustomerId>
+            <description>Eligendi ut qui ut.</description>
+            <email>winford.monahan@yostmayert.name</email>
+          </profile>
+          <validationMode>none</validationMode>
+        </createCustomerProfileRequest>
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Content-Type:
+      - text/xml
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - private
+      Content-Type:
+      - application/xml; charset=utf-8
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - x-requested-with,cache-control,content-type,origin,method,SOAPAction
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - PUT,OPTIONS,POST,GET
+      X-Cnection:
+      - close
+      Content-Length:
+      - '507'
+      Date:
+      - Wed, 20 Jun 2018 19:53:05 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        77u/PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48Y3JlYXRlQ3VzdG9tZXJQcm9maWxlUmVzcG9uc2UgeG1sbnM6eHNpPSJodHRwOi8vd3d3LnczLm9yZy8yMDAxL1hNTFNjaGVtYS1pbnN0YW5jZSIgeG1sbnM6eHNkPSJodHRwOi8vd3d3LnczLm9yZy8yMDAxL1hNTFNjaGVtYSIgeG1sbnM9IkFuZXRBcGkveG1sL3YxL3NjaGVtYS9BbmV0QXBpU2NoZW1hLnhzZCI+PG1lc3NhZ2VzPjxyZXN1bHRDb2RlPk9rPC9yZXN1bHRDb2RlPjxtZXNzYWdlPjxjb2RlPkkwMDAwMTwvY29kZT48dGV4dD5TdWNjZXNzZnVsLjwvdGV4dD48L21lc3NhZ2U+PC9tZXNzYWdlcz48Y3VzdG9tZXJQcm9maWxlSWQ+MTkxNDM0NTk3NTwvY3VzdG9tZXJQcm9maWxlSWQ+PGN1c3RvbWVyUGF5bWVudFByb2ZpbGVJZExpc3QgLz48Y3VzdG9tZXJTaGlwcGluZ0FkZHJlc3NJZExpc3QgLz48dmFsaWRhdGlvbkRpcmVjdFJlc3BvbnNlTGlzdCAvPjwvY3JlYXRlQ3VzdG9tZXJQcm9maWxlUmVzcG9uc2U+
+    http_version: 
+  recorded_at: Wed, 20 Jun 2018 19:53:05 GMT
+- request:
+    method: post
+    uri: https://apitest.authorize.net/xml/v1/request.api
+    body:
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0" encoding="utf-8"?>
+        <createCustomerProfileRequest xmlns="AnetApi/xml/v1/schema/AnetApiSchema.xsd">
+          <merchantAuthentication>
+            <name>7b4Ju4Pu</name>
+            <transactionKey>898zCaw9DX83m932</transactionKey>
+          </merchantAuthentication>
+          <profile>
+            <merchantCustomerId>3ec8733f-2f2b-42cf-b</merchantCustomerId>
+            <description>Eligendi ut qui ut.</description>
+            <email>winford.monahan@yostmayert.name</email>
           </profile>
           <validationMode>none</validationMode>
         </createCustomerProfileRequest>
@@ -109,15 +340,15 @@ http_interactions:
       Content-Length:
       - '503'
       Date:
-      - Mon, 11 Jun 2018 17:56:27 GMT
+      - Wed, 20 Jun 2018 19:53:05 GMT
       Connection:
       - keep-alive
     body:
       encoding: ASCII-8BIT
       string: !binary |-
-        77u/PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48Y3JlYXRlQ3VzdG9tZXJQcm9maWxlUmVzcG9uc2UgeG1sbnM6eHNpPSJodHRwOi8vd3d3LnczLm9yZy8yMDAxL1hNTFNjaGVtYS1pbnN0YW5jZSIgeG1sbnM6eHNkPSJodHRwOi8vd3d3LnczLm9yZy8yMDAxL1hNTFNjaGVtYSIgeG1sbnM9IkFuZXRBcGkveG1sL3YxL3NjaGVtYS9BbmV0QXBpU2NoZW1hLnhzZCI+PG1lc3NhZ2VzPjxyZXN1bHRDb2RlPkVycm9yPC9yZXN1bHRDb2RlPjxtZXNzYWdlPjxjb2RlPkUwMDAzOTwvY29kZT48dGV4dD5BIGR1cGxpY2F0ZSByZWNvcmQgd2l0aCBJRCAxNTA0NjczMDM1IGFscmVhZHkgZXhpc3RzLjwvdGV4dD48L21lc3NhZ2U+PC9tZXNzYWdlcz48Y3VzdG9tZXJQYXltZW50UHJvZmlsZUlkTGlzdCAvPjxjdXN0b21lclNoaXBwaW5nQWRkcmVzc0lkTGlzdCAvPjx2YWxpZGF0aW9uRGlyZWN0UmVzcG9uc2VMaXN0IC8+PC9jcmVhdGVDdXN0b21lclByb2ZpbGVSZXNwb25zZT4=
+        77u/PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48Y3JlYXRlQ3VzdG9tZXJQcm9maWxlUmVzcG9uc2UgeG1sbnM6eHNpPSJodHRwOi8vd3d3LnczLm9yZy8yMDAxL1hNTFNjaGVtYS1pbnN0YW5jZSIgeG1sbnM6eHNkPSJodHRwOi8vd3d3LnczLm9yZy8yMDAxL1hNTFNjaGVtYSIgeG1sbnM9IkFuZXRBcGkveG1sL3YxL3NjaGVtYS9BbmV0QXBpU2NoZW1hLnhzZCI+PG1lc3NhZ2VzPjxyZXN1bHRDb2RlPkVycm9yPC9yZXN1bHRDb2RlPjxtZXNzYWdlPjxjb2RlPkUwMDAzOTwvY29kZT48dGV4dD5BIGR1cGxpY2F0ZSByZWNvcmQgd2l0aCBJRCAxOTE0MzQ1OTc1IGFscmVhZHkgZXhpc3RzLjwvdGV4dD48L21lc3NhZ2U+PC9tZXNzYWdlcz48Y3VzdG9tZXJQYXltZW50UHJvZmlsZUlkTGlzdCAvPjxjdXN0b21lclNoaXBwaW5nQWRkcmVzc0lkTGlzdCAvPjx2YWxpZGF0aW9uRGlyZWN0UmVzcG9uc2VMaXN0IC8+PC9jcmVhdGVDdXN0b21lclByb2ZpbGVSZXNwb25zZT4=
     http_version: 
-  recorded_at: Mon, 11 Jun 2018 17:56:27 GMT
+  recorded_at: Wed, 20 Jun 2018 19:53:05 GMT
 - request:
     method: post
     uri: https://apitest.authorize.net/xml/v1/request.api
@@ -127,10 +358,10 @@ http_interactions:
         <?xml version="1.0" encoding="utf-8"?>
         <getCustomerProfileRequest xmlns="AnetApi/xml/v1/schema/AnetApiSchema.xsd">
           <merchantAuthentication>
-            <name>8U46Pew5dfF</name>
-            <transactionKey>7q7L43ED4x5Gr4j5</transactionKey>
+            <name>7b4Ju4Pu</name>
+            <transactionKey>898zCaw9DX83m932</transactionKey>
           </merchantAuthentication>
-          <customerProfileId>1504673035</customerProfileId>
+          <customerProfileId>1914345975</customerProfileId>
         </getCustomerProfileRequest>
     headers:
       Accept-Encoding:
@@ -161,251 +392,15 @@ http_interactions:
       X-Cnection:
       - close
       Content-Length:
-      - '627'
+      - '610'
       Date:
-      - Mon, 11 Jun 2018 17:56:27 GMT
+      - Wed, 20 Jun 2018 19:53:05 GMT
       Connection:
       - keep-alive
     body:
       encoding: ASCII-8BIT
       string: !binary |-
-        77u/PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48Z2V0Q3VzdG9tZXJQcm9maWxlUmVzcG9uc2UgeG1sbnM6eHNpPSJodHRwOi8vd3d3LnczLm9yZy8yMDAxL1hNTFNjaGVtYS1pbnN0YW5jZSIgeG1sbnM6eHNkPSJodHRwOi8vd3d3LnczLm9yZy8yMDAxL1hNTFNjaGVtYSIgeG1sbnM9IkFuZXRBcGkveG1sL3YxL3NjaGVtYS9BbmV0QXBpU2NoZW1hLnhzZCI+PG1lc3NhZ2VzPjxyZXN1bHRDb2RlPk9rPC9yZXN1bHRDb2RlPjxtZXNzYWdlPjxjb2RlPkkwMDAwMTwvY29kZT48dGV4dD5TdWNjZXNzZnVsLjwvdGV4dD48L21lc3NhZ2U+PC9tZXNzYWdlcz48cHJvZmlsZT48bWVyY2hhbnRDdXN0b21lcklkPjQ0YzRkN2M0LWM0ZWItNDQzZS1hPC9tZXJjaGFudEN1c3RvbWVySWQ+PGRlc2NyaXB0aW9uPk5lc2NpdW50IGN1bHBhIGV0IGRvbG9ydW0gaGFydW0gcG9ycm8uPC9kZXNjcmlwdGlvbj48ZW1haWw+Z2FsZW5fb2t1bmV2YUBhYmVybmF0aHkuY28udWs8L2VtYWlsPjxjdXN0b21lclByb2ZpbGVJZD4xNTA0NjczMDM1PC9jdXN0b21lclByb2ZpbGVJZD48cHJvZmlsZVR5cGU+cmVndWxhcjwvcHJvZmlsZVR5cGU+PC9wcm9maWxlPjwvZ2V0Q3VzdG9tZXJQcm9maWxlUmVzcG9uc2U+
+        77u/PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48Z2V0Q3VzdG9tZXJQcm9maWxlUmVzcG9uc2UgeG1sbnM6eHNpPSJodHRwOi8vd3d3LnczLm9yZy8yMDAxL1hNTFNjaGVtYS1pbnN0YW5jZSIgeG1sbnM6eHNkPSJodHRwOi8vd3d3LnczLm9yZy8yMDAxL1hNTFNjaGVtYSIgeG1sbnM9IkFuZXRBcGkveG1sL3YxL3NjaGVtYS9BbmV0QXBpU2NoZW1hLnhzZCI+PG1lc3NhZ2VzPjxyZXN1bHRDb2RlPk9rPC9yZXN1bHRDb2RlPjxtZXNzYWdlPjxjb2RlPkkwMDAwMTwvY29kZT48dGV4dD5TdWNjZXNzZnVsLjwvdGV4dD48L21lc3NhZ2U+PC9tZXNzYWdlcz48cHJvZmlsZT48bWVyY2hhbnRDdXN0b21lcklkPjNlYzg3MzNmLTJmMmItNDJjZi1iPC9tZXJjaGFudEN1c3RvbWVySWQ+PGRlc2NyaXB0aW9uPkVsaWdlbmRpIHV0IHF1aSB1dC48L2Rlc2NyaXB0aW9uPjxlbWFpbD53aW5mb3JkLm1vbmFoYW5AeW9zdG1heWVydC5uYW1lPC9lbWFpbD48Y3VzdG9tZXJQcm9maWxlSWQ+MTkxNDM0NTk3NTwvY3VzdG9tZXJQcm9maWxlSWQ+PHByb2ZpbGVUeXBlPnJlZ3VsYXI8L3Byb2ZpbGVUeXBlPjwvcHJvZmlsZT48L2dldEN1c3RvbWVyUHJvZmlsZVJlc3BvbnNlPg==
     http_version: 
-  recorded_at: Mon, 11 Jun 2018 17:56:27 GMT
-- request:
-    method: post
-    uri: https://apitest.authorize.net/xml/v1/request.api
-    body:
-      encoding: UTF-8
-      string: |
-        <?xml version="1.0" encoding="utf-8"?>
-        <createCustomerProfileRequest xmlns="AnetApi/xml/v1/schema/AnetApiSchema.xsd">
-          <merchantAuthentication>
-            <name>8U46Pew5dfF</name>
-            <transactionKey>7q7L43ED4x5Gr4j5</transactionKey>
-          </merchantAuthentication>
-          <profile>
-            <merchantCustomerId>f01fdaca-6e89-4ec5-a</merchantCustomerId>
-            <description>Nesciunt culpa et dolorum harum porro.</description>
-            <email>galen_okuneva@abernathy.co.uk</email>
-          </profile>
-          <validationMode>none</validationMode>
-        </createCustomerProfileRequest>
-    headers:
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
-      User-Agent:
-      - Ruby
-      Content-Type:
-      - text/xml
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Cache-Control:
-      - private
-      Content-Type:
-      - application/xml; charset=utf-8
-      Access-Control-Allow-Origin:
-      - "*"
-      Access-Control-Allow-Headers:
-      - x-requested-with,cache-control,content-type,origin,method,SOAPAction
-      Access-Control-Allow-Credentials:
-      - 'true'
-      Access-Control-Allow-Methods:
-      - PUT,OPTIONS,POST,GET
-      X-Cnection:
-      - close
-      Content-Length:
-      - '507'
-      Date:
-      - Mon, 11 Jun 2018 17:56:28 GMT
-      Connection:
-      - keep-alive
-    body:
-      encoding: ASCII-8BIT
-      string: !binary |-
-        77u/PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48Y3JlYXRlQ3VzdG9tZXJQcm9maWxlUmVzcG9uc2UgeG1sbnM6eHNpPSJodHRwOi8vd3d3LnczLm9yZy8yMDAxL1hNTFNjaGVtYS1pbnN0YW5jZSIgeG1sbnM6eHNkPSJodHRwOi8vd3d3LnczLm9yZy8yMDAxL1hNTFNjaGVtYSIgeG1sbnM9IkFuZXRBcGkveG1sL3YxL3NjaGVtYS9BbmV0QXBpU2NoZW1hLnhzZCI+PG1lc3NhZ2VzPjxyZXN1bHRDb2RlPk9rPC9yZXN1bHRDb2RlPjxtZXNzYWdlPjxjb2RlPkkwMDAwMTwvY29kZT48dGV4dD5TdWNjZXNzZnVsLjwvdGV4dD48L21lc3NhZ2U+PC9tZXNzYWdlcz48Y3VzdG9tZXJQcm9maWxlSWQ+MTUwNDY3MzAzNzwvY3VzdG9tZXJQcm9maWxlSWQ+PGN1c3RvbWVyUGF5bWVudFByb2ZpbGVJZExpc3QgLz48Y3VzdG9tZXJTaGlwcGluZ0FkZHJlc3NJZExpc3QgLz48dmFsaWRhdGlvbkRpcmVjdFJlc3BvbnNlTGlzdCAvPjwvY3JlYXRlQ3VzdG9tZXJQcm9maWxlUmVzcG9uc2U+
-    http_version: 
-  recorded_at: Mon, 11 Jun 2018 17:56:28 GMT
-- request:
-    method: post
-    uri: https://apitest.authorize.net/xml/v1/request.api
-    body:
-      encoding: UTF-8
-      string: |
-        <?xml version="1.0" encoding="utf-8"?>
-        <createCustomerProfileRequest xmlns="AnetApi/xml/v1/schema/AnetApiSchema.xsd">
-          <merchantAuthentication>
-            <name>8U46Pew5dfF</name>
-            <transactionKey>7q7L43ED4x5Gr4j5</transactionKey>
-          </merchantAuthentication>
-          <profile>
-            <merchantCustomerId>f12f2496-5ea5-45d3-8</merchantCustomerId>
-            <description>Nesciunt culpa et dolorum harum porro.</description>
-            <email>galen_okuneva@abernathy.co.uk</email>
-          </profile>
-          <validationMode>none</validationMode>
-        </createCustomerProfileRequest>
-    headers:
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
-      User-Agent:
-      - Ruby
-      Content-Type:
-      - text/xml
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Cache-Control:
-      - private
-      Content-Type:
-      - application/xml; charset=utf-8
-      Access-Control-Allow-Origin:
-      - "*"
-      Access-Control-Allow-Headers:
-      - x-requested-with,cache-control,content-type,origin,method,SOAPAction
-      Access-Control-Allow-Credentials:
-      - 'true'
-      Access-Control-Allow-Methods:
-      - PUT,OPTIONS,POST,GET
-      X-Cnection:
-      - close
-      Content-Length:
-      - '507'
-      Date:
-      - Mon, 11 Jun 2018 17:56:28 GMT
-      Connection:
-      - keep-alive
-    body:
-      encoding: ASCII-8BIT
-      string: !binary |-
-        77u/PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48Y3JlYXRlQ3VzdG9tZXJQcm9maWxlUmVzcG9uc2UgeG1sbnM6eHNpPSJodHRwOi8vd3d3LnczLm9yZy8yMDAxL1hNTFNjaGVtYS1pbnN0YW5jZSIgeG1sbnM6eHNkPSJodHRwOi8vd3d3LnczLm9yZy8yMDAxL1hNTFNjaGVtYSIgeG1sbnM9IkFuZXRBcGkveG1sL3YxL3NjaGVtYS9BbmV0QXBpU2NoZW1hLnhzZCI+PG1lc3NhZ2VzPjxyZXN1bHRDb2RlPk9rPC9yZXN1bHRDb2RlPjxtZXNzYWdlPjxjb2RlPkkwMDAwMTwvY29kZT48dGV4dD5TdWNjZXNzZnVsLjwvdGV4dD48L21lc3NhZ2U+PC9tZXNzYWdlcz48Y3VzdG9tZXJQcm9maWxlSWQ+MTUwNDY3MzAzODwvY3VzdG9tZXJQcm9maWxlSWQ+PGN1c3RvbWVyUGF5bWVudFByb2ZpbGVJZExpc3QgLz48Y3VzdG9tZXJTaGlwcGluZ0FkZHJlc3NJZExpc3QgLz48dmFsaWRhdGlvbkRpcmVjdFJlc3BvbnNlTGlzdCAvPjwvY3JlYXRlQ3VzdG9tZXJQcm9maWxlUmVzcG9uc2U+
-    http_version: 
-  recorded_at: Mon, 11 Jun 2018 17:56:28 GMT
-- request:
-    method: post
-    uri: https://apitest.authorize.net/xml/v1/request.api
-    body:
-      encoding: UTF-8
-      string: |
-        <?xml version="1.0" encoding="utf-8"?>
-        <createCustomerProfileRequest xmlns="AnetApi/xml/v1/schema/AnetApiSchema.xsd">
-          <merchantAuthentication>
-            <name>7b4Ju4Pu</name>
-            <transactionKey>898zCaw9DX83m932</transactionKey>
-          </merchantAuthentication>
-          <profile>
-            <merchantCustomerId>d45905bc-f603-41e0-9</merchantCustomerId>
-            <description>Molestias dicta incidunt cupiditate.</description>
-            <email>rose@rippin.us</email>
-          </profile>
-          <validationMode>none</validationMode>
-        </createCustomerProfileRequest>
-    headers:
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
-      User-Agent:
-      - Ruby
-      Content-Type:
-      - text/xml
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Cache-Control:
-      - private
-      Content-Type:
-      - application/xml; charset=utf-8
-      Access-Control-Allow-Origin:
-      - "*"
-      Access-Control-Allow-Headers:
-      - x-requested-with,cache-control,content-type,origin,method,SOAPAction
-      Access-Control-Allow-Credentials:
-      - 'true'
-      Access-Control-Allow-Methods:
-      - PUT,OPTIONS,POST,GET
-      X-Cnection:
-      - close
-      Content-Length:
-      - '507'
-      Date:
-      - Mon, 11 Jun 2018 21:36:50 GMT
-      Connection:
-      - keep-alive
-    body:
-      encoding: ASCII-8BIT
-      string: !binary |-
-        77u/PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48Y3JlYXRlQ3VzdG9tZXJQcm9maWxlUmVzcG9uc2UgeG1sbnM6eHNpPSJodHRwOi8vd3d3LnczLm9yZy8yMDAxL1hNTFNjaGVtYS1pbnN0YW5jZSIgeG1sbnM6eHNkPSJodHRwOi8vd3d3LnczLm9yZy8yMDAxL1hNTFNjaGVtYSIgeG1sbnM9IkFuZXRBcGkveG1sL3YxL3NjaGVtYS9BbmV0QXBpU2NoZW1hLnhzZCI+PG1lc3NhZ2VzPjxyZXN1bHRDb2RlPk9rPC9yZXN1bHRDb2RlPjxtZXNzYWdlPjxjb2RlPkkwMDAwMTwvY29kZT48dGV4dD5TdWNjZXNzZnVsLjwvdGV4dD48L21lc3NhZ2U+PC9tZXNzYWdlcz48Y3VzdG9tZXJQcm9maWxlSWQ+MTkxNDExNDI3OTwvY3VzdG9tZXJQcm9maWxlSWQ+PGN1c3RvbWVyUGF5bWVudFByb2ZpbGVJZExpc3QgLz48Y3VzdG9tZXJTaGlwcGluZ0FkZHJlc3NJZExpc3QgLz48dmFsaWRhdGlvbkRpcmVjdFJlc3BvbnNlTGlzdCAvPjwvY3JlYXRlQ3VzdG9tZXJQcm9maWxlUmVzcG9uc2U+
-    http_version: 
-  recorded_at: Mon, 11 Jun 2018 21:36:50 GMT
-- request:
-    method: post
-    uri: https://apitest.authorize.net/xml/v1/request.api
-    body:
-      encoding: UTF-8
-      string: |
-        <?xml version="1.0" encoding="utf-8"?>
-        <createCustomerProfileRequest xmlns="AnetApi/xml/v1/schema/AnetApiSchema.xsd">
-          <merchantAuthentication>
-            <name>7b4Ju4Pu</name>
-            <transactionKey>898zCaw9DX83m932</transactionKey>
-          </merchantAuthentication>
-          <profile>
-            <merchantCustomerId>93bfba03-1480-4acd-9</merchantCustomerId>
-            <description>Eaque esse necessitatibus.</description>
-            <email>janae.hand@heidenreichherzog.info</email>
-          </profile>
-          <validationMode>none</validationMode>
-        </createCustomerProfileRequest>
-    headers:
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
-      User-Agent:
-      - Ruby
-      Content-Type:
-      - text/xml
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Cache-Control:
-      - private
-      Content-Type:
-      - application/xml; charset=utf-8
-      Access-Control-Allow-Origin:
-      - "*"
-      Access-Control-Allow-Headers:
-      - x-requested-with,cache-control,content-type,origin,method,SOAPAction
-      Access-Control-Allow-Credentials:
-      - 'true'
-      Access-Control-Allow-Methods:
-      - PUT,OPTIONS,POST,GET
-      X-Cnection:
-      - close
-      Content-Length:
-      - '507'
-      Date:
-      - Mon, 11 Jun 2018 21:43:30 GMT
-      Connection:
-      - keep-alive
-    body:
-      encoding: ASCII-8BIT
-      string: !binary |-
-        77u/PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48Y3JlYXRlQ3VzdG9tZXJQcm9maWxlUmVzcG9uc2UgeG1sbnM6eHNpPSJodHRwOi8vd3d3LnczLm9yZy8yMDAxL1hNTFNjaGVtYS1pbnN0YW5jZSIgeG1sbnM6eHNkPSJodHRwOi8vd3d3LnczLm9yZy8yMDAxL1hNTFNjaGVtYSIgeG1sbnM9IkFuZXRBcGkveG1sL3YxL3NjaGVtYS9BbmV0QXBpU2NoZW1hLnhzZCI+PG1lc3NhZ2VzPjxyZXN1bHRDb2RlPk9rPC9yZXN1bHRDb2RlPjxtZXNzYWdlPjxjb2RlPkkwMDAwMTwvY29kZT48dGV4dD5TdWNjZXNzZnVsLjwvdGV4dD48L21lc3NhZ2U+PC9tZXNzYWdlcz48Y3VzdG9tZXJQcm9maWxlSWQ+MTkxNDExNDMyOTwvY3VzdG9tZXJQcm9maWxlSWQ+PGN1c3RvbWVyUGF5bWVudFByb2ZpbGVJZExpc3QgLz48Y3VzdG9tZXJTaGlwcGluZ0FkZHJlc3NJZExpc3QgLz48dmFsaWRhdGlvbkRpcmVjdFJlc3BvbnNlTGlzdCAvPjwvY3JlYXRlQ3VzdG9tZXJQcm9maWxlUmVzcG9uc2U+
-    http_version: 
-  recorded_at: Mon, 11 Jun 2018 21:43:30 GMT
+  recorded_at: Wed, 20 Jun 2018 19:53:06 GMT
 recorded_with: VCR 4.0.0

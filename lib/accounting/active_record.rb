@@ -123,6 +123,8 @@ module Accounting
 
         include Hooks
 
+        attr_accessor :existing_profile_id
+
         accountable_opts = ACCOUNTABLE_OPTIONS.merge(options.symbolize_keys).symbolize_keys
 
         has_one :profile, as: :accountable, dependent: :destroy, required: true, autosave: true, validate: true, class_name: '::Accounting::Profile'
@@ -144,7 +146,7 @@ module Accounting
 
         before_validation unless: Proc.new { |a| a.profile.present? } do
           # Does not work if the proc references models not yet saved
-          self.build_profile(accountable_options)
+          self.build_profile(accountable_options.merge(profile_id: self.existing_profile_id))
         end
       end
 
