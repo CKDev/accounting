@@ -55,6 +55,16 @@ RSpec.describe Accounting::Profile, type: :model do
     end
   end
 
+  it 'should update profile on authorize when profile record is updated' do
+    VCR.use_cassette :valid_profile, record: :new_episodes, re_record_interval: 7.days do
+      profile.save!
+    end
+
+    expect_any_instance_of(AuthorizeNet::CIM::Transaction).to receive(:update_profile)
+    profile.update(authnet_email: 'foo@bar.com')
+    profile.save
+  end
+
   context 'Payments' do
 
     let(:profile) do

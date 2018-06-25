@@ -23,6 +23,8 @@ module Accounting
 
     before_destroy :delete_profile
 
+    after_update :update_profile
+
     def details(pid=profile_id)
       return nil if pid.nil?
       @details ||= Accounting.api(:cim, api_options(accountable)).get_profile(pid)
@@ -82,6 +84,11 @@ module Accounting
           # Did not get a 200 OK response, add the error message whatever it might be
           self.errors.add(:base, response.raw.message)
         end
+      end
+
+      def update_profile
+        customer_profile = AuthorizeNet::CIM::CustomerProfile.new(profile_options.merge(customer_profile_id: profile_id))
+        Accounting.api(:cim, api_options(accountable)).update_profile(customer_profile)
       end
 
       def delete_profile
