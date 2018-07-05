@@ -17,8 +17,9 @@ module Accounting
       resource.assign_attributes(
         profile_type: type,
         last_four: last_four,
+        expiration: expiration,
         year: -1, # -1 tells the payment model not to validate the expiration date.
-        month: -1 # We do this because authorize.net does not provide expiration info, so we treat nil expiration as unknown
+        month: -1
       )
 
       # Assign payment specific attributes (all are pseudo attributes, but needed for validation purposes)
@@ -81,6 +82,15 @@ module Accounting
       end
     end
 
+    def expiration
+      case type
+        when :ach
+          nil
+        when :card
+          parse_expiration details.payment_method.expiration
+      end
+    end
+
     def profile
       if Accounting::Profile.exists?(profile_id: payload[:customer_profile_id])
         Accounting::Profile.find_by(profile_id: payload[:customer_profile_id])
@@ -96,6 +106,14 @@ module Accounting
         resource.details
       end
     end
+
+    private
+
+      def parse_expiration(date_str)
+        year = date_str.split('-')[0]
+        month = date_str.split('-')[1]
+        Date.new(year.to_i, month.to_i, -1)
+      end
 
   end
 end

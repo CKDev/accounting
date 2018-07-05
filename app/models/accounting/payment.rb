@@ -101,8 +101,7 @@ module Accounting
       end
 
       def expiration_date
-        # Allow an out for the edge case where Authorize.NET sends the hook to create a payment profile
-        # It does not send expiration dates, so we need to allow nil in this case and treat it as "Unknown"
+        # Year and month are -1 if the payment is being synched from an authorize webhook.
         return if year == -1 && month == -1
 
         self.errors.add(:base, 'Expiration date cannot be in the past') unless Time.new(year.to_i, month.to_i, Time.now.day, Time.now.hour, Time.now.min, 0) > Time.now
@@ -111,8 +110,11 @@ module Accounting
       end
 
       def format_data
+        # Year and month are -1 if the payment is being synched from an authorize webhook.
+        return if year == -1 && month == -1
+
         # Ensure the year is 4 digit representation
-        self.year = '20' + year.to_s[-2..-1].to_s unless year == -1
+        self.year = '20' + year.to_s[-2..-1].to_s
         self.expiration = Date.new(year.to_i, month.to_i, -1) rescue nil
       end
 

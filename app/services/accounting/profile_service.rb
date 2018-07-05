@@ -13,7 +13,7 @@ module Accounting
         authnet_description: details.description
       )
 
-      resource.save!
+      resource.save! if resource.changed?
 
       Array.wrap(payload[:payment_profiles]).each do |payment|
         service = Accounting::PaymentService.new({ id: payment[:id], customer_profile_id: payload[:id] })
