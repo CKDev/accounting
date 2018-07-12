@@ -4,6 +4,9 @@ module Accounting
     include AccountingHelper
 
     def sync!
+      # Ignore verification transactions
+      return if resource.order&.description == 'Test transaction for ValidateCustomerPaymentProfile.'
+
       # Ensure the transaction has the associated profile and payment associated
       resource.profile_id ||= profile.id
       resource.payment_id ||= payment.id
