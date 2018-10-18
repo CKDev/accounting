@@ -174,12 +174,8 @@ RSpec.configure do |config|
   config.before(:all) do
     begin
       creds = YAML.load_file(File.dirname(__FILE__) + '/credentials.yml')
-      Accounting.config.login = creds['login']
-      Accounting.config.key = creds['key']
-      Accounting.config.gateway = creds['gateway']
+      Accounting.config.signatures = [creds['signature']]
     rescue Errno::ENOENT => e
-      Accounting.config.login = 'TEST'
-      Accounting.config.key = 'TEST'
       warn 'WARNING: Running w/o valid AuthorizeNet sandbox credentials. Create spec/credentials.yml.'
     end
   end

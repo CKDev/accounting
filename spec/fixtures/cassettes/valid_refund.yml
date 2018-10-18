@@ -9,15 +9,15 @@ http_interactions:
         <?xml version="1.0" encoding="utf-8"?>
         <createCustomerProfileTransactionRequest xmlns="AnetApi/xml/v1/schema/AnetApiSchema.xsd">
           <merchantAuthentication>
-            <name>8U46Pew5dfF</name>
-            <transactionKey>3m26PD4kdzX4U358</transactionKey>
+            <name>7YaGa84h</name>
+            <transactionKey>4gP3XtM3Gs768xfb</transactionKey>
           </merchantAuthentication>
           <transaction>
             <profileTransRefund>
               <amount>1.0</amount>
-              <customerProfileId>1502503247</customerProfileId>
-              <customerPaymentProfileId>1502034309</customerPaymentProfileId>
-              <transId>40007348528</transId>
+              <customerProfileId>1915926208</customerProfileId>
+              <customerPaymentProfileId>1829278414</customerPaymentProfileId>
+              <transId>60110161192</transId>
             </profileTransRefund>
           </transaction>
         </createCustomerProfileTransactionRequest>
@@ -39,28 +39,26 @@ http_interactions:
       - private
       Content-Type:
       - application/xml; charset=utf-8
-      Server:
-      - Microsoft-IIS/7.5
       Access-Control-Allow-Origin:
       - "*"
-      Access-Control-Allow-Methods:
-      - PUT,OPTIONS,POST,GET
       Access-Control-Allow-Headers:
       - x-requested-with,cache-control,content-type,origin,method,SOAPAction
       Access-Control-Allow-Credentials:
       - 'true'
-      X-Powered-By:
-      - ASP.NET
+      Access-Control-Allow-Methods:
+      - PUT,OPTIONS,POST,GET
+      X-Cnection:
+      - close
       Content-Length:
-      - '843'
+      - '831'
       Date:
-      - Wed, 27 Sep 2017 16:20:37 GMT
+      - Thu, 18 Oct 2018 02:36:36 GMT
       Connection:
       - keep-alive
     body:
       encoding: ASCII-8BIT
       string: !binary |-
-        PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48Y3JlYXRlVHJhbnNhY3Rpb25SZXNwb25zZSB4bWxuczp4c2k9Imh0dHA6Ly93d3cudzMub3JnLzIwMDEvWE1MU2NoZW1hLWluc3RhbmNlIiB4bWxuczp4c2Q9Imh0dHA6Ly93d3cudzMub3JnLzIwMDEvWE1MU2NoZW1hIiB4bWxucz0iQW5ldEFwaS94bWwvdjEvc2NoZW1hL0FuZXRBcGlTY2hlbWEueHNkIj48cmVmSWQ+MTIzNDU2PC9yZWZJZD48bWVzc2FnZXM+PHJlc3VsdENvZGU+T2s8L3Jlc3VsdENvZGU+PG1lc3NhZ2U+PGNvZGU+STAwMDAxPC9jb2RlPjx0ZXh0PlN1Y2Nlc3NmdWwuPC90ZXh0PjwvbWVzc2FnZT48L21lc3NhZ2VzPjx0cmFuc2FjdGlvblJlc3BvbnNlPjxyZXNwb25zZUNvZGU+MTwvcmVzcG9uc2VDb2RlPjxhdXRoQ29kZSAvPjxhdnNSZXN1bHRDb2RlPlA8L2F2c1Jlc3VsdENvZGU+PGN2dlJlc3VsdENvZGUgLz48Y2F2dlJlc3VsdENvZGUgLz48dHJhbnNJZD4xMjM0NTY2Nzc4PC90cmFuc0lkPjxyZWZUcmFuc0lEPjExMjIzMzQ0NTU8L3JlZlRyYW5zSUQ+PHRyYW5zSGFzaD4zNjI4MDIxODFCN0QzOTQ3RTg2MkU0MkZEMEZEODIxOTwvdHJhbnNIYXNoPjx0ZXN0UmVxdWVzdD4wPC90ZXN0UmVxdWVzdD48YWNjb3VudE51bWJlcj5YWFhYMDAxNTwvYWNjb3VudE51bWJlcj48YWNjb3VudFR5cGU+TWFzdGVyQ2FyZDwvYWNjb3VudFR5cGU+PG1lc3NhZ2VzPjxtZXNzYWdlPjxjb2RlPjE8L2NvZGU+PGRlc2NyaXB0aW9uPlRoaXMgdHJhbnNhY3Rpb24gaGFzIGJlZW4gYXBwcm92ZWQuPC9kZXNjcmlwdGlvbj48L21lc3NhZ2U+PC9tZXNzYWdlcz48L3RyYW5zYWN0aW9uUmVzcG9uc2U+PC9jcmVhdGVUcmFuc2FjdGlvblJlc3BvbnNlPg==
+        77u/PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48Y3JlYXRlQ3VzdG9tZXJQcm9maWxlVHJhbnNhY3Rpb25SZXNwb25zZSB4bWxuczp4c2k9Imh0dHA6Ly93d3cudzMub3JnLzIwMDEvWE1MU2NoZW1hLWluc3RhbmNlIiB4bWxuczp4c2Q9Imh0dHA6Ly93d3cudzMub3JnLzIwMDEvWE1MU2NoZW1hIiB4bWxucz0iQW5ldEFwaS94bWwvdjEvc2NoZW1hL0FuZXRBcGlTY2hlbWEueHNkIj48bWVzc2FnZXM+PHJlc3VsdENvZGU+RXJyb3I8L3Jlc3VsdENvZGU+PG1lc3NhZ2U+PGNvZGU+RTAwMDI3PC9jb2RlPjx0ZXh0PlRoZSByZWZlcmVuY2VkIHRyYW5zYWN0aW9uIGRvZXMgbm90IG1lZXQgdGhlIGNyaXRlcmlhIGZvciBpc3N1aW5nIGEgY3JlZGl0LjwvdGV4dD48L21lc3NhZ2U+PC9tZXNzYWdlcz48ZGlyZWN0UmVzcG9uc2U+MywyLDU0LFRoZSByZWZlcmVuY2VkIHRyYW5zYWN0aW9uIGRvZXMgbm90IG1lZXQgdGhlIGNyaXRlcmlhIGZvciBpc3N1aW5nIGEgY3JlZGl0LiwsUCwwLCwsMS4wMCxDQyxjcmVkaXQsNTM5NGNjODgsRWxpY2lhLEFic2hpcmUsS2xlaW4gR3JvdXAsMDU1IEhpY2tsZSBSZXN0LE5ldyBBcHJpbGhhdmVuLElsbGlub2lzLDU0NjQ4LENPLDgzNC40ODkuNzE5NiB4NzczMSwxLTY1Ny00OTgtOTE4MSxtaWthZWxhLmtyaXNAYnJhZHRrZWhlbGxlci51cywsLCwsLCwsLCwsLCwsMEIxM0I3Q0QzNzk0QzE4Rjc5QzFBOThBM0UyMjczM0QsLCwsLCwsLCwsLCwsWFhYWDAwMTUsTWFzdGVyQ2FyZCwsLCwsLCwsLCwsLCwsLCwsPC9kaXJlY3RSZXNwb25zZT48L2NyZWF0ZUN1c3RvbWVyUHJvZmlsZVRyYW5zYWN0aW9uUmVzcG9uc2U+
     http_version: 
-  recorded_at: Wed, 27 Sep 2017 16:21:30 GMT
-recorded_with: VCR 3.0.3
+  recorded_at: Thu, 18 Oct 2018 02:36:36 GMT
+recorded_with: VCR 4.0.0

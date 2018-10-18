@@ -6,11 +6,6 @@ RSpec.describe User, type: :model do
   let(:profile) { FactoryGirl.create(:accounting_profile) }
   let(:profile_id) { profile.profile_id }
 
-  before do
-    profile.delete
-    accountable.existing_profile_id = profile.profile_id
-  end
-
   it 'should create a profile on save' do
     expect do
       accountable.save
@@ -18,6 +13,9 @@ RSpec.describe User, type: :model do
   end
 
   it 'should create profile with specified profile ID' do
+    profile.delete
+    accountable.existing_profile_id = profile.profile_id
+
     accountable.save
     expect(accountable.profile.profile_id).to eq(profile.profile_id)
   end

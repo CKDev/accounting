@@ -9,13 +9,13 @@ http_interactions:
         <?xml version="1.0" encoding="utf-8"?>
         <createCustomerProfileRequest xmlns="AnetApi/xml/v1/schema/AnetApiSchema.xsd">
           <merchantAuthentication>
-            <name>7b4Ju4Pu</name>
-            <transactionKey>898zCaw9DX83m932</transactionKey>
+            <name>7YaGa84h</name>
+            <transactionKey>4gP3XtM3Gs768xfb</transactionKey>
           </merchantAuthentication>
           <profile>
-            <merchantCustomerId>5fa0987b-d23a-4c3a-a</merchantCustomerId>
-            <description>Reprehenderit quia aut eos asperiores.</description>
-            <email>bethel_hermann@bernhard.name</email>
+            <merchantCustomerId>71e92cbe</merchantCustomerId>
+            <description>Test Description</description>
+            <email>carroll@stracke.co.uk</email>
           </profile>
           <validationMode>none</validationMode>
         </createCustomerProfileRequest>
@@ -50,15 +50,128 @@ http_interactions:
       Content-Length:
       - '507'
       Date:
-      - Wed, 20 Jun 2018 19:03:52 GMT
+      - Wed, 17 Oct 2018 21:25:24 GMT
       Connection:
       - keep-alive
     body:
       encoding: ASCII-8BIT
       string: !binary |-
-        77u/PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48Y3JlYXRlQ3VzdG9tZXJQcm9maWxlUmVzcG9uc2UgeG1sbnM6eHNpPSJodHRwOi8vd3d3LnczLm9yZy8yMDAxL1hNTFNjaGVtYS1pbnN0YW5jZSIgeG1sbnM6eHNkPSJodHRwOi8vd3d3LnczLm9yZy8yMDAxL1hNTFNjaGVtYSIgeG1sbnM9IkFuZXRBcGkveG1sL3YxL3NjaGVtYS9BbmV0QXBpU2NoZW1hLnhzZCI+PG1lc3NhZ2VzPjxyZXN1bHRDb2RlPk9rPC9yZXN1bHRDb2RlPjxtZXNzYWdlPjxjb2RlPkkwMDAwMTwvY29kZT48dGV4dD5TdWNjZXNzZnVsLjwvdGV4dD48L21lc3NhZ2U+PC9tZXNzYWdlcz48Y3VzdG9tZXJQcm9maWxlSWQ+MTkxNDM0NTIyMTwvY3VzdG9tZXJQcm9maWxlSWQ+PGN1c3RvbWVyUGF5bWVudFByb2ZpbGVJZExpc3QgLz48Y3VzdG9tZXJTaGlwcGluZ0FkZHJlc3NJZExpc3QgLz48dmFsaWRhdGlvbkRpcmVjdFJlc3BvbnNlTGlzdCAvPjwvY3JlYXRlQ3VzdG9tZXJQcm9maWxlUmVzcG9uc2U+
+        77u/PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48Y3JlYXRlQ3VzdG9tZXJQcm9maWxlUmVzcG9uc2UgeG1sbnM6eHNpPSJodHRwOi8vd3d3LnczLm9yZy8yMDAxL1hNTFNjaGVtYS1pbnN0YW5jZSIgeG1sbnM6eHNkPSJodHRwOi8vd3d3LnczLm9yZy8yMDAxL1hNTFNjaGVtYSIgeG1sbnM9IkFuZXRBcGkveG1sL3YxL3NjaGVtYS9BbmV0QXBpU2NoZW1hLnhzZCI+PG1lc3NhZ2VzPjxyZXN1bHRDb2RlPk9rPC9yZXN1bHRDb2RlPjxtZXNzYWdlPjxjb2RlPkkwMDAwMTwvY29kZT48dGV4dD5TdWNjZXNzZnVsLjwvdGV4dD48L21lc3NhZ2U+PC9tZXNzYWdlcz48Y3VzdG9tZXJQcm9maWxlSWQ+MTkxNTkxOTYyOTwvY3VzdG9tZXJQcm9maWxlSWQ+PGN1c3RvbWVyUGF5bWVudFByb2ZpbGVJZExpc3QgLz48Y3VzdG9tZXJTaGlwcGluZ0FkZHJlc3NJZExpc3QgLz48dmFsaWRhdGlvbkRpcmVjdFJlc3BvbnNlTGlzdCAvPjwvY3JlYXRlQ3VzdG9tZXJQcm9maWxlUmVzcG9uc2U+
     http_version: 
-  recorded_at: Wed, 20 Jun 2018 19:03:52 GMT
+  recorded_at: Wed, 17 Oct 2018 21:25:24 GMT
+- request:
+    method: post
+    uri: https://apitest.authorize.net/xml/v1/request.api
+    body:
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0" encoding="utf-8"?>
+        <getCustomerProfileRequest xmlns="AnetApi/xml/v1/schema/AnetApiSchema.xsd">
+          <merchantAuthentication>
+            <name>7YaGa84h</name>
+            <transactionKey>4gP3XtM3Gs768xfb</transactionKey>
+          </merchantAuthentication>
+          <customerProfileId>1915919629</customerProfileId>
+        </getCustomerProfileRequest>
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Content-Type:
+      - text/xml
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - private
+      Content-Type:
+      - application/xml; charset=utf-8
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - x-requested-with,cache-control,content-type,origin,method,SOAPAction
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - PUT,OPTIONS,POST,GET
+      X-Cnection:
+      - close
+      Content-Length:
+      - '585'
+      Date:
+      - Wed, 17 Oct 2018 21:25:25 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        77u/PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48Z2V0Q3VzdG9tZXJQcm9maWxlUmVzcG9uc2UgeG1sbnM6eHNpPSJodHRwOi8vd3d3LnczLm9yZy8yMDAxL1hNTFNjaGVtYS1pbnN0YW5jZSIgeG1sbnM6eHNkPSJodHRwOi8vd3d3LnczLm9yZy8yMDAxL1hNTFNjaGVtYSIgeG1sbnM9IkFuZXRBcGkveG1sL3YxL3NjaGVtYS9BbmV0QXBpU2NoZW1hLnhzZCI+PG1lc3NhZ2VzPjxyZXN1bHRDb2RlPk9rPC9yZXN1bHRDb2RlPjxtZXNzYWdlPjxjb2RlPkkwMDAwMTwvY29kZT48dGV4dD5TdWNjZXNzZnVsLjwvdGV4dD48L21lc3NhZ2U+PC9tZXNzYWdlcz48cHJvZmlsZT48bWVyY2hhbnRDdXN0b21lcklkPjcxZTkyY2JlPC9tZXJjaGFudEN1c3RvbWVySWQ+PGRlc2NyaXB0aW9uPlRlc3QgRGVzY3JpcHRpb248L2Rlc2NyaXB0aW9uPjxlbWFpbD5jYXJyb2xsQHN0cmFja2UuY28udWs8L2VtYWlsPjxjdXN0b21lclByb2ZpbGVJZD4xOTE1OTE5NjI5PC9jdXN0b21lclByb2ZpbGVJZD48cHJvZmlsZVR5cGU+cmVndWxhcjwvcHJvZmlsZVR5cGU+PC9wcm9maWxlPjwvZ2V0Q3VzdG9tZXJQcm9maWxlUmVzcG9uc2U+
+    http_version: 
+  recorded_at: Wed, 17 Oct 2018 21:25:25 GMT
+- request:
+    method: post
+    uri: https://apitest.authorize.net/xml/v1/request.api
+    body:
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0" encoding="utf-8"?>
+        <updateCustomerProfileRequest xmlns="AnetApi/xml/v1/schema/AnetApiSchema.xsd">
+          <merchantAuthentication>
+            <name>7YaGa84h</name>
+            <transactionKey>4gP3XtM3Gs768xfb</transactionKey>
+          </merchantAuthentication>
+          <profile>
+            <merchantCustomerId>7456b7fc-230d-4f68-a</merchantCustomerId>
+            <description>Sed necessitatibus tenetur porro doloribus.</description>
+            <email>nadia.walter@wiegand.name</email>
+            <customerProfileId>1915919629</customerProfileId>
+          </profile>
+        </updateCustomerProfileRequest>
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Content-Type:
+      - text/xml
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - private
+      Content-Type:
+      - application/xml; charset=utf-8
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - x-requested-with,cache-control,content-type,origin,method,SOAPAction
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - PUT,OPTIONS,POST,GET
+      X-Cnection:
+      - close
+      Content-Length:
+      - '361'
+      Date:
+      - Wed, 17 Oct 2018 21:25:26 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        77u/PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48dXBkYXRlQ3VzdG9tZXJQcm9maWxlUmVzcG9uc2UgeG1sbnM6eHNpPSJodHRwOi8vd3d3LnczLm9yZy8yMDAxL1hNTFNjaGVtYS1pbnN0YW5jZSIgeG1sbnM6eHNkPSJodHRwOi8vd3d3LnczLm9yZy8yMDAxL1hNTFNjaGVtYSIgeG1sbnM9IkFuZXRBcGkveG1sL3YxL3NjaGVtYS9BbmV0QXBpU2NoZW1hLnhzZCI+PG1lc3NhZ2VzPjxyZXN1bHRDb2RlPk9rPC9yZXN1bHRDb2RlPjxtZXNzYWdlPjxjb2RlPkkwMDAwMTwvY29kZT48dGV4dD5TdWNjZXNzZnVsLjwvdGV4dD48L21lc3NhZ2U+PC9tZXNzYWdlcz48L3VwZGF0ZUN1c3RvbWVyUHJvZmlsZVJlc3BvbnNlPg==
+    http_version: 
+  recorded_at: Wed, 17 Oct 2018 21:25:26 GMT
 - request:
     method: post
     uri: https://apitest.authorize.net/xml/v1/request.api
@@ -68,27 +181,27 @@ http_interactions:
         <?xml version="1.0" encoding="utf-8"?>
         <createCustomerPaymentProfileRequest xmlns="AnetApi/xml/v1/schema/AnetApiSchema.xsd">
           <merchantAuthentication>
-            <name>7b4Ju4Pu</name>
-            <transactionKey>898zCaw9DX83m932</transactionKey>
+            <name>7YaGa84h</name>
+            <transactionKey>4gP3XtM3Gs768xfb</transactionKey>
           </merchantAuthentication>
-          <customerProfileId>1914345221</customerProfileId>
+          <customerProfileId>1915919629</customerProfileId>
           <paymentProfile>
             <billTo>
-              <firstName>Tonisha</firstName>
-              <lastName>Lowe</lastName>
-              <company>Hessel Group</company>
-              <address>67401 Weissnat Rapids</address>
-              <city>Flatleyside</city>
+              <firstName>Marisha</firstName>
+              <lastName>Nicolas</lastName>
+              <company>Boyer Crist and Borer</company>
+              <address>3590 Larkin Mountains</address>
+              <city>Nickyburgh</city>
               <state>Maine</state>
-              <zip>58787-9318</zip>
-              <country>CM</country>
-              <phoneNumber>682.876.6500 x401</phoneNumber>
-              <faxNumber>1-876-666-7776 x139</faxNumber>
+              <zip>20164</zip>
+              <country>AD</country>
+              <phoneNumber>1-792-778-7862</phoneNumber>
+              <faxNumber>442.210.3835 x9035</faxNumber>
             </billTo>
             <payment>
               <creditCard>
-                <cardNumber>5424000000000015</cardNumber>
-                <expirationDate>2023-09</expirationDate>
+                <cardNumber>3088000000000017</cardNumber>
+                <expirationDate>2023-10</expirationDate>
                 <cardCode>123</cardCode>
               </creditCard>
             </payment>
@@ -124,17 +237,17 @@ http_interactions:
       X-Cnection:
       - close
       Content-Length:
-      - '936'
+      - '931'
       Date:
-      - Wed, 20 Jun 2018 19:03:52 GMT
+      - Wed, 17 Oct 2018 21:25:27 GMT
       Connection:
       - keep-alive
     body:
       encoding: ASCII-8BIT
       string: !binary |-
-        77u/PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48Y3JlYXRlQ3VzdG9tZXJQYXltZW50UHJvZmlsZVJlc3BvbnNlIHhtbG5zOnhzaT0iaHR0cDovL3d3dy53My5vcmcvMjAwMS9YTUxTY2hlbWEtaW5zdGFuY2UiIHhtbG5zOnhzZD0iaHR0cDovL3d3dy53My5vcmcvMjAwMS9YTUxTY2hlbWEiIHhtbG5zPSJBbmV0QXBpL3htbC92MS9zY2hlbWEvQW5ldEFwaVNjaGVtYS54c2QiPjxtZXNzYWdlcz48cmVzdWx0Q29kZT5PazwvcmVzdWx0Q29kZT48bWVzc2FnZT48Y29kZT5JMDAwMDE8L2NvZGU+PHRleHQ+U3VjY2Vzc2Z1bC48L3RleHQ+PC9tZXNzYWdlPjwvbWVzc2FnZXM+PGN1c3RvbWVyUHJvZmlsZUlkPjE5MTQzNDUyMjE8L2N1c3RvbWVyUHJvZmlsZUlkPjxjdXN0b21lclBheW1lbnRQcm9maWxlSWQ+MTgyNzk1NDM5NTwvY3VzdG9tZXJQYXltZW50UHJvZmlsZUlkPjx2YWxpZGF0aW9uRGlyZWN0UmVzcG9uc2U+MSwxLDEsKFRFU1RNT0RFKSBUaGlzIHRyYW5zYWN0aW9uIGhhcyBiZWVuIGFwcHJvdmVkLiwwMDAwMDAsUCwwLG5vbmUsVGVzdCB0cmFuc2FjdGlvbiBmb3IgVmFsaWRhdGVDdXN0b21lclBheW1lbnRQcm9maWxlLiwxLjAwLENDLGF1dGhfb25seSxub25lLFRvbmlzaGEsTG93ZSxIZXNzZWwgR3JvdXAsNjc0MDEgV2Vpc3NuYXQgUmFwaWRzLEZsYXRsZXlzaWRlLE1haW5lLDU4Nzg3LTkzMTgsQ00sNjgyLjg3Ni42NTAwIHg0MDEsMS04NzYtNjY2LTc3NzYgeDEzOSxlbWFpbEBleGFtcGxlLmNvbSwsLCwsLCwsLDAuMDAsMC4wMCwwLjAwLEZBTFNFLG5vbmUsRTcwRjlGRUVEN0JGMDE3MzQwMDgyRDhEQ0QyRTREMTIsLCwsLCwsLCwsLCwsWFhYWDAwMTUsTWFzdGVyQ2FyZCwsLCwsLCwsLCwsLCwsLCwsPC92YWxpZGF0aW9uRGlyZWN0UmVzcG9uc2U+PC9jcmVhdGVDdXN0b21lclBheW1lbnRQcm9maWxlUmVzcG9uc2U+
+        77u/PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48Y3JlYXRlQ3VzdG9tZXJQYXltZW50UHJvZmlsZVJlc3BvbnNlIHhtbG5zOnhzaT0iaHR0cDovL3d3dy53My5vcmcvMjAwMS9YTUxTY2hlbWEtaW5zdGFuY2UiIHhtbG5zOnhzZD0iaHR0cDovL3d3dy53My5vcmcvMjAwMS9YTUxTY2hlbWEiIHhtbG5zPSJBbmV0QXBpL3htbC92MS9zY2hlbWEvQW5ldEFwaVNjaGVtYS54c2QiPjxtZXNzYWdlcz48cmVzdWx0Q29kZT5PazwvcmVzdWx0Q29kZT48bWVzc2FnZT48Y29kZT5JMDAwMDE8L2NvZGU+PHRleHQ+U3VjY2Vzc2Z1bC48L3RleHQ+PC9tZXNzYWdlPjwvbWVzc2FnZXM+PGN1c3RvbWVyUHJvZmlsZUlkPjE5MTU5MTk2Mjk8L2N1c3RvbWVyUHJvZmlsZUlkPjxjdXN0b21lclBheW1lbnRQcm9maWxlSWQ+MTgyOTI3NTMzMzwvY3VzdG9tZXJQYXltZW50UHJvZmlsZUlkPjx2YWxpZGF0aW9uRGlyZWN0UmVzcG9uc2U+MSwxLDEsKFRFU1RNT0RFKSBUaGlzIHRyYW5zYWN0aW9uIGhhcyBiZWVuIGFwcHJvdmVkLiwwMDAwMDAsUCwwLG5vbmUsVGVzdCB0cmFuc2FjdGlvbiBmb3IgVmFsaWRhdGVDdXN0b21lclBheW1lbnRQcm9maWxlLiwxLjAwLENDLGF1dGhfb25seSxub25lLE1hcmlzaGEsTmljb2xhcyxCb3llciBDcmlzdCBhbmQgQm9yZXIsMzU5MCBMYXJraW4gTW91bnRhaW5zLE5pY2t5YnVyZ2gsTWFpbmUsMjAxNjQsQUQsMS03OTItNzc4LTc4NjIsNDQyLjIxMC4zODM1IHg5MDM1LGVtYWlsQGV4YW1wbGUuY29tLCwsLCwsLCwsMC4wMCwwLjAwLDAuMDAsRkFMU0Usbm9uZSwwQjEzQjdDRDM3OTRDMThGNzlDMUE5OEEzRTIyNzMzRCwsLCwsLCwsLCwsLCxYWFhYMDAxNyxKQ0IsLCwsLCwsLCwsLCwsLCwsLDwvdmFsaWRhdGlvbkRpcmVjdFJlc3BvbnNlPjwvY3JlYXRlQ3VzdG9tZXJQYXltZW50UHJvZmlsZVJlc3BvbnNlPg==
     http_version: 
-  recorded_at: Wed, 20 Jun 2018 19:03:52 GMT
+  recorded_at: Wed, 17 Oct 2018 21:25:27 GMT
 - request:
     method: post
     uri: https://apitest.authorize.net/xml/v1/request.api
@@ -144,21 +257,21 @@ http_interactions:
         <?xml version="1.0" encoding="utf-8"?>
         <createCustomerShippingAddressRequest xmlns="AnetApi/xml/v1/schema/AnetApiSchema.xsd">
           <merchantAuthentication>
-            <name>7b4Ju4Pu</name>
-            <transactionKey>898zCaw9DX83m932</transactionKey>
+            <name>7YaGa84h</name>
+            <transactionKey>4gP3XtM3Gs768xfb</transactionKey>
           </merchantAuthentication>
-          <customerProfileId>1914345221</customerProfileId>
+          <customerProfileId>1915919629</customerProfileId>
           <address>
-            <firstName>Tonisha</firstName>
-            <lastName>Lowe</lastName>
-            <company>Hessel Group</company>
-            <address>67401 Weissnat Rapids</address>
-            <city>Flatleyside</city>
+            <firstName>Marisha</firstName>
+            <lastName>Nicolas</lastName>
+            <company>Boyer Crist and Borer</company>
+            <address>3590 Larkin Mountains</address>
+            <city>Nickyburgh</city>
             <state>Maine</state>
-            <zip>58787-9318</zip>
-            <country>CM</country>
-            <phoneNumber>682.876.6500 x401</phoneNumber>
-            <faxNumber>1-876-666-7776 x139</faxNumber>
+            <zip>20164</zip>
+            <country>AD</country>
+            <phoneNumber>1-792-778-7862</phoneNumber>
+            <faxNumber>442.210.3835 x9035</faxNumber>
           </address>
         </createCustomerShippingAddressRequest>
     headers:
@@ -192,15 +305,15 @@ http_interactions:
       Content-Length:
       - '475'
       Date:
-      - Wed, 20 Jun 2018 19:03:53 GMT
+      - Wed, 17 Oct 2018 21:25:28 GMT
       Connection:
       - keep-alive
     body:
       encoding: ASCII-8BIT
       string: !binary |-
-        77u/PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48Y3JlYXRlQ3VzdG9tZXJTaGlwcGluZ0FkZHJlc3NSZXNwb25zZSB4bWxuczp4c2k9Imh0dHA6Ly93d3cudzMub3JnLzIwMDEvWE1MU2NoZW1hLWluc3RhbmNlIiB4bWxuczp4c2Q9Imh0dHA6Ly93d3cudzMub3JnLzIwMDEvWE1MU2NoZW1hIiB4bWxucz0iQW5ldEFwaS94bWwvdjEvc2NoZW1hL0FuZXRBcGlTY2hlbWEueHNkIj48bWVzc2FnZXM+PHJlc3VsdENvZGU+T2s8L3Jlc3VsdENvZGU+PG1lc3NhZ2U+PGNvZGU+STAwMDAxPC9jb2RlPjx0ZXh0PlN1Y2Nlc3NmdWwuPC90ZXh0PjwvbWVzc2FnZT48L21lc3NhZ2VzPjxjdXN0b21lclByb2ZpbGVJZD4xOTE0MzQ1MjIxPC9jdXN0b21lclByb2ZpbGVJZD48Y3VzdG9tZXJBZGRyZXNzSWQ+MTg3MjA3NjA5NDwvY3VzdG9tZXJBZGRyZXNzSWQ+PC9jcmVhdGVDdXN0b21lclNoaXBwaW5nQWRkcmVzc1Jlc3BvbnNlPg==
+        77u/PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48Y3JlYXRlQ3VzdG9tZXJTaGlwcGluZ0FkZHJlc3NSZXNwb25zZSB4bWxuczp4c2k9Imh0dHA6Ly93d3cudzMub3JnLzIwMDEvWE1MU2NoZW1hLWluc3RhbmNlIiB4bWxuczp4c2Q9Imh0dHA6Ly93d3cudzMub3JnLzIwMDEvWE1MU2NoZW1hIiB4bWxucz0iQW5ldEFwaS94bWwvdjEvc2NoZW1hL0FuZXRBcGlTY2hlbWEueHNkIj48bWVzc2FnZXM+PHJlc3VsdENvZGU+T2s8L3Jlc3VsdENvZGU+PG1lc3NhZ2U+PGNvZGU+STAwMDAxPC9jb2RlPjx0ZXh0PlN1Y2Nlc3NmdWwuPC90ZXh0PjwvbWVzc2FnZT48L21lc3NhZ2VzPjxjdXN0b21lclByb2ZpbGVJZD4xOTE1OTE5NjI5PC9jdXN0b21lclByb2ZpbGVJZD48Y3VzdG9tZXJBZGRyZXNzSWQ+MTg3MzI4MzgzMTwvY3VzdG9tZXJBZGRyZXNzSWQ+PC9jcmVhdGVDdXN0b21lclNoaXBwaW5nQWRkcmVzc1Jlc3BvbnNlPg==
     http_version: 
-  recorded_at: Wed, 20 Jun 2018 19:03:53 GMT
+  recorded_at: Wed, 17 Oct 2018 21:25:28 GMT
 - request:
     method: post
     uri: https://apitest.authorize.net/xml/v1/request.api
@@ -210,22 +323,164 @@ http_interactions:
         <?xml version="1.0" encoding="utf-8"?>
         <createCustomerPaymentProfileRequest xmlns="AnetApi/xml/v1/schema/AnetApiSchema.xsd">
           <merchantAuthentication>
-            <name>7b4Ju4Pu</name>
-            <transactionKey>898zCaw9DX83m932</transactionKey>
+            <name>7YaGa84h</name>
+            <transactionKey>4gP3XtM3Gs768xfb</transactionKey>
           </merchantAuthentication>
-          <customerProfileId>1914345221</customerProfileId>
+          <customerProfileId>1915919629</customerProfileId>
           <paymentProfile>
             <billTo>
-              <firstName>Vito</firstName>
-              <lastName>Abshire</lastName>
-              <company>Abshire-Hermiston</company>
-              <address>8765 Waters Freeway</address>
-              <city>Magalitown</city>
-              <state>Illinois</state>
-              <zip>44778</zip>
-              <country>AM</country>
-              <phoneNumber>1-480-655-5426</phoneNumber>
-              <faxNumber>207-208-8276 x6531</faxNumber>
+              <firstName>Dolly</firstName>
+              <lastName>Hamill</lastName>
+              <company>Prohaska Weber and Hermiston</company>
+              <address>026 Irma Expressway</address>
+              <city>West Stacieville</city>
+              <state>Tennessee</state>
+              <zip>51382</zip>
+              <country>KW</country>
+              <phoneNumber>1-661-960-6777 x533</phoneNumber>
+              <faxNumber>(424)498-4307 x3135</faxNumber>
+            </billTo>
+            <payment>
+              <creditCard>
+                <cardNumber>3088000000000017</cardNumber>
+                <expirationDate>2023-01</expirationDate>
+                <cardCode>123</cardCode>
+              </creditCard>
+            </payment>
+          </paymentProfile>
+          <validationMode>testMode</validationMode>
+        </createCustomerPaymentProfileRequest>
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Content-Type:
+      - text/xml
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - private
+      Content-Type:
+      - application/xml; charset=utf-8
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - x-requested-with,cache-control,content-type,origin,method,SOAPAction
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - PUT,OPTIONS,POST,GET
+      X-Cnection:
+      - close
+      Content-Length:
+      - '949'
+      Date:
+      - Wed, 17 Oct 2018 21:25:29 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        77u/PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48Y3JlYXRlQ3VzdG9tZXJQYXltZW50UHJvZmlsZVJlc3BvbnNlIHhtbG5zOnhzaT0iaHR0cDovL3d3dy53My5vcmcvMjAwMS9YTUxTY2hlbWEtaW5zdGFuY2UiIHhtbG5zOnhzZD0iaHR0cDovL3d3dy53My5vcmcvMjAwMS9YTUxTY2hlbWEiIHhtbG5zPSJBbmV0QXBpL3htbC92MS9zY2hlbWEvQW5ldEFwaVNjaGVtYS54c2QiPjxtZXNzYWdlcz48cmVzdWx0Q29kZT5PazwvcmVzdWx0Q29kZT48bWVzc2FnZT48Y29kZT5JMDAwMDE8L2NvZGU+PHRleHQ+U3VjY2Vzc2Z1bC48L3RleHQ+PC9tZXNzYWdlPjwvbWVzc2FnZXM+PGN1c3RvbWVyUHJvZmlsZUlkPjE5MTU5MTk2Mjk8L2N1c3RvbWVyUHJvZmlsZUlkPjxjdXN0b21lclBheW1lbnRQcm9maWxlSWQ+MTgyOTI3NTMzNTwvY3VzdG9tZXJQYXltZW50UHJvZmlsZUlkPjx2YWxpZGF0aW9uRGlyZWN0UmVzcG9uc2U+MSwxLDEsKFRFU1RNT0RFKSBUaGlzIHRyYW5zYWN0aW9uIGhhcyBiZWVuIGFwcHJvdmVkLiwwMDAwMDAsUCwwLG5vbmUsVGVzdCB0cmFuc2FjdGlvbiBmb3IgVmFsaWRhdGVDdXN0b21lclBheW1lbnRQcm9maWxlLiwxLjAwLENDLGF1dGhfb25seSxub25lLERvbGx5LEhhbWlsbCxQcm9oYXNrYSBXZWJlciBhbmQgSGVybWlzdG9uLDAyNiBJcm1hIEV4cHJlc3N3YXksV2VzdCBTdGFjaWV2aWxsZSxUZW5uZXNzZWUsNTEzODIsS1csMS02NjEtOTYwLTY3NzcgeDUzMywoNDI0KTQ5OC00MzA3IHgzMTM1LGVtYWlsQGV4YW1wbGUuY29tLCwsLCwsLCwsMC4wMCwwLjAwLDAuMDAsRkFMU0Usbm9uZSwwQjEzQjdDRDM3OTRDMThGNzlDMUE5OEEzRTIyNzMzRCwsLCwsLCwsLCwsLCxYWFhYMDAxNyxKQ0IsLCwsLCwsLCwsLCwsLCwsLDwvdmFsaWRhdGlvbkRpcmVjdFJlc3BvbnNlPjwvY3JlYXRlQ3VzdG9tZXJQYXltZW50UHJvZmlsZVJlc3BvbnNlPg==
+    http_version: 
+  recorded_at: Wed, 17 Oct 2018 21:25:29 GMT
+- request:
+    method: post
+    uri: https://apitest.authorize.net/xml/v1/request.api
+    body:
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0" encoding="utf-8"?>
+        <createCustomerShippingAddressRequest xmlns="AnetApi/xml/v1/schema/AnetApiSchema.xsd">
+          <merchantAuthentication>
+            <name>7YaGa84h</name>
+            <transactionKey>4gP3XtM3Gs768xfb</transactionKey>
+          </merchantAuthentication>
+          <customerProfileId>1915919629</customerProfileId>
+          <address>
+            <firstName>Dolly</firstName>
+            <lastName>Hamill</lastName>
+            <company>Prohaska Weber and Hermiston</company>
+            <address>026 Irma Expressway</address>
+            <city>West Stacieville</city>
+            <state>Tennessee</state>
+            <zip>51382</zip>
+            <country>KW</country>
+            <phoneNumber>1-661-960-6777 x533</phoneNumber>
+            <faxNumber>(424)498-4307 x3135</faxNumber>
+          </address>
+        </createCustomerShippingAddressRequest>
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Content-Type:
+      - text/xml
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - private
+      Content-Type:
+      - application/xml; charset=utf-8
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - x-requested-with,cache-control,content-type,origin,method,SOAPAction
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - PUT,OPTIONS,POST,GET
+      X-Cnection:
+      - close
+      Content-Length:
+      - '475'
+      Date:
+      - Wed, 17 Oct 2018 21:25:30 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        77u/PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48Y3JlYXRlQ3VzdG9tZXJTaGlwcGluZ0FkZHJlc3NSZXNwb25zZSB4bWxuczp4c2k9Imh0dHA6Ly93d3cudzMub3JnLzIwMDEvWE1MU2NoZW1hLWluc3RhbmNlIiB4bWxuczp4c2Q9Imh0dHA6Ly93d3cudzMub3JnLzIwMDEvWE1MU2NoZW1hIiB4bWxucz0iQW5ldEFwaS94bWwvdjEvc2NoZW1hL0FuZXRBcGlTY2hlbWEueHNkIj48bWVzc2FnZXM+PHJlc3VsdENvZGU+T2s8L3Jlc3VsdENvZGU+PG1lc3NhZ2U+PGNvZGU+STAwMDAxPC9jb2RlPjx0ZXh0PlN1Y2Nlc3NmdWwuPC90ZXh0PjwvbWVzc2FnZT48L21lc3NhZ2VzPjxjdXN0b21lclByb2ZpbGVJZD4xOTE1OTE5NjI5PC9jdXN0b21lclByb2ZpbGVJZD48Y3VzdG9tZXJBZGRyZXNzSWQ+MTg3MzI4MzgzNDwvY3VzdG9tZXJBZGRyZXNzSWQ+PC9jcmVhdGVDdXN0b21lclNoaXBwaW5nQWRkcmVzc1Jlc3BvbnNlPg==
+    http_version: 
+  recorded_at: Wed, 17 Oct 2018 21:25:30 GMT
+- request:
+    method: post
+    uri: https://apitest.authorize.net/xml/v1/request.api
+    body:
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0" encoding="utf-8"?>
+        <createCustomerPaymentProfileRequest xmlns="AnetApi/xml/v1/schema/AnetApiSchema.xsd">
+          <merchantAuthentication>
+            <name>7YaGa84h</name>
+            <transactionKey>4gP3XtM3Gs768xfb</transactionKey>
+          </merchantAuthentication>
+          <customerProfileId>1915919629</customerProfileId>
+          <paymentProfile>
+            <billTo>
+              <firstName>Trinidad</firstName>
+              <lastName>Nikolaus</lastName>
+              <company>Hessel Feeney and Ward</company>
+              <address>81264 Connelly Glens</address>
+              <city>Rosemaryview</city>
+              <state>South Dakota</state>
+              <zip>78768-8720</zip>
+              <country>HM</country>
+              <phoneNumber>1-651-786-8301 x267</phoneNumber>
+              <faxNumber>(899)279-3584 x48088</faxNumber>
             </billTo>
             <payment>
               <creditCard>
@@ -266,17 +521,17 @@ http_interactions:
       X-Cnection:
       - close
       Content-Length:
-      - '926'
+      - '955'
       Date:
-      - Wed, 20 Jun 2018 19:03:53 GMT
+      - Wed, 17 Oct 2018 21:25:30 GMT
       Connection:
       - keep-alive
     body:
       encoding: ASCII-8BIT
       string: !binary |-
-        77u/PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48Y3JlYXRlQ3VzdG9tZXJQYXltZW50UHJvZmlsZVJlc3BvbnNlIHhtbG5zOnhzaT0iaHR0cDovL3d3dy53My5vcmcvMjAwMS9YTUxTY2hlbWEtaW5zdGFuY2UiIHhtbG5zOnhzZD0iaHR0cDovL3d3dy53My5vcmcvMjAwMS9YTUxTY2hlbWEiIHhtbG5zPSJBbmV0QXBpL3htbC92MS9zY2hlbWEvQW5ldEFwaVNjaGVtYS54c2QiPjxtZXNzYWdlcz48cmVzdWx0Q29kZT5PazwvcmVzdWx0Q29kZT48bWVzc2FnZT48Y29kZT5JMDAwMDE8L2NvZGU+PHRleHQ+U3VjY2Vzc2Z1bC48L3RleHQ+PC9tZXNzYWdlPjwvbWVzc2FnZXM+PGN1c3RvbWVyUHJvZmlsZUlkPjE5MTQzNDUyMjE8L2N1c3RvbWVyUHJvZmlsZUlkPjxjdXN0b21lclBheW1lbnRQcm9maWxlSWQ+MTgyNzk1NDM5NjwvY3VzdG9tZXJQYXltZW50UHJvZmlsZUlkPjx2YWxpZGF0aW9uRGlyZWN0UmVzcG9uc2U+MSwxLDEsKFRFU1RNT0RFKSBUaGlzIHRyYW5zYWN0aW9uIGhhcyBiZWVuIGFwcHJvdmVkLiwwMDAwMDAsUCwwLG5vbmUsVGVzdCB0cmFuc2FjdGlvbiBmb3IgVmFsaWRhdGVDdXN0b21lclBheW1lbnRQcm9maWxlLiwxLjAwLENDLGF1dGhfb25seSxub25lLFZpdG8sQWJzaGlyZSxBYnNoaXJlLUhlcm1pc3Rvbiw4NzY1IFdhdGVycyBGcmVld2F5LE1hZ2FsaXRvd24sSWxsaW5vaXMsNDQ3NzgsQU0sMS00ODAtNjU1LTU0MjYsMjA3LTIwOC04Mjc2IHg2NTMxLGVtYWlsQGV4YW1wbGUuY29tLCwsLCwsLCwsMC4wMCwwLjAwLDAuMDAsRkFMU0Usbm9uZSxFNzBGOUZFRUQ3QkYwMTczNDAwODJEOERDRDJFNEQxMiwsLCwsLCwsLCwsLCxYWFhYMDAyNyxWaXNhLCwsLCwsLCwsLCwsLCwsLCw8L3ZhbGlkYXRpb25EaXJlY3RSZXNwb25zZT48L2NyZWF0ZUN1c3RvbWVyUGF5bWVudFByb2ZpbGVSZXNwb25zZT4=
+        77u/PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48Y3JlYXRlQ3VzdG9tZXJQYXltZW50UHJvZmlsZVJlc3BvbnNlIHhtbG5zOnhzaT0iaHR0cDovL3d3dy53My5vcmcvMjAwMS9YTUxTY2hlbWEtaW5zdGFuY2UiIHhtbG5zOnhzZD0iaHR0cDovL3d3dy53My5vcmcvMjAwMS9YTUxTY2hlbWEiIHhtbG5zPSJBbmV0QXBpL3htbC92MS9zY2hlbWEvQW5ldEFwaVNjaGVtYS54c2QiPjxtZXNzYWdlcz48cmVzdWx0Q29kZT5PazwvcmVzdWx0Q29kZT48bWVzc2FnZT48Y29kZT5JMDAwMDE8L2NvZGU+PHRleHQ+U3VjY2Vzc2Z1bC48L3RleHQ+PC9tZXNzYWdlPjwvbWVzc2FnZXM+PGN1c3RvbWVyUHJvZmlsZUlkPjE5MTU5MTk2Mjk8L2N1c3RvbWVyUHJvZmlsZUlkPjxjdXN0b21lclBheW1lbnRQcm9maWxlSWQ+MTgyOTI3NTMzNjwvY3VzdG9tZXJQYXltZW50UHJvZmlsZUlkPjx2YWxpZGF0aW9uRGlyZWN0UmVzcG9uc2U+MSwxLDEsKFRFU1RNT0RFKSBUaGlzIHRyYW5zYWN0aW9uIGhhcyBiZWVuIGFwcHJvdmVkLiwwMDAwMDAsUCwwLG5vbmUsVGVzdCB0cmFuc2FjdGlvbiBmb3IgVmFsaWRhdGVDdXN0b21lclBheW1lbnRQcm9maWxlLiwxLjAwLENDLGF1dGhfb25seSxub25lLFRyaW5pZGFkLE5pa29sYXVzLEhlc3NlbCBGZWVuZXkgYW5kIFdhcmQsODEyNjQgQ29ubmVsbHkgR2xlbnMsUm9zZW1hcnl2aWV3LFNvdXRoIERha290YSw3ODc2OC04NzIwLEhNLDEtNjUxLTc4Ni04MzAxIHgyNjcsKDg5OSkyNzktMzU4NCB4NDgwODgsZW1haWxAZXhhbXBsZS5jb20sLCwsLCwsLCwwLjAwLDAuMDAsMC4wMCxGQUxTRSxub25lLDBCMTNCN0NEMzc5NEMxOEY3OUMxQTk4QTNFMjI3MzNELCwsLCwsLCwsLCwsLFhYWFgwMDI3LFZpc2EsLCwsLCwsLCwsLCwsLCwsLDwvdmFsaWRhdGlvbkRpcmVjdFJlc3BvbnNlPjwvY3JlYXRlQ3VzdG9tZXJQYXltZW50UHJvZmlsZVJlc3BvbnNlPg==
     http_version: 
-  recorded_at: Wed, 20 Jun 2018 19:03:53 GMT
+  recorded_at: Wed, 17 Oct 2018 21:25:31 GMT
 - request:
     method: post
     uri: https://apitest.authorize.net/xml/v1/request.api
@@ -286,21 +541,21 @@ http_interactions:
         <?xml version="1.0" encoding="utf-8"?>
         <createCustomerShippingAddressRequest xmlns="AnetApi/xml/v1/schema/AnetApiSchema.xsd">
           <merchantAuthentication>
-            <name>7b4Ju4Pu</name>
-            <transactionKey>898zCaw9DX83m932</transactionKey>
+            <name>7YaGa84h</name>
+            <transactionKey>4gP3XtM3Gs768xfb</transactionKey>
           </merchantAuthentication>
-          <customerProfileId>1914345221</customerProfileId>
+          <customerProfileId>1915919629</customerProfileId>
           <address>
-            <firstName>Vito</firstName>
-            <lastName>Abshire</lastName>
-            <company>Abshire-Hermiston</company>
-            <address>8765 Waters Freeway</address>
-            <city>Magalitown</city>
-            <state>Illinois</state>
-            <zip>44778</zip>
-            <country>AM</country>
-            <phoneNumber>1-480-655-5426</phoneNumber>
-            <faxNumber>207-208-8276 x6531</faxNumber>
+            <firstName>Trinidad</firstName>
+            <lastName>Nikolaus</lastName>
+            <company>Hessel Feeney and Ward</company>
+            <address>81264 Connelly Glens</address>
+            <city>Rosemaryview</city>
+            <state>South Dakota</state>
+            <zip>78768-8720</zip>
+            <country>HM</country>
+            <phoneNumber>1-651-786-8301 x267</phoneNumber>
+            <faxNumber>(899)279-3584 x48088</faxNumber>
           </address>
         </createCustomerShippingAddressRequest>
     headers:
@@ -334,155 +589,13 @@ http_interactions:
       Content-Length:
       - '475'
       Date:
-      - Wed, 20 Jun 2018 19:03:54 GMT
+      - Wed, 17 Oct 2018 21:25:31 GMT
       Connection:
       - keep-alive
     body:
       encoding: ASCII-8BIT
       string: !binary |-
-        77u/PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48Y3JlYXRlQ3VzdG9tZXJTaGlwcGluZ0FkZHJlc3NSZXNwb25zZSB4bWxuczp4c2k9Imh0dHA6Ly93d3cudzMub3JnLzIwMDEvWE1MU2NoZW1hLWluc3RhbmNlIiB4bWxuczp4c2Q9Imh0dHA6Ly93d3cudzMub3JnLzIwMDEvWE1MU2NoZW1hIiB4bWxucz0iQW5ldEFwaS94bWwvdjEvc2NoZW1hL0FuZXRBcGlTY2hlbWEueHNkIj48bWVzc2FnZXM+PHJlc3VsdENvZGU+T2s8L3Jlc3VsdENvZGU+PG1lc3NhZ2U+PGNvZGU+STAwMDAxPC9jb2RlPjx0ZXh0PlN1Y2Nlc3NmdWwuPC90ZXh0PjwvbWVzc2FnZT48L21lc3NhZ2VzPjxjdXN0b21lclByb2ZpbGVJZD4xOTE0MzQ1MjIxPC9jdXN0b21lclByb2ZpbGVJZD48Y3VzdG9tZXJBZGRyZXNzSWQ+MTg3MjA3NjA5NjwvY3VzdG9tZXJBZGRyZXNzSWQ+PC9jcmVhdGVDdXN0b21lclNoaXBwaW5nQWRkcmVzc1Jlc3BvbnNlPg==
+        77u/PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48Y3JlYXRlQ3VzdG9tZXJTaGlwcGluZ0FkZHJlc3NSZXNwb25zZSB4bWxuczp4c2k9Imh0dHA6Ly93d3cudzMub3JnLzIwMDEvWE1MU2NoZW1hLWluc3RhbmNlIiB4bWxuczp4c2Q9Imh0dHA6Ly93d3cudzMub3JnLzIwMDEvWE1MU2NoZW1hIiB4bWxucz0iQW5ldEFwaS94bWwvdjEvc2NoZW1hL0FuZXRBcGlTY2hlbWEueHNkIj48bWVzc2FnZXM+PHJlc3VsdENvZGU+T2s8L3Jlc3VsdENvZGU+PG1lc3NhZ2U+PGNvZGU+STAwMDAxPC9jb2RlPjx0ZXh0PlN1Y2Nlc3NmdWwuPC90ZXh0PjwvbWVzc2FnZT48L21lc3NhZ2VzPjxjdXN0b21lclByb2ZpbGVJZD4xOTE1OTE5NjI5PC9jdXN0b21lclByb2ZpbGVJZD48Y3VzdG9tZXJBZGRyZXNzSWQ+MTg3MzI4MzgzNzwvY3VzdG9tZXJBZGRyZXNzSWQ+PC9jcmVhdGVDdXN0b21lclNoaXBwaW5nQWRkcmVzc1Jlc3BvbnNlPg==
     http_version: 
-  recorded_at: Wed, 20 Jun 2018 19:03:54 GMT
-- request:
-    method: post
-    uri: https://apitest.authorize.net/xml/v1/request.api
-    body:
-      encoding: UTF-8
-      string: |
-        <?xml version="1.0" encoding="utf-8"?>
-        <createCustomerPaymentProfileRequest xmlns="AnetApi/xml/v1/schema/AnetApiSchema.xsd">
-          <merchantAuthentication>
-            <name>7b4Ju4Pu</name>
-            <transactionKey>898zCaw9DX83m932</transactionKey>
-          </merchantAuthentication>
-          <customerProfileId>1914345221</customerProfileId>
-          <paymentProfile>
-            <billTo>
-              <firstName>Brenda</firstName>
-              <lastName>Leannon</lastName>
-              <company>Witting-Wisozk</company>
-              <address>027 Lynda Grove</address>
-              <city>North Roseliaborough</city>
-              <state>Minnesota</state>
-              <zip>60570-9242</zip>
-              <country>DK</country>
-              <phoneNumber>206.656.1717 x96643</phoneNumber>
-              <faxNumber>421.938.7243</faxNumber>
-            </billTo>
-            <payment>
-              <creditCard>
-                <cardNumber>6011000000000012</cardNumber>
-                <expirationDate>2023-04</expirationDate>
-                <cardCode>123</cardCode>
-              </creditCard>
-            </payment>
-          </paymentProfile>
-          <validationMode>testMode</validationMode>
-        </createCustomerPaymentProfileRequest>
-    headers:
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
-      User-Agent:
-      - Ruby
-      Content-Type:
-      - text/xml
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Cache-Control:
-      - private
-      Content-Type:
-      - application/xml; charset=utf-8
-      Access-Control-Allow-Origin:
-      - "*"
-      Access-Control-Allow-Headers:
-      - x-requested-with,cache-control,content-type,origin,method,SOAPAction
-      Access-Control-Allow-Credentials:
-      - 'true'
-      Access-Control-Allow-Methods:
-      - PUT,OPTIONS,POST,GET
-      X-Cnection:
-      - close
-      Content-Length:
-      - '940'
-      Date:
-      - Wed, 20 Jun 2018 19:03:54 GMT
-      Connection:
-      - keep-alive
-    body:
-      encoding: ASCII-8BIT
-      string: !binary |-
-        77u/PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48Y3JlYXRlQ3VzdG9tZXJQYXltZW50UHJvZmlsZVJlc3BvbnNlIHhtbG5zOnhzaT0iaHR0cDovL3d3dy53My5vcmcvMjAwMS9YTUxTY2hlbWEtaW5zdGFuY2UiIHhtbG5zOnhzZD0iaHR0cDovL3d3dy53My5vcmcvMjAwMS9YTUxTY2hlbWEiIHhtbG5zPSJBbmV0QXBpL3htbC92MS9zY2hlbWEvQW5ldEFwaVNjaGVtYS54c2QiPjxtZXNzYWdlcz48cmVzdWx0Q29kZT5PazwvcmVzdWx0Q29kZT48bWVzc2FnZT48Y29kZT5JMDAwMDE8L2NvZGU+PHRleHQ+U3VjY2Vzc2Z1bC48L3RleHQ+PC9tZXNzYWdlPjwvbWVzc2FnZXM+PGN1c3RvbWVyUHJvZmlsZUlkPjE5MTQzNDUyMjE8L2N1c3RvbWVyUHJvZmlsZUlkPjxjdXN0b21lclBheW1lbnRQcm9maWxlSWQ+MTgyNzk1NDM5NzwvY3VzdG9tZXJQYXltZW50UHJvZmlsZUlkPjx2YWxpZGF0aW9uRGlyZWN0UmVzcG9uc2U+MSwxLDEsKFRFU1RNT0RFKSBUaGlzIHRyYW5zYWN0aW9uIGhhcyBiZWVuIGFwcHJvdmVkLiwwMDAwMDAsUCwwLG5vbmUsVGVzdCB0cmFuc2FjdGlvbiBmb3IgVmFsaWRhdGVDdXN0b21lclBheW1lbnRQcm9maWxlLiwxLjAwLENDLGF1dGhfb25seSxub25lLEJyZW5kYSxMZWFubm9uLFdpdHRpbmctV2lzb3prLDAyNyBMeW5kYSBHcm92ZSxOb3J0aCBSb3NlbGlhYm9yb3VnaCxNaW5uZXNvdGEsNjA1NzAtOTI0MixESywyMDYuNjU2LjE3MTcgeDk2NjQzLDQyMS45MzguNzI0MyxlbWFpbEBleGFtcGxlLmNvbSwsLCwsLCwsLDAuMDAsMC4wMCwwLjAwLEZBTFNFLG5vbmUsRTcwRjlGRUVEN0JGMDE3MzQwMDgyRDhEQ0QyRTREMTIsLCwsLCwsLCwsLCwsWFhYWDAwMTIsRGlzY292ZXIsLCwsLCwsLCwsLCwsLCwsLDwvdmFsaWRhdGlvbkRpcmVjdFJlc3BvbnNlPjwvY3JlYXRlQ3VzdG9tZXJQYXltZW50UHJvZmlsZVJlc3BvbnNlPg==
-    http_version: 
-  recorded_at: Wed, 20 Jun 2018 19:03:54 GMT
-- request:
-    method: post
-    uri: https://apitest.authorize.net/xml/v1/request.api
-    body:
-      encoding: UTF-8
-      string: |
-        <?xml version="1.0" encoding="utf-8"?>
-        <createCustomerShippingAddressRequest xmlns="AnetApi/xml/v1/schema/AnetApiSchema.xsd">
-          <merchantAuthentication>
-            <name>7b4Ju4Pu</name>
-            <transactionKey>898zCaw9DX83m932</transactionKey>
-          </merchantAuthentication>
-          <customerProfileId>1914345221</customerProfileId>
-          <address>
-            <firstName>Brenda</firstName>
-            <lastName>Leannon</lastName>
-            <company>Witting-Wisozk</company>
-            <address>027 Lynda Grove</address>
-            <city>North Roseliaborough</city>
-            <state>Minnesota</state>
-            <zip>60570-9242</zip>
-            <country>DK</country>
-            <phoneNumber>206.656.1717 x96643</phoneNumber>
-            <faxNumber>421.938.7243</faxNumber>
-          </address>
-        </createCustomerShippingAddressRequest>
-    headers:
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
-      User-Agent:
-      - Ruby
-      Content-Type:
-      - text/xml
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Cache-Control:
-      - private
-      Content-Type:
-      - application/xml; charset=utf-8
-      Access-Control-Allow-Origin:
-      - "*"
-      Access-Control-Allow-Headers:
-      - x-requested-with,cache-control,content-type,origin,method,SOAPAction
-      Access-Control-Allow-Credentials:
-      - 'true'
-      Access-Control-Allow-Methods:
-      - PUT,OPTIONS,POST,GET
-      X-Cnection:
-      - close
-      Content-Length:
-      - '475'
-      Date:
-      - Wed, 20 Jun 2018 19:03:55 GMT
-      Connection:
-      - keep-alive
-    body:
-      encoding: ASCII-8BIT
-      string: !binary |-
-        77u/PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48Y3JlYXRlQ3VzdG9tZXJTaGlwcGluZ0FkZHJlc3NSZXNwb25zZSB4bWxuczp4c2k9Imh0dHA6Ly93d3cudzMub3JnLzIwMDEvWE1MU2NoZW1hLWluc3RhbmNlIiB4bWxuczp4c2Q9Imh0dHA6Ly93d3cudzMub3JnLzIwMDEvWE1MU2NoZW1hIiB4bWxucz0iQW5ldEFwaS94bWwvdjEvc2NoZW1hL0FuZXRBcGlTY2hlbWEueHNkIj48bWVzc2FnZXM+PHJlc3VsdENvZGU+T2s8L3Jlc3VsdENvZGU+PG1lc3NhZ2U+PGNvZGU+STAwMDAxPC9jb2RlPjx0ZXh0PlN1Y2Nlc3NmdWwuPC90ZXh0PjwvbWVzc2FnZT48L21lc3NhZ2VzPjxjdXN0b21lclByb2ZpbGVJZD4xOTE0MzQ1MjIxPC9jdXN0b21lclByb2ZpbGVJZD48Y3VzdG9tZXJBZGRyZXNzSWQ+MTg3MjA3NjA5ODwvY3VzdG9tZXJBZGRyZXNzSWQ+PC9jcmVhdGVDdXN0b21lclNoaXBwaW5nQWRkcmVzc1Jlc3BvbnNlPg==
-    http_version: 
-  recorded_at: Wed, 20 Jun 2018 19:03:55 GMT
+  recorded_at: Wed, 17 Oct 2018 21:25:31 GMT
 recorded_with: VCR 4.0.0

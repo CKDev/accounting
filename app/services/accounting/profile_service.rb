@@ -2,6 +2,10 @@ module Accounting
   class ProfileService < AccountingService
 
     def sync!
+      if resource.nil? # Don't want to process orphaned profiles
+        raise Accounting::SyncWarning.new("Profile cannot be created, profile with id '#{payload[:id]}' could not be found.", payload)
+      end
+
       if delete?
         resource.destroy!
         return
@@ -23,7 +27,7 @@ module Accounting
     end
 
     def resource
-      @resource ||= Accounting::Profile.find_or_initialize_by(profile_id: payload[:id])
+      @resource ||= Accounting::Profile.find_by(profile_id: payload[:id])
     end
 
     def details

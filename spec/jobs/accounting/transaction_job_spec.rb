@@ -4,7 +4,7 @@ RSpec.describe Accounting::TransactionJob, type: :job do
 
   include ActiveJob::TestHelper
 
-  let(:user) { FactoryGirl.create(:user) }
+  let(:user) { FactoryGirl.create(:user, :with_payment) }
 
   let(:transaction) do
     transaction = user.charge(1.00, user.payments.default)

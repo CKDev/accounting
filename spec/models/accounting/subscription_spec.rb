@@ -4,8 +4,9 @@ RSpec.describe Accounting::Subscription, type: :model do
 
   before(:all) { ActiveJob::Base.queue_adapter = :test }
 
-  let(:user) { FactoryGirl.create(:user) }
-  
+  let!(:user) { FactoryGirl.create(:user) }
+  let!(:payment) { FactoryGirl.build(:accounting_payment, :with_card, profile: user.profile) }
+
   it 'should support instantiation' do
     expect(Accounting::Subscription.new).to be_instance_of(Accounting::Subscription)
   end
@@ -22,10 +23,8 @@ RSpec.describe Accounting::Subscription, type: :model do
     expect(subscription.job_id).to be_nil
 
     VCR.use_cassette :valid_subscription do
-      subscription.save!
       subscription.process_now
     end
-
     expect(subscription.job_id).to eq('0')
   end
 
@@ -42,7 +41,6 @@ RSpec.describe Accounting::Subscription, type: :model do
     subscription = user.subscribe('Test', 2.00, 6, user.payments.default)
 
     VCR.use_cassette :valid_subscription do
-      subscription.save!
       subscription.process_now!
     end
 
@@ -55,7 +53,6 @@ RSpec.describe Accounting::Subscription, type: :model do
     subscription = user.subscribe('Test', 1.00, 6, user.payments.default)
 
     VCR.use_cassette :valid_subscription do
-      subscription.save!
       subscription.process_now!
     end
 
@@ -68,7 +65,6 @@ RSpec.describe Accounting::Subscription, type: :model do
     subscription = user.subscribe('Test', 1.00, 6, user.payments.default)
 
     VCR.use_cassette :valid_subscription do
-      subscription.save!
       subscription.process_now!
     end
 
@@ -80,7 +76,6 @@ RSpec.describe Accounting::Subscription, type: :model do
     subscription = user.subscribe('Test', 1.00, 6, user.payments.default)
 
     VCR.use_cassette :valid_subscription do
-      subscription.save!
       subscription.process_now!
     end
 

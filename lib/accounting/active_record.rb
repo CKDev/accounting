@@ -137,8 +137,6 @@ module Accounting
 
         define_hooks :before_subscription_tick, :after_subscription_tick, :before_transaction_submit, :after_transaction_submit, :before_transaction_sync, :after_transaction_sync, :before_subscription_submit, :after_subscription_submit, :before_subscription_sync, :after_subscription_sync, :before_subscription_cancel, :after_subscription_cancel
 
-        validates_presence_of :profile
-
         # Expose the options so they can be retrieved later
         after_initialize do
           @_accountable_options = accountable_opts
@@ -146,7 +144,7 @@ module Accounting
 
         before_validation unless: Proc.new { |a| a.profile.present? } do
           # Does not work if the proc references models not yet saved
-          self.build_profile(accountable_options.merge(profile_id: self.existing_profile_id))
+          self.build_profile(accountable_options.merge(profile_id: self.existing_profile_id, accountable: self))
         end
       end
 

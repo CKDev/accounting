@@ -82,7 +82,7 @@ module Accounting
         request = CreateCustomerPaymentProfileRequest.new
         request.paymentProfile = payment_profile
         request.customerProfileId = @profile.profile_id
-        request.validationMode = Accounting.config.validation_mode
+        request.validationMode = api_validation_mode(@profile.accountable)
 
         request
       end

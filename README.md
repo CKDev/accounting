@@ -297,6 +297,16 @@ After checking out the repo, run `bin/setup` to install dependencies. Then, run 
 
 To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
 
+
+### Webhook testing
+
+Web hook service specs don't pass unless you update the webhook json before testing.
+For webhook testing, run railsapp and ngrok to receive webhook. Use these commands in rails console to create profile and payment:
+`u = User.create`
+`address = Accounting::Address.new(first_name: 'Ming', last_name: 'Jin', street_address: 'street address', city: 'Calgary', state:'Illionis', zip: '345677')`
+`Accounting::Payment.new(profile: u.profile, profile_type: 'ach', routing: '011401533', account: '021000021', bank_name: 'Test bank', account_holder: 'Ming Jin', account_type: 'checking', address: address)`
+`Accounting::Test::CreateCard.new(u.profile, '370000000000002',1234,nil,nil,address).create_payment`
+
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/ehainer/accounting. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.

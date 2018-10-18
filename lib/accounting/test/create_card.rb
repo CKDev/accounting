@@ -4,6 +4,9 @@ module Accounting
     # Since we will use Accept.js for payment creation, we need a way to create Payment Profile in original way(with card data)
     # for tests. <tt>Accounting::Test::CreateCard<tt> provides the way.
     class CreateCard
+
+      include AccountingHelper
+
       attr_accessor :address, :profile, :payment
       attr_accessor :number, :ccv, :month, :year
 
@@ -21,7 +24,7 @@ module Accounting
 
       def create_payment
         payment_profile = AuthorizeNet::CIM::PaymentProfile.new(payment_method: card, billing_address: address&.to_billing_address)
-        response = Accounting.api(:cim).create_payment_profile(payment_profile, profile.profile_id, validation_mode: Accounting.config.validation_mode)
+        response = Accounting.api(:cim, api_options(profile.accountable)).create_payment_profile(payment_profile, profile.profile_id, validation_mode: api_validation_mode(profile.accountable))
         if response.success?
           if response.validation_response.present?
             # Add the payment attributes. Expiration only applies to card payment types
@@ -37,7 +40,6 @@ module Accounting
           # All is not well, include the authorize.net error code and message
           @payment.errors.add(:base, [response.message_code, response.message_text].join(' '))
         end
-
         @payment
       end
 

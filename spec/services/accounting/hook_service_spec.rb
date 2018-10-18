@@ -2,7 +2,12 @@ require 'spec_helper'
 
 RSpec.describe Accounting::HookService do
 
+  let(:profile) { FactoryGirl.create(:accounting_profile) }
   let(:hook) { Accounting::HookService.new({ 'payload' => { 'entityName' => 'transaction' }, 'eventType' => 'create' }) }
+
+  before(:each) do
+    profile.update_column(:profile_id, 1502474889)
+  end
 
   it 'will have a titleized entity name' do
     hook.payload[:entity_name] = 'transaction'

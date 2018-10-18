@@ -11,7 +11,6 @@ module Accounting
       @signature = signature.to_s
       @body = body.to_s
       @payload = payload
-
       authenticate!
       hook.handle!
     end
@@ -25,7 +24,7 @@ module Accounting
       def authenticate!
         raise Accounting::SyncError.new('Invalid signature', payload) if signature.blank?
 
-        Array.wrap(Accounting.config.signature).flatten.each do |sig|
+        Array.wrap(Accounting.config.signatures).flatten.each do |sig|
           return true if signature == OpenSSL::HMAC.hexdigest('SHA512', sig, body).upcase
         end
 
