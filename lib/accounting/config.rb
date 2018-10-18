@@ -1,7 +1,8 @@
 module Accounting
   class Config
 
-    attr_accessor :signatures, :gateway, :cancel_subscription_on_destroy, :queue, :logger, :domain
+    attr_accessor :gateway, :cancel_subscription_on_destroy, :queue, :logger, :domain
+    attr_writer :signatures
 
     def initialize
       @signatures = []

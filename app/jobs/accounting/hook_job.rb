@@ -1,8 +1,6 @@
 module Accounting
   class HookJob < ::ActiveJob::Base
 
-    include AccountingHelper
-
     rescue_from Accounting::SyncError, with: :sync_failure
 
     rescue_from Accounting::SyncWarning, with: :sync_failure
