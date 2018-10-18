@@ -36,7 +36,7 @@ RSpec.describe Accounting::Profile, type: :model do
     stub_request(:any, 'https://apitest.authorize.net/xml/v1/request.api').to_raise('Blocked')
     user = FactoryGirl.build(:user)
     expect(user).not_to be_valid
-    expect(user.errors.full_messages).to eq(['Profile base Blocked', 'Profile profile can\'t be blank'])
+    expect(user.errors.full_messages).to eq(['Profile base Blocked', 'Profile profile Missing authnet profile_id'])
   end
 
   it 'should delete the customer profile when destroyed' do

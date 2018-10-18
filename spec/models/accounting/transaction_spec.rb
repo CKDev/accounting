@@ -42,7 +42,7 @@ RSpec.describe Accounting::Transaction, type: :model do
     expect(charge.options['address_id']).to eq(address.address_id)
   end
 
-  xit 'will have errors from authorize.net requests that fail, but are not duplicates', focus: true do
+  xit 'will have errors from authorize.net requests that fail, but are not duplicates' do
     charge = user.charge(1.00, user.payments.default)
     VCR.use_cassette(:invalid_charge) { charge.process_now }
     expect(charge.errors.full_messages).to eq(['E00003 Broken'])
