@@ -3,7 +3,7 @@ module Accounting
 
     include AccountingHelper
 
-    belongs_to :accountable, polymorphic: true, required: true, class_name: '::Accounting::Profile'
+    belongs_to :accountable, polymorphic: true, required: true
 
     has_many :payments, inverse_of: :profile, autosave: true, dependent: :destroy do
       def default
@@ -19,7 +19,7 @@ module Accounting
 
     validate :create_profile
 
-    validates_presence_of :profile_id
+    validates_presence_of :profile_id, message: 'Missing authnet profile_id'
 
     before_destroy :delete_profile
 

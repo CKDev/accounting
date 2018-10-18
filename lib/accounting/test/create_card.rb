@@ -40,7 +40,6 @@ module Accounting
           # All is not well, include the authorize.net error code and message
           @payment.errors.add(:base, [response.message_code, response.message_text].join(' '))
         end
-
         @payment
       end
 
