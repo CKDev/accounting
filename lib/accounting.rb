@@ -48,8 +48,9 @@ module Accounting
   end
 
   def self.api(type, **options)
-    options[:api_login] ||= config.login
-    options[:api_key] ||= config.key
+    raise ArgumentError, 'Authnet login can\'t be blank' if options[:api_login].nil?
+    raise ArgumentError, 'Authnet key can\'t be blank' if options[:api_key].nil?
+
     case type.to_sym
       when :arb
         AuthorizeNet::ARB::Transaction.new(options[:api_login], options[:api_key], { gateway: config.gateway })

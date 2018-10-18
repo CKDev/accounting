@@ -22,6 +22,10 @@ module AccountingHelper
     }
   end
 
+  def api_validation_mode(accountable)
+    option(:api_validation_mode, accountable)
+  end
+
   def option(key, accountable)
     accountable.instance_variable_get('@_accountable_options').try(:[], key.to_sym)
   end

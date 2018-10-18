@@ -2,15 +2,18 @@ require 'spec_helper'
 
 RSpec.describe Accounting::PaymentService do
 
-  let(:hook_profile)          { { "notificationId" => "e2eaa2bd-4c5f-4bb8-a943-da264a0b1968", "eventType" => "net.authorize.customer.created", "eventDate" => "2017-09-20T17:18:54.9460311Z", "webhookId" => "82ed4771-17bb-4fc6-8ea4-f0cad81d3414", "payload" => {"paymentProfiles" => [], "merchantCustomerId" => "2b86c057-d7fe-4d57-a", "description" => "Ipsam quam voluptatem sunt et dolorum.", "entityName" => "customerProfile", "id" => "1502473210" }} }
-  let(:hook_payment_card)     { { "notificationId" => "35f96318-03c4-419e-922f-2b0fb561b885", "eventType" => "net.authorize.customer.paymentProfile.created", "eventDate" => "2017-09-21T04:45:36.437607Z", "webhookId" => "82ed4771-17bb-4fc6-8ea4-f0cad81d3414", "payload" => {"customerProfileId" => 1502473210, "entityName" => "customerPaymentProfile", "id" => "1501996571" }} }
-  let(:hook_payment_ach)      { { "notificationId" => "35f96318-03c4-419e-922f-2b0fb561b885", "eventType" => "net.authorize.customer.paymentProfile.created", "eventDate" => "2017-09-21T04:45:36.437607Z", "webhookId" => "82ed4771-17bb-4fc6-8ea4-f0cad81d3414", "payload" => {"customerProfileId" => 1502473210, "entityName" => "customerPaymentProfile", "id" => "1807755575" }} }
+  let(:profile) { FactoryGirl.create(:accounting_profile) }
+
+  let(:hook_profile)          { {"notificationId"=>"16b7f322-5914-41af-99bc-26095ba7f2e7", "eventType"=>"net.authorize.customer.created", "eventDate"=>"2018-10-17T16:00:46.5489933Z", "webhookId"=>"eb6e1f40-9e17-4d8d-aae3-a47acc001fbc", "payload"=>{"merchantCustomerId"=>"051562a2", "description"=>"Test Description", "entityName"=>"customerProfile", "id"=>"1915911486"}, "hook"=>{"notificationId"=>"16b7f322-5914-41af-99bc-26095ba7f2e7", "eventType"=>"net.authorize.customer.created", "eventDate"=>"2018-10-17T16:00:46.5489933Z", "webhookId"=>"eb6e1f40-9e17-4d8d-aae3-a47acc001fbc", "payload"=>{"merchantCustomerId"=>"051562a2", "description"=>"Test Description", "entityName"=>"customerProfile", "id"=>"1915911486"}}} }
+  let(:hook_payment_card)     { {"notificationId"=>"9a8c85fc-ac8f-460e-84a7-cc4c963711a7", "eventType"=>"net.authorize.customer.paymentProfile.created", "eventDate"=>"2018-10-17T16:30:02.2270619Z", "webhookId"=>"eb6e1f40-9e17-4d8d-aae3-a47acc001fbc", "payload"=>{"customerProfileId"=>1915911486, "entityName"=>"customerPaymentProfile", "id"=>"1829269244"}, "hook"=>{"notificationId"=>"9a8c85fc-ac8f-460e-84a7-cc4c963711a7", "eventType"=>"net.authorize.customer.paymentProfile.created", "eventDate"=>"2018-10-17T16:30:02.2270619Z", "webhookId"=>"eb6e1f40-9e17-4d8d-aae3-a47acc001fbc", "payload"=>{"customerProfileId"=>1915911486, "entityName"=>"customerPaymentProfile", "id"=>"1829269244"}}} }
+  let(:hook_payment_ach)      { {"notificationId"=>"4c8711d3-3cf5-4953-afe7-805dcd595103", "eventType"=>"net.authorize.customer.paymentProfile.created", "eventDate"=>"2018-10-17T16:27:56.8906329Z", "webhookId"=>"eb6e1f40-9e17-4d8d-aae3-a47acc001fbc", "payload"=>{"customerProfileId"=>1915911486, "entityName"=>"customerPaymentProfile", "id"=>"1829269233"}, "hook"=>{"notificationId"=>"4c8711d3-3cf5-4953-afe7-805dcd595103", "eventType"=>"net.authorize.customer.paymentProfile.created", "eventDate"=>"2018-10-17T16:27:56.8906329Z", "webhookId"=>"eb6e1f40-9e17-4d8d-aae3-a47acc001fbc", "payload"=>{"customerProfileId"=>1915911486, "entityName"=>"customerPaymentProfile", "id"=>"1829269233"}}} }
 
   let(:service_profile)       { Accounting::HookService.new(hook_profile).service }
   let(:service_payment_card)  { Accounting::HookService.new(hook_payment_card).service }
   let(:service_payment_ach)   { Accounting::HookService.new(hook_payment_ach).service }
 
   before(:each) do
+    profile.update_column(:profile_id, 1915911486)
     service_profile.sync!
   end
 

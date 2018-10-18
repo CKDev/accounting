@@ -2,7 +2,7 @@ require 'spec_helper'
 
 RSpec.describe Accounting::HooksController, type: :controller do
 
-  let(:valid_header)    { { 'X-ANET-Signature' => 'sha512=2E17B31056F098C5A300023E957FB0A19DB3F3800485454AA04F71A869386F4EDFDC31EA4A952B449550CFE8F19681FDBA7E6AAB2BA5FFC23F4E9CD638CADAAC' } }
+  let(:valid_header)    { { 'X-ANET-Signature' => 'sha512=0F6CE5553D27622F6BA93BA1D1DF1541AA29E912881D8AD364F41C07BB2EC4F6697BF7625D9F37B41E4046799A91B5B4B4084ADC892DDB17EF8E88CA0B829528' } }
   let(:invalid_header)  { { 'X-ANET-Signature' => 'sha512=2883C17E8BF62AD36C1F34C9C11FFAC38DCB7DB5661AE900F4C7549436F1797F90FDA81EF92DD0C5D967ECE2D60ACA9C55454D561F486B5E33EB7EF5766BEEA6' } }
   let(:error_header)    { { 'X-ANET-Signature' => 'sha512=5F81D8B8B6250EA6D6E3FBF4E30902708C2F5BE38FF9FB511F0350DC4F49F201BDA414B3FB718FF2372C9DF8A32C998A8E131148599237C1DECD370F1231B0F4' } }
 
@@ -13,10 +13,10 @@ RSpec.describe Accounting::HooksController, type: :controller do
     @profile = FactoryGirl.create(:accounting_profile)
     @paymentProfile = FactoryGirl.create(:accounting_payment, :with_ach, profile: @profile)
 
-    @valid_payload = "{\"notificationId\":\"d9819ad2-f656-49ce-b890-1213233648b4\",
+    @valid_payload =  "{\"notificationId\":\"4985a7ab-0503-428c-bc0d-e034b83e7be7\",
                        \"eventType\":\"net.authorize.customer.paymentProfile.created\",
-                       \"eventDate\":\"2017-09-21T20:45:10.8088504Z\",
-                       \"webhookId\":\"82ed4771-17bb-4fc6-8ea4-f0cad81d3414\",
+                       \"eventDate\":\"2018-10-18T03:09:30.2729756Z\",
+                       \"webhookId\":\"eb6e1f40-9e17-4d8d-aae3-a47acc001fbc\",
                        \"payload\":{\"customerProfileId\":#{@profile.profile_id},
                        \"entityName\":\"customerPaymentProfile\",
                        \"id\":#{@paymentProfile.id}}}"

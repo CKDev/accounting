@@ -2,9 +2,14 @@ require 'spec_helper'
 
 RSpec.describe Accounting::ProfileService do
 
-  let(:hook_profile)          { { "notificationId" => "e2eaa2bd-4c5f-4bb8-a943-da264a0b1968", "eventType" => "net.authorize.customer.created", "eventDate" => "2017-09-20T17:18:54.9460311Z", "webhookId" => "82ed4771-17bb-4fc6-8ea4-f0cad81d3414", "payload" => { "paymentProfiles" => [{ "id" => "1501998893" }], "merchantCustomerId" => "2b86c057-d7fe-4d57-a", "description" => "Ipsam quam voluptatem sunt et dolorum.", "entityName" => "customerProfile", "id" => "1502474889" }} }
+  let(:profile) { FactoryGirl.create(:accounting_profile) }
+  let(:hook_profile)          { {"notificationId"=>"16b7f322-5914-41af-99bc-26095ba7f2e7", "eventType"=>"net.authorize.customer.created", "eventDate"=>"2018-10-17T16:00:46.5489933Z", "webhookId"=>"eb6e1f40-9e17-4d8d-aae3-a47acc001fbc", "payload"=>{"merchantCustomerId"=>"051562a2", "description"=>"Test Description", "entityName"=>"customerProfile", "id"=>"1915911486"}, "hook"=>{"notificationId"=>"16b7f322-5914-41af-99bc-26095ba7f2e7", "eventType"=>"net.authorize.customer.created", "eventDate"=>"2018-10-17T16:00:46.5489933Z", "webhookId"=>"eb6e1f40-9e17-4d8d-aae3-a47acc001fbc", "payload"=>{"merchantCustomerId"=>"051562a2", "description"=>"Test Description", "entityName"=>"customerProfile", "id"=>"1915911486"}}} }
 
   let(:service_profile)       { Accounting::HookService.new(hook_profile).service }
+
+  before(:each) do
+    profile.update_column(:profile_id, 1502474889)
+  end
 
   it 'should be instantiable' do
     expect(service_profile).to be_instance_of(Accounting::ProfileService)

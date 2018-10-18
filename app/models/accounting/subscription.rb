@@ -9,7 +9,7 @@ module Accounting
 
     belongs_to :profile, inverse_of: :subscriptions
 
-    belongs_to :payment, optional: true
+    belongs_to :payment, required: true
 
     has_many :transactions
 
@@ -21,7 +21,7 @@ module Accounting
 
     validates_inclusion_of :status, in: Accounting::Subscription.statuses.keys
 
-    validates :name, :start_date, :payment, :length, presence: true
+    validates :name, :start_date, :length, presence: true
 
     validates_inclusion_of :length, in: 7..365, message: 'interval must be between 7 and 365 days', if: proc { |s| s.unit == DAY }
 

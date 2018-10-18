@@ -70,7 +70,7 @@ module Accounting
         ach = AuthorizeNet::ECheck.new(routing, account, bank_name, account_holder, { account_type: account_type, check_number: check_number, echeck_type: echeck_type || AuthorizeNet::ECheck::CheckType::INTERNET_INITIATED })
         payment_profile = AuthorizeNet::CIM::PaymentProfile.new(payment_method: ach, billing_address: address&.to_billing_address)
 
-        response = Accounting.api(:cim, api_options(profile.accountable)).create_payment_profile(payment_profile, profile.profile_id, validation_mode: Accounting.config.validation_mode)
+        response = Accounting.api(:cim, api_options(profile.accountable)).create_payment_profile(payment_profile, profile.profile_id, validation_mode: api_validation_mode(profile.accountable))
 
         if response.success?
           if response.validation_response.present?

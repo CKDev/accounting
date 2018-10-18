@@ -4,12 +4,12 @@ RSpec.describe Accounting::HookJob, type: :job do
 
   include ActiveJob::TestHelper
 
-  let(:valid_signature) { '9DE493FA0B3FF24708AB26D33B7A52E321C4B3D6987AFE6CCF3F5E97C16649BF62403A3ACAF0C317E58DF7F012A6DD3FD6364ED08284988A62112148931E05B1' }
+  let(:valid_signature) { '0F6CE5553D27622F6BA93BA1D1DF1541AA29E912881D8AD364F41C07BB2EC4F6697BF7625D9F37B41E4046799A91B5B4B4084ADC892DDB17EF8E88CA0B829528' }
   let(:invalid_signature) { 'BOLOGNE' }
 
-  let(:body) { '{"notificationId":"d57e72c5-5e4a-418b-a0f5-ed7f5b39258d","eventType":"net.authorize.customer.paymentProfile.created","eventDate":"2017-09-22T22:10:10.5591051Z","webhookId":"82ed4771-17bb-4fc6-8ea4-f0cad81d3414","payload":{"customerProfileId":1502483854,"entityName":"customerPaymentProfile","id":"1502013436"}}' }
-  let(:valid_payload) { { "notificationId" => "d57e72c5-5e4a-418b-a0f5-ed7f5b39258d", "eventType" => "net.authorize.customer.paymentProfile.created", "eventDate" => "2017-09-22T22:10:10.5591051Z", "webhookId" => "82ed4771-17bb-4fc6-8ea4-f0cad81d3414", "payload" => { "customerProfileId" => 1502483854, "entityName" => "customerPaymentProfile", "id" => "1502013436" } } }
-  let(:invalid_payload) { { "notificationId" => "d57e72c5-5e4a-418b-a0f5-ed7f5b39258d", "eventType" => "net.authorize.customer.paymentProfile.created", "eventDate" => "2017-09-22T22:10:10.5591051Z", "webhookId" => "82ed4771-17bb-4fc6-8ea4-f0cad81d3414", "payload" => { "customerProfileId" => 1502483854, "entityName" => "customerPaymentProfile", "id" => "1111111111" } } }
+  let(:body) { '{"notificationId":"4985a7ab-0503-428c-bc0d-e034b83e7be7","eventType":"net.authorize.customer.paymentProfile.created","eventDate":"2018-10-18T03:09:30.2729756Z","webhookId":"eb6e1f40-9e17-4d8d-aae3-a47acc001fbc","payload":{"customerProfileId":1915926376,"entityName":"customerPaymentProfile","id":"1829278584"}}' }
+  let(:valid_payload) { {"notificationId"=>"4985a7ab-0503-428c-bc0d-e034b83e7be7", "eventType"=>"net.authorize.customer.paymentProfile.created", "eventDate"=>"2018-10-18T03:09:30.2729756Z", "webhookId"=>"eb6e1f40-9e17-4d8d-aae3-a47acc001fbc", "payload"=>{"customerProfileId"=>1915926376, "entityName"=>"customerPaymentProfile", "id"=>"1829278584"} } }
+  let(:invalid_payload) { {"notificationId"=>"4985a7ab-0503-428c-bc0d-e034b83e7be7", "eventType"=>"net.authorize.customer.paymentProfile.created", "eventDate"=>"2018-10-18T03:09:30.2729756Z", "webhookId"=>"eb6e1f40-9e17-4d8d-aae3-a47acc001fbc", "payload"=>{"customerProfileId"=>1915926376, "entityName"=>"customerPaymentProfile", "id"=>"1111111111"} } }
 
   subject(:valid_job) { described_class.perform_later(valid_signature, body, valid_payload) }
   subject(:invalid_job) { described_class.perform_later(invalid_signature, body, valid_payload) }

@@ -4,7 +4,7 @@ RSpec.describe Accounting::SubscriptionJob, type: :job do
 
   include ActiveJob::TestHelper
 
-  let(:user) { FactoryGirl.create(:user) }
+  let(:user) { FactoryGirl.create(:user, :with_payment) }
 
   let(:subscription) do
     subscription = user.subscribe('Test', 4.00, 6, user.payments.default)

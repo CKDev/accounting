@@ -2,8 +2,10 @@ require 'spec_helper'
 
 RSpec.describe Accounting::SubscriptionService do
 
-  let(:hook_profile)          { { "notificationId" => "e2eaa2bd-4c5f-4bb8-a943-da264a0b1968", "eventType" => "net.authorize.customer.created", "eventDate" => "2017-09-20T17:18:54.9460311Z", "webhookId" => "82ed4771-17bb-4fc6-8ea4-f0cad81d3414", "payload" => { "paymentProfiles" => [{ "id" => "1501998893" }], "merchantCustomerId" => "2b86c057-d7fe-4d57-a", "description" => "Ipsam quam voluptatem sunt et dolorum.", "entityName" => "customerProfile", "id" => "1502474889" }} }
-  let(:hook_payment)          { { "notificationId" => "35f96318-03c4-419e-922f-2b0fb561b885", "eventType" => "net.authorize.customer.paymentProfile.created", "eventDate" => "2017-09-21T04:45:36.437607Z", "webhookId" => "82ed4771-17bb-4fc6-8ea4-f0cad81d3414", "payload" => { "customerProfileId" => 1502473210, "entityName" => "customerPaymentProfile", "id" => "1501998893" }} }
+  let(:profile) { FactoryGirl.create(:accounting_profile) }
+
+  let(:hook_profile)          { {"notificationId"=>"16b7f322-5914-41af-99bc-26095ba7f2e7", "eventType"=>"net.authorize.customer.created", "eventDate"=>"2018-10-17T16:00:46.5489933Z", "webhookId"=>"eb6e1f40-9e17-4d8d-aae3-a47acc001fbc", "payload"=>{"merchantCustomerId"=>"051562a2", "description"=>"Test Description", "entityName"=>"customerProfile", "id"=>"1915911486"}, "hook"=>{"notificationId"=>"16b7f322-5914-41af-99bc-26095ba7f2e7", "eventType"=>"net.authorize.customer.created", "eventDate"=>"2018-10-17T16:00:46.5489933Z", "webhookId"=>"eb6e1f40-9e17-4d8d-aae3-a47acc001fbc", "payload"=>{"merchantCustomerId"=>"051562a2", "description"=>"Test Description", "entityName"=>"customerProfile", "id"=>"1915911486"}}} }
+  let(:hook_payment)          { {"notificationId"=>"9a8c85fc-ac8f-460e-84a7-cc4c963711a7", "eventType"=>"net.authorize.customer.paymentProfile.created", "eventDate"=>"2018-10-17T16:30:02.2270619Z", "webhookId"=>"eb6e1f40-9e17-4d8d-aae3-a47acc001fbc", "payload"=>{"customerProfileId"=>1915911486, "entityName"=>"customerPaymentProfile", "id"=>"1829269244"}, "hook"=>{"notificationId"=>"9a8c85fc-ac8f-460e-84a7-cc4c963711a7", "eventType"=>"net.authorize.customer.paymentProfile.created", "eventDate"=>"2018-10-17T16:30:02.2270619Z", "webhookId"=>"eb6e1f40-9e17-4d8d-aae3-a47acc001fbc", "payload"=>{"customerProfileId"=>1915911486, "entityName"=>"customerPaymentProfile", "id"=>"1829269244"}}} }
   let(:hook_subscription)     { { "notificationId" => "d68c0825-5ba8-40b9-97db-f16274731fab", "eventType" => "net.authorize.customer.subscription.created", "eventDate" => "2017-09-21T19:57:18.9398092Z", "webhookId" => "82ed4771-17bb-4fc6-8ea4-f0cad81d3414", "payload" => { "name" => "Test", "amount" => 4.0, "status" => "canceled", "profile" => {"customerProfileId" => 1502474889, "customerPaymentProfileId" => 1501998893}, "entityName" => "subscription", "id" => "4765887"}, "hook"=>{"notificationId" => "d68c0825-5ba8-40b9-97db-f16274731fab", "eventType" => "net.authorize.customer.subscription.created", "eventDate" => "2017-09-21T19:57:18.9398092Z", "webhookId" => "82ed4771-17bb-4fc6-8ea4-f0cad81d3414", "payload" => {"name" => "Test", "amount"=>4.0, "status" => "canceled", "profile" => {"customerProfileId" => 1502474889, "customerPaymentProfileId" => 1501998893}, "entityName" => "subscription", "id" => "4765887" }}} }
 
   let(:service_profile)       { Accounting::HookService.new(hook_profile).service }
@@ -11,6 +13,7 @@ RSpec.describe Accounting::SubscriptionService do
   let(:service_subscription)  { Accounting::HookService.new(hook_subscription).service }
 
   before(:each) do
+    profile.update_column(:profile_id, 1502474889)
     service_profile.sync!
   end
 

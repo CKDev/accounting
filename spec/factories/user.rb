@@ -1,7 +1,6 @@
 FactoryGirl.define do
   factory :user, class: 'User' do
 
-    profile { FactoryGirl.create(:accounting_profile, :with_all_cards) }
     email { FFaker::Internet.email }
     name { FFaker::Name.name }
 
@@ -11,7 +10,7 @@ FactoryGirl.define do
         payments 1
       end
 
-      before :create do |user, evaluator|
+      after :create do |user, evaluator|
         evaluator.payments.times do
           payment = FactoryGirl.build(:accounting_payment, :with_card, profile: user.profile)
           payment.save
@@ -22,21 +21,18 @@ FactoryGirl.define do
 
     trait :with_transactions do
       after :create do |user, evaluator|
-        user.hold(1.00, user.payments.default).save!
-        VCR.use_cassette(:valid_hold, record: :new_episodes) { user.transactions.holds.map(&:process_now!) }
+        VCR.use_cassette(:valid_hold, record: :new_episodes) { user.hold(1.00, user.payments.default).process_now! }
 
-        user.charge(1.00, user.payments.default).save!
-        VCR.use_cassette(:valid_charge, record: :new_episodes) { user.transactions.charges.map(&:process_now!) }
+        VCR.use_cassette(:valid_charge, record: :new_episodes) { user.charge(1.00, user.payments.default).process_now! }
 
-        user.void(user.transactions.charges.last).save!
-        VCR.use_cassette(:valid_void, record: :new_episodes) { user.transactions.voids.map(&:process_now!) }
+        VCR.use_cassette(:valid_void, record: :new_episodes) { user.void(user.transactions.charges.last).process_now! }
 
-        user.refund(1.00, user.transactions.captured.last, user.payments.default).save!
-        VCR.use_cassette(:valid_refund, record: :new_episodes) { user.transactions.refunds.map(&:process_now!) }
+        # Refund fails here because settled transactions can be refunded only the next day
+        # VCR.use_cassette(:valid_refund, record: :new_episodes) { user.refund(1.00, user.transactions.captured.last, user.payments.default).process_now }
 
-        user.capture(user.transactions.holds.last).save!
-        VCR.use_cassette(:valid_capture, record: :new_episodes) { user.transactions.captures.map(&:process_now!) }
+        VCR.use_cassette(:valid_capture, record: :new_episodes) { user.capture(user.transactions.holds.last).process_now! }
       end
     end
+
   end
 end

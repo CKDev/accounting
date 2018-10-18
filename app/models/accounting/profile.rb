@@ -3,7 +3,7 @@ module Accounting
 
     include AccountingHelper
 
-    belongs_to :accountable, polymorphic: true, optional: true, class_name: '::Accounting::Profile'
+    belongs_to :accountable, polymorphic: true, required: true, class_name: '::Accounting::Profile'
 
     has_many :payments, inverse_of: :profile, autosave: true, dependent: :destroy do
       def default
@@ -103,13 +103,13 @@ module Accounting
         request = AuthorizeNet::API::GetTransactionListForCustomerRequest.new
         request.customerProfileId = self.profile_id
 
-        request.paging = AuthorizeNet::API::Paging.new;
-        request.paging.limit = 100;
-        request.paging.offset = 1;
+        request.paging = AuthorizeNet::API::Paging.new
+        request.paging.limit = 100
+        request.paging.offset = 1
 
-        request.sorting = AuthorizeNet::API::TransactionListSorting.new;
+        request.sorting = AuthorizeNet::API::TransactionListSorting.new
         request.sorting.orderBy = AuthorizeNet::API::TransactionListOrderFieldEnum::SubmitTimeUTC
-        request.sorting.orderDescending = true;
+        request.sorting.orderDescending = true
 
         request
       end

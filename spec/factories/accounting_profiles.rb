@@ -2,6 +2,7 @@ require_relative '../../lib/accounting/test/create_card'
 
 FactoryGirl.define do
   factory :accounting_profile, class: 'Accounting::Profile' do
+    initialize_with { FactoryGirl.create(:user).profile }
     authnet_id { SecureRandom.uuid[0..19] }
     authnet_email { FFaker::Internet.email }
     authnet_description { FFaker::Lorem.sentence(2) }

@@ -1,6 +1,10 @@
 class User < ApplicationRecord
+  creds = YAML.load_file(File.dirname(__FILE__) + '/../../../credentials.yml')
 
-  accountable email: :email, id: proc { |u| rand(1..9999) }, description: 'Test Description', queue: 'default'
+  accountable email: :email, id: proc { |u| SecureRandom.hex(4) }, description: 'Test Description',
+    api_login: proc { creds['login'] },
+    api_key: proc { creds['key'] },
+    api_validation_mode: :testMode
 
   # Transaction Callbacks
   before_transaction_submit :before_submit_transaction
