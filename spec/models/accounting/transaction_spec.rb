@@ -34,12 +34,12 @@ RSpec.describe Accounting::Transaction, type: :model do
     address = FactoryGirl.create(:accounting_address, :with_payment, :with_address_id)
     charge = user.charge(1.00, user.payments.default, address_id: '0')
     expect(charge).to be_valid
-    expect(charge.options['address_id']).to eq('0')
+    expect(charge.options[:address_id]).to eq('0')
     
     charge = user.charge(1.00, user.payments.default, address_id: address)
     expect(charge).to be_valid
-    expect(charge.options['address_id']).to be_present
-    expect(charge.options['address_id']).to eq(address.address_id)
+    expect(charge.options[:address_id]).to be_present
+    expect(charge.options[:address_id]).to eq(address.address_id)
   end
 
   xit 'will have errors from authorize.net requests that fail, but are not duplicates' do

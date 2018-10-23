@@ -11,7 +11,7 @@ module Accounting
 
     belongs_to :subscription, optional: true
 
-    serialize :options, JSON
+    serialize :options, Hash
 
     delegate :accountable, to: :profile
 
@@ -170,32 +170,32 @@ module Accounting
 
       def hold
         before_transaction!
-        response = Accounting.api(:cim, api_options(profile.accountable)).create_transaction_auth_only(amount, profile.profile_id, payment.payment_profile_id, nil, options)
-        handle_transaction(response, status: :held, message: options['message'])
+        response = Accounting.api(:cim, api_options(profile.accountable)).create_transaction_auth_only(amount, profile.profile_id, payment.payment_profile_id, order, options)
+        handle_transaction(response, status: :held, message: options[:message])
       end
 
       def capture
         before_transaction!
-        response = Accounting.api(:cim, api_options(profile.accountable)).create_transaction_prior_auth_capture(original_transaction.try(:transaction_id), amount, nil, options)
-        handle_transaction(response, status: :captured, message: options['message'])
+        response = Accounting.api(:cim, api_options(profile.accountable)).create_transaction_prior_auth_capture(original_transaction.try(:transaction_id), amount, order, options)
+        handle_transaction(response, status: :captured, message: options[:message])
       end
 
       def void
         before_transaction!
         response = Accounting.api(:cim, api_options(profile.accountable)).create_transaction_void(original_transaction.try(:transaction_id), options)
-        handle_transaction(response, status: :voided, message: options['message'])
+        handle_transaction(response, status: :voided, message: options[:message])
       end
 
       def charge
         before_transaction!
-        response = Accounting.api(:cim, api_options(profile.accountable)).create_transaction_auth_capture(amount, profile.profile_id, payment.payment_profile_id, nil, options)
-        handle_transaction(response, status: :captured, message: options['message'])
+        response = Accounting.api(:cim, api_options(profile.accountable)).create_transaction_auth_capture(amount, profile.profile_id, payment.payment_profile_id, order, options)
+        handle_transaction(response, status: :captured, message: options[:message])
       end
 
       def refund
         before_transaction!
-        response = Accounting.api(:cim, api_options(profile.accountable)).create_transaction_refund(original_transaction.try(:transaction_id), amount, profile.profile_id, payment.payment_profile_id, nil, options)
-        handle_transaction(response, status: :refunded, message: options['message'])
+        response = Accounting.api(:cim, api_options(profile.accountable)).create_transaction_refund(original_transaction.try(:transaction_id), amount, profile.profile_id, payment.payment_profile_id, order, options)
+        handle_transaction(response, status: :refunded, message: options[:message])
       end
 
       def before_transaction!
@@ -228,6 +228,10 @@ module Accounting
 
       def update_subscription!
         subscription.update!(next_transaction_at: subscription.next_transaction_date) if subscription?
+      end
+
+      def order
+        options[:order]
       end
 
   end
