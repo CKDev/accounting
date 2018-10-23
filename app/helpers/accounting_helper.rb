@@ -16,7 +16,7 @@ module AccountingHelper
 
   def api_options(accountable)
     return {} if accountable.nil?
-    {
+    options = {
       api_login: value_from(option(:api_login, accountable), accountable, accountable),
       api_key: value_from(option(:api_key, accountable), accountable, accountable)
     }
