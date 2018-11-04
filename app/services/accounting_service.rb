@@ -1,10 +1,11 @@
 class AccountingService
 
-    attr_accessor :payload, :event
+    attr_accessor :payload, :event, :api_creds
 
-    def initialize(payload={}, event=nil)
+    def initialize(payload={}, event=nil, api_creds=nil)
       @payload = payload
       @event = event
+      @api_creds = api_creds
     end
 
     def sync
@@ -21,6 +22,14 @@ class AccountingService
 
     def delete?
       event == 'deleted'
+    end
+
+    def hook_api_options
+      return {} if api_creds.nil?
+      {
+        api_login: api_creds[:login],
+        api_key: api_creds[:key]
+      }
     end
 
 end

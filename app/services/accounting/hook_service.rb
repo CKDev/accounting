@@ -1,12 +1,13 @@
 module Accounting
   class HookService
 
-    attr_accessor :hook, :payload, :event
+    attr_accessor :hook, :payload, :event, :api_creds
 
-    def initialize(hook)
+    def initialize(hook, api_creds=nil)
       @hook = hook.deep_transform_keys { |k| k.underscore.to_sym }
       @payload = @hook[:payload]
       @event = @hook[:event_type].split('.').last
+      @api_creds = api_creds
     end
 
     def handle!
@@ -20,7 +21,7 @@ module Accounting
     def service
       case payload[:entity_name]
         when 'transaction'
-          Accounting::TransactionService.new(payload, event)
+          Accounting::TransactionService.new(payload, event, api_creds)
         when 'subscription'
           Accounting::SubscriptionService.new(payload, event)
         when 'customerProfile'

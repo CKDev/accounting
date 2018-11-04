@@ -1,8 +1,6 @@
 module Accounting
   class TransactionService < AccountingService
 
-    include AccountingHelper
-
     def sync!
       # Ignore verification transactions
       return if details&.order&.description == 'Test transaction for ValidateCustomerPaymentProfile.'
@@ -107,7 +105,7 @@ module Accounting
     end
 
     def details
-      if resource.details.nil?
+      if resource.details(hook_api_options).nil?
         raise Accounting::SyncError.new("Transaction cannot be created because the record could not be found.", payload)
       else
         resource.details

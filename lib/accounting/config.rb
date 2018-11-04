@@ -2,10 +2,10 @@ module Accounting
   class Config
 
     attr_accessor :gateway, :cancel_subscription_on_destroy, :queue, :logger, :domain
-    attr_writer :signatures
+    attr_writer :api_creds
 
     def initialize
-      @signatures = []
+      @api_creds = []
       @gateway ||= :sandbox
       @cancel_subscription_on_destroy ||= false
       @queue ||= :default
@@ -13,11 +13,12 @@ module Accounting
       @domain ||= 'example.org'
     end
 
-    def signatures
-      if @signatures.respond_to?(:call)
-        @signatures.call
+    # @return Array of authnet api logins hash
+    def api_creds
+      if @api_creds.respond_to?(:call)
+        @api_creds.call
       else
-        @signatures
+        @api_creds
       end
     end
 
