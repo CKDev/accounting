@@ -11,9 +11,9 @@ RSpec.describe Accounting::HookJob, type: :job do
   let(:valid_payload) { {"notificationId"=>"4985a7ab-0503-428c-bc0d-e034b83e7be7", "eventType"=>"net.authorize.customer.paymentProfile.created", "eventDate"=>"2018-10-18T03:09:30.2729756Z", "webhookId"=>"eb6e1f40-9e17-4d8d-aae3-a47acc001fbc", "payload"=>{"customerProfileId"=>1915926376, "entityName"=>"customerPaymentProfile", "id"=>"1829278584"} } }
   let(:invalid_payload) { {"notificationId"=>"4985a7ab-0503-428c-bc0d-e034b83e7be7", "eventType"=>"net.authorize.customer.paymentProfile.created", "eventDate"=>"2018-10-18T03:09:30.2729756Z", "webhookId"=>"eb6e1f40-9e17-4d8d-aae3-a47acc001fbc", "payload"=>{"customerProfileId"=>1915926376, "entityName"=>"customerPaymentProfile", "id"=>"1111111111"} } }
 
-  subject(:valid_job) { described_class.perform_later(valid_signature, body, valid_payload) }
-  subject(:invalid_job) { described_class.perform_later(invalid_signature, body, valid_payload) }
-  subject(:invalid_payload_job) { described_class.perform_later(valid_signature, body, invalid_payload) }
+  subject(:valid_job) { described_class.perform_later(valid_signature, body, valid_payload, '123') }
+  subject(:invalid_job) { described_class.perform_later(invalid_signature, body, valid_payload, '123') }
+  subject(:invalid_payload_job) { described_class.perform_later(valid_signature, body, invalid_payload, '123') }
 
   it 'will queue the transaction job' do
     expect { valid_job }.to change(ActiveJob::Base.queue_adapter.enqueued_jobs, :size).by(1)

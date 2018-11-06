@@ -3,9 +3,9 @@ module Accounting
 
     def accounting_hooks
       namespace :accounting do
-        post    'hooks', to: 'hooks#create', as: :create_hook
-        put     'hooks', to: 'hooks#update', as: :update_hook
-        delete  'hooks', to: 'hooks#destroy', as: :destroy_hook
+        post    'hooks/:uid', to: 'hooks#create', as: :create_hook
+        put     'hooks/:uid', to: 'hooks#update', as: :update_hook
+        delete  'hooks/:uid', to: 'hooks#destroy', as: :destroy_hook
       end
     end
 

@@ -24,8 +24,8 @@ RSpec.describe Accounting::TransactionService do
   #   subscription              = Accounting::Subscription.create!(profile_id: profile_subscription.id, subscription_id: service_subscription.resource.details.subscription_id.to_i, name: 'Test', start_date: Time.now, payment_id: payment_card.id, length: 1, unit: :months, amount: 1, total_occurrences: 9999)
   # end
 
-  let(:api_creds) { YAML.load_file(File.dirname(__FILE__) + '/../../credentials.yml').symbolize_keys }
-  let(:service) { Accounting::TransactionService.new(hook_card, nil, api_creds)}
+  let(:api_creds) { YAML.load_file(File.dirname(__FILE__) + '/../../credentials.yml')[123].symbolize_keys }
+  let(:service) { Accounting::TransactionService.new(hook_card, nil, '123')}
 
   it 'should be instantiable' do
     expect(service).to be_instance_of(Accounting::TransactionService)

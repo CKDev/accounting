@@ -1,13 +1,17 @@
 module Accounting
   class HookService
 
-    attr_accessor :hook, :payload, :event, :api_creds
+    attr_accessor :hook, :payload, :event, :uid
 
-    def initialize(hook, api_creds=nil)
+    ##
+    # @param uid Identifier for authnet account
+    #
+    # @author Ming <ming@commercekitchen.com>
+    def initialize(hook, uid)
       @hook = hook.deep_transform_keys { |k| k.underscore.to_sym }
       @payload = @hook[:payload]
       @event = @hook[:event_type].split('.').last
-      @api_creds = api_creds
+      @uid = uid
     end
 
     def handle!
@@ -21,7 +25,7 @@ module Accounting
     def service
       case payload[:entity_name]
         when 'transaction'
-          Accounting::TransactionService.new(payload, event, api_creds)
+          Accounting::TransactionService.new(payload, event, uid)
         when 'subscription'
           Accounting::SubscriptionService.new(payload, event)
         when 'customerProfile'

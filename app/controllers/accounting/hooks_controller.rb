@@ -22,7 +22,7 @@ module Accounting
       end
 
       def enqueue_job
-        Accounting::HookJob.set(queue: Accounting.config.queue || :default).perform_later(signature, body, payload)
+        Accounting::HookJob.set(queue: Accounting.config.queue || :default).perform_later(signature, body, payload, params.require(:uid))
         head :ok
       end
 
