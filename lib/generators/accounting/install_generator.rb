@@ -10,18 +10,6 @@ module Accounting
         create_file Rails.root.join('config', 'initializers', 'accounting.rb'), <<-CONTENT
 Accounting.setup do |config|
 
-  # API Login
-  config.login = ''
-
-  # API Key
-  config.key = ''
-
-  # API Signature Key
-  config.signature = ''
-
-  # Validation Mode for Payment Profiles. Must be one of: testMode, liveMode, or none
-  config.validation_mode = :testMode
-
   # API Gatway. Should be one of: 'production' or 'sandbox'
   config.gateway = :sandbox
 
@@ -38,6 +26,12 @@ Accounting.setup do |config|
   # The format of emails will always be <accountable_class>_<accountable_id>@<domain>, and will not actually
   # refer to specific customer email addresses
   config.domain = 'example.org'
+
+  # Multiple authnet accounts hash. All uids set on authnet account webhook urls should be present in this hash.
+  # Note: Keep this hash updated when authnet account creds or uid get changed.
+  config.api_creds = AuthnetAccount.all.each_with_object({}) do |e, obj|
+    obj[e.uid] = e.to_h
+  end
 
 end
 CONTENT

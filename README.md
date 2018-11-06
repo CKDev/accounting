@@ -72,7 +72,7 @@ Once you've created either a sandbox or live Authorize.net account and logged in
 
 **Note:** Where relevant, remember the default secret answer for the security question is "Simon" unless you have changed it already.
 
-1. From the account settings page, one must deal with 4 specific sections, highlighted here
+1. From the account settings page, one must deal with 5 specific sections, highlighted here
 <img src="https://raw.githubusercontent.com/ehainer/accounting/master/settings.png" width="100%" />
 
 
@@ -80,6 +80,7 @@ Once you've created either a sandbox or live Authorize.net account and logged in
 <img src="https://raw.githubusercontent.com/ehainer/accounting/master/credentials.png" width="100%" />
 
 3. Second, create a public client key from the 'Manage Public Client key' section. You'll plug this into your app's configuration too.
+<img src="https://raw.githubusercontent.com/ehainer/accounting/master/client_key.png" width="100%" />
 
 4. Third, enable the transaction details api.
 <img src="https://raw.githubusercontent.com/ehainer/accounting/master/details.png" width="100%" />
@@ -89,7 +90,7 @@ Once you've created either a sandbox or live Authorize.net account and logged in
 <img src="https://raw.githubusercontent.com/ehainer/accounting/master/test.png" width="100%" />
 
 
-6. Last, enable all WebHooks. The requested url should be your app's domain, followed by `/accounting/hooks`, which is the app endpoint that will handle requests from authorize.net. WebHooks are what essentially "sync" events in authorize.net with your application, such as ensuring a subscription related transaction is generated when the billing anniversary date is reached.
+6. Last, enable all WebHooks. The requested url should be your app's domain, followed by `/accounting/hooks/:uid`, which is the app endpoint that will handle requests from authorize.net. WebHooks are what essentially "sync" events in authorize.net with your application, such as ensuring a subscription related transaction is generated when the billing anniversary date is reached.
 <img src="https://raw.githubusercontent.com/ehainer/accounting/master/hooks.png" width="100%" />
 
 

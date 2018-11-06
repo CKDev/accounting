@@ -5,12 +5,17 @@ module Accounting
 
     rescue_from Accounting::SyncWarning, with: :sync_failure
 
-    attr_accessor :signature, :body, :payload
+    attr_accessor :signature, :body, :payload, :uid
 
-    def perform(signature, body, payload)
+    ##
+    # @param uid Identifier for authnet account
+    #
+    # @author Ming <ming@commercekitchen.com>
+    def perform(signature, body, payload, uid)
       @signature = signature.to_s
       @body = body.to_s
       @payload = payload
+      @uid = uid.to_s.downcase
       authenticate!
       hook.handle!
     end
@@ -18,15 +23,16 @@ module Accounting
     private
 
       def hook
-        Accounting::HookService.new(payload)
+        Accounting::HookService.new(payload, uid)
       end
 
       def authenticate!
         raise Accounting::SyncError.new('Invalid signature', payload) if signature.blank?
 
-        Array.wrap(Accounting.config.signatures).flatten.each do |sig|
-          return true if signature == OpenSSL::HMAC.hexdigest('SHA512', sig, body).upcase
-        end
+        cred = Accounting.config.api_creds[uid]
+        raise Accounting::SyncError.new("Invalid uid: #{uid}", payload) if cred.nil?
+
+        return true if signature == OpenSSL::HMAC.hexdigest('SHA512', cred[:signature], body).upcase
 
         raise Accounting::SyncError.new('Invalid signature', payload)
       end

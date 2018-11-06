@@ -1,11 +1,10 @@
 module Accounting
   class Config
 
-    attr_accessor :gateway, :cancel_subscription_on_destroy, :queue, :logger, :domain
-    attr_writer :signatures
+    attr_accessor :gateway, :cancel_subscription_on_destroy, :queue, :logger, :domain, :api_creds
 
     def initialize
-      @signatures = []
+      @api_creds = {}
       @gateway ||= :sandbox
       @cancel_subscription_on_destroy ||= false
       @queue ||= :default
@@ -13,12 +12,9 @@ module Accounting
       @domain ||= 'example.org'
     end
 
-    def signatures
-      if @signatures.respond_to?(:call)
-        @signatures.call
-      else
-        @signatures
-      end
+    def api_creds=(api_creds)
+      @api_creds = api_creds.deep_symbolize_keys
+      @api_creds.stringify_keys!
     end
 
   end

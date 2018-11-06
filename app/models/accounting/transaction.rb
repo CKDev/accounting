@@ -50,8 +50,8 @@ module Accounting
 
     before_save :update_subscription!
 
-    def details
-      @details ||= Accounting.api(:reporting, api_options(accountable)).get_transaction_details(transaction_id)
+    def details(api_opts={})
+      @details ||= Accounting.api(:reporting, api_options(accountable).merge(api_opts)).get_transaction_details(transaction_id)
       if @details && @details.success?
         @details.transaction
       else

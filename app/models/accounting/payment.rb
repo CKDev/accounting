@@ -7,11 +7,11 @@ module Accounting
 
     has_one :address, inverse_of: :payment, autosave: true, dependent: :destroy
 
-    before_destroy :delete_payment
+    before_destroy :delete_payment, if: proc { |p| p.profile.present? }
 
     after_create :reset_default
 
-    after_destroy :reset_default
+    after_destroy :reset_default, if: proc { |p| p.profile.present? }
 
     attr_accessor :month, :year
 
@@ -91,7 +91,7 @@ module Accounting
 
       # Delete the associated payment profile on Authorize.net when this instance is destroyed
       def delete_payment
-        Accounting.api(:cim, api_options(profile.accountable)).delete_payment_profile(payment_profile_id, profile.profile_id) unless Rails.env.test?
+        Accounting.api(:cim, api_options(profile.accountable)).delete_payment_profile(payment_profile_id, profile.profile_id)
       end
 
       def reset_default
