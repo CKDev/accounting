@@ -5,10 +5,13 @@ RSpec.describe Accounting::ProfileService do
   let(:profile) { FactoryGirl.create(:accounting_profile) }
   let(:hook_profile)          { {"notificationId"=>"16b7f322-5914-41af-99bc-26095ba7f2e7", "eventType"=>"net.authorize.customer.created", "eventDate"=>"2018-10-17T16:00:46.5489933Z", "webhookId"=>"eb6e1f40-9e17-4d8d-aae3-a47acc001fbc", "payload"=>{"merchantCustomerId"=>"051562a2", "description"=>"Test Description", "entityName"=>"customerProfile", "id"=>"1915911486"}, "hook"=>{"notificationId"=>"16b7f322-5914-41af-99bc-26095ba7f2e7", "eventType"=>"net.authorize.customer.created", "eventDate"=>"2018-10-17T16:00:46.5489933Z", "webhookId"=>"eb6e1f40-9e17-4d8d-aae3-a47acc001fbc", "payload"=>{"merchantCustomerId"=>"051562a2", "description"=>"Test Description", "entityName"=>"customerProfile", "id"=>"1915911486"}}} }
 
-  let(:service_profile)       { Accounting::HookService.new(hook_profile).service }
+  let(:service_profile)       { Accounting::HookService.new(hook_profile, TEST_UID).service }
 
   before(:each) do
     profile.update_column(:profile_id, 1502474889)
+    if service_profile.resource.nil?
+      skip 'Please input valid webhook and customer profile id with paymentProfiles'
+    end
   end
 
   it 'should be instantiable' do

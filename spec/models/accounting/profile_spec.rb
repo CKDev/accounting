@@ -36,7 +36,7 @@ RSpec.describe Accounting::Profile, type: :model do
     stub_request(:any, 'https://apitest.authorize.net/xml/v1/request.api').to_raise('Blocked')
     user = FactoryGirl.build(:user)
     expect(user).not_to be_valid
-    expect(user.errors.full_messages).to eq(['Profile base Blocked', 'Profile profile Missing authnet profile_id'])
+    expect(user.errors.full_messages).to eq(["Profile base Null Response Failed to create a new customer profile.", "Profile profile Missing authnet profile_id"])
   end
 
   it 'should delete the customer profile when destroyed' do
@@ -56,7 +56,7 @@ RSpec.describe Accounting::Profile, type: :model do
       profile.save!
     end
 
-    expect_any_instance_of(AuthorizeNet::CIM::Transaction).to receive(:update_profile)
+    expect_any_instance_of(AuthorizeNet::API::Transaction).to receive(:update_customer_profile)
     profile.update(authnet_email: 'foo@bar.com')
   end
 

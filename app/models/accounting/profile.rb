@@ -27,24 +27,15 @@ module Accounting
 
     def details(pid=profile_id)
       return nil if pid.nil?
-      @details ||= Accounting.api(:cim, api_options(accountable)).get_profile(pid)
-      if @details && @details.success?
-        @details.profile
+
+      request = GetCustomerProfileRequest.new
+      request.customerProfileId = pid
+
+      @response ||= authnet(:api).get_customer_profile(request)
+      if @response && @response.messages.resultCode == MessageTypeEnum::Ok
+        @response.profile
       else
         nil
-      end
-    end
-
-    def transaction_details
-      return [] if self.profile_id.blank?
-      request = configure_transactions_request
-      @response ||= Accounting.api(:api, api_options(accountable)).get_transaction_list_for_customer(request)
-      if @response.messages.resultCode == AuthorizeNet::API::MessageTypeEnum::Ok
-        return [] if @response.transactions&.transaction.blank?
-        @response.transactions.transaction
-      else
-        # TODO: log error message.
-        []
       end
     end
 
@@ -53,11 +44,12 @@ module Accounting
       def create_profile
         return if errors.present? || details.present?
 
-        customer_profile = AuthorizeNet::CIM::CustomerProfile.new(profile_options)
-        response = Accounting.api(:cim, api_options(accountable)).create_profile(customer_profile)
-        if response.raw.is_a?(Net::HTTPSuccess)
-          if response.message_code == 'E00039' # Profile exists
-            profile_id = response.message_text.match(/[0-9]+/).to_s
+        response = authnet(:api).create_customer_profile(create_request)
+        unless response == nil || response.is_a?(Exception)
+          if response.messages.resultCode == MessageTypeEnum::Ok && response.customerProfileId.present?
+            assign_attributes(profile_id: response.customerProfileId)
+          elsif response.messages.messages[0].code == 'E00039' # Profile exists
+            profile_id = response.messages.messages[0].text.match(/[0-9]+/).to_s
             info = details(profile_id)
 
             # If profile details were found for the matching profile id,
@@ -71,48 +63,45 @@ module Accounting
               assign_attributes(profile_id: profile_id) if actual == configured
               return
             end
-          end
-
-          # Separate if/else in case the catch for error E00039 did not match
-          # the configured accountable data
-          if response.success? && response.profile_id.present?
-            assign_attributes(profile_id: response.profile_id)
           else
-            self.errors.add(:base, [response.message_code, response.message_text].join(' '))
+            # Did not get a 200 OK response, add the error message whatever it might be
+            self.errors.add(:base, [response.messages.messages[0].code, response.messages.messages[0].text].join(' '))
           end
         else
-          # Did not get a 200 OK response, add the error message whatever it might be
-          self.errors.add(:base, response.raw.message)
+          self.errors.add(:base, ['Null Response', 'Failed to create a new customer profile.'].join(' '))
         end
       end
 
       def update_profile
-        customer_profile = AuthorizeNet::CIM::CustomerProfile.new(profile_options.merge(customer_profile_id: profile_id))
-        Accounting.api(:cim, api_options(accountable)).update_profile(customer_profile)
+        authnet(:api).update_customer_profile(update_request)
       end
 
       def delete_profile
-        Accounting.api(:cim, api_options(accountable)).delete_profile(profile_id)
+        request = DeleteCustomerProfileRequest.new(nil, nil, profile_id)
+        authnet(:api).delete_customer_profile(request)
       end
 
-      def profile_options
-        { email: authnet_email, id: authnet_id, description: authnet_description }.reject { |_,v| v.blank? }
-      end
-
-      def configure_transactions_request
-        request = AuthorizeNet::API::GetTransactionListForCustomerRequest.new
-        request.customerProfileId = self.profile_id
-
-        request.paging = AuthorizeNet::API::Paging.new
-        request.paging.limit = 100
-        request.paging.offset = 1
-
-        request.sorting = AuthorizeNet::API::TransactionListSorting.new
-        request.sorting.orderBy = AuthorizeNet::API::TransactionListOrderFieldEnum::SubmitTimeUTC
-        request.sorting.orderDescending = true
-
+      def create_request
+        request = CreateCustomerProfileRequest.new
+        # Build the profile object containing the main information about the customer profile
+        request.profile = CustomerProfileType.new
+        request.profile.merchantCustomerId = authnet_id
+        request.profile.description = authnet_description
+        request.profile.email = authnet_email
+        request.validationMode = ValidationModeEnum::None
         request
       end
 
+      def update_request
+        request = UpdateCustomerProfileRequest.new
+        request.profile = CustomerProfileExType.new
+
+        # Edit this part to select a specific customer
+        request.profile.customerProfileId = profile_id
+        request.profile.merchantCustomerId = authnet_id
+        request.profile.description = authnet_description
+        request.profile.email = authnet_email
+        request
+      end
   end
 end

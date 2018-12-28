@@ -12,7 +12,7 @@ module Accounting
       end
 
       resource.assign_attributes(
-        authnet_id: details.id,
+        authnet_id: details.merchantCustomerId,
         authnet_email: details.email,
         authnet_description: details.description
       )

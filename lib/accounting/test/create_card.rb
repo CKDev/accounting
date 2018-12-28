@@ -10,6 +10,8 @@ module Accounting
       attr_accessor :address, :profile, :payment
       attr_accessor :number, :ccv, :month, :year
 
+      delegate :accountable, to: :profile
+
       def initialize(profile, number, ccv, month, year, address)
         @profile = profile
         @ccv = ccv
@@ -23,32 +25,47 @@ module Accounting
       end
 
       def create_payment
-        payment_profile = AuthorizeNet::CIM::PaymentProfile.new(payment_method: card, billing_address: address&.to_billing_address)
-        response = Accounting.api(:cim, api_options(profile.accountable)).create_payment_profile(payment_profile, profile.profile_id, validation_mode: api_validation_mode(profile.accountable))
-        if response.success?
-          if response.validation_response.present?
-            # Add the payment attributes. Expiration only applies to card payment types
-            # If no payment types exist yet, make the first one the default
-            @payment.assign_attributes(
-              title: response.validation_response.fields[:card_type],
-              payment_profile_id: response.payment_profile_id,
+        response = authnet(:api).create_customer_payment_profile(request)
+        if response != nil
+          if response.messages.resultCode == MessageTypeEnum::Ok
+            payment.assign_attributes(
+              title:  response.validationDirectResponse.split(',')[51],
+              payment_profile_id: response.customerPaymentProfileId,
               default: profile.payments.count == 0,
-              last_four: response.validation_response.fields[:account_number].to_s[-4..-1]
+              last_four:  response.validationDirectResponse.split(',')[50].to_s[-4..-1]
             )
+          else
+            payment.errors.add(:base, [response.messages.messages[0].code, response.messages.messages[0].text].join(' '))
           end
         else
-          # All is not well, include the authorize.net error code and message
-          @payment.errors.add(:base, [response.message_code, response.message_text].join(' '))
+          payment.errors.add(:base, 'Null Response')
         end
-        @payment
+        payment
       end
 
-      def card
-        AuthorizeNet::CreditCard.new(number, expiration_str, card_code: ccv)
+      def request
+        # Build the payment object
+        payment = PaymentType.new(CreditCardType.new)
+        payment.creditCard.cardNumber = number
+        payment.creditCard.expirationDate = expiration_str
+        payment.creditCard.cardCode = ccv
+        # Use the previously defined payment and billTo objects to
+        # build a payment profile to send with the request
+        paymentProfile = CustomerPaymentProfileType.new
+        paymentProfile.payment = payment
+        paymentProfile.billTo = address&.to_billing_address
+        paymentProfile.defaultPaymentProfile = true
+
+        # Build the request object
+        request = CreateCustomerPaymentProfileRequest.new
+        request.paymentProfile = paymentProfile
+        request.customerProfileId = profile.profile_id
+        request.validationMode = ValidationModeEnum::LiveMode
+        request
       end
 
       def expiration_str
-        "#{month.to_s.rjust(2, '0')}#{year.to_s[-2..-1]}"
+        "#{year}-#{month.to_s.rjust(2, '0')}"
       end
     end
   end

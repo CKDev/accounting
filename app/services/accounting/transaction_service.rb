@@ -16,15 +16,15 @@ module Accounting
       resource.assign_attributes(
         transaction_type: type,
         transaction_method: method,
-        authorization_code: details.auth_code,
-        avs_response: details.avs_response,
-        amount: details.auth_amount,
-        submitted_at: details.submitted_at,
+        authorization_code: details.authCode,
+        avs_response: details.AVSResponse,
+        amount: details.authAmount,
+        submitted_at: details.submitTimeUTC,
         status: status
       )
 
       if subscription?
-        resource.assign_attributes(subscription_id: subscription.id, subscription_payment: details.subscription_paynum.to_i)
+        resource.assign_attributes(subscription_id: subscription.id, subscription_payment: details.subscription.payNum.to_i)
       end
 
       resource.profile.accountable.try(:run_hook, :before_subscription_tick, subscription, resource) if subscription?
@@ -41,10 +41,10 @@ module Accounting
     end
 
     def type
-      details.type.underscore.chomp('_transaction')
+      details.transactionType.underscore.chomp('_transaction')
     end
 
-    def status(input=details.status)
+    def status(input=details.transactionStatus)
       case input
         when 'voided'; 'voided'
         when 'expired'; 'expired'
@@ -61,22 +61,22 @@ module Accounting
     end
 
     def method
-      details.payment_method.class::PAYMENT_METHOD_CODE
+      card? ? 'CC' : 'ECHECK'
     end
 
     def card?
-      details.payment_method.is_a?(AuthorizeNet::CreditCard)
+      details.payment.creditCard.present?
     end
 
     def ach?
-      details.payment_method.is_a?(AuthorizeNet::ECheck)
+      details.payment.bankAccount.present?
     end
 
     def last_four
       if card?
-        details.payment_method.card_number[-4..-1]
+        details.payment.creditCard.cardNumber[-4..-1]
       elsif ach?
-        details.payment_method.account_number[-4..-1]
+        details.payment.bankAccount.accountNumber[-4..-1]
       end
     end
 
@@ -97,19 +97,19 @@ module Accounting
     end
 
     def subscription?
-      details.subscription_id.present? && details.subscription_paynum.present? && subscription.present?
+      details.subscription.present? && subscription.present?
     end
 
     def subscription
-      @subscription ||= Accounting::Subscription.find_by(subscription_id: details.subscription_id.to_i)
+      @subscription ||= Accounting::Subscription.find_by(subscription_id: details.subscription.id.to_i)
     end
 
     def details
       if resource.details(hook_api_options).nil?
         raise Accounting::SyncError.new("Transaction cannot be created because the record could not be found.", payload)
-      else
-        resource.details
       end
+
+      resource.details
     end
 
   end

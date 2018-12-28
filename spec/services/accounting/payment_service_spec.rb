@@ -8,12 +8,15 @@ RSpec.describe Accounting::PaymentService do
   let(:hook_payment_card)     { {"notificationId"=>"9a8c85fc-ac8f-460e-84a7-cc4c963711a7", "eventType"=>"net.authorize.customer.paymentProfile.created", "eventDate"=>"2018-10-17T16:30:02.2270619Z", "webhookId"=>"eb6e1f40-9e17-4d8d-aae3-a47acc001fbc", "payload"=>{"customerProfileId"=>1915911486, "entityName"=>"customerPaymentProfile", "id"=>"1829269244"}, "hook"=>{"notificationId"=>"9a8c85fc-ac8f-460e-84a7-cc4c963711a7", "eventType"=>"net.authorize.customer.paymentProfile.created", "eventDate"=>"2018-10-17T16:30:02.2270619Z", "webhookId"=>"eb6e1f40-9e17-4d8d-aae3-a47acc001fbc", "payload"=>{"customerProfileId"=>1915911486, "entityName"=>"customerPaymentProfile", "id"=>"1829269244"}}} }
   let(:hook_payment_ach)      { {"notificationId"=>"4c8711d3-3cf5-4953-afe7-805dcd595103", "eventType"=>"net.authorize.customer.paymentProfile.created", "eventDate"=>"2018-10-17T16:27:56.8906329Z", "webhookId"=>"eb6e1f40-9e17-4d8d-aae3-a47acc001fbc", "payload"=>{"customerProfileId"=>1915911486, "entityName"=>"customerPaymentProfile", "id"=>"1829269233"}, "hook"=>{"notificationId"=>"4c8711d3-3cf5-4953-afe7-805dcd595103", "eventType"=>"net.authorize.customer.paymentProfile.created", "eventDate"=>"2018-10-17T16:27:56.8906329Z", "webhookId"=>"eb6e1f40-9e17-4d8d-aae3-a47acc001fbc", "payload"=>{"customerProfileId"=>1915911486, "entityName"=>"customerPaymentProfile", "id"=>"1829269233"}}} }
 
-  let(:service_profile)       { Accounting::HookService.new(hook_profile).service }
-  let(:service_payment_card)  { Accounting::HookService.new(hook_payment_card).service }
-  let(:service_payment_ach)   { Accounting::HookService.new(hook_payment_ach).service }
+  let(:service_profile)       { Accounting::HookService.new(hook_profile, TEST_UID).service }
+  let(:service_payment_card)  { Accounting::HookService.new(hook_payment_card, TEST_UID).service }
+  let(:service_payment_ach)   { Accounting::HookService.new(hook_payment_ach, TEST_UID).service }
 
   before(:each) do
     profile.update_column(:profile_id, 1915911486)
+    if service_profile.resource.nil?
+      skip 'Please input valid webhook and customer payment profile id'
+    end
     service_profile.sync!
   end
 

@@ -1,4 +1,5 @@
 module AccountingHelper
+  include AuthorizeNet::API
 
   def value_from(arg, context, *args)
     if arg.respond_to?(:call)
@@ -28,6 +29,11 @@ module AccountingHelper
 
   def option(key, accountable)
     accountable.instance_variable_get('@_accountable_options').try(:[], key.to_sym)
+  end
+
+  def authnet(type, opts={})
+    raise 'Define accountable in the class' unless respond_to? :accountable
+    Accounting.api(type, api_options(accountable).merge(opts))
   end
 
 end

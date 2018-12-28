@@ -25,7 +25,7 @@ RSpec.describe Accounting::TransactionService do
   # end
 
   let(:api_creds) { YAML.load_file(File.dirname(__FILE__) + '/../../credentials.yml')[123].symbolize_keys }
-  let(:service) { Accounting::TransactionService.new(hook_card, nil, '123')}
+  let(:service) { Accounting::TransactionService.new(hook_card, nil, TEST_UID)}
 
   it 'should be instantiable' do
     expect(service).to be_instance_of(Accounting::TransactionService)

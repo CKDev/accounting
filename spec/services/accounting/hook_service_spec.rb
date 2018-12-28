@@ -3,7 +3,7 @@ require 'spec_helper'
 RSpec.describe Accounting::HookService do
 
   let(:profile) { FactoryGirl.create(:accounting_profile) }
-  let(:hook) { Accounting::HookService.new({ 'payload' => { 'entityName' => 'transaction' }, 'eventType' => 'create' }) }
+  let(:hook) { Accounting::HookService.new({ 'payload' => { 'entityName' => 'transaction' }, 'eventType' => 'create' }, TEST_UID) }
 
   before(:each) do
     profile.update_column(:profile_id, 1502474889)

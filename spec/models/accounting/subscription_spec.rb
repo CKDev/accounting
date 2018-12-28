@@ -7,6 +7,8 @@ RSpec.describe Accounting::Subscription, type: :model do
   let!(:user) { FactoryGirl.create(:user) }
   let!(:payment) { FactoryGirl.build(:accounting_payment, :with_card, profile: user.profile) }
 
+  before :each { skip }
+
   it 'should support instantiation' do
     expect(Accounting::Subscription.new).to be_instance_of(Accounting::Subscription)
   end

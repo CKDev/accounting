@@ -6,6 +6,8 @@ module Accounting
     attr_accessor :params
     attr_accessor :profile, :payment
 
+    delegate :accountable, to: :profile
+
     def initialize(params, profile)
       @params = params
       @profile = profile
@@ -45,17 +47,16 @@ module Accounting
       #
       # @reference https://github.com/AuthorizeNet/sample-code-ruby/blob/master/CustomerProfiles/create-customer-payment-profile.rb
       def create_customer_payment_profile
-        transaction = Accounting.api(:api, api_options(@profile.accountable))
-        @response = transaction.create_customer_payment_profile(build_request)
+        @response = authnet(:api).create_customer_payment_profile(build_request)
 
         if @response != nil
           if @response.messages.resultCode == MessageTypeEnum::Ok
             Accounting.log 'Payment', 'Accept', info: "Successfully created a customer payment profile with id: #{@response.customerPaymentProfileId}."
             @payment.assign_attributes(
-              title: parsed_response[:card_type],
+              title: response.validationDirectResponse.split(',')[51],
               payment_profile_id: @response.customerPaymentProfileId,
               default: @profile.payments.count == 0,
-              last_four: parsed_response[:account_number].to_s[-4..-1]
+              last_four: response.validationDirectResponse.split(',')[50].to_s[-4..-1]
             )
           else
             error_msg = [@response.messages.messages[0].code, @response.messages.messages[0].text].join(' ')
@@ -85,10 +86,6 @@ module Accounting
         request.validationMode = api_validation_mode(@profile.accountable)
 
         request
-      end
-
-      def parsed_response
-        @parsed_response ||= AuthorizeNet::AIM::Response.new(@response.to_xml, Accounting.api(:cim, api_options(@profile.accountable))).fields
       end
   end
 end
