@@ -50,6 +50,7 @@ module Accounting
       request = GetCustomerPaymentProfileRequest.new
       request.customerProfileId = profile.profile_id
       request.customerPaymentProfileId = payment_profile_id
+      request.unmaskExpirationDate = true
 
       @response ||= authnet(:api).get_customer_payment_profile(request)
 
