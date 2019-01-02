@@ -242,17 +242,13 @@ module Accounting
         subscription.update!(next_transaction_at: subscription.next_transaction_date) if subscription?
       end
 
-      def order
-        options[:order]
-      end
-
       def create_request(type, amount, profile_id, payment_id, ref_trans_id=nil)
         request = CreateTransactionRequest.new
   
         request.transactionRequest = TransactionRequestType.new
         request.transactionRequest.amount = amount
         request.transactionRequest.transactionType = type
-        request.transactionRequest.poNumber = order
+        request.transactionRequest.poNumber = options[:po_num]
         if profile_id.present? && payment_id.present?
           request.transactionRequest.profile = CustomerProfilePaymentType.new
           request.transactionRequest.profile.customerProfileId = profile_id
