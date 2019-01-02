@@ -23,17 +23,17 @@ RSpec.describe Accounting::HooksController, type: :controller do
   end
 
   it 'should enqueue a hook job on create' do
-    expect { post :create, uid: 123, params: JSON.parse(@valid_payload) }.to have_enqueued_job(Accounting::HookJob)
+    expect { post :create, uid: TEST_UID, params: JSON.parse(@valid_payload) }.to have_enqueued_job(Accounting::HookJob)
     expect(response).to have_http_status(:ok)
   end
 
   it 'should enqueue a hook job on update' do
-    expect { post :update, uid: 123, params: JSON.parse(@valid_payload) }.to have_enqueued_job(Accounting::HookJob)
+    expect { post :update, uid: TEST_UID, params: JSON.parse(@valid_payload) }.to have_enqueued_job(Accounting::HookJob)
     expect(response).to have_http_status(:ok)
   end
 
   it 'should enqueue a hook job on destroy' do
-    expect { post :destroy, uid: 123, params: JSON.parse(@valid_payload) }.to have_enqueued_job(Accounting::HookJob)
+    expect { post :destroy, uid: TEST_UID, params: JSON.parse(@valid_payload) }.to have_enqueued_job(Accounting::HookJob)
     expect(response).to have_http_status(:ok)
   end
 

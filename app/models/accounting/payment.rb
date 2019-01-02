@@ -61,7 +61,7 @@ module Accounting
     end
 
     def default!
-      if profile.present? && !profile.destroyed? && 
+      if profile.present? && !profile.destroyed?
         profile.payments.where(default: true).update_all(default: false)
         update_attribute(:default, true)
       end
