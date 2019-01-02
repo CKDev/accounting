@@ -4,8 +4,8 @@ RSpec.describe Accounting::Subscription, type: :model do
 
   before(:all) { ActiveJob::Base.queue_adapter = :test }
 
-  let!(:user) { FactoryGirl.create(:user) }
-  let!(:payment) { FactoryGirl.build(:accounting_payment, :with_card, profile: user.profile) }
+  let!(:user) { FactoryBot.create(:user) }
+  let!(:payment) { FactoryBot.build(:accounting_payment, :with_card, profile: user.profile) }
 
   before :each { skip }
 

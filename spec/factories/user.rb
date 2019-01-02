@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :user, class: 'User' do
 
     email { FFaker::Internet.email }
@@ -6,13 +6,13 @@ FactoryGirl.define do
 
     trait :with_payment do
       transient do
-        numbers ['370000000000002', '6011000000000012', '3088000000000017', '4111111111111111', '5424000000000015']
-        payments 1
+        numbers { ['370000000000002', '6011000000000012', '3088000000000017', '4111111111111111', '5424000000000015'] }
+        payments { 1 }
       end
 
       after :create do |user, evaluator|
         evaluator.payments.times do
-          payment = FactoryGirl.build(:accounting_payment, :with_card, profile: user.profile)
+          payment = FactoryBot.build(:accounting_payment, :with_card, profile: user.profile)
           payment.save
           user.payments << payment
         end

@@ -3,7 +3,7 @@ module Accounting
 
     def sync!
       if resource.nil? # Don't want to process orphaned profiles
-        raise Accounting::SyncWarning.new("Profile cannot be created, profile with id '#{payload[:id]}' could not be found.", payload)
+        raise Accounting::SyncError.new("Profile cannot be created, profile with id '#{payload[:id]}' could not be found.", payload)
       end
 
       if delete?

@@ -47,19 +47,19 @@ module Accounting
       #
       # @reference https://github.com/AuthorizeNet/sample-code-ruby/blob/master/CustomerProfiles/create-customer-payment-profile.rb
       def create_customer_payment_profile
-        @response = authnet(:api).create_customer_payment_profile(build_request)
+        response = authnet(:api).create_customer_payment_profile(build_request)
 
-        if @response != nil
-          if @response.messages.resultCode == MessageTypeEnum::Ok
-            Accounting.log 'Payment', 'Accept', info: "Successfully created a customer payment profile with id: #{@response.customerPaymentProfileId}."
+        if response != nil
+          if response.messages.resultCode == MessageTypeEnum::Ok
+            Accounting.log 'Payment', 'Accept', info: "Successfully created a customer payment profile with id: #{response.customerPaymentProfileId}."
             @payment.assign_attributes(
               title: response.validationDirectResponse.split(',')[51],
-              payment_profile_id: @response.customerPaymentProfileId,
+              payment_profile_id: response.customerPaymentProfileId,
               default: @profile.payments.count == 0,
               last_four: response.validationDirectResponse.split(',')[50].to_s[-4..-1]
             )
           else
-            error_msg = [@response.messages.messages[0].code, @response.messages.messages[0].text].join(' ')
+            error_msg = [response.messages.messages[0].code, response.messages.messages[0].text].join(' ')
             Accounting.log 'Payment', 'Accept', warn: "Failed to create a new customer payment profile - #{error_msg}"
             @payment.errors.add(:base, error_msg)
           end

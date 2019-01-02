@@ -57,7 +57,7 @@ module Accounting
       request.transId = transaction_id
 
       @response ||= authnet(:api, api_opts).get_transaction_details(request)
-      if @response && @response.success?
+      if @response && @response.messages.resultCode == MessageTypeEnum::Ok
         @response.transaction
       else
         nil
@@ -145,9 +145,9 @@ module Accounting
     private
 
       def handle_transaction(response, **params)
-        unless response == nil || response.is_a?(Exception)
+        if response.present? && !response.is_a?(Exception)
           if response.messages.resultCode == MessageTypeEnum::Ok
-            if response.transactionResponse != nil && response.transactionResponse.messages != nil
+            if response.transactionResponse&.messages.present?
               fields ={
                 submitted_at: Time.now.utc,
                 transaction_method: response.transactionResponse.accountType,
@@ -157,14 +157,14 @@ module Accounting
               }
 
               assign_attributes(params.merge(fields))
-              save
+              return save
             else
-              if response.transactionResponse.errors != nil
+              if response&.transactionResponse&.errors.present?
                 error_msg = [response.transactionResponse.errors.errors[0].errorCode, response.transactionResponse.errors.errors[0].errorText].join(' ')
               end
             end
           else
-            if response.transactionResponse != nil && response.transactionResponse.errors != nil
+            if response.transactionResponse&.errors.present?
               if response.transactionResponse.responseCode == '3' && response.transactionResponse.errors.errors[0].errorCode == '11'
                 raise Accounting::DuplicateError, 'Transaction has already been submitted'
               end
@@ -173,23 +173,23 @@ module Accounting
               error_msg = [response.messages.messages[0].code, response.messages.messages[0].text].join(' ')
             end
           end
-        else
-          error_msg = 'Failed to charge customer profile.'
         end
 
+        error_msg ||= 'Failed to charge customer profile.'
         raise StandardError, HTMLEntities.new.decode(error_msg)
       end
 
-      # TODO: hold, capture needs to be updated to use Authnet API, not CIM. charge/void/refund are updated.
       def hold
         before_transaction!
-        response = authnet(:cim).create_transaction_auth_only(amount, profile.profile_id, payment.payment_profile_id, order, options)
+        request = create_request(TransactionTypeEnum::AuthOnlyTransaction, amount, profile.profile_id, payment.payment_profile_id)
+        response = authnet(:api).create_transaction(request)
         handle_transaction(response, status: :held, message: options[:message])
       end
 
       def capture
         before_transaction!
-        response = authnet(:cim).create_transaction_prior_auth_capture(original_transaction.try(:transaction_id), amount, order, options)
+        request = create_request(TransactionTypeEnum::PriorAuthCaptureTransaction, amount, nil, nil, original_transaction.try(:transaction_id))
+        response = authnet(:api).create_transaction(request)
         handle_transaction(response, status: :captured, message: options[:message])
       end
 
@@ -246,19 +246,21 @@ module Accounting
         options[:order]
       end
 
-      def create_request(type, amount, profile_id, payment_id, ref_trans_id)
+      def create_request(type, amount, profile_id, payment_id, ref_trans_id=nil)
         request = CreateTransactionRequest.new
   
         request.transactionRequest = TransactionRequestType.new
         request.transactionRequest.amount = amount
         request.transactionRequest.transactionType = type
         request.transactionRequest.poNumber = order
-        request.transactionRequest.profile = CustomerProfilePaymentType.new
-        request.transactionRequest.profile.customerProfileId = profile_id
-        request.transactionRequest.profile.paymentProfile = PaymentProfile.new(payment_id)
+        if profile_id.present? && payment_id.present?
+          request.transactionRequest.profile = CustomerProfilePaymentType.new
+          request.transactionRequest.profile.customerProfileId = profile_id
+          request.transactionRequest.profile.paymentProfile = PaymentProfile.new(payment_id)
+        end
 
         # Refund/Void
-        request.transactionRequest.refTransId = authTransId
+        request.transactionRequest.refTransId = ref_trans_id
 
         request
       end

@@ -10,8 +10,8 @@ RSpec.describe Accounting::HooksController, type: :controller do
 
   before(:each) do
     request.headers.merge! valid_header
-    @profile = FactoryGirl.create(:accounting_profile)
-    @paymentProfile = FactoryGirl.create(:accounting_payment, :with_ach, profile: @profile)
+    @profile = FactoryBot.create(:accounting_profile)
+    @paymentProfile = FactoryBot.create(:accounting_payment, :with_ach, profile: @profile)
 
     @valid_payload =  "{\"notificationId\":\"4985a7ab-0503-428c-bc0d-e034b83e7be7\",
                        \"eventType\":\"net.authorize.customer.paymentProfile.created\",

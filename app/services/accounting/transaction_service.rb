@@ -2,6 +2,10 @@ module Accounting
   class TransactionService < AccountingService
 
     def sync!
+      if resource.nil? # Don't want to process orphaned profiles
+        raise Accounting::SyncError.new("Transaction cannot be created, transaction with id '#{payload[:id]}' could not be found.", payload)
+      end
+
       # Ignore verification transactions
       return if details&.order&.description == 'Test transaction for ValidateCustomerPaymentProfile.'
 
@@ -37,7 +41,7 @@ module Accounting
     end
 
     def resource
-      @resource ||= Accounting::Transaction.find_or_initialize_by(transaction_id: payload[:id])
+      @resource ||= Accounting::Transaction.find_by(transaction_id: payload[:id])
     end
 
     def type

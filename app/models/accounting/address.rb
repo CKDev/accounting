@@ -28,7 +28,7 @@ module Accounting
         unless response == nil || response.is_a?(Exception)
           if response.messages.resultCode == MessageTypeEnum::Ok
             assign_attributes(address_id: response.customerAddressId)
-          elsif response.messages.resultCode == 'E00039'
+          elsif response.messages.resultCode == 'Error' && response.messages.messages[0].code == 'E00039'
             # Duplicate address, so just assign the address id associated
             assign_attributes(address_id: response.customerAddressId)
           else

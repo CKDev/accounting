@@ -2,7 +2,7 @@ require 'spec_helper'
 
 RSpec.describe Accounting::Profile, type: :model do
 
-  let(:profile) { FactoryGirl.build(:accounting_profile) }
+  let(:profile) { FactoryBot.build(:accounting_profile) }
 
   it 'should support instantiation' do
     expect(Accounting::Profile.new).to be_instance_of(Accounting::Profile)
@@ -20,7 +20,7 @@ RSpec.describe Accounting::Profile, type: :model do
     end
     email = profile.authnet_email
 
-    new_profile = FactoryGirl.build(:accounting_profile, authnet_email: email)
+    new_profile = FactoryBot.build(:accounting_profile, authnet_email: email)
     expect(new_profile).to be_valid
   end
 
@@ -34,7 +34,7 @@ RSpec.describe Accounting::Profile, type: :model do
 
   it 'should fail to validate with the request errors if not a 200 response' do
     stub_request(:any, 'https://apitest.authorize.net/xml/v1/request.api').to_raise('Blocked')
-    user = FactoryGirl.build(:user)
+    user = FactoryBot.build(:user)
     expect(user).not_to be_valid
     expect(user.errors.full_messages).to eq(["Profile base Null Response Failed to create a new customer profile.", "Profile profile Missing authnet profile_id"])
   end
@@ -64,7 +64,7 @@ RSpec.describe Accounting::Profile, type: :model do
 
     let(:profile) do
       VCR.use_cassette :valid_profiles, record: :new_episodes, re_record_interval: 7.days do
-        FactoryGirl.create(:accounting_profile, :with_payment, payment_count: 3)
+        FactoryBot.create(:accounting_profile, :with_payment, payment_count: 3)
       end
     end
 

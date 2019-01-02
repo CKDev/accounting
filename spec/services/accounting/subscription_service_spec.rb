@@ -2,7 +2,7 @@ require 'spec_helper'
 
 RSpec.describe Accounting::SubscriptionService do
 
-  let(:profile) { FactoryGirl.create(:accounting_profile) }
+  let(:profile) { FactoryBot.create(:accounting_profile) }
 
   let(:hook_profile)          { {"notificationId"=>"16b7f322-5914-41af-99bc-26095ba7f2e7", "eventType"=>"net.authorize.customer.created", "eventDate"=>"2018-10-17T16:00:46.5489933Z", "webhookId"=>"eb6e1f40-9e17-4d8d-aae3-a47acc001fbc", "payload"=>{"merchantCustomerId"=>"051562a2", "description"=>"Test Description", "entityName"=>"customerProfile", "id"=>"1915911486"}, "hook"=>{"notificationId"=>"16b7f322-5914-41af-99bc-26095ba7f2e7", "eventType"=>"net.authorize.customer.created", "eventDate"=>"2018-10-17T16:00:46.5489933Z", "webhookId"=>"eb6e1f40-9e17-4d8d-aae3-a47acc001fbc", "payload"=>{"merchantCustomerId"=>"051562a2", "description"=>"Test Description", "entityName"=>"customerProfile", "id"=>"1915911486"}}} }
   let(:hook_payment)          { {"notificationId"=>"9a8c85fc-ac8f-460e-84a7-cc4c963711a7", "eventType"=>"net.authorize.customer.paymentProfile.created", "eventDate"=>"2018-10-17T16:30:02.2270619Z", "webhookId"=>"eb6e1f40-9e17-4d8d-aae3-a47acc001fbc", "payload"=>{"customerProfileId"=>1915911486, "entityName"=>"customerPaymentProfile", "id"=>"1829269244"}, "hook"=>{"notificationId"=>"9a8c85fc-ac8f-460e-84a7-cc4c963711a7", "eventType"=>"net.authorize.customer.paymentProfile.created", "eventDate"=>"2018-10-17T16:30:02.2270619Z", "webhookId"=>"eb6e1f40-9e17-4d8d-aae3-a47acc001fbc", "payload"=>{"customerProfileId"=>1915911486, "entityName"=>"customerPaymentProfile", "id"=>"1829269244"}}} }
