@@ -11,12 +11,10 @@ module Accounting
 
     delegate :profile, to: :payment
 
-    def to_billing_address
-      AuthorizeNet::Address.new(address_fields)
-    end
+    delegate :accountable, to: :profile
 
-    def to_shipping_address
-      AuthorizeNet::ShippingAddress.new(address_fields)
+    def to_billing_address
+      CustomerAddressType.new(*address_fields)
     end
 
     private
@@ -25,28 +23,41 @@ module Accounting
         # If we already have errors, or our associated payment method has errors, don't bother creating the address
         return if errors.present? || payment.errors.present?
 
-        response = Accounting.api(:cim, api_options(profile.accountable)).create_address(to_billing_address, profile.profile_id)
+        response = authnet(:api).create_customer_shipping_profile(create_request)
 
-        if response.success?
-          assign_attributes(address_id: response.address_id)
-        elsif response.message_code == 'E00039'
-          # Duplicate address, so just assign the address id associated
-          assign_attributes(address_id: response.address_id)
+        unless response == nil || response.is_a?(Exception)
+          if response.messages.resultCode == MessageTypeEnum::Ok
+            assign_attributes(address_id: response.customerAddressId)
+          elsif response.messages.resultCode == 'Error' && response.messages.messages[0].code == 'E00039'
+            # Duplicate address, so just assign the address id associated
+            assign_attributes(address_id: response.customerAddressId)
+          else
+            # All is not well, include the authorize.net error code and message
+            self.errors.add(:base, [response.messages.messages[0].code, response.messages.messages[0].text].join(' '))
+          end
         else
-          # All is not well, include the authorize.net error code and message
-          self.errors.add(:base, [response.message_code, response.message_text].join(' '))
+          self.errors.add(:base, ['Null Response', 'Failed to create a new customer address.'].join(' '))
         end
       end
 
       # Delete the associated payment profile on Authorize.net when this instance is destroyed
       def delete_address
-        Accounting.api(:cim, api_options(profile.accountable)).delete_address(address_id, profile.profile_id) unless Rails.env.test?
+        request = DeleteCustomerShippingAddressRequest.new(nil, nil, profile.profile_id, address_id)
+        authnet(:api).delete_customer_shipping_profile(request) unless Rails.env.test?
       end
 
       def address_fields
         fields = attributes.symbolize_keys.slice(:first_name, :last_name, :company, :street_address, :city, :state, :zip, :country, :phone, :fax)
         # Remove commas, since it will screw with the comma delimited response string that authorize.net sends back
-        fields.map { |k,v| { k => v.to_s.gsub(/,+/, '') } }.compact.reduce(Hash.new, :merge)
+        fields.map { |k, v| v.to_s.gsub(/,+/, '') }
+      end
+
+      def create_request
+        request = CreateCustomerShippingAddressRequest.new
+        
+        request.address = to_billing_address
+        request.customerProfileId = profile.profile_id
+        request
       end
 
   end

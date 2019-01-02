@@ -7,19 +7,23 @@ http_interactions:
       encoding: UTF-8
       string: |
         <?xml version="1.0" encoding="utf-8"?>
-        <createCustomerProfileTransactionRequest xmlns="AnetApi/xml/v1/schema/AnetApiSchema.xsd">
+        <createTransactionRequest xmlns="AnetApi/xml/v1/schema/AnetApiSchema.xsd">
           <merchantAuthentication>
             <name>7YaGa84h</name>
             <transactionKey>4gP3XtM3Gs768xfb</transactionKey>
           </merchantAuthentication>
-          <transaction>
-            <profileTransAuthOnly>
-              <amount>1.0</amount>
-              <customerProfileId>1915926208</customerProfileId>
-              <customerPaymentProfileId>1829278414</customerPaymentProfileId>
-            </profileTransAuthOnly>
-          </transaction>
-        </createCustomerProfileTransactionRequest>
+          <clientId>sdk-ruby-1.9.7</clientId>
+          <transactionRequest>
+            <transactionType>authOnlyTransaction</transactionType>
+            <amount>1.0</amount>
+            <profile>
+              <customerProfileId>1916962947</customerProfileId>
+              <paymentProfile>
+                <paymentProfileId>1830218367</paymentProfileId>
+              </paymentProfile>
+            </profile>
+          </transactionRequest>
+        </createTransactionRequest>
     headers:
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
@@ -35,29 +39,35 @@ http_interactions:
       message: OK
     headers:
       Cache-Control:
-      - private
+      - no-store
+      Pragma:
+      - no-cache
       Content-Type:
       - application/xml; charset=utf-8
-      Access-Control-Allow-Origin:
-      - "*"
-      Access-Control-Allow-Headers:
-      - x-requested-with,cache-control,content-type,origin,method,SOAPAction
+      X-Opnet-Transaction-Trace:
+      - a2_5ed1139b-1533-463c-811d-a5ed796d44e7-11076-17732871
       Access-Control-Allow-Credentials:
       - 'true'
+      Access-Control-Allow-Headers:
+      - x-requested-with,cache-control,content-type,origin,method,SOAPAction
       Access-Control-Allow-Methods:
       - PUT,OPTIONS,POST,GET
+      Access-Control-Allow-Origin:
+      - "*"
+      Strict-Transport-Security:
+      - max-age=31536000
       X-Cnection:
       - close
       Content-Length:
-      - '744'
+      - '1012'
       Date:
-      - Thu, 18 Oct 2018 02:36:32 GMT
+      - Fri, 28 Dec 2018 03:33:51 GMT
       Connection:
       - keep-alive
     body:
       encoding: ASCII-8BIT
       string: !binary |-
-        77u/PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48Y3JlYXRlQ3VzdG9tZXJQcm9maWxlVHJhbnNhY3Rpb25SZXNwb25zZSB4bWxuczp4c2k9Imh0dHA6Ly93d3cudzMub3JnLzIwMDEvWE1MU2NoZW1hLWluc3RhbmNlIiB4bWxuczp4c2Q9Imh0dHA6Ly93d3cudzMub3JnLzIwMDEvWE1MU2NoZW1hIiB4bWxucz0iQW5ldEFwaS94bWwvdjEvc2NoZW1hL0FuZXRBcGlTY2hlbWEueHNkIj48bWVzc2FnZXM+PHJlc3VsdENvZGU+T2s8L3Jlc3VsdENvZGU+PG1lc3NhZ2U+PGNvZGU+STAwMDAxPC9jb2RlPjx0ZXh0PlN1Y2Nlc3NmdWwuPC90ZXh0PjwvbWVzc2FnZT48L21lc3NhZ2VzPjxkaXJlY3RSZXNwb25zZT4xLDEsMSxUaGlzIHRyYW5zYWN0aW9uIGhhcyBiZWVuIGFwcHJvdmVkLixLSTQzN1EsWSw2MDExMDE2MTE5MSwsLDEuMDAsQ0MsYXV0aF9vbmx5LDUzOTRjYzg4LEVsaWNpYSxBYnNoaXJlLEtsZWluIEdyb3VwLDA1NSBIaWNrbGUgUmVzdCxOZXcgQXByaWxoYXZlbixJbGxpbm9pcyw1NDY0OCxDTyw4MzQuNDg5LjcxOTYgeDc3MzEsMS02NTctNDk4LTkxODEsbWlrYWVsYS5rcmlzQGJyYWR0a2VoZWxsZXIudXMsLCwsLCwsLCwsLCwsLDUxNEE5Nzk5MUE4QzkyMTBCQzQyMDQwNDgzODEwOUMyLFAsMiwsLCwsLCwsLCwsWFhYWDAwMTUsTWFzdGVyQ2FyZCwsLCwsLCwsLCwsLCwsLCwsPC9kaXJlY3RSZXNwb25zZT48L2NyZWF0ZUN1c3RvbWVyUHJvZmlsZVRyYW5zYWN0aW9uUmVzcG9uc2U+
+        77u/PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48Y3JlYXRlVHJhbnNhY3Rpb25SZXNwb25zZSB4bWxuczp4c2k9Imh0dHA6Ly93d3cudzMub3JnLzIwMDEvWE1MU2NoZW1hLWluc3RhbmNlIiB4bWxuczp4c2Q9Imh0dHA6Ly93d3cudzMub3JnLzIwMDEvWE1MU2NoZW1hIiB4bWxucz0iQW5ldEFwaS94bWwvdjEvc2NoZW1hL0FuZXRBcGlTY2hlbWEueHNkIj48bWVzc2FnZXM+PHJlc3VsdENvZGU+T2s8L3Jlc3VsdENvZGU+PG1lc3NhZ2U+PGNvZGU+STAwMDAxPC9jb2RlPjx0ZXh0PlN1Y2Nlc3NmdWwuPC90ZXh0PjwvbWVzc2FnZT48L21lc3NhZ2VzPjx0cmFuc2FjdGlvblJlc3BvbnNlPjxyZXNwb25zZUNvZGU+MTwvcmVzcG9uc2VDb2RlPjxhdXRoQ29kZT5aM0VBWFI8L2F1dGhDb2RlPjxhdnNSZXN1bHRDb2RlPlk8L2F2c1Jlc3VsdENvZGU+PGN2dlJlc3VsdENvZGU+UDwvY3Z2UmVzdWx0Q29kZT48Y2F2dlJlc3VsdENvZGU+MjwvY2F2dlJlc3VsdENvZGU+PHRyYW5zSWQ+NjAxMTQzNTE2NTI8L3RyYW5zSWQ+PHJlZlRyYW5zSUQgLz48dHJhbnNIYXNoPkEyRTMxQjBFRENGNjgwOEQ5OTZEOTI4NzIxRjJBNkUwPC90cmFuc0hhc2g+PHRlc3RSZXF1ZXN0PjA8L3Rlc3RSZXF1ZXN0PjxhY2NvdW50TnVtYmVyPlhYWFgwMDI3PC9hY2NvdW50TnVtYmVyPjxhY2NvdW50VHlwZT5WaXNhPC9hY2NvdW50VHlwZT48bWVzc2FnZXM+PG1lc3NhZ2U+PGNvZGU+MTwvY29kZT48ZGVzY3JpcHRpb24+VGhpcyB0cmFuc2FjdGlvbiBoYXMgYmVlbiBhcHByb3ZlZC48L2Rlc2NyaXB0aW9uPjwvbWVzc2FnZT48L21lc3NhZ2VzPjx0cmFuc0hhc2hTaGEyIC8+PHByb2ZpbGU+PGN1c3RvbWVyUHJvZmlsZUlkPjE5MTY5NjI5NDc8L2N1c3RvbWVyUHJvZmlsZUlkPjxjdXN0b21lclBheW1lbnRQcm9maWxlSWQ+MTgzMDIxODM2NzwvY3VzdG9tZXJQYXltZW50UHJvZmlsZUlkPjwvcHJvZmlsZT48L3RyYW5zYWN0aW9uUmVzcG9uc2U+PC9jcmVhdGVUcmFuc2FjdGlvblJlc3BvbnNlPg==
     http_version: 
-  recorded_at: Thu, 18 Oct 2018 02:36:32 GMT
+  recorded_at: Fri, 28 Dec 2018 03:33:52 GMT
 recorded_with: VCR 4.0.0

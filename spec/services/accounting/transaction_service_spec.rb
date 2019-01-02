@@ -2,7 +2,12 @@ require 'spec_helper'
 
 RSpec.describe Accounting::TransactionService do
 
-  let(:hook_card)             { {"notificationId"=>"9a8c85fc-ac8f-460e-84a7-cc4c963711a7", "eventType"=>"net.authorize.customer.paymentProfile.created", "eventDate"=>"2018-10-17T16:30:02.2270619Z", "webhookId"=>"eb6e1f40-9e17-4d8d-aae3-a47acc001fbc", "payload"=>{"customerProfileId"=>1915911486, "entityName"=>"customerPaymentProfile", "id"=>"1829269244"}, "hook"=>{"notificationId"=>"9a8c85fc-ac8f-460e-84a7-cc4c963711a7", "eventType"=>"net.authorize.customer.paymentProfile.created", "eventDate"=>"2018-10-17T16:30:02.2270619Z", "webhookId"=>"eb6e1f40-9e17-4d8d-aae3-a47acc001fbc", "payload"=>{"customerProfileId"=>1915911486, "entityName"=>"customerPaymentProfile", "id"=>"1829269244"}}} }
+  let!(:profile) { FactoryBot.create(:accounting_profile, profile_id: 1916962958) }
+  let!(:payment) { FactoryBot.create(:accounting_payment, profile: profile, payment_profile_id: 1874391586) }
+  let!(:transaction) { FactoryBot.create(:accounting_transaction, transaction_id: 40023485475, payment: payment, amount: 15.00, profile: profile) }
+  let(:hook_card) { {"notificationId"=>"4e22ea43-4e32-483c-afbe-8ca95eba3270", "eventType"=>"net.authorize.payment.authcapture.created", "eventDate"=>"2019-01-02T02:59:00.1280724Z", "webhookId"=>"eb6e1f40-9e17-4d8d-aae3-a47acc001fbc", "payload"=>{"responseCode"=>1, "authCode"=>"R9TS09", "avsResponse"=>"Y", "authAmount"=>15.0, "entityName"=>"transaction", "id"=>"40023485475"}, "uid"=>"authnet_uid", "hook"=>{"notificationId"=>"4e22ea43-4e32-483c-afbe-8ca95eba3270", "eventType"=>"net.authorize.payment.authcapture.created", "eventDate"=>"2019-01-02T02:59:00.1280724Z", "webhookId"=>"eb6e1f40-9e17-4d8d-aae3-a47acc001fbc", "payload"=>{"responseCode"=>1, "authCode"=>"R9TS09", "avsResponse"=>"Y", "authAmount"=>15.0, "entityName"=>"transaction", "id"=>"40023485475"}}} }
+
+  # let(:hook_card)             { {"notificationId"=>"9a8c85fc-ac8f-460e-84a7-cc4c963711a7", "eventType"=>"net.authorize.customer.paymentProfile.created", "eventDate"=>"2018-10-17T16:30:02.2270619Z", "webhookId"=>"eb6e1f40-9e17-4d8d-aae3-a47acc001fbc", "payload"=>{"customerProfileId"=>1915911486, "entityName"=>"customerPaymentProfile", "id"=>"1916962958"}, "hook"=>{"notificationId"=>"9a8c85fc-ac8f-460e-84a7-cc4c963711a7", "eventType"=>"net.authorize.customer.paymentProfile.created", "eventDate"=>"2018-10-17T16:30:02.2270619Z", "webhookId"=>"eb6e1f40-9e17-4d8d-aae3-a47acc001fbc", "payload"=>{"customerProfileId"=>1915911486, "entityName"=>"customerPaymentProfile", "id"=>"1916962958"}}} }
   # let(:hook_ach)              { {"notificationId"=>"4c8711d3-3cf5-4953-afe7-805dcd595103", "eventType"=>"net.authorize.customer.paymentProfile.created", "eventDate"=>"2018-10-17T16:27:56.8906329Z", "webhookId"=>"eb6e1f40-9e17-4d8d-aae3-a47acc001fbc", "payload"=>{"customerProfileId"=>1915911486, "entityName"=>"customerPaymentProfile", "id"=>"1829269233"}, "hook"=>{"notificationId"=>"4c8711d3-3cf5-4953-afe7-805dcd595103", "eventType"=>"net.authorize.customer.paymentProfile.created", "eventDate"=>"2018-10-17T16:27:56.8906329Z", "webhookId"=>"eb6e1f40-9e17-4d8d-aae3-a47acc001fbc", "payload"=>{"customerProfileId"=>1915911486, "entityName"=>"customerPaymentProfile", "id"=>"1829269233"}}} }
   # let(:hook_subscription)     { { "notificationId" => "13739aed-1ac2-4611-9c59-38ea8abd6ed0", "eventType" => "net.authorize.payment.authcapture.created", "eventDate" => "2017-09-20T17:22:06.6624919Z", "webhookId" => "82ed4771-17bb-4fc6-8ea4-f0cad81d3414", "payload" => {"responseCode" => 0,"authCode" => "YSV1DM", "avsResponse" => "Y", "authAmount" => 0.0, "entityName" => "transaction", "id" => "60030156528" }} }
   # let(:hook_unknown)          { { "notificationId" => "13739aed-1ac2-4611-9c59-38ea8abd6ed0", "eventType" => "net.authorize.payment.authcapture.created", "eventDate" => "2017-09-20T17:22:06.6624919Z", "webhookId" => "82ed4771-17bb-4fc6-8ea4-f0cad81d3414", "payload" => {"responseCode" => 0,"authCode" => "YSV1DM", "avsResponse" => "Y", "authAmount" => 0.0, "entityName" => "transaction", "id" => "40007191118" }} }
@@ -24,14 +29,14 @@ RSpec.describe Accounting::TransactionService do
   #   subscription              = Accounting::Subscription.create!(profile_id: profile_subscription.id, subscription_id: service_subscription.resource.details.subscription_id.to_i, name: 'Test', start_date: Time.now, payment_id: payment_card.id, length: 1, unit: :months, amount: 1, total_occurrences: 9999)
   # end
 
-  let(:api_creds) { YAML.load_file(File.dirname(__FILE__) + '/../../credentials.yml')[123].symbolize_keys }
-  let(:service) { Accounting::TransactionService.new(hook_card, nil, '123')}
+  let(:api_creds) { YAML.load_file(File.dirname(__FILE__) + '/../../credentials.yml')[TEST_UID].symbolize_keys }
+  let(:service) { Accounting::HookService.new(hook_card, TEST_UID).service }
 
   it 'should be instantiable' do
     expect(service).to be_instance_of(Accounting::TransactionService)
   end
 
-  it 'should have a transaction resource' do
+  it 'should have a transaction resource if transaction exists' do
     expect(service.resource).to be_instance_of(Accounting::Transaction)
   end
 
@@ -40,18 +45,17 @@ RSpec.describe Accounting::TransactionService do
     expect(service.hook_api_options[:api_login]).to eq(api_creds[:login])
   end
 
-  # it 'should have a resource with a profile and payment relations after syncing' do
-  #   expect(service.resource.profile_id).to be_nil
-  #   expect(service.resource.payment_id).to be_nil
+  it 'should raise error if transaction not found in accounting' do
+    expect { service.sync! }.to raise_error(Accounting::SyncError, /Transaction cannot be created, transaction with id/)
+  end
 
-  #   service.sync!
+  it 'should have a resource with a profile and payment relations after syncing' do
+    expect(service.resource.status).to eq('pending')
+    service.sync!
 
-  #   expect(service.resource.profile_id).to_not be_nil
-  #   expect(service.resource.payment_id).to_not be_nil
-  # end
-
-  it 'should raise a sync error if the transaction details can not be found' do
-    expect { service.sync! }.to raise_error(Accounting::SyncError, /record could not be found/)
+    expect(service.resource.profile_id).to_not be_nil
+    expect(service.resource.payment_id).to_not be_nil
+    expect(service.resource.status).to eq('captured')
   end
 
   it 'should have a status' do

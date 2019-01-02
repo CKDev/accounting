@@ -44,7 +44,7 @@ module Accounting
     after_commit :process_later
 
     def details
-      @details ||= Accounting.api(:arb, api_options(profile.accountable)).get_subscription_details(subscription_id)
+      @details ||= authnet(:arb).get_subscription_details(subscription_id)
       if @details && @details.success?
         @details.subscription
       else
@@ -71,7 +71,7 @@ module Accounting
         raise Accounting::SubscriptionCanceledError, "Subscription with id #{subscription_id} has already been canceled"
       end
 
-      response = Accounting.api(:arb, api_options(profile.accountable)).cancel(subscription_id)
+      response = authnet(:arb).cancel(subscription_id)
       if response.present? && response.success?
         result = update(status: CANCELED)
         profile.accountable.try(:run_hook, :after_subscription_cancel, self) if result
@@ -172,7 +172,7 @@ module Accounting
 
         subscription = AuthorizeNet::ARB::Subscription.new(fields)
 
-        response = Accounting.api(:arb, api_options(profile.accountable)).create(subscription)
+        response = authnet(:arb).create(subscription)
 
         if response.present? && response.success?
           # Keep assign_attributes for these 2 attributes separate since next_transaction_date depends on subscription_id being set

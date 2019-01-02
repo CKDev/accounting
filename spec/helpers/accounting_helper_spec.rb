@@ -2,7 +2,7 @@ require 'spec_helper'
 
 RSpec.describe AccountingHelper, type: :helper do
 
-  let(:user) { FactoryGirl.create(:user, name: 'Test Name', email: 'test_email@example.org') }
+  let(:user) { FactoryBot.create(:user, name: 'Test Name', email: 'test_email@example.org') }
 
   it 'will return the value returned from a proc argument' do
     expect(value_from(proc { |u| u.name }, user, user)).to eq('Test Name')

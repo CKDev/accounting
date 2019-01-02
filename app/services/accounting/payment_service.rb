@@ -17,7 +17,7 @@ module Accounting
       resource.assign_attributes(
         profile_type: type,
         last_four: last_four,
-        expiration: expiration,
+        # expiration: expiration,
         year: -1, # -1 tells the payment model not to validate the expiration date.
         month: -1
       )
@@ -36,10 +36,12 @@ module Accounting
     end
 
     def type
-      if details.payment_method.is_a?(AuthorizeNet::ECheck)
+      if details.payment.bankAccount.present?
         :ach
-      elsif details.payment_method.is_a?(AuthorizeNet::CreditCard)
+      elsif details.payment.creditCard.present?
         :card
+      else
+        raise Accounting::SyncError.new("Payment profile payment type is blank", payload)
       end
     end
 
@@ -54,40 +56,42 @@ module Accounting
     def title
       case type
         when :ach
-          details.payment_method.bank_name
+          details.payment.bankAccount.bankName
         when :card
-          details.payment_method.card_type
+          details.payment.creditCard.cardType
       end
     end
 
     def address
-      return unless details.billing_address.present?
+      return unless details.billTo.present?
 
       Accounting::Address.new(
-        first_name: details.billing_address.first_name,
-        last_name: details.billing_address.last_name,
-        street_address: details.billing_address.street_address,
-        city: details.billing_address.city,
-        state: details.billing_address.state,
-        zip: details.billing_address.zip
+        first_name: details.billTo.firstName,
+        last_name: details.billTo.lastName,
+        street_address: details.billTo.address,
+        city: details.billTo.city,
+        state: details.billTo.state,
+        zip: details.billTo.zip
       )
     end
 
     def last_four
       case type
         when :ach
-          details.payment_method.account_number[-4..-1]
+          details.payment.bankAccount.accountNumber[-4..-1]
         when :card
-          details.payment_method.card_number[-4..-1]
+          details.payment.creditCard.cardNumber[-4..-1]
       end
     end
 
+    # TODO: figure out how to get expiration date from authorize.net syncing. Alex's solution(https://github.com/CKDev/accounting/pull/6) does
+    #       not work anymore since Authorize.net deprecated their CIM API and uses new API. They just return 'XXXX' for expirationDate.
     def expiration
       case type
         when :ach
           nil
         when :card
-          parse_expiration details.payment_method.expiration
+          parse_expiration details.payment.creditCard.expirationDate
       end
     end
 

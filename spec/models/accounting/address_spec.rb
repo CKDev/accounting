@@ -2,14 +2,10 @@ require 'spec_helper'
 
 RSpec.describe Accounting::Address, type: :model do
 
-  let(:address) { FactoryGirl.build(:accounting_address, :with_payment) }
+  let(:address) { FactoryBot.build(:accounting_address, :with_payment) }
 
   it 'can be fetched as a billing address' do
-    expect(address.to_billing_address).to be_instance_of(AuthorizeNet::Address)
-  end
-
-  it 'can be fetched as a shipping address' do
-    expect(address.to_shipping_address).to be_instance_of(AuthorizeNet::ShippingAddress)
+    expect(address.to_billing_address).to be_instance_of(AuthorizeNet::API::CustomerAddressType)
   end
 
   it 'can create an address profile' do
@@ -21,7 +17,7 @@ RSpec.describe Accounting::Address, type: :model do
   end
 
   it 'will have address errors if the address could not be created' do
-    address = FactoryGirl.build(:accounting_address)
+    address = FactoryBot.build(:accounting_address)
 
     VCR.use_cassette :invalid_address do
       expect(address).to_not be_valid

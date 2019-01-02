@@ -3,7 +3,7 @@ require 'spec_helper'
 RSpec.describe User, type: :model do
 
   let(:accountable) { User.new }
-  let(:profile) { FactoryGirl.create(:accounting_profile) }
+  let(:profile) { FactoryBot.create(:accounting_profile) }
   let(:profile_id) { profile.profile_id }
 
   it 'should create a profile on save' do

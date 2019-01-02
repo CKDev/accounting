@@ -44,11 +44,17 @@ module Accounting
 
     accepts_nested_attributes_for :address, reject_if: :all_blank
 
-    def details
-      @details ||= Accounting.api(:cim, api_options(profile.accountable)).get_payment_profile(payment_profile_id, profile.profile_id)
+    delegate :accountable, to: :profile
 
-      if @details && @details.success?
-        @details.payment_profile
+    def details
+      request = GetCustomerPaymentProfileRequest.new
+      request.customerProfileId = profile.profile_id
+      request.customerPaymentProfileId = payment_profile_id
+
+      @response ||= authnet(:api).get_customer_payment_profile(request)
+
+      if @response.messages.resultCode == MessageTypeEnum::Ok
+        @response.paymentProfile
       else
         nil
       end
@@ -56,8 +62,8 @@ module Accounting
 
     def default!
       if profile.present? && !profile.destroyed?
-        profile.payments.where(default: true).where.not(id: id).update_all(default: false)
-        update_attribute(:default, true) unless destroyed?
+        profile.payments.where(default: true).update_all(default: false)
+        update_attribute(:default, true)
       end
     end
 
@@ -67,31 +73,33 @@ module Accounting
         # Don't bother creating the payment if errors exist on self or the address at this point, it will fail to validate anyways
         return if errors.present? || (address.present? && address.errors.present?)
 
-        ach = AuthorizeNet::ECheck.new(routing, account, bank_name, account_holder, { account_type: account_type, check_number: check_number, echeck_type: echeck_type || AuthorizeNet::ECheck::CheckType::INTERNET_INITIATED })
-        payment_profile = AuthorizeNet::CIM::PaymentProfile.new(payment_method: ach, billing_address: address&.to_billing_address)
+        response = authnet(:api).create_customer_payment_profile(create_request)
 
-        response = Accounting.api(:cim, api_options(profile.accountable)).create_payment_profile(payment_profile, profile.profile_id, validation_mode: api_validation_mode(profile.accountable))
-
-        if response.success?
-          if response.validation_response.present?
-            # Add the payment attributes. Expiration only applies to card payment types
-            # If no payment types exist yet, make the first one the default
-            assign_attributes(
-              title: response.validation_response.fields[:card_type],
-              payment_profile_id: response.payment_profile_id,
-              default: profile.payments.count == 0,
-              last_four: response.validation_response.fields[:account_number].to_s[-4..-1]
-            )
+        unless response == nil || response.is_a?(Exception)
+          if response.messages.resultCode == MessageTypeEnum::Ok
+            if response.validationDirectResponse.present?
+              # Add the payment attributes. Expiration only applies to card payment types
+              # If no payment types exist yet, make the first one the default
+              assign_attributes(
+                title: response.validationDirectResponse.split(',')[51],
+                payment_profile_id: response.customerPaymentProfileId,
+                default: profile.payments.count == 0,
+                last_four: response.validationDirectResponse.split(',')[50].to_s[-4..-1]
+              )
+            end
+          else
+            # All is not well, include the authorize.net error code and message
+            self.errors.add(:base, [response.messages.messages[0].code, response.messages.messages[0].text].join(' '))
           end
         else
-          # All is not well, include the authorize.net error code and message
-          self.errors.add(:base, [response.message_code, response.message_text].join(' '))
+          self.errors.add(:base, ['Null Response', 'Failed to create a new customer payment profile.'].join(' '))
         end
       end
 
       # Delete the associated payment profile on Authorize.net when this instance is destroyed
       def delete_payment
-        Accounting.api(:cim, api_options(profile.accountable)).delete_payment_profile(payment_profile_id, profile.profile_id)
+        request = DeleteCustomerPaymentProfileRequest.new(nil, nil, payment_profile_id, profile.profile_id)
+        authnet(:api).delete_customer_payment_profile(request)
       end
 
       def reset_default
@@ -116,6 +124,36 @@ module Accounting
         # Ensure the year is 4 digit representation
         self.year = '20' + year.to_s[-2..-1].to_s
         self.expiration = Date.new(year.to_i, month.to_i, -1) rescue nil
+      end
+
+      def create_request
+        # Build the payment object
+        payment = PaymentType.new
+        payment.bankAccount = BankAccountType.new
+        payment.bankAccount.accountType = account_type
+        payment.bankAccount.routingNumber = routing
+        payment.bankAccount.accountNumber = account
+        payment.bankAccount.nameOnAccount = account_holder
+        payment.bankAccount.echeckType = echeck_type || AuthorizeNet::ECheck::CheckType::INTERNET_INITIATED
+        payment.bankAccount.bankName = bank_name
+        payment.bankAccount.checkNumber = check_number
+
+        # Build an address object
+        billTo = address&.to_billing_address
+
+        # Use the previously defined payment and billTo objects to
+        # build a payment profile to send with the request
+        paymentProfile = CustomerPaymentProfileType.new
+        paymentProfile.payment = payment
+        paymentProfile.billTo = billTo
+        paymentProfile.defaultPaymentProfile = true
+
+        # Build the request object
+        request = CreateCustomerPaymentProfileRequest.new
+        request.paymentProfile = paymentProfile
+        request.customerProfileId = profile.profile_id
+        request.validationMode = api_validation_mode(profile.accountable)
+        request
       end
 
   end

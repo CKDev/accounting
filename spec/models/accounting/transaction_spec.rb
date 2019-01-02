@@ -4,7 +4,7 @@ RSpec.describe Accounting::Transaction, type: :model do
 
   before(:all) { ActiveJob::Base.queue_adapter = :test }
 
-  let(:user) { FactoryGirl.create(:user, :with_payment, :with_transactions) }
+  let(:user) { FactoryBot.create(:user, :with_payment, :with_transactions) }
 
   before(:each) { user.transactions }
 
@@ -31,7 +31,7 @@ RSpec.describe Accounting::Transaction, type: :model do
   end
 
   it 'will fetch the address if an address instance is provided' do
-    address = FactoryGirl.create(:accounting_address, :with_payment, :with_address_id)
+    address = FactoryBot.create(:accounting_address, :with_payment, :with_address_id)
     charge = user.charge(1.00, user.payments.default, address_id: '0')
     expect(charge).to be_valid
     expect(charge.options[:address_id]).to eq('0')

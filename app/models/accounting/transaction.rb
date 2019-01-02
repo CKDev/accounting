@@ -50,10 +50,15 @@ module Accounting
 
     before_save :update_subscription!
 
+    delegate :accountable, to: :profile
+
     def details(api_opts={})
-      @details ||= Accounting.api(:reporting, api_options(accountable).merge(api_opts)).get_transaction_details(transaction_id)
-      if @details && @details.success?
-        @details.transaction
+      request = GetTransactionDetailsRequest.new
+      request.transId = transaction_id
+
+      @response ||= authnet(:api, api_opts).get_transaction_details(request)
+      if @response && @response.messages.resultCode == MessageTypeEnum::Ok
+        @response.transaction
       else
         nil
       end
@@ -140,61 +145,72 @@ module Accounting
     private
 
       def handle_transaction(response, **params)
-        if response.present? && response.success?
-          if response.direct_response.present?
-            # Extract just the fields that we're going to save
-            fields = response.direct_response.fields.slice(:authorization_code, :method, :transaction_id, :avs_response)
+        if response.present? && !response.is_a?(Exception)
+          if response.messages.resultCode == MessageTypeEnum::Ok
+            if response.transactionResponse&.messages.present?
+              fields ={
+                submitted_at: Time.now.utc,
+                transaction_method: response.transactionResponse.accountType,
+                authorization_code: response.transactionResponse.authCode,
+                transaction_id: response.transactionResponse.transId,
+                avs_response: response.transactionResponse.avsResultCode
+              }
 
-            # Set the submitted at timestamp
-            fields[:submitted_at] = Time.now.utc
-
-            # Can't use the key/column name "method" in a database, change it to "transaction_method"
-            fields[:transaction_method] = fields.delete(:method)
-
-            assign_attributes(params.merge(fields))
-            save
-          end
-        elsif response.present?
-          if response.direct_response.present?
-            # Handle duplicate transactions separately
-            fields = response.direct_response.fields.slice(:response_code, :response_subcode, :response_reason_code)
-            if fields[:response_code] == '3' && fields[:response_subcode] == '1' && fields[:response_reason_code] == '11'
-              raise Accounting::DuplicateError, 'Transaction has already been submitted'
+              assign_attributes(params.merge(fields))
+              return save
+            else
+              if response&.transactionResponse&.errors.present?
+                error_msg = [response.transactionResponse.errors.errors[0].errorCode, response.transactionResponse.errors.errors[0].errorText].join(' ')
+              end
+            end
+          else
+            if response.transactionResponse&.errors.present?
+              if response.transactionResponse.responseCode == '3' && response.transactionResponse.errors.errors[0].errorCode == '11'
+                raise Accounting::DuplicateError, 'Transaction has already been submitted'
+              end
+              error_msg = [response.transactionResponse.errors.errors[0].errorCode, response.transactionResponse.errors.errors[0].errorText].join(' ')
+            else
+              error_msg = [response.messages.messages[0].code, response.messages.messages[0].text].join(' ')
             end
           end
-
-          # Got a response, but it wasn't good
-          raise StandardError, HTMLEntities.new.decode([response.message_code, response.message_text].join(' '))
         end
+
+        error_msg ||= 'Failed to charge customer profile.'
+        raise StandardError, HTMLEntities.new.decode(error_msg)
       end
 
       def hold
         before_transaction!
-        response = Accounting.api(:cim, api_options(profile.accountable)).create_transaction_auth_only(amount, profile.profile_id, payment.payment_profile_id, order, options)
+        request = create_request(TransactionTypeEnum::AuthOnlyTransaction, amount, profile.profile_id, payment.payment_profile_id)
+        response = authnet(:api).create_transaction(request)
         handle_transaction(response, status: :held, message: options[:message])
       end
 
       def capture
         before_transaction!
-        response = Accounting.api(:cim, api_options(profile.accountable)).create_transaction_prior_auth_capture(original_transaction.try(:transaction_id), amount, order, options)
+        request = create_request(TransactionTypeEnum::PriorAuthCaptureTransaction, amount, nil, nil, original_transaction.try(:transaction_id))
+        response = authnet(:api).create_transaction(request)
         handle_transaction(response, status: :captured, message: options[:message])
       end
 
       def void
         before_transaction!
-        response = Accounting.api(:cim, api_options(profile.accountable)).create_transaction_void(original_transaction.try(:transaction_id), options)
+        request = create_request(TransactionTypeEnum::VoidTransaction, nil, nil, nil, original_transaction.try(:transaction_id))
+        response = authnet(:api).create_transaction(request)
         handle_transaction(response, status: :voided, message: options[:message])
       end
 
       def charge
         before_transaction!
-        response = Accounting.api(:cim, api_options(profile.accountable)).create_transaction_auth_capture(amount, profile.profile_id, payment.payment_profile_id, order, options)
+        request = create_request(TransactionTypeEnum::AuthCaptureTransaction, amount, profile.profile_id, payment.payment_profile_id)
+        response = authnet(:api).create_transaction(request)
         handle_transaction(response, status: :captured, message: options[:message])
       end
 
       def refund
         before_transaction!
-        response = Accounting.api(:cim, api_options(profile.accountable)).create_transaction_refund(original_transaction.try(:transaction_id), amount, profile.profile_id, payment.payment_profile_id, order, options)
+        request = create_request(TransactionTypeEnum::RefundTransaction, amount, profile.profile_id, payment.payment_profile_id, original_transaction.try(:transaction_id))
+        response = authnet(:api).create_transaction(request)
         handle_transaction(response, status: :refunded, message: options[:message])
       end
 
@@ -222,16 +238,31 @@ module Accounting
         option(:queue, accountable) || :default
       end
 
-      def accountable
-        profile.try(:accountable)
-      end
-
       def update_subscription!
         subscription.update!(next_transaction_at: subscription.next_transaction_date) if subscription?
       end
 
       def order
         options[:order]
+      end
+
+      def create_request(type, amount, profile_id, payment_id, ref_trans_id=nil)
+        request = CreateTransactionRequest.new
+  
+        request.transactionRequest = TransactionRequestType.new
+        request.transactionRequest.amount = amount
+        request.transactionRequest.transactionType = type
+        request.transactionRequest.poNumber = order
+        if profile_id.present? && payment_id.present?
+          request.transactionRequest.profile = CustomerProfilePaymentType.new
+          request.transactionRequest.profile.customerProfileId = profile_id
+          request.transactionRequest.profile.paymentProfile = PaymentProfile.new(payment_id)
+        end
+
+        # Refund/Void
+        request.transactionRequest.refTransId = ref_trans_id
+
+        request
       end
 
   end

@@ -10,8 +10,8 @@ RSpec.describe Accounting::HooksController, type: :controller do
 
   before(:each) do
     request.headers.merge! valid_header
-    @profile = FactoryGirl.create(:accounting_profile)
-    @paymentProfile = FactoryGirl.create(:accounting_payment, :with_ach, profile: @profile)
+    @profile = FactoryBot.create(:accounting_profile)
+    @paymentProfile = FactoryBot.create(:accounting_payment, :with_ach, profile: @profile)
 
     @valid_payload =  "{\"notificationId\":\"4985a7ab-0503-428c-bc0d-e034b83e7be7\",
                        \"eventType\":\"net.authorize.customer.paymentProfile.created\",
@@ -23,17 +23,17 @@ RSpec.describe Accounting::HooksController, type: :controller do
   end
 
   it 'should enqueue a hook job on create' do
-    expect { post :create, params: JSON.parse(@valid_payload) }.to have_enqueued_job(Accounting::HookJob)
+    expect { post :create, uid: TEST_UID, params: JSON.parse(@valid_payload) }.to have_enqueued_job(Accounting::HookJob)
     expect(response).to have_http_status(:ok)
   end
 
   it 'should enqueue a hook job on update' do
-    expect { post :update, params: JSON.parse(@valid_payload) }.to have_enqueued_job(Accounting::HookJob)
+    expect { post :update, uid: TEST_UID, params: JSON.parse(@valid_payload) }.to have_enqueued_job(Accounting::HookJob)
     expect(response).to have_http_status(:ok)
   end
 
   it 'should enqueue a hook job on destroy' do
-    expect { post :destroy, params: JSON.parse(@valid_payload) }.to have_enqueued_job(Accounting::HookJob)
+    expect { post :destroy, uid: TEST_UID, params: JSON.parse(@valid_payload) }.to have_enqueued_job(Accounting::HookJob)
     expect(response).to have_http_status(:ok)
   end
 

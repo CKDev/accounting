@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :accounting_address, class: 'Accounting::Address' do
     first_name { FFaker::Name.first_name }
     last_name { FFaker::Name.last_name }
@@ -12,7 +12,7 @@ FactoryGirl.define do
     fax { FFaker::PhoneNumber.phone_number }
 
     trait :with_payment do
-      payment { FactoryGirl.build(:accounting_payment, :with_card) }
+      payment { FactoryBot.build(:accounting_payment, :with_card) }
     end
 
     trait :with_address_id do

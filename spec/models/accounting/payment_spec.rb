@@ -2,7 +2,7 @@ require 'spec_helper'
 
 RSpec.describe Accounting::Payment, type: :model do
 
-  let(:payment) { FactoryGirl.build(:accounting_payment, :with_card) }
+  let(:payment) { FactoryBot.build(:accounting_payment, :with_card) }
 
   it 'should support instantiation' do
     expect(Accounting::Payment.new).to be_instance_of(Accounting::Payment)
@@ -22,7 +22,7 @@ RSpec.describe Accounting::Payment, type: :model do
       VCR.use_cassette :valid_payment, record: :new_episodes, re_record_interval: 7.days do
         payment.save!
         expect(payment.default?).to be_truthy
-        payment2 = FactoryGirl.create(:accounting_payment, :with_card, profile: payment.profile)
+        payment2 = FactoryBot.create(:accounting_payment, :with_card, profile: payment.profile)
         payment2.default!
         expect(payment.reload.default?).to be_falsey
         expect(payment2.reload.default?).to be_truthy
@@ -60,7 +60,7 @@ RSpec.describe Accounting::Payment, type: :model do
 
       types.each do |type|
         VCR.use_cassette "payment_ach_#{type}", record: :new_episodes, re_record_interval: 7.days do
-          payment = FactoryGirl.create(:accounting_payment, :with_ach, account_type: type)
+          payment = FactoryBot.create(:accounting_payment, :with_ach, account_type: type)
           expect(payment.title).to eq('Bank Account')
         end
       end
@@ -70,7 +70,7 @@ RSpec.describe Accounting::Payment, type: :model do
 
   context 'Opaque Data(Accept.js)' do
 
-    let(:payment_card) { FactoryGirl.build(:accounting_payment, :with_card) }
+    let(:payment_card) { FactoryBot.build(:accounting_payment, :with_card) }
 
     it 'should not run create_payment when create from payment nonce' do
       expect(payment_card).not_to receive(:create_payment)
