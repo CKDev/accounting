@@ -58,7 +58,7 @@ RSpec.describe Accounting::PaymentService do
     # expect { service_payment_card.sync! }.to change { Accounting::Payment.count }.by(-1) # Now destroy it
   end
 
-  it 'should raise a sync error if the payment details could not be found', focus: true do
+  it 'should raise a sync error if the payment details could not be found' do
     service_payment_card.sync!
     service_payment_card.resource.update_column(:payment_profile_id, nil)
     service_payment_card.resource.profile.update_column(:profile_id, nil)

@@ -17,7 +17,7 @@ module Accounting
       resource.assign_attributes(
         profile_type: type,
         last_four: last_four,
-        # expiration: expiration,
+        expiration: expiration,
         year: -1, # -1 tells the payment model not to validate the expiration date.
         month: -1
       )
@@ -84,8 +84,6 @@ module Accounting
       end
     end
 
-    # TODO: figure out how to get expiration date from authorize.net syncing. Alex's solution(https://github.com/CKDev/accounting/pull/6) does
-    #       not work anymore since Authorize.net deprecated their CIM API and uses new API. They just return 'XXXX' for expirationDate.
     def expiration
       case type
         when :ach
