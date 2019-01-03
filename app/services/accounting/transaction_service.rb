@@ -41,7 +41,9 @@ module Accounting
     end
 
     def resource
-      @resource ||= Accounting::Transaction.find_by(transaction_id: payload[:id])
+      # where().first is used here to make sure we get the first Accounting::Transaction
+      # according to resource ID every time
+      @resource ||= Accounting::Transaction.where(transaction_id: payload[:id]).first
     end
 
     def type
