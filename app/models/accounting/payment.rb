@@ -99,7 +99,7 @@ module Accounting
 
       # Delete the associated payment profile on Authorize.net when this instance is destroyed
       def delete_payment
-        request = DeleteCustomerPaymentProfileRequest.new(nil, nil, payment_profile_id, profile.profile_id)
+        request = DeleteCustomerPaymentProfileRequest.new(nil, nil, profile.profile_id, payment_profile_id)
         authnet(:api).delete_customer_payment_profile(request)
       end
 
