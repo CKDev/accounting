@@ -150,7 +150,7 @@ module Accounting
             if response.transactionResponse&.messages.present?
               fields = {
                 submitted_at: Time.now.utc,
-                transaction_method: trans_method,
+                transaction_method: trans_method(response),
                 authorization_code: response.transactionResponse.authCode,
                 transaction_id: response.transactionResponse.transId,
                 avs_response: response.transactionResponse.avsResultCode
@@ -179,7 +179,7 @@ module Accounting
         raise StandardError, HTMLEntities.new.decode(error_msg)
       end
 
-      def trans_method
+      def trans_method(response)
         response.transactionResponse.accountType === 'eCheck' ? 'ECHECK' : 'CC'
       end
 
