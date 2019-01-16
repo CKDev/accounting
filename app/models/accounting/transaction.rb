@@ -148,9 +148,9 @@ module Accounting
         if response.present? && !response.is_a?(Exception)
           if response.messages.resultCode == MessageTypeEnum::Ok
             if response.transactionResponse&.messages.present?
-              fields ={
+              fields = {
                 submitted_at: Time.now.utc,
-                transaction_method: response.transactionResponse.accountType,
+                transaction_method: trans_method,
                 authorization_code: response.transactionResponse.authCode,
                 transaction_id: response.transactionResponse.transId,
                 avs_response: response.transactionResponse.avsResultCode
@@ -177,6 +177,10 @@ module Accounting
 
         error_msg ||= 'Failed to charge customer profile.'
         raise StandardError, HTMLEntities.new.decode(error_msg)
+      end
+
+      def trans_method
+        response.transactionResponse.accountType === 'eCheck' ? 'ECHECK' : 'CC'
       end
 
       def hold
