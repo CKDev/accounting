@@ -2,10 +2,6 @@ module Accounting
   class TransactionService < AccountingService
 
     def sync!
-      if resource.nil? # Don't want to process orphaned profiles
-        raise Accounting::SyncError.new("Transaction cannot be created, transaction with id '#{payload[:id]}' could not be found.", payload)
-      end
-
       # Ignore verification transactions
       return if details&.order&.description == 'Test transaction for ValidateCustomerPaymentProfile.'
 
@@ -44,6 +40,7 @@ module Accounting
       # where().first is used here to make sure we get the first Accounting::Transaction
       # according to resource ID every time
       @resource ||= Accounting::Transaction.where(transaction_id: payload[:id]).first
+      @resource ||= Accounting::Transaction.new(transaction_id: payload[:id])
     end
 
     def type
@@ -87,10 +84,10 @@ module Accounting
     end
 
     def profile
-      if Accounting::Profile.exists?(authnet_email: details.customer.email)
-        Accounting::Profile.find_by(authnet_email: details.customer.email)
+      if Accounting::Profile.exists?(authnet_id: details.customer.id)
+        Accounting::Profile.find_by(authnet_id: details.customer.id)
       else
-        raise Accounting::SyncWarning.new("Transaction cannot be created, profile with email '#{details.customer.email}' could not be found.", payload)
+        raise Accounting::SyncWarning.new("Transaction cannot be created, profile with authnet_id '#{details.customer.id}' could not be found.", payload)
       end
     end
 
