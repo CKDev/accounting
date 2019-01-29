@@ -50,7 +50,7 @@ module Accounting
 
     before_save :update_subscription!
 
-    delegate :accountable, to: :profile
+    delegate :accountable, to: :profile, allow_nil: true # Accountable might not exist before sync.
 
     def details(api_opts={})
       request = GetTransactionDetailsRequest.new
