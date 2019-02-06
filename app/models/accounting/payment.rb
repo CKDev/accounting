@@ -135,7 +135,7 @@ module Accounting
         payment.bankAccount.routingNumber = routing
         payment.bankAccount.accountNumber = account
         payment.bankAccount.nameOnAccount = account_holder
-        payment.bankAccount.echeckType = echeck_type || AuthorizeNet::ECheck::CheckType::INTERNET_INITIATED
+        payment.bankAccount.echeckType = echeck_type || echeck_type_for_account
         payment.bankAccount.bankName = bank_name
         payment.bankAccount.checkNumber = check_number
 
@@ -155,6 +155,10 @@ module Accounting
         request.customerProfileId = profile.profile_id
         request.validationMode = api_validation_mode(profile.accountable)
         request
+      end
+
+      def echeck_type_for_account
+        account_type == 'businessChecking' ? EcheckTypeEnum::CCD : EcheckTypeEnum::WEB
       end
 
   end

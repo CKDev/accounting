@@ -66,6 +66,13 @@ RSpec.describe Accounting::Payment, type: :model do
       end
     end
 
+    it 'echeck type should be CCD for businessChecking' do
+      VCR.use_cassette "payment_ach_businessChecking", record: :new_episodes, re_record_interval: 7.days do
+        payment = FactoryBot.create(:accounting_payment, :with_ach, account_type: 'businessChecking')
+        expect(payment.send(:echeck_type_for_account)).to eq('CCD')
+      end
+    end
+
   end
 
   context 'Opaque Data(Accept.js)' do
