@@ -13,8 +13,6 @@ module Accounting
 
     serialize :options, Hash
 
-    delegate :accountable, to: :profile
-
     # Holds
     scope :holds, -> { where(transaction_type: :auth_only) }
 

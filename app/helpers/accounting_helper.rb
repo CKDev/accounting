@@ -33,7 +33,7 @@ module AccountingHelper
 
   def authnet(type, opts={})
     raise 'Define accountable in the class' unless respond_to? :accountable
-    Accounting.api(type, api_options(accountable).merge(opts))
+    Accounting.api(type, accountable.present? ? api_options(accountable) : opts)
   end
 
 end
