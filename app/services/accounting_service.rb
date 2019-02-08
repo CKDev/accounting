@@ -29,7 +29,7 @@ class AccountingService
   end
 
   def hook_api_options
-    cred = Accounting.config.api_creds[uid]
+    cred = Accounting.config.api_creds(uid)
     return {} if cred.nil?
 
     { api_login: cred[:login], api_key: cred[:key] }

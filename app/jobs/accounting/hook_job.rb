@@ -29,8 +29,8 @@ module Accounting
       def authenticate!
         raise Accounting::SyncError.new('Invalid signature', payload) if signature.blank?
 
-        cred = Accounting.config.api_creds[uid]
-        raise Accounting::SyncError.new("Invalid uid: #{uid}", payload) if cred.nil?
+        cred = Accounting.config.api_creds(uid)
+        raise Accounting::SyncWarning.new("Invalid uid: #{uid}", payload) if cred.nil?
 
         return true if signature == OpenSSL::HMAC.hexdigest('SHA512', cred[:signature], body).upcase
 

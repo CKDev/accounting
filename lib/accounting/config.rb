@@ -13,8 +13,18 @@ module Accounting
     end
 
     def api_creds=(api_creds)
-      @api_creds = api_creds.deep_symbolize_keys
-      @api_creds.stringify_keys!
+      raise ArgumentError, 'Authnet API creds should be Proc or Hash' unless @api_creds.respond_to?(:call) || @api_creds.is_a?(Hash)
+      @api_creds = api_creds
+    end
+
+    def api_creds(uid)
+      hash = if @api_creds.respond_to?(:call)
+        @api_creds.call(uid)
+      elsif @api_creds.is_a?(Hash)
+        @api_creds.stringify_keys[uid]
+      end
+
+      hash.deep_symbolize_keys
     end
 
   end
