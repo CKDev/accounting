@@ -29,9 +29,9 @@ Accounting.setup do |config|
 
   # Multiple authnet accounts api credentials. Define a proc that returns authnet API creds for given uid.
   # Note: Keep this hash updated whenever authnet account creds or uid get changed.
-  config.api_creds = proc do |uid|
-    Facility.find_by('lower(site_code) = ?', uid).authnet_account.to_h
-  end
+  config.api_creds = proc { |uid| Facility.find_by('lower(site_code) = ?', uid).authnet_account.to_h }
+  # OR
+  # config.api_creds = proc { |uid| { login: 'xxx', key: 'yyy', singature: 'zzz', client_key: 'ccc' } }
 
 end
 CONTENT
