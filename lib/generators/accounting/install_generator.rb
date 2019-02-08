@@ -27,11 +27,11 @@ Accounting.setup do |config|
   # refer to specific customer email addresses
   config.domain = 'example.org'
 
-  # Multiple authnet accounts hash. All uids set on authnet account webhook urls should be present in this hash.
-  # Note: Keep this hash updated when authnet account creds or uid get changed.
-  config.api_creds = AuthnetAccount.all.each_with_object({}) do |e, obj|
-    obj[e.uid] = e.to_h
-  end
+  # Multiple authnet accounts api credentials. Define a proc that returns authnet API creds for given uid.
+  # Note: Keep this hash updated whenever authnet account creds or uid get changed.
+  config.api_creds = proc { |uid| Facility.find_by('lower(site_code) = ?', uid).authnet_account.to_h }
+  # OR
+  # config.api_creds = proc { |uid| { login: 'xxx', key: 'yyy', singature: 'zzz', client_key: 'ccc' } }
 
 end
 CONTENT
