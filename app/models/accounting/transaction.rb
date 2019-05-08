@@ -32,8 +32,6 @@ module Accounting
 
     validates :transaction_type, inclusion: { in: %w(auth_only prior_auth_capture void auth_capture refund) }
 
-    validates :payment, presence: true, if: proc { |t| ['auth_only', 'auth_capture', 'refund'].include?(t.transaction_type) }
-
     validates :amount, numericality: { greater_than: 0 }, if: proc { |t| t.transaction_type != 'void' }
 
     validates :payment, presence: true, if: proc { |t| !['void', 'prior_auth_capture'].include?(t.transaction_type) }

@@ -22,6 +22,6 @@ class CreateAccountingTransactions < ActiveRecord::Migration[5.1]
       t.timestamps
     end
 
-    # add_index :accounting_transactions, :transaction_id, unique: true
+    # add_index :accounting_transactions, [:transaction_id, :transaction_type], unique: true
   end
 end

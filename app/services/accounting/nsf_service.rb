@@ -64,7 +64,7 @@ module Accounting
 
       def find_original_transaction(return_trans_id)
         details = get_transaction_details(return_trans_id)
-        profile = Accounting::Profile.find_by!(authnet_id: details.transaction.customer.id)
+        profile = Accounting::Profile.find_by!(authnet_id: details.customer.id)
 
         last_four = details.payment.bankAccount.accountNumber[-4..-1]
         payment = profile.payments.find_by!(last_four: last_four, profile_type: :ach)
