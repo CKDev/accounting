@@ -69,7 +69,7 @@ module Accounting
         last_four = details.payment.bankAccount.accountNumber[-4..-1]
         payment = profile.payments.find_by!(last_four: last_four, profile_type: :ach)
 
-        get_returned_transaction_list_for_customer(profile.id, payment.id).each do |ot|
+        get_returned_transaction_list_for_customer(profile.profile_id, payment.payment_profile_id).each do |ot|
           get_transaction_details(ot.transId).returnedItems.returnedItem.each do |returnedItem|
             return ot.transId if returnedItem.id == return_trans_id
           end
