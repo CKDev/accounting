@@ -64,6 +64,10 @@ module Accounting
 
       def find_original_transaction(return_trans_id)
         details = get_transaction_details(return_trans_id)
+        # refTransId is present in prod env as of May 10th, 2019
+        return details.refTransId if details.refTransId.present?
+
+        # if refTransId is missing, callback to check all transactions
         profile = Accounting::Profile.find_by!(authnet_id: details.customer.id)
 
         last_four = details.payment.bankAccount.accountNumber[-4..-1]
@@ -120,6 +124,5 @@ module Accounting
           Accounting.log('NSF', error: "Found returned transaction #{trans_id} but it's not in RL")
         end
       end
-
   end
 end
