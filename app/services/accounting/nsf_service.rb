@@ -117,7 +117,7 @@ module Accounting
       def set_nsf(trans_id)
         transaction = Accounting::Transaction.find_by(transaction_id: trans_id)
         if transaction.present?
-          transaction.returned!
+          transaction.update_column(status: :returned)
           yield transaction if block_given?
           Accounting.log('NSF', info: "Found NSF transaction: #{trans_id}")
         else
