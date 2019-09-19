@@ -36,11 +36,11 @@ module Accounting
 
     validates :payment, presence: true, if: proc { |t| !['void', 'prior_auth_capture'].include?(t.transaction_type) }
 
-    validate :can_capture, if: proc { |t| t.transaction_type == 'prior_auth_capture' }
+    validate :can_capture, if: proc { |t| t.transaction_type == 'prior_auth_capture' && !t.processed? }
 
-    validate :can_refund, if: proc { |t| t.transaction_type == 'refund' }
+    validate :can_refund, if: proc { |t| t.transaction_type == 'refund' && !t.processed? }
 
-    validate :can_void, if: proc { |t| t.transaction_type == 'void' }
+    validate :can_void, if: proc { |t| t.transaction_type == 'void' && !t.processed? }
 
     after_commit :process_later
 
@@ -81,7 +81,7 @@ module Accounting
     def process_now!
       accountable.try(:run_hook, :before_transaction_submit, self)
 
-      return self if processed?
+      return self if submitted?
 
       begin
         case transaction_type
@@ -105,7 +105,7 @@ module Accounting
     end
 
     def process_later
-      unless job_id.present?
+      unless processed?
         job = Accounting::TransactionJob.set(queue: queue).perform_later(self)
         update_column(:job_id, job.provider_job_id)
       end
@@ -113,6 +113,10 @@ module Accounting
     end
 
     def processed?
+      job_id.present?
+    end
+
+    def submitted?
       submitted_at.present?
     end
 
@@ -212,7 +216,7 @@ module Accounting
       end
 
       def before_transaction!
-        raise Accounting::DuplicateError, 'Transaction has already been submitted' if processed?
+        raise Accounting::DuplicateError, 'Transaction has already been submitted' if submitted?
       end
 
       def can_capture

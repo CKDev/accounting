@@ -23,6 +23,8 @@ module Accounting
         status: status
       )
 
+      handle_refund
+
       if subscription?
         resource.assign_attributes(subscription_id: subscription.id, subscription_payment: details.subscription.payNum.to_i)
       end
@@ -113,6 +115,15 @@ module Accounting
       end
 
       resource.details
+    end
+
+    def handle_refund
+      if status == 'refunded'
+        resource.original_transaction = profile.transactions.find_by(transaction_id: details.refTransId)
+        resource.message ||= "Refunded transaction (#{details.refTransId})"
+      elsif status == 'voided'
+        resource.message ||= "Voided transaction (#{details.transId})"
+      end
     end
 
   end
