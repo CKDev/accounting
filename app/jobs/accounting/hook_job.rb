@@ -14,7 +14,7 @@ module Accounting
     def perform(signature, body, payload, uid)
       @signature = signature.to_s
       @body = body.to_s
-      @payload = payload
+      @payload = JSON.parse payload
       @uid = uid.to_s.downcase
       authenticate!
       hook.handle!
@@ -30,7 +30,7 @@ module Accounting
         raise Accounting::SyncError.new('Invalid signature', payload) if signature.blank?
 
         cred = Accounting.config.api_creds(uid)
-        raise Accounting::SyncError.new("Invalid uid: #{uid}", payload) if cred.blank?
+        raise Accounting::SyncWarning.new("Invalid uid: #{uid}", payload) if cred.blank?
 
         return true if signature == OpenSSL::HMAC.hexdigest('SHA512', cred[:signature], body).upcase
 
