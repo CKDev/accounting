@@ -18,12 +18,13 @@ RSpec.describe Accounting::HooksController, type: :controller do
                        \"eventDate\":\"2018-10-18T03:09:30.2729756Z\",
                        \"webhookId\":\"eb6e1f40-9e17-4d8d-aae3-a47acc001fbc\",
                        \"payload\":{\"customerProfileId\":#{@profile.profile_id},
+                       \"description\":\"Rémy  Raleigh\",
                        \"entityName\":\"customerPaymentProfile\",
                        \"id\":#{@paymentProfile.id}}}"
   end
 
   it 'should enqueue a hook job on create' do
-    expect { post :create, params: JSON.parse(@valid_payload).merge(uid: TEST_UID) }.to have_enqueued_job(Accounting::HookJob)
+    expect { post :create, params: JSON.parse(@valid_payload).merge(uid: TEST_UID), as: :json }.to have_enqueued_job(Accounting::HookJob)
     expect(response).to have_http_status(:ok)
   end
 

@@ -31,11 +31,11 @@ module Accounting
       end
 
       def payload
-        params.try(:to_unsafe_h) || {}
+        params.to_json.force_encoding 'UTF-8'
       end
 
       def body
-        request.body.read
+        request.body.read.force_encoding 'UTF-8'
       end
 
   end
