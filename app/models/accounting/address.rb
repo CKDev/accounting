@@ -25,7 +25,7 @@ module Accounting
 
         response = authnet(:api).create_customer_shipping_profile(create_request)
 
-        unless response == nil || response.is_a?(Exception)
+        if valid_authnet_response?(response)
           if response.messages.resultCode == MessageTypeEnum::Ok
             assign_attributes(address_id: response.customerAddressId)
           elsif response.messages.resultCode == 'Error' && response.messages.messages[0].code == 'E00039'

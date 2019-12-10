@@ -53,7 +53,7 @@ module Accounting
       request.transId = transaction_id
 
       @response ||= authnet(:api, api_opts).get_transaction_details(request)
-      if @response && @response.messages.resultCode == MessageTypeEnum::Ok
+      if valid_authnet_response?(@response) && @response.messages.resultCode == MessageTypeEnum::Ok
         @response.transaction
       else
         nil
@@ -141,7 +141,7 @@ module Accounting
     private
 
       def handle_transaction(response, **params)
-        if response.present? && !response.is_a?(Exception)
+        if valid_authnet_response?(response)
           if response.messages.resultCode == MessageTypeEnum::Ok
             if response.transactionResponse&.messages.present?
               fields = {

@@ -54,7 +54,7 @@ module Accounting
 
       @response ||= authnet(:api).get_customer_payment_profile(request)
 
-      if @response.messages.resultCode == MessageTypeEnum::Ok
+      if valid_authnet_response?(@response) && @response.messages.resultCode == MessageTypeEnum::Ok
         @response.paymentProfile
       else
         nil
@@ -76,7 +76,7 @@ module Accounting
 
         response = authnet(:api).create_customer_payment_profile(create_request)
 
-        unless response == nil || response.is_a?(Exception)
+        if valid_authnet_response?(response)
           if response.messages.resultCode == MessageTypeEnum::Ok
             if response.validationDirectResponse.present?
               # Add the payment attributes. Expiration only applies to card payment types

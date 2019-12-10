@@ -36,4 +36,8 @@ module AccountingHelper
     Accounting.api(type, accountable.present? ? api_options(accountable) : opts)
   end
 
+  def valid_authnet_response?(response)
+    # https://developer.authorize.net/api/reference/responseCodes.html
+    response.present? && !response.is_a?(Exception) && response.messages.present?
+  end
 end

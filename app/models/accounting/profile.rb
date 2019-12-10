@@ -32,7 +32,7 @@ module Accounting
       request.customerProfileId = pid
 
       @response ||= authnet(:api).get_customer_profile(request)
-      if @response && @response.messages.resultCode == MessageTypeEnum::Ok
+      if valid_authnet_response?(@response) && @response.messages.resultCode == MessageTypeEnum::Ok
         @response.profile
       else
         nil
@@ -45,7 +45,7 @@ module Accounting
         return if errors.present? || details.present?
 
         response = authnet(:api).create_customer_profile(create_request)
-        unless response == nil || response.is_a?(Exception)
+        if valid_authnet_response?(response)
           if response.messages.resultCode == MessageTypeEnum::Ok && response.customerProfileId.present?
             assign_attributes(profile_id: response.customerProfileId)
           elsif response.messages.messages[0].code == 'E00039' # Profile exists

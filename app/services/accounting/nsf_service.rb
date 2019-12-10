@@ -36,7 +36,7 @@ module Accounting
       
         response = Accounting.api(:api, authnet_options).get_settled_batch_list(request)
 
-        unless response.messages.resultCode == MessageTypeEnum::Ok
+        unless valid_authnet_response?(response) && response.messages.resultCode == MessageTypeEnum::Ok
           raise Accounting::SyncWarning.new("Failed to fetch settled batch list: #{response.messages.messages[0].text}")
         end
 

@@ -49,7 +49,7 @@ module Accounting
       def create_customer_payment_profile
         response = authnet(:api).create_customer_payment_profile(build_request)
 
-        if response != nil
+        if valid_authnet_response?(response)
           if response.messages.resultCode == MessageTypeEnum::Ok
             Accounting.log 'Payment', 'Accept', info: "Successfully created a customer payment profile with id: #{response.customerPaymentProfileId}."
             @payment.assign_attributes(

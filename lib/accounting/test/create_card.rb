@@ -26,7 +26,7 @@ module Accounting
 
       def create_payment
         response = authnet(:api).create_customer_payment_profile(request)
-        if response != nil
+        if valid_authnet_response?(response)
           if response.messages.resultCode == MessageTypeEnum::Ok
             payment.assign_attributes(
               title:  response.validationDirectResponse.split(',')[51],
