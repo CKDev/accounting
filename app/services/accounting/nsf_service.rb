@@ -68,7 +68,7 @@ module Accounting
         return details.refTransId if details.refTransId.present?
 
         # if refTransId is missing, callback to check all transactions
-        profile = Accounting::Profile.find_by!(authnet_id: details.customer.id)
+        profile = Accounting::Profile.where(authnet_id: details.customer.id).last
 
         last_four = details.payment.bankAccount.accountNumber[-4..-1]
         payment = profile.payments.find_by!(last_four: last_four, profile_type: :ach)

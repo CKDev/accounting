@@ -87,7 +87,7 @@ module Accounting
 
     def profile
       if Accounting::Profile.exists?(authnet_id: details.customer.id)
-        Accounting::Profile.find_by(authnet_id: details.customer.id)
+        Accounting::Profile.where(authnet_id: details.customer.id).last
       else
         raise Accounting::SyncWarning.new("Transaction cannot be created, profile with authnet_id '#{details.customer.id}' could not be found.", payload)
       end
@@ -119,7 +119,7 @@ module Accounting
 
     def handle_refund
       if status == 'refunded'
-        resource.original_transaction = profile.transactions.find_by(transaction_id: details.refTransId)
+        resource.original_transaction ||= profile.transactions.find_by(transaction_id: details.refTransId)
         resource.message ||= "Refunded transaction (#{details.refTransId})"
       elsif status == 'voided'
         resource.message ||= "Voided transaction (#{details.transId})"
