@@ -1,17 +1,20 @@
 module Accounting
   class Payment < ::ActiveRecord::Base
-
     include AccountingHelper
+
+    acts_as_paranoid
 
     belongs_to :profile, inverse_of: :payments, required: true
 
     has_one :address, inverse_of: :payment, autosave: true, dependent: :destroy
 
     before_destroy :delete_payment, if: proc { |p| p.profile.present? }
+    before_real_destroy :delete_payment, if: proc { |p| p.profile.present? }
 
     after_create :reset_default
 
     after_destroy :reset_default, if: proc { |p| p.profile.present? }
+    after_real_destroy :reset_default, if: proc { |p| p.profile.present? }
 
     attr_accessor :month, :year
 
@@ -128,16 +131,7 @@ module Accounting
       end
 
       def create_request
-        # Build the payment object
-        payment = PaymentType.new
-        payment.bankAccount = BankAccountType.new
-        payment.bankAccount.accountType = account_type
-        payment.bankAccount.routingNumber = routing
-        payment.bankAccount.accountNumber = account
-        payment.bankAccount.nameOnAccount = account_holder
-        payment.bankAccount.echeckType = echeck_type || echeck_type_for_account
-        payment.bankAccount.bankName = bank_name
-        payment.bankAccount.checkNumber = check_number
+        payment = bank_account_type
 
         # Build an address object
         billTo = address&.to_billing_address
@@ -155,6 +149,25 @@ module Accounting
         request.customerProfileId = profile.profile_id
         request.validationMode = api_validation_mode(profile.accountable)
         request
+      end
+
+      def bank_account_type
+        payment = PaymentType.new
+        payment.bankAccount = BankAccountType.new
+        payment.bankAccount.accountType = account_type
+        payment.bankAccount.routingNumber = routing
+        payment.bankAccount.accountNumber = account
+        payment.bankAccount.nameOnAccount = account_holder
+        payment.bankAccount.echeckType = echeck_type || echeck_type_for_account
+        payment.bankAccount.bankName = bank_name
+        payment.bankAccount.checkNumber = check_number
+        payment
+      end
+
+      def credit_card_type
+        payment = PaymentType.new
+        payment.creditCard = CreditCardType.new(last_four, expiration.strftime('%Y-%m'))
+        payment
       end
 
       def echeck_type_for_account

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2017_12_18_235154) do
+ActiveRecord::Schema.define(version: 20200203150438) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,6 +42,8 @@ ActiveRecord::Schema.define(version: 2017_12_18_235154) do
     t.boolean "default", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_accounting_payments_on_deleted_at"
     t.index ["payment_profile_id"], name: "index_accounting_payments_on_payment_profile_id", unique: true
   end
 

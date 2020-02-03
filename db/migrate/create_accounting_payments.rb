@@ -8,6 +8,7 @@ class CreateAccountingPayments < ActiveRecord::Migration[5.1]
       t.date :expiration
       t.integer :profile_type
       t.boolean :default, null: false, default: false
+      t.datetime :deleted_at, index: true
 
       t.timestamps null: false
     end

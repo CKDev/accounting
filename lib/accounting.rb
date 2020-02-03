@@ -7,7 +7,7 @@ require 'hooks'
 require 'htmlentities'
 require 'authorize_net'
 require 'credit_card_validator'
-
+require 'paranoia'
 
 module Accounting
 
