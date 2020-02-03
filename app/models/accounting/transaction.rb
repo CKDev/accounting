@@ -34,7 +34,7 @@ module Accounting
 
     validates :amount, numericality: { greater_than: 0 }, if: proc { |t| t.transaction_type != 'void' }
 
-    validates :payment, presence: true, if: proc { |t| !['void', 'prior_auth_capture'].include?(t.transaction_type) }
+    validates :payment, presence: true, unless: proc { |t| t.processed? || ['void', 'refund', 'prior_auth_capture'].include?(t.transaction_type) }
 
     validate :can_capture, if: proc { |t| t.transaction_type == 'prior_auth_capture' && !t.processed? }
 
@@ -210,7 +210,7 @@ module Accounting
 
       def refund
         before_transaction!
-        request = create_request(TransactionTypeEnum::RefundTransaction, amount, profile.profile_id, payment.payment_profile_id, original_transaction.try(:transaction_id))
+        request = create_request(TransactionTypeEnum::RefundTransaction, amount, nil, nil, original_transaction.try(:transaction_id))
         response = authnet(:api).create_transaction(request)
         handle_transaction(response, status: :refunded, message: options[:message])
       end
@@ -250,15 +250,16 @@ module Accounting
         request.transactionRequest.amount = amount
         request.transactionRequest.transactionType = type
         request.transactionRequest.poNumber = options[:po_num]
+
         if profile_id.present? && payment_id.present?
           request.transactionRequest.profile = CustomerProfilePaymentType.new
           request.transactionRequest.profile.customerProfileId = profile_id
           request.transactionRequest.profile.paymentProfile = PaymentProfile.new(payment_id)
+        elsif ['refund', 'void'].include?(transaction_type)
+          payment = Accounting::Payment.with_deleted.find(original_transaction.payment_id)
+          request.transactionRequest.payment = payment.send(payment.ach? ? :bank_account_type : :credit_card_type)
         end
-
-        # Refund/Void
         request.transactionRequest.refTransId = ref_trans_id
-
         request
       end
 
