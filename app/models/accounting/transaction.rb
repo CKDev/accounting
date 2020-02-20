@@ -256,8 +256,16 @@ module Accounting
           request.transactionRequest.profile.customerProfileId = profile_id
           request.transactionRequest.profile.paymentProfile = PaymentProfile.new(payment_id)
         elsif ['refund', 'void'].include?(transaction_type)
-          payment = Accounting::Payment.with_deleted.find(original_transaction.payment_id)
-          request.transactionRequest.payment = payment.send(payment.ach? ? :bank_account_type : :credit_card_type)
+          details = original_transaction.details.payment
+          payment = PaymentType.new
+          if details.creditCard.present?
+            payment.creditCard = CreditCardType.new(details.creditCard.cardNumber.last(4), details.creditCard.expirationDate)
+          else
+            payment.bankAccount = BankAccountType.new(details.bankAccount.accountType, details.bankAccount.routingNumber.last(4),
+              details.bankAccount.accountNumber.last(4), details.bankAccount.nameOnAccount, details.bankAccount.echeckType,
+              details.bankAccount.bankName)
+          end
+          request.transactionRequest.payment = payment
         end
         request.transactionRequest.refTransId = ref_trans_id
         request
