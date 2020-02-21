@@ -262,7 +262,7 @@ module Accounting
             payment.creditCard = CreditCardType.new(details.creditCard.cardNumber.last(4), details.creditCard.expirationDate)
           else
             payment.bankAccount = BankAccountType.new(details.bankAccount.accountType, details.bankAccount.routingNumber.last(4),
-              details.bankAccount.accountNumber.last(4), details.bankAccount.nameOnAccount, details.bankAccount.echeckType,
+              details.bankAccount.accountNumber.last(4), details.bankAccount.nameOnAccount, nil,
               details.bankAccount.bankName)
           end
           request.transactionRequest.payment = payment
