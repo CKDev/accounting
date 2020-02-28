@@ -94,8 +94,8 @@ module Accounting
     end
 
     def payment
-      if profile.payments.exists?(last_four: last_four, profile_type: card? ? :card : :ach)
-        profile.payments.find_by(last_four: last_four, profile_type: card? ? :card : :ach)
+      if profile.payments.with_deleted.exists?(last_four: last_four, profile_type: card? ? :card : :ach)
+        profile.payments.with_deleted.where(last_four: last_four, profile_type: card? ? :card : :ach).order('deleted_at IS NOT NULL').first
       else
         raise Accounting::SyncWarning.new("Transaction cannot be created because the defined payment method was not found on the accountable profile", payload)
       end
