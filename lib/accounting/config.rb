@@ -8,7 +8,7 @@ module Accounting
       @gateway ||= :sandbox
       @cancel_subscription_on_destroy ||= false
       @queue ||= :default
-      @logger ||= ActiveSupport::TaggedLogging.new(Logger.new(Rails.root.join('log', 'accounting.log'), 'weekly'))
+      @logger ||= ActiveSupport::TaggedLogging.new(Logger.new(Rails.root.join('log', 'accounting.log')))
       @domain ||= 'example.org'
     end
 
