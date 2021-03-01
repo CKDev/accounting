@@ -111,7 +111,7 @@ module Accounting
 
     def details
       if resource.details(hook_api_options).nil?
-        raise Accounting::SyncError.new("Transaction cannot be created because the record could not be found.", payload)
+        raise Accounting::SyncWarning.new("Transaction cannot be created because the record could not be found.", payload)
       end
 
       resource.details
