@@ -5,6 +5,8 @@ module Accounting
 
     rescue_from Accounting::SyncWarning, with: :sync_failure
 
+    retry_on Accounting::RetryTransactionSyncWithDelay, wait: 2.minutes
+
     attr_accessor :signature, :body, :payload, :uid
 
     ##

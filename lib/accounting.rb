@@ -17,6 +17,8 @@ module Accounting
 
   class SubscriptionCanceledError < ::StandardError; end
 
+  class RetryTransactionSyncWithDelay < ::StandardError; end
+
   class SyncError < ::StandardError
     def initialize(message, payload={})
       @payload = payload
