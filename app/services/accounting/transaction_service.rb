@@ -7,7 +7,7 @@ module Accounting
 
       # Auth.net charge endpoint sometimes take more than 30 seconds and webhook arrives before
       # the API finishes, we will process webhook in 2 minutes to avoid unique constraint issue
-      raise RetryTransactionSyncWithDelay if resource.new_cord? && details.submitTimeUTC > 2.minutes.ago
+      raise RetryTransactionSyncWithDelay if resource.new_record? && details.submitTimeUTC > 2.minutes.ago
 
       # Ensure the transaction has the associated profile and payment associated
       resource.profile_id ||= profile.id
